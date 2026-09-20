@@ -938,217 +938,242 @@ export default function Home() {
             </div>
           </div>
         )}
-      </div>
 
-      {/* MODAL SERTIFIKAT */}
-      {activeCert && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 transition-all"
-          style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.65)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-          }}
-          onClick={closeCert}
-        >
+        {/* MODAL SERTIFIKAT */}
+        {activeCert && (
           <div
-            className="relative w-full max-w-[1200px] rounded-3xl p-4 sm:p-6 flex flex-col overflow-hidden text-slate-900 liquid-glass-3d max-h-[92vh]"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 transition-all"
+            style={{
+              backgroundColor: 'rgba(15, 23, 42, 0.65)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+            }}
+            onClick={closeCert}
           >
-            <div className="relative z-10 flex items-center justify-between pb-3 border-b border-slate-900/10 shrink-0 mb-3 gap-2">
-              <div className="flex items-center gap-2 overflow-hidden">
-                <span className="text-slate-800 font-extrabold text-[10px] sm:text-[11px] uppercase tracking-wider shrink-0">
-                  Credential Viewer
-                </span>
-                <span className="text-slate-400 shrink-0">•</span>
-                <h3 className="text-[14px] sm:text-[18px] font-black text-slate-900 truncate">{activeCert.title}</h3>
+            <div
+              className="relative w-full max-w-[1200px] rounded-3xl p-4 sm:p-6 flex flex-col overflow-hidden text-slate-900 liquid-glass-3d max-h-[92vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative z-10 flex items-center justify-between pb-3 border-b border-slate-900/10 shrink-0 mb-3 gap-2">
+                <div className="flex items-center gap-2 overflow-hidden">
+                  <span className="text-slate-800 font-extrabold text-[10px] sm:text-[11px] uppercase tracking-wider shrink-0">
+                    Credential Viewer
+                  </span>
+                  <span className="text-slate-400 shrink-0">•</span>
+                  <h3 className="text-[14px] sm:text-[18px] font-black text-slate-900 truncate">{activeCert.title}</h3>
+                </div>
+                <button
+                  type="button"
+                  onClick={closeCert}
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-colors bg-white/80 hover:bg-white border border-white cursor-pointer shadow-sm font-bold shrink-0"
+                >
+                  ✕
+                </button>
               </div>
-              <button
-                type="button"
-                onClick={closeCert}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-colors bg-white/80 hover:bg-white border border-white cursor-pointer shadow-sm font-bold shrink-0"
-              >
-                ✕
-              </button>
-            </div>
 
-            <div className="relative z-10 w-full aspect-[1.414/1] max-h-[75vh] overflow-hidden rounded-2xl bg-white/50 border border-white flex items-center justify-center shadow-inner">
-              {activeCert.type === 'pdf' ? (
-                <iframe
-                  src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                  className="w-full h-full border-0 rounded-2xl bg-white"
-                  title={activeCert.title}
-                />
-              ) : (
-                /* eslint-disable-next-line @next/next/no-img-element */
-                <img
-                  src={activeCert.src}
-                  alt={activeCert.title}
-                  className="w-full h-full object-contain rounded-2xl bg-white"
-                />
-              )}
+              <div className="relative z-10 w-full aspect-[1.414/1] max-h-[75vh] overflow-hidden rounded-2xl bg-white/50 border border-white flex items-center justify-center shadow-inner">
+                {activeCert.type === 'pdf' ? (
+                  <iframe
+                    src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
+                    className="w-full h-full border-0 rounded-2xl bg-white"
+                    title={activeCert.title}
+                  />
+                ) : (
+                  /* eslint-disable-next-line @next/next/no-img-element */
+                  <img
+                    src={activeCert.src}
+                    alt={activeCert.title}
+                    className="w-full h-full object-contain rounded-2xl bg-white"
+                  />
+                )}
+              </div>
             </div>
           </div>
-        </div>
-      )}
+        )}
 
-      {/* MODAL HASIL PORTOFOLIO */}
-      {activePreview && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 transition-all"
-          style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.65)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-          }}
-          onClick={closePreview}
-        >
+        {/* MODAL HASIL PORTOFOLIO */}
+        {activePreview && (
           <div
-            className="relative w-full max-w-[1200px] rounded-3xl p-4 sm:p-8 space-y-4 sm:space-y-6 overflow-hidden text-slate-900 flex flex-col justify-between liquid-glass-3d max-h-[92vh]"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 transition-all"
+            style={{
+              backgroundColor: 'rgba(15, 23, 42, 0.65)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+            }}
+            onClick={closePreview}
           >
-            <div className="relative z-10 flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-900/10 gap-2">
-              <h3 className="text-[16px] sm:text-[20px] font-black text-slate-900 tracking-tight truncate">
-                Portofolio - {activePreview.title}
-              </h3>
-              <button
-                type="button"
-                onClick={closePreview}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-all bg-white/80 hover:bg-white border border-white shadow-sm backdrop-blur-md font-bold cursor-pointer shrink-0"
-              >
-                ✕
-              </button>
-            </div>
+            <div
+              className="relative w-full max-w-[1200px] rounded-3xl p-4 sm:p-8 space-y-4 sm:space-y-6 overflow-hidden text-slate-900 flex flex-col justify-between liquid-glass-3d max-h-[92vh]"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <div className="relative z-10 flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-900/10 gap-2">
+                <h3 className="text-[16px] sm:text-[20px] font-black text-slate-900 tracking-tight truncate">
+                  Portofolio - {activePreview.title}
+                </h3>
+                <button
+                  type="button"
+                  onClick={closePreview}
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-all bg-white/80 hover:bg-white border border-white shadow-sm backdrop-blur-md font-bold cursor-pointer shrink-0"
+                >
+                  ✕
+                </button>
+              </div>
 
-            <div className="relative z-10 overflow-y-auto space-y-6 pr-1 max-h-[76vh]">
-              {activePreview.username ? (
-                <div className="space-y-6 sm:space-y-8">
-                  <div className="p-4 sm:p-8 rounded-3xl space-y-6 liquid-glass-3d">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 md:gap-10">
-                      <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-slate-900 p-[2px] shrink-0 flex items-center justify-center shadow-lg overflow-hidden">
-                        <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
-                          {activePreview.avatarImg ? (
-                            /* eslint-disable-next-line @next/next/no-img-element */
-                            <img
-                              src={activePreview.avatarImg}
-                              alt={activePreview.displayName || activePreview.username || 'Avatar'}
-                              className="w-full h-full object-cover rounded-full"
-                            />
-                          ) : (
-                            <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white font-bold text-sm uppercase rounded-full">
-                              {activePreview.username ? activePreview.username.substring(0, 2) : 'IG'}
+              <div className="relative z-10 overflow-y-auto space-y-6 pr-1 max-h-[76vh]">
+                {activePreview.username ? (
+                  <div className="space-y-6 sm:space-y-8">
+                    <div className="p-4 sm:p-8 rounded-3xl space-y-6 liquid-glass-3d">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 md:gap-10">
+                        <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-slate-900 p-[2px] shrink-0 flex items-center justify-center shadow-lg overflow-hidden">
+                          <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
+                            {activePreview.avatarImg ? (
+                              /* eslint-disable-next-line @next/next/no-img-element */
+                              <img
+                                src={activePreview.avatarImg}
+                                alt={activePreview.displayName || activePreview.username || 'Avatar'}
+                                className="w-full h-full object-cover rounded-full"
+                              />
+                            ) : (
+                              <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white font-bold text-sm uppercase rounded-full">
+                                {activePreview.username ? activePreview.username.substring(0, 2) : 'IG'}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="space-y-3 sm:space-y-4 flex-1 w-full">
+                          <div className="flex flex-wrap items-center justify-between sm:justify-start gap-3">
+                            <h2 className="text-[18px] sm:text-[22px] font-black text-slate-900 tracking-tight">
+                              {activePreview.username}
+                            </h2>
+                            {activePreview.instagramUrl && (
+                              <a
+                                href={activePreview.instagramUrl}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="px-4 sm:px-5 py-2 rounded-2xl text-[11px] md:text-[12px] font-bold text-white shadow-sm transition-all bg-slate-900 hover:bg-slate-800 backdrop-blur-sm"
+                              >
+                                Kunjungi Profile Instagram
+                              </a>
+                            )}
+                          </div>
+
+                          <div className="flex items-center gap-4 sm:gap-8 text-[12px] sm:text-[13px] border-y border-slate-900/10 py-2 sm:py-2.5 font-normal">
+                            <div>
+                              <span className="font-extrabold text-slate-900">{activePreview.postsCount}</span>{' '}
+                              <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">posts</span>
                             </div>
-                          )}
+                            <div>
+                              <span className="font-extrabold text-slate-900">{activePreview.followersCount}</span>{' '}
+                              <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">followers</span>
+                            </div>
+                            <div>
+                              <span className="font-extrabold text-slate-900">{activePreview.followingCount}</span>{' '}
+                              <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">following</span>
+                            </div>
+                          </div>
+
+                          <div className="space-y-1 text-[12px] sm:text-[13px] font-normal text-slate-800">
+                            <div className="font-bold text-slate-900 text-[15px] sm:text-[17px]">
+                              {activePreview.displayName}
+                            </div>
+                            {activePreview.category && (
+                              <div className="text-slate-600 font-semibold text-[10px] sm:text-[11px] pb-1">
+                                {activePreview.category}
+                              </div>
+                            )}
+                            {activePreview.bio?.map((line, idx) => (
+                              <p key={idx} className="leading-relaxed text-justify">
+                                {line}
+                              </p>
+                            ))}
+                            {activePreview.website && (
+                              <a
+                                href={`https://${activePreview.website}`}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className="inline-flex items-center gap-1.5 font-bold text-blue-700 hover:text-blue-800 pt-1.5 text-[12px] sm:text-[13px]"
+                              >
+                                <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                  <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
+                                  <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
+                                </svg>
+                                <span>{activePreview.website}</span>
+                              </a>
+                            )}
+                          </div>
                         </div>
                       </div>
 
-                      <div className="space-y-3 sm:space-y-4 flex-1 w-full">
-                        <div className="flex flex-wrap items-center justify-between sm:justify-start gap-3">
-                          <h2 className="text-[18px] sm:text-[22px] font-black text-slate-900 tracking-tight">
-                            {activePreview.username}
-                          </h2>
-                          {activePreview.instagramUrl && (
-                            <a
-                              href={activePreview.instagramUrl}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="px-4 sm:px-5 py-2 rounded-2xl text-[11px] md:text-[12px] font-bold text-white shadow-sm transition-all bg-slate-900 hover:bg-slate-800 backdrop-blur-sm"
+                      <div className="space-y-4">
+                        <div className="flex items-center justify-between border-b border-slate-900/10 pb-3">
+                          <span className="text-[10px] sm:text-[11px] font-extrabold text-slate-800 tracking-wider uppercase flex items-center gap-2">
+                            <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
+                              <circle cx="12" cy="13" r="4" />
+                            </svg>
+                            <span>LIVE DISPLAY DESIGN & FEATURED POSTS</span>
+                          </span>
+                        </div>
+
+                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                          {activePreview.posts?.map((post, index) => (
+                            <div
+                              key={index}
+                              className="rounded-3xl overflow-hidden flex flex-col justify-between liquid-glass-3d min-h-[440px]"
                             >
-                              Kunjungi Profile Instagram
-                            </a>
-                          )}
-                        </div>
-
-                        <div className="flex items-center gap-4 sm:gap-8 text-[12px] sm:text-[13px] border-y border-slate-900/10 py-2 sm:py-2.5 font-normal">
-                          <div>
-                            <span className="font-extrabold text-slate-900">{activePreview.postsCount}</span>{' '}
-                            <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">posts</span>
-                          </div>
-                          <div>
-                            <span className="font-extrabold text-slate-900">{activePreview.followersCount}</span>{' '}
-                            <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">followers</span>
-                          </div>
-                          <div>
-                            <span className="font-extrabold text-slate-900">{activePreview.followingCount}</span>{' '}
-                            <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">following</span>
-                          </div>
-                        </div>
-
-                        <div className="space-y-1 text-[12px] sm:text-[13px] font-normal text-slate-800">
-                          <div className="font-bold text-slate-900 text-[15px] sm:text-[17px]">
-                            {activePreview.displayName}
-                          </div>
-                          {activePreview.category && (
-                            <div className="text-slate-600 font-semibold text-[10px] sm:text-[11px] pb-1">
-                              {activePreview.category}
+                              <iframe
+                                src={post.embedUrl}
+                                className="w-full h-full min-h-[440px] border-0 rounded-3xl"
+                                scrolling="no"
+                                allow="autoplay"
+                                title={`Instagram Post ${index + 1}`}
+                              />
                             </div>
-                          )}
-                          {activePreview.bio?.map((line, idx) => (
-                            <p key={idx} className="leading-relaxed text-justify">
-                              {line}
-                            </p>
                           ))}
-                          {activePreview.website && (
-                            <a
-                              href={`https://${activePreview.website}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 font-bold text-blue-700 hover:text-blue-800 pt-1.5 text-[12px] sm:text-[13px]"
-                            >
-                              <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
-                                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
-                              </svg>
-                              <span>{activePreview.website}</span>
-                            </a>
-                          )}
                         </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between border-b border-slate-900/10 pb-3">
-                        <span className="text-[10px] sm:text-[11px] font-extrabold text-slate-800 tracking-wider uppercase flex items-center gap-2">
-                          <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                            <circle cx="12" cy="13" r="4" />
-                          </svg>
-                          <span>LIVE DISPLAY DESIGN & FEATURED POSTS</span>
-                        </span>
-                      </div>
-
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
-                        {activePreview.posts?.map((post, index) => (
-                          <div
-                            key={index}
-                            className="rounded-3xl overflow-hidden flex flex-col justify-between liquid-glass-3d min-h-[440px]"
-                          >
-                            <iframe
-                              src={post.embedUrl}
-                              className="w-full h-full min-h-[440px] border-0 rounded-3xl"
-                              scrolling="no"
-                              allow="autoplay"
-                              title={`Instagram Post ${index + 1}`}
-                            />
-                          </div>
-                        ))}
                       </div>
                     </div>
                   </div>
-                </div>
-              ) : (
-                <div className="w-full space-y-5">
-                  {activePreview.mediaList && activePreview.mediaList.length > 0 ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-h-[65vh] overflow-y-auto p-2 sm:p-4 rounded-3xl">
-                      {activePreview.mediaList.map((file, i) => (
+                ) : (
+                  <div className="w-full space-y-5">
+                    {activePreview.mediaList && activePreview.mediaList.length > 0 ? (
+                      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-h-[65vh] overflow-y-auto p-2 sm:p-4 rounded-3xl">
+                        {activePreview.mediaList.map((file, i) => (
+                          <div
+                            key={i}
+                            onClick={() => setZoomedMedia(file)}
+                            className="aspect-square rounded-3xl p-2 sm:p-3 liquid-glass-3d flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:bg-white/60 group"
+                          >
+                            {file.endsWith('.mp4') ? (
+                              <video
+                                src={file}
+                                muted
+                                loop
+                                autoPlay
+                                playsInline
+                                className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none"
+                              />
+                            ) : (
+                              /* eslint-disable-next-line @next/next/no-img-element */
+                              <img
+                                src={file}
+                                alt={`${activePreview.title} #${i + 1}`}
+                                className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none drop-shadow-md"
+                              />
+                            )}
+                          </div>
+                        ))}
+                      </div>
+                    ) : activePreview.img ? (
+                      <div className="w-full flex items-center justify-center rounded-3xl p-4 text-center">
                         <div
-                          key={i}
-                          onClick={() => setZoomedMedia(file)}
-                          className="aspect-square rounded-3xl p-2 sm:p-3 liquid-glass-3d flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:bg-white/60 group"
+                          onClick={() => setZoomedMedia(activePreview.img!)}
+                          className="max-w-md w-full aspect-square cursor-pointer transition-all hover:scale-[1.03] rounded-3xl p-4 liquid-glass-3d flex items-center justify-center"
                         >
-                          {file.endsWith('.mp4') ? (
+                          {activePreview.img.endsWith('.mp4') ? (
                             <video
-                              src={file}
+                              src={activePreview.img}
                               muted
                               loop
                               autoPlay
@@ -1158,97 +1183,73 @@ export default function Home() {
                           ) : (
                             /* eslint-disable-next-line @next/next/no-img-element */
                             <img
-                              src={file}
-                              alt={`${activePreview.title} #${i + 1}`}
+                              src={activePreview.img}
+                              alt={activePreview.title}
                               className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none drop-shadow-md"
                             />
                           )}
                         </div>
-                      ))}
-                    </div>
-                  ) : activePreview.img ? (
-                    <div className="w-full flex items-center justify-center rounded-3xl p-4 text-center">
-                      <div
-                        onClick={() => setZoomedMedia(activePreview.img!)}
-                        className="max-w-md w-full aspect-square cursor-pointer transition-all hover:scale-[1.03] rounded-3xl p-4 liquid-glass-3d flex items-center justify-center"
-                      >
-                        {activePreview.img.endsWith('.mp4') ? (
-                          <video
-                            src={activePreview.img}
-                            muted
-                            loop
-                            autoPlay
-                            playsInline
-                            className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none"
-                          />
-                        ) : (
-                          /* eslint-disable-next-line @next/next/no-img-element */
-                          <img
-                            src={activePreview.img}
-                            alt={activePreview.title}
-                            className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none drop-shadow-md"
-                          />
-                        )}
                       </div>
-                    </div>
-                  ) : null}
+                    ) : null}
 
-                  <div className="text-center pt-1 space-y-1">
-                    <p className="font-extrabold text-slate-900 text-[14px] sm:text-[16px] tracking-tight">
-                      Dokumentasi Karya {activePreview.title}
-                    </p>
-                    <p className="text-[11px] sm:text-[12px] text-slate-700 font-semibold">
-                      Klik gambar atau video untuk melihat pratinjau diperbesar
-                    </p>
+                    <div className="text-center pt-1 space-y-1">
+                      <p className="font-extrabold text-slate-900 text-[14px] sm:text-[16px] tracking-tight">
+                        Dokumentasi Karya {activePreview.title}
+                      </p>
+                      <p className="text-[11px] sm:text-[12px] text-slate-700 font-semibold">
+                        Klik gambar atau video untuk melihat pratinjau diperbesar
+                      </p>
+                    </div>
                   </div>
-                </div>
-              )}
+                )}
+              </div>
             </div>
           </div>
         )}
 
-      {/* MODAL LIGHTBOX OVERLAY */}
-      {zoomedMedia && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-8 transition-all"
-          style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.88)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-          }}
-          onClick={() => setZoomedMedia(null)}
-        >
+        {/* MODAL LIGHTBOX OVERLAY */}
+        {zoomedMedia && (
           <div
-            className="relative max-w-[1200px] max-h-[90vh] w-full flex items-center justify-center p-2"
-            onClick={(e) => e.stopPropagation()}
+            className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-8 transition-all"
+            style={{
+              backgroundColor: 'rgba(15, 23, 42, 0.88)',
+              backdropFilter: 'blur(20px)',
+              WebkitBackdropFilter: 'blur(20px)',
+            }}
+            onClick={() => setZoomedMedia(null)}
           >
-            <button
-              type="button"
-              onClick={() => setZoomedMedia(null)}
-              className="absolute -top-12 right-0 sm:right-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center text-lg transition-all cursor-pointer border border-white/30 shadow-xl font-bold"
+            <div
+              className="relative max-w-[1200px] max-h-[90vh] w-full flex items-center justify-center p-2"
+              onClick={(e) => e.stopPropagation()}
             >
-              ✕
-            </button>
+              <button
+                type="button"
+                onClick={() => setZoomedMedia(null)}
+                className="absolute -top-12 right-0 sm:right-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center text-lg transition-all cursor-pointer border border-white/30 shadow-xl font-bold"
+              >
+                ✕
+              </button>
 
-            {zoomedMedia.endsWith('.mp4') ? (
-              <video
-                src={zoomedMedia}
-                controls
-                autoPlay
-                playsInline
-                className="max-h-[80vh] sm:max-h-[85vh] max-w-full rounded-3xl shadow-2xl border border-slate-700 bg-black"
-              />
-            ) : (
-              /* eslint-disable-next-line @next/next/no-img-element */
-              <img
-                src={zoomedMedia}
-                alt="Preview diperbesar"
-                className="max-h-[80vh] sm:max-h-[85vh] max-w-full object-contain rounded-3xl shadow-2xl border border-slate-200 bg-white"
-              />
-            )}
+              {zoomedMedia.endsWith('.mp4') ? (
+                <video
+                  src={zoomedMedia}
+                  controls
+                  autoPlay
+                  playsInline
+                  className="max-h-[80vh] sm:max-h-[85vh] max-w-full rounded-3xl shadow-2xl border border-slate-700 bg-black"
+                />
+              ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
+                <img
+                  src={zoomedMedia}
+                  alt="Preview diperbesar"
+                  className="max-h-[80vh] sm:max-h-[85vh] max-w-full object-contain rounded-3xl shadow-2xl border border-slate-200 bg-white"
+                />
+              )}
+            </div>
           </div>
-        </div>
-      )}
+        )}
+      </div>
     </div>
   );
 }

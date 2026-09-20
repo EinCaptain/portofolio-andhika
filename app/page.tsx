@@ -420,20 +420,19 @@ export default function Home() {
                 ].map((tool, idx) => (
                   <div
                     key={idx}
-                    className="p-4 sm:p-5 transition-all duration-300 space-y-2 h-full flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
+                    className="p-5 sm:p-6 transition-all duration-300 h-full flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
                   >
-                    <div className="space-y-2 relative z-10">
-                      <div className="flex items-center justify-end">
-                        <span className="text-[9.5px] font-extrabold text-slate-500 uppercase tracking-wider bg-white/60 px-2.5 py-0.5 rounded-full border border-white/80 truncate">
+                    <div className="space-y-3 relative z-10">
+                      <div className="flex items-start justify-between gap-3">
+                        <h3 className="text-[14px] sm:text-[15px] md:text-[16px] font-bold text-slate-900 leading-snug text-left">
+                          {tool.name}
+                        </h3>
+                        <span className="text-[9px] sm:text-[9.5px] font-extrabold text-slate-600 uppercase tracking-wider bg-white/60 px-2.5 py-1 rounded-full border border-white/80 shrink-0">
                           {tool.category}
                         </span>
                       </div>
 
-                      <h3 className="text-[13.5px] sm:text-[14.5px] font-bold text-slate-900 leading-snug text-left pt-0.5">
-                        {tool.name}
-                      </h3>
-
-                      <p className="text-[11px] sm:text-[12px] font-normal text-slate-600 leading-relaxed text-left">
+                      <p className="text-[11.5px] sm:text-[12px] font-normal text-slate-600 leading-relaxed text-left">
                         {tool.desc}
                       </p>
                     </div>

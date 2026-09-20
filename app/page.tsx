@@ -660,12 +660,7 @@ export default function Home() {
                       ],
                       website: 'www.diatera.com',
                       posts: [
-                        { url: 'https://www.instagram.com/p/C7qLDlSpypd/?img_index=1', embedUrl: 'https://www.instagram.com/p/C7qLDlSpypd/embed' },
-                        { url: 'https://www.instagram.com/p/C7SvsGjPA6i/', embedUrl: 'https://www.instagram.com/p/C7SvsGjPA6i/embed' },
-                        { url: 'https://www.instagram.com/p/C7RqeQcJvmb/?img_index=1', embedUrl: 'https://www.instagram.com/p/C7RqeQcJvmb/embed' },
-                        { url: 'https://www.instagram.com/p/C7RTunxJW2X/?img_index=1', embedUrl: 'https://www.instagram.com/p/C7RTunxJW2X/embed' },
-                        { url: 'https://www.instagram.com/p/C7OsO0mpYIZ/?img_index=2', embedUrl: 'https://www.instagram.com/p/C7OsO0mpYIZ/embed' },
-                        { url: 'https://www.instagram.com/p/C5e8-6pJ0hc/', embedUrl: 'https://www.instagram.com/p/C5e8-6pJ0hc/embed' }
+                        { url: 'https://www.instagram.com/p/C7qLDlSpypd/?img_index=1', embedUrl: 'https://www.instagram.com/p/C7qLDlSpypd/embed' }
                       ]
                     })
                 },
@@ -691,15 +686,7 @@ export default function Home() {
                       ],
                       website: 'linktr.ee/GlovecareOfficial',
                       posts: [
-                        { url: 'https://www.instagram.com/p/DJnWHO7tVf6/', embedUrl: 'https://www.instagram.com/p/DJnWHO7tVf6/embed' },
-                        { url: 'https://www.instagram.com/p/DJx3JZGKcM-/?img_index=1', embedUrl: 'https://www.instagram.com/p/DJx3JZGKcM-/embed' },
-                        { url: 'https://www.instagram.com/p/DJlvOFltV4y/', embedUrl: 'https://www.instagram.com/p/DJlvOFltV4y/embed' },
-                        { url: 'https://www.instagram.com/p/DJlTyGfKe8J/?img_index=1', embedUrl: 'https://www.instagram.com/p/DJlTyGfKe8J/embed' },
-                        { url: 'https://www.instagram.com/p/DJk--3fSfbp/', embedUrl: 'https://www.instagram.com/p/DJk--3fSfbp/embed' },
-                        { url: 'https://www.instagram.com/p/DJbcCVkNMJR/', embedUrl: 'https://www.instagram.com/p/DJbcCVkNMJR/embed' },
-                        { url: 'https://www.instagram.com/p/DKs7pifuCl0/', embedUrl: 'https://www.instagram.com/p/DKs7pifuCl0/embed' },
-                        { url: 'https://www.instagram.com/p/DKx-yHLOtZB/', embedUrl: 'https://www.instagram.com/p/DKx-yHLOtZB/embed' },
-                        { url: 'https://www.instagram.com/p/DK6d85chp0T/', embedUrl: 'https://www.instagram.com/p/DK6d85chp0T/embed' }
+                        { url: 'https://www.instagram.com/p/DJnWHO7tVf6/', embedUrl: 'https://www.instagram.com/p/DJnWHO7tVf6/embed' }
                       ]
                     })
                 }
@@ -771,13 +758,7 @@ export default function Home() {
                       mediaList: [
                         '/portofolio/produk-1.jpg',
                         '/portofolio/produk-3.jpg',
-                        '/portofolio/produk-4.jpg',
-                        '/portofolio/produk-5.jpg',
-                        '/portofolio/produk-6.jpg',
-                        '/portofolio/produk-7.jpg',
-                        '/portofolio/produk-8.jpg',
-                        '/portofolio/produk-9.jpg',
-                        '/portofolio/produk-10.jpg'
+                        '/portofolio/produk-4.jpg'
                       ]
                     })
                 }
@@ -950,19 +931,7 @@ export default function Home() {
                   action: () =>
                     openPreview({
                       title: 'E-Invitation Display - Digisite Tech',
-                      mediaList: [
-                        '/portofolio/e-invitation-birthday-digisite-1.jpg',
-                        '/portofolio/e-invitation-birthday-digisite-2.jpg',
-                        '/portofolio/e-invitation-birthday-digisite-3.jpg',
-                        '/portofolio/e-invitation-seminar-digisite-1.jpg',
-                        '/portofolio/e-invitation-seminar-digisite-2.jpg',
-                        '/portofolio/e-invitation-seminar-digisite-3.jpg',
-                        '/portofolio/e-invitation-seminar-digisite-4.jpg',
-                        '/portofolio/e-invitation-wedding-digisite-1.jpg',
-                        '/portofolio/e-invitation-wedding-digisite-2.jpg',
-                        '/portofolio/e-invitation-wedding-digisite-3.jpg',
-                        '/portofolio/e-invitation-wedding-digisite-4.jpg'
-                      ]
+                      mediaList: ['/portofolio/e-invitation-birthday-digisite-1.jpg']
                     })
                 },
                 {
@@ -971,14 +940,7 @@ export default function Home() {
                   action: () =>
                     openPreview({
                       title: 'Filter Live Report – Meta Spark Studio',
-                      mediaList: [
-                        '/portofolio/filter-meta-spark-1.mp4',
-                        '/portofolio/filter-meta-spark-2.mp4',
-                        '/portofolio/filter-meta-spark-3.mp4',
-                        '/portofolio/filter-meta-spark-4.mp4',
-                        '/portofolio/filter-meta-spark-5.mp4',
-                        '/portofolio/filter-meta-spark-6.mp4'
-                      ]
+                      mediaList: ['/portofolio/filter-meta-spark-1.mp4']
                     })
                 },
                 {
@@ -996,12 +958,7 @@ export default function Home() {
                   action: () =>
                     openPreview({
                       title: 'Lanyard & ID Card',
-                      mediaList: [
-                        '/portofolio/lanyard-1.jpg',
-                        '/portofolio/lanyard-2.jpg',
-                        '/portofolio/lanyard-idcard-1.jpg',
-                        '/portofolio/lanyard-idcard-2.jpg'
-                      ]
+                      mediaList: ['/portofolio/lanyard-1.jpg']
                     })
                 },
                 {
@@ -1019,15 +976,7 @@ export default function Home() {
                   action: () =>
                     openPreview({
                       title: 'Story Content – OnTheGoods',
-                      mediaList: [
-                        '/portofolio/story-onthegoods-1.mp4',
-                        '/portofolio/story-onthegoods-1.jpg',
-                        '/portofolio/story-onthegoods-2.jpg',
-                        '/portofolio/story-onthegoods-3.jpg',
-                        '/portofolio/story-onthegoods-4.jpg',
-                        '/portofolio/story-onthegoods-5.jpg',
-                        '/portofolio/story-onthegoods-6.jpg'
-                      ]
+                      mediaList: ['/portofolio/story-onthegoods-1.mp4']
                     })
                 }
               ].map((item, idx) => (
@@ -1124,7 +1073,6 @@ export default function Home() {
             className="relative w-full max-w-[1500px] rounded-3xl p-4 sm:p-8 space-y-4 sm:space-y-6 overflow-hidden text-slate-900 flex flex-col justify-between liquid-glass-3d max-h-[92vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            {/* HEADER MODAL */}
             <div className="relative z-10 flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-900/10 gap-2">
               <h3 className="text-[16px] sm:text-[18px] md:text-[22px] font-black text-slate-900 tracking-tight truncate">
                 Portofolio - {activePreview.title}

@@ -1,6 +1,6 @@
 import React from 'react';
 import type { Metadata } from 'next';
-import './globals.css';
+import './globals.css'; // <-- INI BARIS KUNCI YANG SEBELUMNYA HILANG
 
 export const metadata: Metadata = {
   title: 'Andhika Rievaldy - Portfolio',

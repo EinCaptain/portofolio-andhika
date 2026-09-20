@@ -153,20 +153,16 @@ export default function Home() {
 
       {/* MAIN CONTAINER: CANVAS 2.355px DENGAN 3 KOLOM / SLIDE @ 785px */}
       <div className="relative z-10 mx-auto px-3 sm:px-6 py-6 md:py-10 w-full max-w-[2355px]">
-        
         {/* VIEW 1: BERANDA UTAMA (TIGA SLIDE/KOLOM) */}
         {currentView === 'main' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-[2355px] mx-auto items-start">
-            
-            {/* ==================== SLIDE 1 (LEBAR 785px) ==================== */}
+            {/* SLIDE 1 (LEBAR 785px) */}
             <div className="w-full max-w-[785px] mx-auto space-y-6">
-              
               {/* CARD HEADER */}
               <section
                 id="home"
                 className="relative overflow-hidden flex flex-col justify-between p-6 sm:p-8 text-slate-900 liquid-glass-3d rounded-3xl min-h-[640px] w-full"
               >
-                {/* BARIS ATAS: STATUS BADGE & CREDENTIALS */}
                 <div className="flex items-center justify-between w-full relative z-20 gap-2">
                   <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] sm:text-[12px] text-slate-800 bg-white/80 backdrop-blur-md border border-white/90 shadow-sm font-bold">
                     <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
@@ -181,7 +177,6 @@ export default function Home() {
                   </a>
                 </div>
 
-                {/* GRID HERO: TEKS & FOTO PROFIL */}
                 <div className="grid grid-cols-1 sm:grid-cols-12 gap-5 items-end my-auto pt-4 pb-2 relative z-20">
                   <div className="sm:col-span-7 flex flex-col justify-center text-left">
                     <div className="text-slate-700 font-extrabold text-[11px] tracking-widest uppercase mb-1.5">
@@ -193,7 +188,6 @@ export default function Home() {
                       <span className="text-slate-800">Rievaldy</span>
                     </h1>
 
-                    {/* KONTAK GRID */}
                     <div className="grid grid-cols-1 gap-2 pt-5 text-[11.5px] text-slate-700 font-medium">
                       <a
                         href="mailto:andhikarievaldy@gmail.com"
@@ -241,7 +235,6 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* FOTO HERO PROFIL */}
                   {!profileImgError && (
                     <div className="sm:col-span-5 flex justify-center sm:justify-end items-end h-full mt-4 sm:mt-0">
                       <img
@@ -254,7 +247,6 @@ export default function Home() {
                   )}
                 </div>
 
-                {/* NAVIGASI BAWAH MELAYANG */}
                 <div className="flex justify-center relative z-20 pt-2">
                   <div className="rounded-full p-1 flex items-center gap-1 text-[11px] bg-white/80 backdrop-blur-lg border border-white shadow-sm max-w-full overflow-x-auto scrollbar-none">
                     <a href="#home" className="px-3 py-1.5 rounded-full bg-slate-900 text-white font-bold shadow-sm whitespace-nowrap">
@@ -365,9 +357,8 @@ export default function Home() {
               </section>
             </div>
 
-            {/* ==================== SLIDE 2 (LEBAR 785px) ==================== */}
+            {/* SLIDE 2 (LEBAR 785px) */}
             <div className="w-full max-w-[785px] mx-auto space-y-6">
-              
               {/* CARD TOOLS & SOFTWARE PROFICIENCY */}
               <section id="tools" className="space-y-4 w-full">
                 <div className="p-5 text-slate-900 liquid-glass-3d rounded-3xl">
@@ -447,9 +438,8 @@ export default function Home() {
               </section>
             </div>
 
-            {/* ==================== SLIDE 3 (LEBAR 785px) ==================== */}
+            {/* SLIDE 3 (LEBAR 785px) */}
             <div className="w-full max-w-[785px] mx-auto space-y-6">
-              
               {/* CARD SERVICES & EXPERTISE */}
               <section id="services" className="space-y-4 w-full">
                 <div className="p-5 text-slate-900 liquid-glass-3d rounded-3xl">
@@ -587,7 +577,7 @@ export default function Home() {
                 </div>
               </section>
 
-              {/* CARD INTERESTED IN WORKING TOGETHER? (FOOTER) */}
+              {/* CARD INTERESTED IN WORKING TOGETHER? */}
               <footer
                 id="contact"
                 className="p-6 text-center space-y-4 text-slate-900 liquid-glass-3d rounded-3xl overflow-hidden w-full"
@@ -614,7 +604,6 @@ export default function Home() {
                 </div>
               </footer>
             </div>
-
           </div>
         )}
 

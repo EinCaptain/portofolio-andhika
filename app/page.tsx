@@ -375,115 +375,47 @@ export default function Home() {
                   {
                     name: 'Adobe Photoshop',
                     category: 'Visual & Retouching',
-                    desc: 'Pengolahan dan retouching foto komersial, manipulasi gambar terdistribusi, serta penyempurnaan estetika materi promosi digital.',
-                    icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="3" />
-                        <path d="M7 17V7h3.5a2.5 2.5 0 0 1 0 5H7" />
-                        <path d="M14 13a2 2 0 0 1 2 2v2" />
-                      </svg>
-                    )
+                    desc: 'Pengolahan dan retouching foto komersial, manipulasi gambar terdistribusi, serta penyempurnaan estetika materi promosi digital.'
                   },
                   {
                     name: 'Adobe Illustrator',
                     category: 'Vector & Graphic Design',
-                    desc: 'Perancangan aset vektor, desain logo utama, tata letak konten grafik, dan pembuatan komponen identitas visual merek.',
-                    icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="3" />
-                        <path d="M8 17l3-9 3 9" />
-                        <path d="M9.5 13.5h5" />
-                        <circle cx="17" cy="16" r="1" fill="currentColor" />
-                      </svg>
-                    )
+                    desc: 'Perancangan aset vektor, desain logo utama, tata letak konten grafik, dan pembuatan komponen identitas visual merek.'
                   },
                   {
                     name: 'Adobe Premiere Pro',
                     category: 'Video Production',
-                    desc: 'Penyuntingan video komersial lanskap, perangkaian alur cerita sinematik, penyelarasan audio, dan teknik color grading.',
-                    icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="3" />
-                        <path d="M7 17V7h3.5a2.5 2.5 0 0 1 0 5H7" />
-                        <path d="M14 11v6" />
-                        <path d="M14 13a1.5 1.5 0 0 1 1.5-1.5H17" />
-                      </svg>
-                    )
+                    desc: 'Penyuntingan video komersial lanskap, perangkaian alur cerita sinematik, penyelarasan audio, dan teknik color grading.'
                   },
                   {
                     name: 'Canva Pro',
                     category: 'Fast Visual Design',
-                    desc: 'Penyusunan materi desain cepat untuk konten harian media sosial, infografis presentasi, dan kolaborasi tata letak promosi.',
-                    icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="12" cy="12" r="9" />
-                        <path d="M12 8a4 4 0 1 0 4 4" />
-                      </svg>
-                    )
+                    desc: 'Penyusunan materi desain cepat untuk konten harian media sosial, infografis presentasi, dan kolaborasi tata letak promosi.'
                   },
                   {
                     name: 'CapCut Pro',
                     category: 'Short-Form Video Editing',
-                    desc: 'Produksi dan penyuntingan konten video pendek (Reels, TikTok, & Short) dengan alur transisi dinamis, efek teks, dan tren audio.',
-                    icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M6 4l12 16" />
-                        <path d="M18 4L6 20" />
-                        <circle cx="6" cy="6" r="2" />
-                        <circle cx="6" cy="18" r="2" />
-                      </svg>
-                    )
+                    desc: 'Produksi dan penyuntingan konten video pendek (Reels, TikTok, & Short) dengan alur transisi dinamis, efek teks, dan tren audio.'
                   },
                   {
                     name: 'Meta Spark Studio',
                     category: 'Augmented Reality (AR)',
-                    desc: 'Pengembangan filter AR interaktif untuk kebutuhan liputan acara secara langsung (live report) guna meningkatkan engagement audiens.',
-                    icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <polygon points="12 2 2 7 12 12 22 7 12 2" />
-                        <polyline points="2 17 12 22 22 17" />
-                        <polyline points="2 12 12 17 22 12" />
-                      </svg>
-                    )
+                    desc: 'Pengembangan filter AR interaktif untuk kebutuhan liputan acara secara langsung (live report) guna meningkatkan engagement audiens.'
                   },
                   {
                     name: 'Meta Business Suite',
                     category: 'Social Media Operations',
-                    desc: 'Manajemen penjadwalan publikasi konten Instagram & Facebook, pemantauan matriks performa, serta manajemen interaksi audiens.',
-                    icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M18 20V10" />
-                        <path d="M12 20V4" />
-                        <path d="M6 20v-6" />
-                      </svg>
-                    )
+                    desc: 'Manajemen penjadwalan publikasi konten Instagram & Facebook, pemantauan matriks performa, serta manajemen interaksi audiens.'
                   },
                   {
                     name: 'Google Docs',
                     category: 'Copywriting & Planning',
-                    desc: 'Penyusunan naskah copywriting, pembuatan kalender konten terstruktur, pengerjaan creative brief, serta dokumentasi strategi narasi.',
-                    icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
-                        <polyline points="14 2 14 8 20 8" />
-                        <line x1="16" y1="13" x2="8" y2="13" />
-                        <line x1="16" y1="17" x2="8" y2="17" />
-                      </svg>
-                    )
+                    desc: 'Penyusunan naskah copywriting, pembuatan kalender konten terstruktur, pengerjaan creative brief, serta dokumentasi strategi narasi.'
                   },
                   {
                     name: 'Google Sheets / Spreadsheet',
                     category: 'Analytics & Reporting',
-                    desc: 'Pengolahan dan analisis data Key Performance Indicator (KPI) kampanye digital, pemetaaan basis data, serta pelaporan performa media.',
-                    icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="3" y="3" width="18" height="18" rx="2" />
-                        <line x1="3" y1="9" x2="21" y2="9" />
-                        <line x1="3" y1="15" x2="21" y2="15" />
-                        <line x1="9" y1="3" x2="9" y2="21" />
-                        <line x1="15" y1="3" x2="15" y2="21" />
-                      </svg>
-                    )
+                    desc: 'Pengolahan dan analisis data Key Performance Indicator (KPI) kampanye digital, pemetaaan basis data, serta pelaporan performa media.'
                   }
                 ].map((tool, idx) => (
                   <div
@@ -491,10 +423,7 @@ export default function Home() {
                     className="p-4 sm:p-5 transition-all duration-300 space-y-2 h-full flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
                   >
                     <div className="space-y-2 relative z-10">
-                      <div className="flex items-center justify-between gap-2">
-                        <div className="w-8 h-8 rounded-2xl text-slate-800 bg-white/80 border border-white flex items-center justify-center shrink-0 shadow-sm">
-                          {tool.icon}
-                        </div>
+                      <div className="flex items-center justify-end">
                         <span className="text-[9.5px] font-extrabold text-slate-500 uppercase tracking-wider bg-white/60 px-2.5 py-0.5 rounded-full border border-white/80 truncate">
                           {tool.category}
                         </span>

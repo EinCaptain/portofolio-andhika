@@ -197,7 +197,7 @@ export default function Home() {
                       className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl transition-all bg-white/70 backdrop-blur-md border border-white/90 hover:bg-white/90 shadow-sm group cursor-pointer"
                     >
                       <svg className="w-4 h-4 text-slate-800 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 0-2-2H5a2 2 0 0-2 2v10a2 2 0 002 2z" />
                       </svg>
                       <span className="truncate text-slate-900 font-bold">andhikarievaldy@gmail.com</span>
                     </a>
@@ -223,7 +223,7 @@ export default function Home() {
                       className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl transition-all bg-white/70 backdrop-blur-md border border-white/90 hover:bg-white/90 shadow-sm group cursor-pointer"
                     >
                       <svg className="w-4 h-4 text-slate-800 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                        <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 0 1-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
                       <span className="text-slate-900 font-bold">+62 851-7977-0217</span>
                     </a>
@@ -780,8 +780,8 @@ export default function Home() {
                   className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
                 >
                   <div className="space-y-1 relative z-10">
-                    <h2 className="text-[10px] sm:text-[11px] font-extrabold text-slate-900 leading-tight">{item.name}</h2>
-                    <p className="text-[9px] sm:text-[9.5px] font-normal text-slate-600 leading-relaxed text-left">
+                    <h2 className="text-[8.5px] sm:text-[9.5px] font-extrabold text-slate-900 leading-tight tracking-tight">{item.name}</h2>
+                    <p className="text-[8px] sm:text-[8.5px] font-normal text-slate-600 leading-relaxed text-left">
                       {item.desc}
                     </p>
                   </div>
@@ -858,8 +858,8 @@ export default function Home() {
                   className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
                 >
                   <div className="space-y-1 relative z-10">
-                    <h2 className="text-[10px] sm:text-[11px] font-extrabold text-slate-900 leading-tight">{item.name}</h2>
-                    <p className="text-[9px] sm:text-[9.5px] font-normal text-slate-600 leading-relaxed text-left">
+                    <h2 className="text-[8.5px] sm:text-[9.5px] font-extrabold text-slate-900 leading-tight tracking-tight">{item.name}</h2>
+                    <p className="text-[8px] sm:text-[8.5px] font-normal text-slate-600 leading-relaxed text-left">
                       {item.desc}
                     </p>
                   </div>
@@ -944,8 +944,8 @@ export default function Home() {
                   className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
                 >
                   <div className="space-y-1 relative z-10">
-                    <h2 className="text-[10px] sm:text-[11px] font-extrabold text-slate-900 leading-tight">{item.name}</h2>
-                    <p className="text-[9px] sm:text-[9.5px] font-normal text-slate-600 leading-relaxed text-left">
+                    <h2 className="text-[8.5px] sm:text-[9.5px] font-extrabold text-slate-900 leading-tight tracking-tight">{item.name}</h2>
+                    <p className="text-[8px] sm:text-[8.5px] font-normal text-slate-600 leading-relaxed text-left">
                       {item.desc}
                     </p>
                   </div>
@@ -1107,8 +1107,8 @@ export default function Home() {
                   className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
                 >
                   <div className="space-y-1 relative z-10">
-                    <h2 className="text-[10px] sm:text-[11px] font-extrabold text-slate-900 leading-tight">{item.name}</h2>
-                    <p className="text-[9px] sm:text-[9.5px] font-normal text-slate-600 leading-relaxed text-left">
+                    <h2 className="text-[8.5px] sm:text-[9.5px] font-extrabold text-slate-900 leading-tight tracking-tight">{item.name}</h2>
+                    <p className="text-[8px] sm:text-[8.5px] font-normal text-slate-600 leading-relaxed text-left">
                       {item.desc}
                     </p>
                   </div>

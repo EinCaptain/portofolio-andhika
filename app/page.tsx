@@ -151,12 +151,12 @@ export default function Home() {
         }}
       />
 
-      {/* MAIN CONTAINER: CANVAS 2.355px DENGAN 3 KOLOM / SLIDE @ 785px */}
+      {/* MAIN CONTAINER */}
       <div className="relative z-10 mx-auto px-3 sm:px-6 py-6 md:py-10 w-full max-w-[2355px]">
-        {/* VIEW 1: BERANDA UTAMA (TIGA SLIDE/KOLOM) */}
+        {/* VIEW 1: BERANDA UTAMA */}
         {currentView === 'main' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 w-full max-w-[2355px] mx-auto items-start">
-            {/* SLIDE 1 (LEBAR 785px) */}
+            {/* SLIDE 1 */}
             <div className="w-full max-w-[785px] mx-auto space-y-6">
               {/* CARD HEADER */}
               <section
@@ -357,7 +357,7 @@ export default function Home() {
               </section>
             </div>
 
-            {/* SLIDE 2 (LEBAR 785px) */}
+            {/* SLIDE 2 */}
             <div className="w-full max-w-[785px] mx-auto space-y-6">
               {/* CARD TOOLS & SOFTWARE PROFICIENCY */}
               <section id="tools" className="space-y-4 w-full">
@@ -438,7 +438,7 @@ export default function Home() {
               </section>
             </div>
 
-            {/* SLIDE 3 (LEBAR 785px) */}
+            {/* SLIDE 3 */}
             <div className="w-full max-w-[785px] mx-auto space-y-6">
               {/* CARD SERVICES & EXPERTISE */}
               <section id="services" className="space-y-4 w-full">
@@ -1230,7 +1230,8 @@ export default function Home() {
               )}
             </div>
           </div>
-        )}
+        </div>
+      )}
 
       {/* MODAL LIGHTBOX OVERLAY */}
       {zoomedMedia && (

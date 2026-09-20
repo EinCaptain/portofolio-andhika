@@ -2,8 +2,6 @@
 
 import React, { useState } from 'react';
 
-/* eslint-disable @next/next/no-img-element */
-
 type PostItem = {
   url: string;
   embedUrl: string;
@@ -25,62 +23,6 @@ type PreviewData = {
   img?: string;
   mediaList?: string[];
 };
-
-function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; alt?: string }) {
-  const [hasError, setHasError] = useState(false);
-
-  if (hasError) {
-    return (
-      <div className="w-full h-full aspect-square rounded-2xl border border-white/60 bg-white/20 backdrop-blur-md flex items-center justify-center p-3 text-xs text-slate-600 break-all">
-        {src}
-      </div>
-    );
-  }
-
-  if (src.endsWith('.mp4')) {
-    return (
-      <video
-        src={src}
-        muted
-        loop
-        autoPlay
-        playsInline
-        className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none"
-        onError={() => setHasError(true)}
-      />
-    );
-  }
-
-  return (
-    <img
-      src={src}
-      alt={alt || title}
-      className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none drop-shadow-md"
-      onError={() => setHasError(true)}
-    />
-  );
-}
-
-function InstagramAvatar({ username, displayName, avatarImg }: { username?: string; displayName?: string; avatarImg?: string }) {
-  const [imgError, setImgError] = useState(false);
-
-  if (avatarImg && !imgError) {
-    return (
-      <img
-        src={avatarImg}
-        alt={displayName || username || 'Avatar'}
-        className="w-full h-full object-cover rounded-full"
-        onError={() => setImgError(true)}
-      />
-    );
-  }
-
-  return (
-    <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white font-bold text-sm uppercase rounded-full">
-      {username ? username.substring(0, 2) : 'IG'}
-    </div>
-  );
-}
 
 export default function Home() {
   const [currentView, setCurrentView] = useState<'main' | 'social-media' | 'photography' | 'videography' | 'graphic-design'>('main');
@@ -131,10 +73,7 @@ export default function Home() {
   };
 
   return (
-    <div
-      className="min-h-screen text-slate-900 font-sans antialiased relative selection:bg-slate-900 selection:text-white overflow-x-hidden"
-      style={{ backgroundColor: '#E2E8F0' }}
-    >
+    <div className="min-h-screen text-slate-900 font-sans antialiased relative selection:bg-slate-900 selection:text-white overflow-x-hidden bg-[#E2E8F0]">
       {/* AMBIENT LIGHTING BACKGROUND */}
       <div
         className="fixed inset-0 pointer-events-none z-0"
@@ -151,11 +90,10 @@ export default function Home() {
         }}
       />
 
-      {/* MAIN CONTAINER (VERTIKAL TUNGGAL MAX-W-6XL) */}
+      {/* MAIN CONTAINER */}
       <div className="relative z-10 mx-auto px-4 sm:px-6 py-6 md:py-10 w-full max-w-6xl space-y-6 sm:space-y-8">
-        {/* VIEW 1: BERANDA UTAMA */}
         {currentView === 'main' && (
-          <>
+          <div className="space-y-6 sm:space-y-8">
             {/* 1. HERO HEADER CARD */}
             <section
               id="home"
@@ -235,6 +173,7 @@ export default function Home() {
 
                 {!profileImgError && (
                   <div className="sm:col-span-5 flex justify-center sm:justify-end items-end h-full mt-4 sm:mt-0">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/profile.png"
                       alt="Andhika Rievaldy"
@@ -269,7 +208,7 @@ export default function Home() {
               </div>
             </section>
 
-            {/* 2. CARD ABOUT ME (2 KOLOM: DESKRIPSI DI KIRI, SERTIFIKAT DI KANAN) */}
+            {/* 2. CARD ABOUT ME */}
             <section id="about" className="p-6 sm:p-8 text-slate-900 liquid-glass-3d rounded-3xl overflow-hidden w-full">
               <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start relative z-10">
                 <div className="md:col-span-7 space-y-3">
@@ -356,7 +295,7 @@ export default function Home() {
               </div>
             </section>
 
-            {/* 3. SERVICES & EXPERTISE SECTION (4 KARTU BERDAMPINGAN) */}
+            {/* 3. SERVICES & EXPERTISE SECTION */}
             <section id="services" className="space-y-4 w-full">
               <div className="p-5 text-slate-900 liquid-glass-3d rounded-3xl">
                 <span className="text-[11px] font-extrabold text-slate-700 tracking-wider uppercase block">What I Do</span>
@@ -597,7 +536,7 @@ export default function Home() {
                 </div>
               </div>
             </footer>
-          </>
+          </div>
         )}
 
         {/* VIEW 2: SOCIAL MEDIA MANAGEMENT */}
@@ -1040,6 +979,7 @@ export default function Home() {
                   title={activeCert.title}
                 />
               ) : (
+                /* eslint-disable-next-line @next/next/no-img-element */
                 <img
                   src={activeCert.src}
                   alt={activeCert.title}
@@ -1086,11 +1026,18 @@ export default function Home() {
                     <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 md:gap-10">
                       <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-slate-900 p-[2px] shrink-0 flex items-center justify-center shadow-lg overflow-hidden">
                         <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
-                          <InstagramAvatar
-                            username={activePreview.username}
-                            displayName={activePreview.displayName}
-                            avatarImg={activePreview.avatarImg}
-                          />
+                          {activePreview.avatarImg ? (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img
+                              src={activePreview.avatarImg}
+                              alt={activePreview.displayName || activePreview.username || 'Avatar'}
+                              className="w-full h-full object-cover rounded-full"
+                            />
+                          ) : (
+                            <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white font-bold text-sm uppercase rounded-full">
+                              {activePreview.username ? activePreview.username.substring(0, 2) : 'IG'}
+                            </div>
+                          )}
                         </div>
                       </div>
 
@@ -1099,14 +1046,16 @@ export default function Home() {
                           <h2 className="text-[18px] sm:text-[22px] font-black text-slate-900 tracking-tight">
                             {activePreview.username}
                           </h2>
-                          <a
-                            href={activePreview.instagramUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-4 sm:px-5 py-2 rounded-2xl text-[11px] md:text-[12px] font-bold text-white shadow-sm transition-all bg-slate-900 hover:bg-slate-800 backdrop-blur-sm"
-                          >
-                            Kunjungi Profile Instagram
-                          </a>
+                          {activePreview.instagramUrl && (
+                            <a
+                              href={activePreview.instagramUrl}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="px-4 sm:px-5 py-2 rounded-2xl text-[11px] md:text-[12px] font-bold text-white shadow-sm transition-all bg-slate-900 hover:bg-slate-800 backdrop-blur-sm"
+                            >
+                              Kunjungi Profile Instagram
+                            </a>
+                          )}
                         </div>
 
                         <div className="flex items-center gap-4 sm:gap-8 text-[12px] sm:text-[13px] border-y border-slate-900/10 py-2 sm:py-2.5 font-normal">
@@ -1196,7 +1145,23 @@ export default function Home() {
                           onClick={() => setZoomedMedia(file)}
                           className="aspect-square rounded-3xl p-2 sm:p-3 liquid-glass-3d flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:bg-white/60 group"
                         >
-                          <SmartMediaDisplay src={file} title={`${activePreview.title} #${i + 1}`} />
+                          {file.endsWith('.mp4') ? (
+                            <video
+                              src={file}
+                              muted
+                              loop
+                              autoPlay
+                              playsInline
+                              className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none"
+                            />
+                          ) : (
+                            /* eslint-disable-next-line @next/next/no-img-element */
+                            <img
+                              src={file}
+                              alt={`${activePreview.title} #${i + 1}`}
+                              className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none drop-shadow-md"
+                            />
+                          )}
                         </div>
                       ))}
                     </div>
@@ -1206,7 +1171,23 @@ export default function Home() {
                         onClick={() => setZoomedMedia(activePreview.img!)}
                         className="max-w-md w-full aspect-square cursor-pointer transition-all hover:scale-[1.03] rounded-3xl p-4 liquid-glass-3d flex items-center justify-center"
                       >
-                        <SmartMediaDisplay src={activePreview.img} title={activePreview.title} />
+                        {activePreview.img.endsWith('.mp4') ? (
+                          <video
+                            src={activePreview.img}
+                            muted
+                            loop
+                            autoPlay
+                            playsInline
+                            className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none"
+                          />
+                        ) : (
+                          /* eslint-disable-next-line @next/next/no-img-element */
+                          <img
+                            src={activePreview.img}
+                            alt={activePreview.title}
+                            className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none drop-shadow-md"
+                          />
+                        )}
                       </div>
                     </div>
                   ) : null}
@@ -1257,6 +1238,7 @@ export default function Home() {
                 className="max-h-[80vh] sm:max-h-[85vh] max-w-full rounded-3xl shadow-2xl border border-slate-700 bg-black"
               />
             ) : (
+              /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={zoomedMedia}
                 alt="Preview diperbesar"

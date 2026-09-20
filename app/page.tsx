@@ -92,6 +92,7 @@ export default function Home() {
 
       {/* MAIN CONTAINER */}
       <div className="relative z-10 mx-auto px-4 sm:px-6 py-6 md:py-10 w-full max-w-6xl space-y-6 sm:space-y-8">
+        {/* VIEW 1: BERANDA UTAMA */}
         {currentView === 'main' && (
           <div className="space-y-6 sm:space-y-8">
             {/* 1. HERO HEADER CARD */}

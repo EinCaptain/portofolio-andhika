@@ -2,6 +2,8 @@
 
 import React, { useState } from 'react';
 
+/* eslint-disable @next/next/no-img-element */
+
 type PostItem = {
   url: string;
   embedUrl: string;
@@ -130,8 +132,8 @@ export default function Home() {
 
   return (
     <div
-      className="min-h-screen text-slate-900 font-sans antialiased relative selection:bg-slate-900 selection:text-white"
-      style={{ backgroundColor: '#E2E8F0', overflowX: 'hidden' }}
+      className="min-h-screen text-slate-900 font-sans antialiased relative selection:bg-slate-900 selection:text-white overflow-x-hidden"
+      style={{ backgroundColor: '#E2E8F0' }}
     >
       {/* AMBIENT LIGHTING BACKGROUND */}
       <div
@@ -142,7 +144,7 @@ export default function Home() {
       />
 
       <div
-        className="fixed -top-32 -left-32 w-[650px] h-[650px] pointer-events-none z-0 rounded-full"
+        className="fixed -top-32 -left-32 w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] pointer-events-none z-0 rounded-full"
         style={{
           background: 'radial-gradient(circle, rgba(165, 180, 252, 0.55) 0%, rgba(226, 232, 240, 0) 70%)',
           filter: 'blur(90px)',
@@ -150,174 +152,124 @@ export default function Home() {
       />
 
       {/* MAIN CONTAINER */}
-      <div
-        className="relative z-10 mx-auto px-4 sm:px-6 py-8 md:py-12 space-y-14"
-        style={{ width: '100%', maxWidth: '1500px' }}
-      >
+      <div className="relative z-10 mx-auto px-3 sm:px-6 py-6 md:py-12 space-y-10 md:space-y-14 w-full max-w-[1500px]">
+        
         {/* VIEW 1: BERANDA UTAMA */}
         {currentView === 'main' && (
-          <div className="space-y-14">
+          <div className="space-y-10 md:space-y-14">
+            {/* HERO CARD */}
             <section
               id="home"
-              className="relative overflow-hidden flex flex-col justify-between p-6 sm:p-10 md:p-14 text-slate-900 mx-auto liquid-glass-3d rounded-3xl"
-              style={{
-                width: '100%',
-                maxWidth: '1500px',
-                minHeight: '85vh',
-              }}
+              className="relative overflow-hidden flex flex-col justify-between p-6 sm:p-8 md:p-12 text-slate-900 mx-auto liquid-glass-3d rounded-3xl min-h-[580px] lg:min-h-[640px] w-full max-w-[1500px]"
             >
-              {/* FOTO HERO PROFILE */}
-              {!profileImgError && (
-                <div 
-                  className="absolute right-0 bottom-0 top-0 w-full md:w-1/2 pointer-events-none z-10 flex items-end justify-center md:justify-end pr-0 md:pr-8 overflow-hidden"
-                  style={{ maxHeight: '100%' }}
-                >
-                  <img
-                    src="/profile.png"
-                    alt="Andhika Rievaldy"
-                    style={{ maxHeight: '90%', maxWidth: '100%', objectFit: 'contain', objectPosition: 'bottom' }}
-                    className="w-auto drop-shadow-[0_20px_35px_rgba(15,23,42,0.18)]"
-                    onError={() => setProfileImgError(true)}
-                  />
-                </div>
-              )}
-
               {/* BARIS ATAS: STATUS BADGE & CREDENTIALS */}
-              <div className="flex items-center justify-between w-full relative z-20">
-                <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-[12px] md:text-[14px] text-slate-800 bg-white/80 backdrop-blur-md border border-white/90 shadow-sm font-bold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+              <div className="flex items-center justify-between w-full relative z-20 gap-2">
+                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] sm:text-[12px] md:text-[13px] text-slate-800 bg-white/80 backdrop-blur-md border border-white/90 shadow-sm font-bold">
+                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
                   <span>Open to work</span>
                 </div>
 
                 <a
                   href="#about"
-                  className="px-6 py-2.5 rounded-full text-white font-bold text-[12px] md:text-[14px] transition-all shadow-md bg-slate-900/90 hover:bg-slate-900 border border-slate-700/50 backdrop-blur-md pointer-events-auto"
+                  className="px-4 sm:px-5 py-2 rounded-full text-white font-bold text-[11px] sm:text-[12px] md:text-[13px] transition-all shadow-md bg-slate-900/90 hover:bg-slate-900 border border-slate-700/50 backdrop-blur-md pointer-events-auto"
                 >
                   View Credentials
                 </a>
               </div>
 
-              {/* AREA TEKS HERO UTAMA */}
-              <div className="my-auto pt-8 pb-12 relative z-20 max-w-[620px]">
-                <div className="text-slate-700 font-extrabold text-[12px] md:text-[14px] tracking-widest uppercase mb-3">
-                  Marketing Communication Specialist
-                </div>
+              {/* GRID HERO: TEKS & FOTO PROFIL */}
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end my-auto pt-6 pb-2 relative z-20">
+                {/* TEKS HERO */}
+                <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left max-w-[620px] mx-auto lg:mx-0">
+                  <div className="text-slate-700 font-extrabold text-[11px] sm:text-[12px] md:text-[13px] tracking-widest uppercase mb-2">
+                    Marketing Communication Specialist
+                  </div>
 
-                <h1 className="text-5xl sm:text-7xl lg:text-8xl font-black text-slate-900 tracking-tight leading-none">
-                  Andhika <br />
-                  <span className="text-slate-800">Rievaldy</span>
-                </h1>
+                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[0.95]">
+                    Andhika <br />
+                    <span className="text-slate-800">Rievaldy</span>
+                  </h1>
 
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-8 text-[15px] md:text-[16px] text-slate-700 font-medium">
-                  <a
-                    href="mailto:andhikarievaldy@gmail.com"
-                    className="flex items-center gap-2.5 p-3.5 rounded-2xl transition-all bg-white/70 backdrop-blur-md border border-white/90 hover:bg-white/90 shadow-sm group cursor-pointer"
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      style={{ minWidth: '18px', minHeight: '18px' }}
-                      className="w-4 h-4 text-slate-800 shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                  {/* KONTAK GRID */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-6 text-[12px] sm:text-[13.5px] text-slate-700 font-medium text-left">
+                    <a
+                      href="mailto:andhikarievaldy@gmail.com"
+                      className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl transition-all bg-white/70 backdrop-blur-md border border-white/90 hover:bg-white/90 shadow-sm group cursor-pointer"
                     >
-                      <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <span className="truncate text-slate-900 font-bold">andhikarievaldy@gmail.com</span>
-                  </a>
+                      <svg className="w-4 h-4 text-slate-800 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                      </svg>
+                      <span className="truncate text-slate-900 font-bold">andhikarievaldy@gmail.com</span>
+                    </a>
 
-                  <a
-                    href="https://www.linkedin.com/in/rievaldyandhika/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 p-3.5 rounded-2xl transition-all bg-white/70 backdrop-blur-md border border-white/90 hover:bg-white/90 shadow-sm group cursor-pointer"
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      style={{ minWidth: '18px', minHeight: '18px' }}
-                      className="w-4 h-4 text-slate-800 shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                    <a
+                      href="https://www.linkedin.com/in/rievaldyandhika/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl transition-all bg-white/70 backdrop-blur-md border border-white/90 hover:bg-white/90 shadow-sm group cursor-pointer"
                     >
-                      <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-                      <rect x="2" y="9" width="4" height="12" />
-                      <circle cx="4" cy="4" r="2" />
-                    </svg>
-                    <span className="truncate text-slate-900 font-bold">linkedin.com/in/rievaldyandhika</span>
-                  </a>
+                      <svg className="w-4 h-4 text-slate-800 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+                        <rect x="2" y="9" width="4" height="12" />
+                        <circle cx="4" cy="4" r="2" />
+                      </svg>
+                      <span className="truncate text-slate-900 font-bold">linkedin.com/in/rievaldyandhika</span>
+                    </a>
 
-                  <a
-                    href="https://wa.me/6285179770217"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 p-3.5 rounded-2xl transition-all bg-white/70 backdrop-blur-md border border-white/90 hover:bg-white/90 shadow-sm group cursor-pointer"
-                  >
-                    <svg
-                      width="18"
-                      height="18"
-                      style={{ minWidth: '18px', minHeight: '18px' }}
-                      className="w-4 h-4 text-slate-800 shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
+                    <a
+                      href="https://wa.me/6285179770217"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl transition-all bg-white/70 backdrop-blur-md border border-white/90 hover:bg-white/90 shadow-sm group cursor-pointer"
                     >
-                      <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    <span className="text-slate-900 font-bold">+62 851-7977-0217</span>
-                  </a>
+                      <svg className="w-4 h-4 text-slate-800 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      <span className="text-slate-900 font-bold">+62 851-7977-0217</span>
+                    </a>
 
-                  <div className="flex items-center gap-2.5 p-3.5 rounded-2xl bg-white/70 backdrop-blur-md border border-white/90 select-none shadow-sm">
-                    <svg
-                      width="18"
-                      height="18"
-                      style={{ minWidth: '18px', minHeight: '18px' }}
-                      className="w-4 h-4 text-slate-800 shrink-0"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      strokeWidth="1.6"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                    >
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                      <circle cx="12" cy="10" r="3" />
-                    </svg>
-                    <span className="text-slate-900 font-bold">Tangerang, Indonesia</span>
+                    <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl bg-white/70 backdrop-blur-md border border-white/90 select-none shadow-sm">
+                      <svg className="w-4 h-4 text-slate-800 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      <span className="text-slate-900 font-bold">Tangerang, Indonesia</span>
+                    </div>
                   </div>
                 </div>
+
+                {/* FOTO HERO PROFIL */}
+                {!profileImgError && (
+                  <div className="lg:col-span-5 flex justify-center lg:justify-end items-end h-full mt-4 lg:mt-0">
+                    <img
+                      src="/profile.png"
+                      alt="Andhika Rievaldy"
+                      className="w-48 sm:w-64 lg:w-[380px] max-w-full h-auto object-contain object-bottom drop-shadow-[0_20px_35px_rgba(15,23,42,0.18)]"
+                      onError={() => setProfileImgError(true)}
+                    />
+                  </div>
+                )}
               </div>
 
-              {/* NAVIGASI BAWAH */}
-              <div className="flex justify-center relative z-20 pt-4">
-                <div className="rounded-full p-1.5 flex items-center gap-1 text-[12px] md:text-[14px] bg-white/80 backdrop-blur-lg border border-white shadow-sm">
-                  <a href="#home" className="px-5 py-2 rounded-full bg-slate-900 text-white font-bold shadow-sm">
+              {/* NAVIGASI BAWAH MELAYANG */}
+              <div className="flex justify-center relative z-20 pt-3">
+                <div className="rounded-full p-1 sm:p-1.5 flex items-center gap-1 text-[11px] sm:text-[12px] md:text-[13px] bg-white/80 backdrop-blur-lg border border-white shadow-sm max-w-full overflow-x-auto scrollbar-none">
+                  <a href="#home" className="px-3.5 sm:px-4.5 py-1.5 sm:py-2 rounded-full bg-slate-900 text-white font-bold shadow-sm whitespace-nowrap">
                     Home
                   </a>
-                  <a href="#about" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors">
+                  <a href="#about" className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors whitespace-nowrap">
                     About
                   </a>
-                  <a href="#tools" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors">
+                  <a href="#tools" className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors whitespace-nowrap">
                     Software
                   </a>
-                  <a href="#services" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors">
+                  <a href="#services" className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors whitespace-nowrap">
                     Services
                   </a>
-                  <a href="#work" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors">
+                  <a href="#work" className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors whitespace-nowrap">
                     Work
                   </a>
-                  <a href="#contact" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors">
+                  <a href="#contact" className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors whitespace-nowrap">
                     Links
                   </a>
                 </div>
@@ -325,51 +277,44 @@ export default function Home() {
             </section>
 
             {/* ABOUT ME SECTION */}
-            <section
-              id="about"
-              className="p-8 md:p-12 text-slate-900 mx-auto liquid-glass-3d rounded-3xl overflow-hidden"
-              style={{
-                width: '100%',
-                maxWidth: '1500px',
-              }}
-            >
+            <section id="about" className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto liquid-glass-3d rounded-3xl overflow-hidden w-full max-w-[1500px]">
               <div className="grid md:grid-cols-12 gap-8 items-center relative z-10">
                 <div className="md:col-span-7 space-y-4">
                   <div>
-                    <span className="text-[12px] md:text-[14px] font-extrabold text-slate-700 tracking-wider uppercase block">
+                    <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block">
                       About Me
                     </span>
-                    <h2 className="text-[24px] md:text-[32px] font-black text-slate-900 leading-tight mt-1">
+                    <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900 leading-tight mt-1">
                       Rievaldy Andhika Koswara, S.I.Kom
                     </h2>
                   </div>
 
-                  <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
+                  <p className="text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-700 leading-relaxed text-justify">
                     Saya adalah lulusan Marketing Communication yang berfokus pada penguatan identitas merek dan eksekusi strategi media digital.
                     Berpengalaman dalam merangkai narasi merek, memproduksi konten kreatif, serta mengoptimalkan performa kanal digital untuk membangun hubungan bermakna dengan target audiens.
                   </p>
                 </div>
 
                 <div className="md:col-span-5 space-y-3">
-                  <span className="text-[12px] md:text-[14px] font-extrabold text-slate-700 tracking-wider uppercase block mb-1">
+                  <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block mb-1">
                     Certifications & Licenses
                   </span>
 
                   <button
                     type="button"
                     onClick={() => openCert('Sertifikat LSP BNSP', '/certificates/sertifikat-bnsp.pdf', 'pdf')}
-                    className="w-full flex items-center justify-between p-4 rounded-2xl text-[15px] md:text-[16px] font-normal text-slate-900 transition-all bg-white/70 backdrop-blur-md border border-white hover:bg-white/90 shadow-sm group cursor-pointer text-left"
+                    className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-900 transition-all bg-white/70 backdrop-blur-md border border-white hover:bg-white/90 shadow-sm group cursor-pointer text-left"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-800 bg-white/90 shrink-0 border border-slate-200/80 shadow-sm">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-xl flex items-center justify-center text-slate-800 bg-white/90 shrink-0 border border-slate-200/80 shadow-sm">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M12 15l-2 5l2-1.5l2 1.5l-2-5" />
                           <circle cx="12" cy="9" r="6" />
                         </svg>
                       </div>
                       <span className="font-bold text-slate-900">Sertifikat LSP BNSP</span>
                     </div>
-                    <svg width="16" height="16" className="w-4 h-4 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="14" height="14" className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="5" y1="12" x2="19" y2="12" />
                       <polyline points="12 5 19 12 12 19" />
                     </svg>
@@ -378,18 +323,18 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() => openCert('Sertifikat Digital Marketing RevoU', '/certificates/sertifikat-revou.pdf', 'pdf')}
-                    className="w-full flex items-center justify-between p-4 rounded-2xl text-[15px] md:text-[16px] font-normal text-slate-900 transition-all bg-white/70 backdrop-blur-md border border-white hover:bg-white/90 shadow-sm group cursor-pointer text-left"
+                    className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-900 transition-all bg-white/70 backdrop-blur-md border border-white hover:bg-white/90 shadow-sm group cursor-pointer text-left"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-800 bg-white/90 shrink-0 border border-slate-200/80 shadow-sm">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-xl flex items-center justify-center text-slate-800 bg-white/90 shrink-0 border border-slate-200/80 shadow-sm">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
                           <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
                         </svg>
                       </div>
                       <span className="font-bold text-slate-900">Sertifikat Digital Marketing RevoU</span>
                     </div>
-                    <svg width="16" height="16" className="w-4 h-4 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="14" height="14" className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="5" y1="12" x2="19" y2="12" />
                       <polyline points="12 5 19 12 12 19" />
                     </svg>
@@ -398,18 +343,18 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() => openCert('Sertifikat Workshop Copywriter', '/certificates/sertifikat-copywriter.jpg', 'image')}
-                    className="w-full flex items-center justify-between p-4 rounded-2xl text-[15px] md:text-[16px] font-normal text-slate-900 transition-all bg-white/70 backdrop-blur-md border border-white hover:bg-white/90 shadow-sm group cursor-pointer text-left"
+                    className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-900 transition-all bg-white/70 backdrop-blur-md border border-white hover:bg-white/90 shadow-sm group cursor-pointer text-left"
                   >
-                    <div className="flex items-center gap-3">
-                      <div className="w-8 h-8 rounded-xl flex items-center justify-center text-slate-800 bg-white/90 shrink-0 border border-slate-200/80 shadow-sm">
-                        <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                    <div className="flex items-center gap-2.5">
+                      <div className="w-7 h-7 rounded-xl flex items-center justify-center text-slate-800 bg-white/90 shrink-0 border border-slate-200/80 shadow-sm">
+                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                           <path d="M12 20h9" />
                           <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
                         </svg>
                       </div>
                       <span className="font-bold text-slate-900">Sertifikat Workshop Copywriter</span>
                     </div>
-                    <svg width="16" height="16" className="w-4 h-4 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="14" height="14" className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="5" y1="12" x2="19" y2="12" />
                       <polyline points="12 5 19 12 12 19" />
                     </svg>
@@ -418,21 +363,21 @@ export default function Home() {
               </div>
             </section>
 
-            {/* SOFTWARE & TOOLS PROFICIENCY SECTION */}
-            <section id="tools" className="space-y-6 mx-auto" style={{ width: '100%', maxWidth: '1500px' }}>
+            {/* TECHNICAL STACK SECTION */}
+            <section id="tools" className="space-y-5 mx-auto w-full max-w-[1500px]">
               <div>
-                <span className="text-[12px] md:text-[14px] font-extrabold text-slate-700 tracking-wider uppercase block">Technical Stack</span>
-                <h2 className="text-[24px] md:text-[32px] font-black text-slate-900 mt-1">Tools & Software Proficiency</h2>
+                <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block">Technical Stack</span>
+                <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900 mt-0.5">Tools & Software Proficiency</h2>
               </div>
 
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
                 {[
                   {
                     name: 'Adobe Photoshop',
                     category: 'Visual & Retouching',
                     desc: 'Pengolahan dan retouching foto komersial, manipulasi gambar terdistribusi, serta penyempurnaan estetika materi promosi digital.',
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3" y="3" width="18" height="18" rx="3" />
                         <path d="M7 17V7h3.5a2.5 2.5 0 0 1 0 5H7" />
                         <path d="M14 13a2 2 0 0 1 2 2v2" />
@@ -444,7 +389,7 @@ export default function Home() {
                     category: 'Vector & Graphic Design',
                     desc: 'Perancangan aset vektor, desain logo utama, tata letak konten grafik, dan pembuatan komponen identitas visual merek.',
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3" y="3" width="18" height="18" rx="3" />
                         <path d="M8 17l3-9 3 9" />
                         <path d="M9.5 13.5h5" />
@@ -457,7 +402,7 @@ export default function Home() {
                     category: 'Video Production',
                     desc: 'Penyuntingan video komersial lanskap, perangkaian alur cerita sinematik, penyelarasan audio, dan teknik color grading.',
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3" y="3" width="18" height="18" rx="3" />
                         <path d="M7 17V7h3.5a2.5 2.5 0 0 1 0 5H7" />
                         <path d="M14 11v6" />
@@ -470,7 +415,7 @@ export default function Home() {
                     category: 'Fast Visual Design',
                     desc: 'Penyusunan materi desain cepat untuk konten harian media sosial, infografis presentasi, dan kolaborasi tata letak promosi.',
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="12" cy="12" r="9" />
                         <path d="M12 8a4 4 0 1 0 4 4" />
                       </svg>
@@ -481,7 +426,7 @@ export default function Home() {
                     category: 'Short-Form Video Editing',
                     desc: 'Produksi dan penyuntingan konten video pendek (Reels, TikTok, & Short) dengan alur transisi dinamis, efek teks, dan tren audio.',
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M6 4l12 16" />
                         <path d="M18 4L6 20" />
                         <circle cx="6" cy="6" r="2" />
@@ -494,7 +439,7 @@ export default function Home() {
                     category: 'Augmented Reality (AR)',
                     desc: 'Pengembangan filter AR interaktif untuk kebutuhan liputan acara secara langsung (live report) guna meningkatkan engagement audiens.',
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <polygon points="12 2 2 7 12 12 22 7 12 2" />
                         <polyline points="2 17 12 22 22 17" />
                         <polyline points="2 12 12 17 22 12" />
@@ -506,7 +451,7 @@ export default function Home() {
                     category: 'Social Media Operations',
                     desc: 'Manajemen penjadwalan publikasi konten Instagram & Facebook, pemantauan matriks performa, serta manajemen interaksi audiens.',
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M18 20V10" />
                         <path d="M12 20V4" />
                         <path d="M6 20v-6" />
@@ -518,7 +463,7 @@ export default function Home() {
                     category: 'Copywriting & Planning',
                     desc: 'Penyusunan naskah copywriting, pembuatan kalender konten terstruktur, pengerjaan creative brief, serta dokumentasi strategi narasi.',
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
                         <polyline points="14 2 14 8 20 8" />
                         <line x1="16" y1="13" x2="8" y2="13" />
@@ -531,7 +476,7 @@ export default function Home() {
                     category: 'Analytics & Reporting',
                     desc: 'Pengolahan dan analisis data Key Performance Indicator (KPI) kampanye digital, pemetaaan basis data, serta pelaporan performa media.',
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="3" y="3" width="18" height="18" rx="2" />
                         <line x1="3" y1="9" x2="21" y2="9" />
                         <line x1="3" y1="15" x2="21" y2="15" />
@@ -543,23 +488,23 @@ export default function Home() {
                 ].map((tool, idx) => (
                   <div
                     key={idx}
-                    className="p-6 transition-all duration-300 space-y-3 h-full flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
+                    className="p-4 sm:p-5 transition-all duration-300 space-y-2 h-full flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
                   >
-                    <div className="space-y-3 relative z-10">
-                      <div className="flex items-center justify-between">
-                        <div className="w-10 h-10 rounded-2xl text-slate-800 bg-white/80 border border-white flex items-center justify-center shrink-0 shadow-sm">
+                    <div className="space-y-2 relative z-10">
+                      <div className="flex items-center justify-between gap-2">
+                        <div className="w-8 h-8 rounded-2xl text-slate-800 bg-white/80 border border-white flex items-center justify-center shrink-0 shadow-sm">
                           {tool.icon}
                         </div>
-                        <span className="text-[11px] font-extrabold text-slate-500 uppercase tracking-wider bg-white/60 px-2.5 py-1 rounded-full border border-white/80">
+                        <span className="text-[9.5px] font-extrabold text-slate-500 uppercase tracking-wider bg-white/60 px-2.5 py-0.5 rounded-full border border-white/80 truncate">
                           {tool.category}
                         </span>
                       </div>
 
-                      <h3 className="text-[17px] md:text-[18px] font-bold text-slate-900 leading-snug text-left pt-1">
+                      <h3 className="text-[13.5px] sm:text-[14.5px] font-bold text-slate-900 leading-snug text-left pt-0.5">
                         {tool.name}
                       </h3>
 
-                      <p className="text-[13px] md:text-[14px] font-normal text-slate-700 leading-relaxed text-justify">
+                      <p className="text-[11px] sm:text-[12px] font-normal text-slate-600 leading-relaxed text-left">
                         {tool.desc}
                       </p>
                     </div>
@@ -569,16 +514,16 @@ export default function Home() {
             </section>
 
             {/* SERVICES SECTION */}
-            <section id="services" className="space-y-6 mx-auto" style={{ width: '100%', maxWidth: '1500px' }}>
+            <section id="services" className="space-y-5 mx-auto w-full max-w-[1500px]">
               <div>
-                <span className="text-[12px] md:text-[14px] font-extrabold text-slate-700 tracking-wider uppercase block">What I Do</span>
-                <h2 className="text-[24px] md:text-[32px] font-black text-slate-900 mt-1">Services & Expertise</h2>
+                <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block">What I Do</span>
+                <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900 mt-0.5">Services & Expertise</h2>
               </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
                 {[
                   {
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <circle cx="18" cy="5" r="3" />
                         <circle cx="6" cy="12" r="3" />
                         <circle cx="18" cy="19" r="3" />
@@ -591,7 +536,7 @@ export default function Home() {
                   },
                   {
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M12 19l7-7 3 3-7 7-3-3z" />
                         <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
                         <path d="M2 2l7.586 7.586" />
@@ -603,7 +548,7 @@ export default function Home() {
                   },
                   {
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
                         <circle cx="12" cy="13" r="4" />
                       </svg>
@@ -613,7 +558,7 @@ export default function Home() {
                   },
                   {
                     icon: (
-                      <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <rect x="2" y="4" width="20" height="16" rx="2" />
                         <polygon points="10,9 15,12 10,15" />
                       </svg>
@@ -624,16 +569,16 @@ export default function Home() {
                 ].map((item, idx) => (
                   <div
                     key={idx}
-                    className="p-6 transition-all duration-300 space-y-4 h-full flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
+                    className="p-4 sm:p-5 transition-all duration-300 space-y-2.5 h-full flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
                   >
-                    <div className="space-y-3 relative z-10">
-                      <div className="w-10 h-10 rounded-2xl text-slate-800 bg-white/80 border border-white flex items-center justify-center shrink-0 shadow-sm">
+                    <div className="space-y-2 relative z-10">
+                      <div className="w-8 h-8 rounded-2xl text-slate-800 bg-white/80 border border-white flex items-center justify-center shrink-0 shadow-sm">
                         {item.icon}
                       </div>
-                      <h3 className="text-[16px] md:text-[18px] font-bold text-slate-900 leading-snug text-left">
+                      <h3 className="text-[13.5px] sm:text-[14.5px] font-bold text-slate-900 leading-snug text-left">
                         {item.title}
                       </h3>
-                      <p className="text-[13px] md:text-[14px] font-normal text-slate-700 leading-relaxed text-justify">
+                      <p className="text-[11px] sm:text-[12px] font-normal text-slate-600 leading-relaxed text-left">
                         {item.desc}
                       </p>
                     </div>
@@ -642,14 +587,14 @@ export default function Home() {
               </div>
             </section>
 
-            {/* FEATURED PROJECTS / CASE STUDIES SECTION */}
-            <section id="work" className="space-y-6 mx-auto" style={{ width: '100%', maxWidth: '1500px' }}>
+            {/* FEATURED PROJECTS SECTION */}
+            <section id="work" className="space-y-5 mx-auto w-full max-w-[1500px]">
               <div>
-                <span className="text-[12px] md:text-[14px] font-extrabold text-slate-700 tracking-wider uppercase block">Case Studies</span>
-                <h2 className="text-[24px] md:text-[32px] font-black text-slate-900 mt-1">Featured Projects</h2>
+                <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block">Case Studies</span>
+                <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900 mt-0.5">Featured Projects</h2>
               </div>
 
-              <div className="grid md:grid-cols-2 gap-6" style={{ width: '100%' }}>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
                 {[
                   {
                     tag: 'STRATEGY & CONTENT',
@@ -678,24 +623,23 @@ export default function Home() {
                 ].map((proj, idx) => (
                   <div
                     key={idx}
-                    className="p-6 sm:p-8 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
-                    style={{ width: '100%' }}
+                    className="p-4 sm:p-5 transition-all duration-300 space-y-3 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
                   >
-                    <div className="space-y-2 relative z-10">
-                      <span className="text-[12px] md:text-[14px] font-extrabold text-slate-700 uppercase tracking-widest block">
+                    <div className="space-y-1.5 relative z-10">
+                      <span className="text-[9.5px] sm:text-[10px] font-extrabold text-slate-700 uppercase tracking-widest block">
                         {proj.tag}
                       </span>
-                      <h3 className="text-[24px] md:text-[32px] font-black text-slate-900 leading-tight">{proj.name}</h3>
-                      <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
+                      <h3 className="text-[15px] sm:text-[16.5px] md:text-[18px] font-extrabold text-slate-900 leading-snug">{proj.name}</h3>
+                      <p className="text-[11px] sm:text-[12px] font-normal text-slate-600 leading-relaxed text-left">
                         {proj.desc}
                       </p>
                     </div>
 
-                    <div className="pt-2 relative z-10">
+                    <div className="pt-1 relative z-10">
                       <button
                         type="button"
                         onClick={proj.action}
-                        className="inline-flex items-center justify-center px-6 py-2.5 rounded-2xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+                        className="inline-flex items-center justify-center px-4 py-1.5 rounded-2xl text-[11px] sm:text-[12px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
                       >
                         <span>See Portfolio</span>
                       </button>
@@ -705,22 +649,18 @@ export default function Home() {
               </div>
             </section>
 
-            {/* FOOTER / CONTACT SECTION */}
+            {/* FOOTER SECTION */}
             <footer
               id="contact"
-              className="p-8 md:p-12 text-center space-y-6 text-slate-900 mx-auto liquid-glass-3d rounded-3xl overflow-hidden"
-              style={{
-                width: '100%',
-                maxWidth: '1500px',
-              }}
+              className="p-6 sm:p-8 md:p-12 text-center space-y-6 text-slate-900 mx-auto liquid-glass-3d rounded-3xl overflow-hidden w-full max-w-[1500px]"
             >
               <div className="relative z-10 space-y-4">
-                <span className="text-[12px] md:text-[14px] font-extrabold text-slate-700 tracking-wider uppercase block">Let&apos;s Connect</span>
-                <h2 className="text-[24px] md:text-[32px] font-black text-slate-900">Interested in Working Together?</h2>
-                <div className="flex flex-wrap justify-center gap-4 pt-2">
+                <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block">Let&apos;s Connect</span>
+                <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900">Interested in Working Together?</h2>
+                <div className="flex flex-wrap justify-center gap-3 sm:gap-4 pt-2">
                   <a
                     href="mailto:andhikarievaldy@gmail.com"
-                    className="text-white font-bold text-[12px] md:text-[14px] px-7 py-3.5 rounded-full shadow-md bg-slate-900/90 hover:bg-slate-900 transition-all backdrop-blur-sm"
+                    className="text-white font-bold text-[12px] md:text-[13px] px-6 sm:px-7 py-3 sm:py-3.5 rounded-full shadow-md bg-slate-900/90 hover:bg-slate-900 transition-all backdrop-blur-sm"
                   >
                     Send Email Direct
                   </a>
@@ -728,7 +668,7 @@ export default function Home() {
                     href="https://www.linkedin.com/in/rievaldyandhika/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="text-slate-900 font-bold text-[12px] md:text-[14px] px-7 py-3.5 rounded-full bg-white/80 backdrop-blur-md border border-white hover:bg-white transition-all shadow-sm"
+                    className="text-slate-900 font-bold text-[12px] md:text-[13px] px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white/80 backdrop-blur-md border border-white hover:bg-white transition-all shadow-sm"
                   >
                     LinkedIn Profile
                   </a>
@@ -740,19 +680,16 @@ export default function Home() {
 
         {/* VIEW 2: SOCIAL MEDIA MANAGEMENT */}
         {currentView === 'social-media' && (
-          <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div
-              className="p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d rounded-3xl overflow-hidden"
-              style={{ width: '100%', maxWidth: '1500px' }}
-            >
-              <div className="relative z-10 space-y-6">
+          <div className="space-y-6 md:space-y-8 w-full mx-auto max-w-[1500px]">
+            <div className="p-5 sm:p-7 md:p-10 text-slate-900 mx-auto space-y-5 liquid-glass-3d rounded-3xl overflow-hidden w-full">
+              <div className="relative z-10 space-y-4">
                 <div>
                   <button
                     type="button"
                     onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
+                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
                   >
-                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="19" y1="12" x2="5" y2="12" />
                       <polyline points="12 19 5 12 12 5" />
                     </svg>
@@ -760,19 +697,18 @@ export default function Home() {
                   </button>
                 </div>
 
-                <div className="space-y-3 pt-2">
-                  <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
+                <div className="space-y-1.5 pt-1">
+                  <h1 className="text-[20px] sm:text-[26px] md:text-[30px] font-black text-slate-900 leading-tight">
                     Social Media Management
                   </h1>
-
-                  <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
+                  <p className="text-[12px] sm:text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
                     Kumpulan dokumentasi eksekusi strategi media sosial, penyusunan jadwal konten, penulisan narasi copywriting, serta pengelolaan interaksi merek.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
               {[
                 {
                   name: 'Diatera Technology',
@@ -841,12 +777,11 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-8 transition-all duration-300 space-y-5 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
-                  style={{ width: '100%' }}
+                  className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
                 >
-                  <div className="space-y-3 relative z-10">
-                    <h2 className="text-[24px] md:text-[32px] font-black text-slate-900 leading-tight">{item.name}</h2>
-                    <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
+                  <div className="space-y-1 relative z-10">
+                    <h2 className="text-[10px] sm:text-[11px] font-extrabold text-slate-900 leading-tight">{item.name}</h2>
+                    <p className="text-[9px] sm:text-[9.5px] font-normal text-slate-600 leading-relaxed text-left">
                       {item.desc}
                     </p>
                   </div>
@@ -855,7 +790,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-2xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+                      className="w-full inline-flex items-center justify-center px-3.5 py-1.5 rounded-2xl text-[10.5px] sm:text-[11px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
                     >
                       <span>See Portfolio</span>
                     </button>
@@ -868,19 +803,16 @@ export default function Home() {
 
         {/* VIEW 3: COMMERCIAL PHOTOGRAPHY */}
         {currentView === 'photography' && (
-          <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div
-              className="p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d rounded-3xl overflow-hidden"
-              style={{ width: '100%', maxWidth: '1500px' }}
-            >
-              <div className="relative z-10 space-y-6">
+          <div className="space-y-6 md:space-y-8 w-full mx-auto max-w-[1500px]">
+            <div className="p-5 sm:p-7 md:p-10 text-slate-900 mx-auto space-y-5 liquid-glass-3d rounded-3xl overflow-hidden w-full">
+              <div className="relative z-10 space-y-4">
                 <div>
                   <button
                     type="button"
                     onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
+                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
                   >
-                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="19" y1="12" x2="5" y2="12" />
                       <polyline points="12 19 5 12 12 5" />
                     </svg>
@@ -888,19 +820,18 @@ export default function Home() {
                   </button>
                 </div>
 
-                <div className="space-y-3 pt-2">
-                  <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
+                <div className="space-y-1.5 pt-1">
+                  <h1 className="text-[20px] sm:text-[26px] md:text-[30px] font-black text-slate-900 leading-tight">
                     Commercial Photography
                   </h1>
-
-                  <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
+                  <p className="text-[12px] sm:text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
                     Pengarahan visual, konsep tata cahaya, dan pengambilan foto komersial produk yang disempurnakan dengan teknik retouching profesional serta color grading Adobe Lightroom.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
               {[
                 {
                   name: 'Product Photography – Glovecare',
@@ -924,12 +855,11 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
-                  style={{ width: '100%' }}
+                  className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
                 >
-                  <div className="space-y-2.5 relative z-10">
-                    <h2 className="text-[18px] md:text-[22px] font-black text-slate-900 leading-snug">{item.name}</h2>
-                    <p className="text-[13px] md:text-[14px] font-normal text-slate-700 leading-relaxed text-justify">
+                  <div className="space-y-1 relative z-10">
+                    <h2 className="text-[10px] sm:text-[11px] font-extrabold text-slate-900 leading-tight">{item.name}</h2>
+                    <p className="text-[9px] sm:text-[9.5px] font-normal text-slate-600 leading-relaxed text-left">
                       {item.desc}
                     </p>
                   </div>
@@ -938,7 +868,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-2xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+                      className="w-full inline-flex items-center justify-center px-3.5 py-1.5 rounded-2xl text-[10.5px] sm:text-[11px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
                     >
                       <span>See Portfolio</span>
                     </button>
@@ -951,19 +881,16 @@ export default function Home() {
 
         {/* VIEW 4: VIDEOGRAPHY & VIDEO EDITING */}
         {currentView === 'videography' && (
-          <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div
-              className="p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d rounded-3xl overflow-hidden"
-              style={{ width: '100%', maxWidth: '1500px' }}
-            >
-              <div className="relative z-10 space-y-6">
+          <div className="space-y-6 md:space-y-8 w-full mx-auto max-w-[1500px]">
+            <div className="p-5 sm:p-7 md:p-10 text-slate-900 mx-auto space-y-5 liquid-glass-3d rounded-3xl overflow-hidden w-full">
+              <div className="relative z-10 space-y-4">
                 <div>
                   <button
                     type="button"
                     onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
+                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
                   >
-                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="19" y1="12" x2="5" y2="12" />
                       <polyline points="12 19 5 12 12 5" />
                     </svg>
@@ -971,19 +898,18 @@ export default function Home() {
                   </button>
                 </div>
 
-                <div className="space-y-3 pt-2">
-                  <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
+                <div className="space-y-1.5 pt-1">
+                  <h1 className="text-[20px] sm:text-[26px] md:text-[30px] font-black text-slate-900 leading-tight">
                     Videography & Video Editing
                   </h1>
-
-                  <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
+                  <p className="text-[12px] sm:text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
                     Produksi dan penyuntingan video komersial, proyek kreatif, serta konten vlogging berbasis penceritaan visual yang dinamis.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
               {[
                 {
                   name: 'Commercial & Brand Project',
@@ -1015,12 +941,11 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
-                  style={{ width: '100%' }}
+                  className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
                 >
-                  <div className="space-y-2.5 relative z-10">
-                    <h2 className="text-[18px] md:text-[22px] font-black text-slate-900 leading-snug">{item.name}</h2>
-                    <p className="text-[13px] md:text-[14px] font-normal text-slate-700 leading-relaxed text-justify">
+                  <div className="space-y-1 relative z-10">
+                    <h2 className="text-[10px] sm:text-[11px] font-extrabold text-slate-900 leading-tight">{item.name}</h2>
+                    <p className="text-[9px] sm:text-[9.5px] font-normal text-slate-600 leading-relaxed text-left">
                       {item.desc}
                     </p>
                   </div>
@@ -1029,7 +954,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-2xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+                      className="w-full inline-flex items-center justify-center px-3.5 py-1.5 rounded-2xl text-[10.5px] sm:text-[11px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
                     >
                       <span>See Portfolio</span>
                     </button>
@@ -1042,19 +967,16 @@ export default function Home() {
 
         {/* VIEW 5: GRAPHIC DESIGN & VISUAL CONTENT */}
         {currentView === 'graphic-design' && (
-          <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div
-              className="p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d rounded-3xl overflow-hidden"
-              style={{ width: '100%', maxWidth: '1500px' }}
-            >
-              <div className="relative z-10 space-y-6">
+          <div className="space-y-6 md:space-y-8 w-full mx-auto max-w-[1500px]">
+            <div className="p-5 sm:p-7 md:p-10 text-slate-900 mx-auto space-y-5 liquid-glass-3d rounded-3xl overflow-hidden w-full">
+              <div className="relative z-10 space-y-4">
                 <div>
                   <button
                     type="button"
                     onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
+                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
                   >
-                    <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="19" y1="12" x2="5" y2="12" />
                       <polyline points="12 19 5 12 12 5" />
                     </svg>
@@ -1062,19 +984,18 @@ export default function Home() {
                   </button>
                 </div>
 
-                <div className="space-y-3 pt-2">
-                  <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
+                <div className="space-y-1.5 pt-1">
+                  <h1 className="text-[20px] sm:text-[26px] md:text-[30px] font-black text-slate-900 leading-tight">
                     Graphic Design & Visual Content
                   </h1>
-
-                  <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
+                  <p className="text-[12px] sm:text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
                     Perancangan identitas visual, media promosi seminar, materi e-commerce, filter AR interaktif, serta desain merchandise operasional merek.
                   </p>
                 </div>
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
               {[
                 {
                   name: 'Banner Seminar – Esa Unggul University',
@@ -1183,12 +1104,11 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
-                  style={{ width: '100%' }}
+                  className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
                 >
-                  <div className="space-y-2.5 relative z-10">
-                    <h2 className="text-[18px] md:text-[22px] font-black text-slate-900 leading-snug">{item.name}</h2>
-                    <p className="text-[13px] md:text-[14px] font-normal text-slate-700 leading-relaxed text-justify">
+                  <div className="space-y-1 relative z-10">
+                    <h2 className="text-[10px] sm:text-[11px] font-extrabold text-slate-900 leading-tight">{item.name}</h2>
+                    <p className="text-[9px] sm:text-[9.5px] font-normal text-slate-600 leading-relaxed text-left">
                       {item.desc}
                     </p>
                   </div>
@@ -1197,7 +1117,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-2xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+                      className="w-full inline-flex items-center justify-center px-3.5 py-1.5 rounded-2xl text-[10.5px] sm:text-[11px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
                     >
                       <span>See Portfolio</span>
                     </button>
@@ -1212,7 +1132,7 @@ export default function Home() {
       {/* MODAL SERTIFIKAT */}
       {activeCert && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-all"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 transition-all"
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.65)',
             backdropFilter: 'blur(20px)',
@@ -1221,27 +1141,27 @@ export default function Home() {
           onClick={closeCert}
         >
           <div
-            className="relative w-full max-w-[1500px] rounded-3xl p-4 sm:p-6 flex flex-col overflow-hidden text-slate-900 liquid-glass-3d"
+            className="relative w-full max-w-[1500px] rounded-3xl p-4 sm:p-6 flex flex-col overflow-hidden text-slate-900 liquid-glass-3d max-h-[92vh]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative z-10 flex items-center justify-between pb-3 border-b border-slate-900/10 shrink-0 mb-3">
-              <div className="flex items-center gap-2">
-                <span className="text-slate-800 font-extrabold text-[12px] md:text-[14px] uppercase tracking-wider">
+            <div className="relative z-10 flex items-center justify-between pb-3 border-b border-slate-900/10 shrink-0 mb-3 gap-2">
+              <div className="flex items-center gap-2 overflow-hidden">
+                <span className="text-slate-800 font-extrabold text-[10px] sm:text-[11px] md:text-[12px] uppercase tracking-wider shrink-0">
                   Credential Viewer
                 </span>
-                <span className="text-slate-400">•</span>
-                <h3 className="text-[18px] md:text-[24px] font-black text-slate-900">{activeCert.title}</h3>
+                <span className="text-slate-400 shrink-0">•</span>
+                <h3 className="text-[14px] sm:text-[16px] md:text-[20px] font-black text-slate-900 truncate">{activeCert.title}</h3>
               </div>
               <button
                 type="button"
                 onClick={closeCert}
-                className="w-8 h-8 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-colors bg-white/80 hover:bg-white border border-white cursor-pointer shadow-sm font-bold"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-colors bg-white/80 hover:bg-white border border-white cursor-pointer shadow-sm font-bold shrink-0"
               >
                 ✕
               </button>
             </div>
 
-            <div className="relative z-10 w-full aspect-[1.414/1] max-h-[78vh] overflow-hidden rounded-2xl bg-white/50 border border-white flex items-center justify-center shadow-inner">
+            <div className="relative z-10 w-full aspect-[1.414/1] max-h-[75vh] overflow-hidden rounded-2xl bg-white/50 border border-white flex items-center justify-center shadow-inner">
               {activeCert.type === 'pdf' ? (
                 <iframe
                   src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
@@ -1263,7 +1183,7 @@ export default function Home() {
       {/* MODAL HASIL PORTOFOLIO */}
       {activePreview && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-all"
+          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 transition-all"
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.65)',
             backdropFilter: 'blur(20px)',
@@ -1272,32 +1192,29 @@ export default function Home() {
           onClick={closePreview}
         >
           <div
-            className="relative w-full max-w-[1500px] rounded-3xl p-6 sm:p-8 space-y-6 overflow-hidden text-slate-900 flex flex-col justify-between liquid-glass-3d"
-            style={{
-              maxHeight: '92vh',
-            }}
+            className="relative w-full max-w-[1500px] rounded-3xl p-4 sm:p-8 space-y-4 sm:space-y-6 overflow-hidden text-slate-900 flex flex-col justify-between liquid-glass-3d max-h-[92vh]"
             onClick={(e) => e.stopPropagation()}
           >
             {/* HEADER MODAL */}
-            <div className="relative z-10 flex items-center justify-between pb-4 border-b border-slate-900/10">
-              <h3 className="text-[20px] md:text-[26px] font-black text-slate-900 tracking-tight">
+            <div className="relative z-10 flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-900/10 gap-2">
+              <h3 className="text-[16px] sm:text-[18px] md:text-[22px] font-black text-slate-900 tracking-tight truncate">
                 Portofolio - {activePreview.title}
               </h3>
               <button
                 type="button"
                 onClick={closePreview}
-                className="w-9 h-9 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-all bg-white/80 hover:bg-white border border-white shadow-sm backdrop-blur-md font-bold cursor-pointer"
+                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-all bg-white/80 hover:bg-white border border-white shadow-sm backdrop-blur-md font-bold cursor-pointer shrink-0"
               >
                 ✕
               </button>
             </div>
 
-            <div className="relative z-10 overflow-y-auto space-y-6 pr-1" style={{ maxHeight: '76vh' }}>
+            <div className="relative z-10 overflow-y-auto space-y-6 pr-1 max-h-[76vh]">
               {activePreview.username ? (
-                <div className="space-y-8">
-                  <div className="p-6 sm:p-8 rounded-3xl space-y-6 liquid-glass-3d">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-6 md:gap-10">
-                      <div className="w-20 h-20 sm:w-24 sm:h-24 rounded-full bg-slate-900 p-[2px] shrink-0 flex items-center justify-center shadow-lg overflow-hidden">
+                <div className="space-y-6 sm:space-y-8">
+                  <div className="p-4 sm:p-8 rounded-3xl space-y-6 liquid-glass-3d">
+                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 md:gap-10">
+                      <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-slate-900 p-[2px] shrink-0 flex items-center justify-center shadow-lg overflow-hidden">
                         <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
                           <InstagramAvatar
                             username={activePreview.username}
@@ -1307,42 +1224,42 @@ export default function Home() {
                         </div>
                       </div>
 
-                      <div className="space-y-4 flex-1">
-                        <div className="flex flex-wrap items-center gap-4">
-                          <h2 className="text-[24px] md:text-[32px] font-black text-slate-900 tracking-tight">
+                      <div className="space-y-3 sm:space-y-4 flex-1 w-full">
+                        <div className="flex flex-wrap items-center justify-between sm:justify-start gap-3">
+                          <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900 tracking-tight">
                             {activePreview.username}
                           </h2>
                           <a
                             href={activePreview.instagramUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="px-5 py-2 rounded-2xl text-[12px] md:text-[14px] font-bold text-white shadow-sm transition-all bg-slate-900 hover:bg-slate-800 backdrop-blur-sm"
+                            className="px-4 sm:px-5 py-2 rounded-2xl text-[11px] md:text-[13px] font-bold text-white shadow-sm transition-all bg-slate-900 hover:bg-slate-800 backdrop-blur-sm"
                           >
                             Kunjungi Profile Instagram
                           </a>
                         </div>
 
-                        <div className="flex items-center gap-6 sm:gap-8 text-[15px] md:text-[17px] border-y border-slate-900/10 py-2.5 font-normal">
+                        <div className="flex items-center gap-4 sm:gap-8 text-[12px] sm:text-[13px] md:text-[14px] border-y border-slate-900/10 py-2 sm:py-2.5 font-normal">
                           <div>
                             <span className="font-extrabold text-slate-900">{activePreview.postsCount}</span>{' '}
-                            <span className="text-slate-700 text-[13px] md:text-[15px] font-medium">posts</span>
+                            <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">posts</span>
                           </div>
                           <div>
                             <span className="font-extrabold text-slate-900">{activePreview.followersCount}</span>{' '}
-                            <span className="text-slate-700 text-[13px] md:text-[15px] font-medium">followers</span>
+                            <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">followers</span>
                           </div>
                           <div>
                             <span className="font-extrabold text-slate-900">{activePreview.followingCount}</span>{' '}
-                            <span className="text-slate-700 text-[13px] md:text-[15px] font-medium">following</span>
+                            <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">following</span>
                           </div>
                         </div>
 
-                        <div className="space-y-1 text-[15px] md:text-[17px] font-normal text-slate-800">
-                          <div className="font-bold text-slate-900 text-[18px] md:text-[22px]">
+                        <div className="space-y-1 text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-800">
+                          <div className="font-bold text-slate-900 text-[15px] sm:text-[17px] md:text-[18px]">
                             {activePreview.displayName}
                           </div>
                           {activePreview.category && (
-                            <div className="text-slate-600 font-semibold text-[12px] md:text-[14px] pb-1">
+                            <div className="text-slate-600 font-semibold text-[10px] sm:text-[11px] md:text-[12px] pb-1">
                               {activePreview.category}
                             </div>
                           )}
@@ -1356,9 +1273,9 @@ export default function Home() {
                               href={`https://${activePreview.website}`}
                               target="_blank"
                               rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 font-bold text-blue-700 hover:text-blue-800 pt-1.5 text-[15px] md:text-[16px]"
+                              className="inline-flex items-center gap-1.5 font-bold text-blue-700 hover:text-blue-800 pt-1.5 text-[12px] sm:text-[13px] md:text-[14px]"
                             >
-                              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                                 <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
                                 <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
                               </svg>
@@ -1371,8 +1288,8 @@ export default function Home() {
 
                     <div className="space-y-4">
                       <div className="flex items-center justify-between border-b border-slate-900/10 pb-3">
-                        <span className="text-[12px] md:text-[14px] font-extrabold text-slate-800 tracking-wider uppercase flex items-center gap-2">
-                          <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
+                        <span className="text-[10px] sm:text-[11px] md:text-[12px] font-extrabold text-slate-800 tracking-wider uppercase flex items-center gap-2">
+                          <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
                             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
                             <circle cx="12" cy="13" r="4" />
                           </svg>
@@ -1380,14 +1297,11 @@ export default function Home() {
                         </span>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
                         {activePreview.posts?.map((post, index) => (
                           <div
                             key={index}
-                            className="rounded-3xl overflow-hidden flex flex-col justify-between liquid-glass-3d"
-                            style={{
-                              minHeight: '440px',
-                            }}
+                            className="rounded-3xl overflow-hidden flex flex-col justify-between liquid-glass-3d min-h-[440px]"
                           >
                             <iframe
                               src={post.embedUrl}
@@ -1405,12 +1319,12 @@ export default function Home() {
               ) : (
                 <div className="w-full space-y-5">
                   {activePreview.mediaList && activePreview.mediaList.length > 0 ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-h-[65vh] overflow-y-auto p-4 rounded-3xl">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-h-[65vh] overflow-y-auto p-2 sm:p-4 rounded-3xl">
                       {activePreview.mediaList.map((file, i) => (
                         <div
                           key={i}
                           onClick={() => setZoomedMedia(file)}
-                          className="aspect-square rounded-3xl p-3 liquid-glass-3d flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:bg-white/60 group"
+                          className="aspect-square rounded-3xl p-2 sm:p-3 liquid-glass-3d flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:bg-white/60 group"
                         >
                           <SmartMediaDisplay src={file} title={`${activePreview.title} #${i + 1}`} />
                         </div>
@@ -1428,10 +1342,10 @@ export default function Home() {
                   ) : null}
 
                   <div className="text-center pt-1 space-y-1">
-                    <p className="font-extrabold text-slate-900 text-[18px] md:text-[22px] tracking-tight">
+                    <p className="font-extrabold text-slate-900 text-[14px] sm:text-[16px] md:text-[18px] tracking-tight">
                       Dokumentasi Karya {activePreview.title}
                     </p>
-                    <p className="text-[13px] md:text-[14px] text-slate-700 font-semibold">
+                    <p className="text-[11px] sm:text-[12px] text-slate-700 font-semibold">
                       Klik gambar atau video untuk melihat pratinjau diperbesar
                     </p>
                   </div>
@@ -1439,13 +1353,12 @@ export default function Home() {
               )}
             </div>
           </div>
-        </div>
-      )}
+        )}
 
       {/* MODAL LIGHTBOX OVERLAY */}
       {zoomedMedia && (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-8 transition-all"
+          className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-8 transition-all"
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.88)',
             backdropFilter: 'blur(20px)',
@@ -1460,7 +1373,7 @@ export default function Home() {
             <button
               type="button"
               onClick={() => setZoomedMedia(null)}
-              className="absolute -top-12 right-0 sm:right-2 w-10 h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center text-lg transition-all cursor-pointer border border-white/30 shadow-xl font-bold"
+              className="absolute -top-12 right-0 sm:right-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center text-lg transition-all cursor-pointer border border-white/30 shadow-xl font-bold"
             >
               ✕
             </button>
@@ -1471,13 +1384,13 @@ export default function Home() {
                 controls
                 autoPlay
                 playsInline
-                className="max-h-[85vh] max-w-full rounded-3xl shadow-2xl border border-slate-700 bg-black"
+                className="max-h-[80vh] sm:max-h-[85vh] max-w-full rounded-3xl shadow-2xl border border-slate-700 bg-black"
               />
             ) : (
               <img
                 src={zoomedMedia}
                 alt="Preview diperbesar"
-                className="max-h-[85vh] max-w-full object-contain rounded-3xl shadow-2xl border border-slate-200 bg-white"
+                className="max-h-[80vh] sm:max-h-[85vh] max-w-full object-contain rounded-3xl shadow-2xl border border-slate-200 bg-white"
               />
             )}
           </div>

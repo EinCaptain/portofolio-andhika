@@ -1,25 +1,21 @@
+@import "tailwindcss";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-html {
-  scroll-behavior: smooth;
-}
-
-/* EFEK LIQUID GLASS 3D */
 .liquid-glass-3d {
   background: rgba(255, 255, 255, 0.55);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(255, 255, 255, 0.85);
-  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06), 
+  box-shadow: 0 20px 40px rgba(15, 23, 42, 0.06),
               inset 0 1px 1px rgba(255, 255, 255, 0.9);
 }
 
-/* SEMBUNYIKAN SCROLLBAR */
 .scrollbar-none::-webkit-scrollbar {
   display: none;
 }
+
 .scrollbar-none {
   -ms-overflow-style: none;
   scrollbar-width: none;

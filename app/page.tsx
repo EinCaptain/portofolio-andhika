@@ -110,7 +110,6 @@ export default function Home() {
                     ANDHIKA RIEVALDY
                   </h1>
 
-                  {/* NAVIGASI DAN PINTASAN KONTAK */}
                   <div className="pt-4 flex flex-wrap items-center gap-2">
                     <a
                       href="mailto:andhikarievaldy@gmail.com"
@@ -139,7 +138,6 @@ export default function Home() {
 
                 {!profileImgError && (
                   <div className="sm:col-span-4 flex justify-center sm:justify-end items-end h-full mt-4 sm:mt-0">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
                     <img
                       src="/profile.png"
                       alt="Andhika Rievaldy"
@@ -165,10 +163,9 @@ export default function Home() {
                 Berpengalaman dalam merangkai narasi merek, memproduksi konten kreatif, serta mengoptimalkan performa kanal digital untuk membangun hubungan bermakna dengan target audiens.
               </p>
 
-              {/* SERTIFIKAT & LISENSI */}
               <div className="pt-4 space-y-2">
                 <span className="text-[11px] font-extrabold text-slate-700 tracking-wider uppercase block">
-                  Certifications & Licenses
+                  Certifications &amp; Licenses
                 </span>
                 <div className="flex flex-wrap gap-2">
                   <button
@@ -176,21 +173,21 @@ export default function Home() {
                     onClick={() => openCert('Sertifikat LSP BNSP', '/certificates/sertifikat-bnsp.pdf', 'pdf')}
                     className="px-4 py-2 rounded-2xl text-[12px] font-bold text-slate-900 bg-white/70 hover:bg-white border border-white shadow-sm transition-all cursor-pointer"
                   >
-                    Sertifikat LSP BNSP ↗
+                    Sertifikat LSP BNSP &rarr;
                   </button>
                   <button
                     type="button"
                     onClick={() => openCert('Sertifikat Digital Marketing RevoU', '/certificates/sertifikat-revou.pdf', 'pdf')}
                     className="px-4 py-2 rounded-2xl text-[12px] font-bold text-slate-900 bg-white/70 hover:bg-white border border-white shadow-sm transition-all cursor-pointer"
                   >
-                    Sertifikat Digital Marketing RevoU ↗
+                    Sertifikat Digital Marketing RevoU &rarr;
                   </button>
                   <button
                     type="button"
                     onClick={() => openCert('Sertifikat Workshop Copywriter', '/certificates/sertifikat-copywriter.jpg', 'image')}
                     className="px-4 py-2 rounded-2xl text-[12px] font-bold text-slate-900 bg-white/70 hover:bg-white border border-white shadow-sm transition-all cursor-pointer"
                   >
-                    Sertifikat Workshop Copywriter ↗
+                    Sertifikat Workshop Copywriter &rarr;
                   </button>
                 </div>
               </div>
@@ -198,13 +195,11 @@ export default function Home() {
 
             {/* GAMBAR 2 (TOP): SERVICES & EXPERTISE SECTION */}
             <section id="services" className="space-y-4 w-full">
-              {/* HEADER CARD FULL-WIDTH */}
               <div className="p-6 text-slate-900 liquid-glass-3d rounded-full px-8">
                 <span className="text-[11px] font-extrabold text-slate-700 tracking-wider uppercase block">What I Do</span>
-                <h2 className="text-[22px] sm:text-[26px] font-black text-slate-900 uppercase">SERVICES & EXPERTISE</h2>
+                <h2 className="text-[22px] sm:text-[26px] font-black text-slate-900 uppercase">SERVICES &amp; EXPERTISE</h2>
               </div>
 
-              {/* 4 KARTU BERDAMPINGAN */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                 {[
                   {
@@ -250,13 +245,11 @@ export default function Home() {
 
             {/* GAMBAR 2 (BOTTOM): FEATURED PROJECTS SECTION */}
             <section id="work" className="space-y-4 w-full">
-              {/* HEADER CARD FULL-WIDTH */}
               <div className="p-6 text-slate-900 liquid-glass-3d rounded-full px-8">
                 <span className="text-[11px] font-extrabold text-slate-700 tracking-wider uppercase block">Case Studies</span>
                 <h2 className="text-[22px] sm:text-[26px] font-black text-slate-900 uppercase">FEATURED PROJECTS</h2>
               </div>
 
-              {/* 4 KARTU BERDAMPINGAN */}
               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full">
                 {[
                   {
@@ -316,13 +309,11 @@ export default function Home() {
 
             {/* GAMBAR 3 (TOP): TOOLS & SOFTWARE PROFICIENCY SECTION */}
             <section id="tools" className="space-y-4 w-full">
-              {/* HEADER CARD FULL-WIDTH */}
               <div className="p-6 text-slate-900 liquid-glass-3d rounded-full px-8">
                 <span className="text-[11px] font-extrabold text-slate-700 tracking-wider uppercase block">Technical Stack</span>
-                <h2 className="text-[22px] sm:text-[26px] font-black text-slate-900 uppercase">TOOLS & SOFTWARE PROFICIENCY</h2>
+                <h2 className="text-[22px] sm:text-[26px] font-black text-slate-900 uppercase">TOOLS &amp; SOFTWARE PROFICIENCY</h2>
               </div>
 
-              {/* GRID 3x3 */}
               <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                 {[
                   {
@@ -434,7 +425,7 @@ export default function Home() {
                   onClick={goToMain}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
                 >
-                  ← Kembali ke Beranda
+                  &larr; Kembali ke Beranda
                 </button>
               </div>
 
@@ -538,7 +529,7 @@ export default function Home() {
                   onClick={goToMain}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
                 >
-                  ← Kembali ke Beranda
+                  &larr; Kembali ke Beranda
                 </button>
               </div>
 
@@ -604,13 +595,13 @@ export default function Home() {
                   onClick={goToMain}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
                 >
-                  ← Kembali ke Beranda
+                  &larr; Kembali ke Beranda
                 </button>
               </div>
 
               <div className="space-y-1">
                 <h1 className="text-[24px] sm:text-[30px] font-black text-slate-900 leading-tight">
-                  Videography & Video Editing
+                  Videography &amp; Video Editing
                 </h1>
                 <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
                   Produksi dan penyuntingan video komersial, proyek kreatif, serta konten vlogging berbasis penceritaan visual yang dinamis.
@@ -684,13 +675,13 @@ export default function Home() {
                   onClick={goToMain}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
                 >
-                  ← Kembali ke Beranda
+                  &larr; Kembali ke Beranda
                 </button>
               </div>
 
               <div className="space-y-1">
                 <h1 className="text-[24px] sm:text-[30px] font-black text-slate-900 leading-tight">
-                  Graphic Design & Visual Content
+                  Graphic Design &amp; Visual Content
                 </h1>
                 <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
                   Perancangan identitas visual, media promosi seminar, materi e-commerce, filter AR interaktif, serta desain merchandise operasional merek.
@@ -706,7 +697,15 @@ export default function Home() {
                   action: () =>
                     openPreview({
                       title: 'Banner Seminar – Esa Unggul University',
-                      mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/flyer-esa-unggul-${i + 1}.jpg`)
+                      mediaList: [
+                        '/portofolio/flyer-esa-unggul-1.jpg',
+                        '/portofolio/flyer-esa-unggul-2.jpg',
+                        '/portofolio/flyer-esa-unggul-3.jpg',
+                        '/portofolio/flyer-esa-unggul-4.jpg',
+                        '/portofolio/flyer-esa-unggul-5.jpg',
+                        '/portofolio/flyer-esa-unggul-6.jpg',
+                        '/portofolio/flyer-esa-unggul-7.jpg'
+                      ]
                     })
                 },
                 {
@@ -715,7 +714,13 @@ export default function Home() {
                   action: () =>
                     openPreview({
                       title: 'Display Marketplace – Glovecare',
-                      mediaList: Array.from({ length: 31 }, (_, i) => `/portofolio/display-glovecare-${i + 1}.jpg`)
+                      mediaList: [
+                        '/portofolio/display-glovecare-1.jpg',
+                        '/portofolio/display-glovecare-2.jpg',
+                        '/portofolio/display-glovecare-3.jpg',
+                        '/portofolio/display-glovecare-4.jpg',
+                        '/portofolio/display-glovecare-5.jpg'
+                      ]
                     })
                 },
                 {
@@ -742,7 +747,15 @@ export default function Home() {
                   action: () =>
                     openPreview({
                       title: 'Flyer Seminar – Esa Unggul University',
-                      mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/flyer-esa-unggul-${i + 1}.jpg`)
+                      mediaList: [
+                        '/portofolio/flyer-esa-unggul-1.jpg',
+                        '/portofolio/flyer-esa-unggul-2.jpg',
+                        '/portofolio/flyer-esa-unggul-3.jpg',
+                        '/portofolio/flyer-esa-unggul-4.jpg',
+                        '/portofolio/flyer-esa-unggul-5.jpg',
+                        '/portofolio/flyer-esa-unggul-6.jpg',
+                        '/portofolio/flyer-esa-unggul-7.jpg'
+                      ]
                     })
                 },
                 {
@@ -760,7 +773,15 @@ export default function Home() {
                   action: () =>
                     openPreview({
                       title: 'Logo Design',
-                      mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/logo-design-${i + 1}.jpg`)
+                      mediaList: [
+                        '/portofolio/logo-design-1.jpg',
+                        '/portofolio/logo-design-2.jpg',
+                        '/portofolio/logo-design-3.jpg',
+                        '/portofolio/logo-design-4.jpg',
+                        '/portofolio/logo-design-5.jpg',
+                        '/portofolio/logo-design-6.jpg',
+                        '/portofolio/logo-design-7.jpg'
+                      ]
                     })
                 },
                 {
@@ -820,7 +841,7 @@ export default function Home() {
                 <span className="text-slate-800 font-extrabold text-[10px] sm:text-[11px] uppercase tracking-wider shrink-0">
                   Credential Viewer
                 </span>
-                <span className="text-slate-400 shrink-0">•</span>
+                <span className="text-slate-400 shrink-0">&bull;</span>
                 <h3 className="text-[14px] sm:text-[18px] font-black text-slate-900 truncate">{activeCert.title}</h3>
               </div>
               <button
@@ -828,7 +849,7 @@ export default function Home() {
                 onClick={closeCert}
                 className="w-8 h-8 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-colors bg-white/80 hover:bg-white border border-white cursor-pointer shadow-sm font-bold shrink-0"
               >
-                ✕
+                &times;
               </button>
             </div>
 
@@ -840,7 +861,6 @@ export default function Home() {
                   title={activeCert.title}
                 />
               ) : (
-                /* eslint-disable-next-line @next/next/no-img-element */
                 <img
                   src={activeCert.src}
                   alt={activeCert.title}
@@ -876,7 +896,7 @@ export default function Home() {
                 onClick={closePreview}
                 className="w-8 h-8 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-all bg-white/80 hover:bg-white border border-white shadow-sm backdrop-blur-md font-bold cursor-pointer shrink-0"
               >
-                ✕
+                &times;
               </button>
             </div>
 
@@ -888,7 +908,6 @@ export default function Home() {
                       <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-slate-900 p-[2px] shrink-0 flex items-center justify-center shadow-lg overflow-hidden">
                         <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
                           {activePreview.avatarImg ? (
-                            /* eslint-disable-next-line @next/next/no-img-element */
                             <img
                               src={activePreview.avatarImg}
                               alt={activePreview.displayName || activePreview.username || 'Avatar'}
@@ -973,7 +992,7 @@ export default function Home() {
                             <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
                             <circle cx="12" cy="13" r="4" />
                           </svg>
-                          <span>LIVE DISPLAY DESIGN & FEATURED POSTS</span>
+                          <span>LIVE DISPLAY DESIGN &amp; FEATURED POSTS</span>
                         </span>
                       </div>
 
@@ -1016,7 +1035,6 @@ export default function Home() {
                               className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none"
                             />
                           ) : (
-                            /* eslint-disable-next-line @next/next/no-img-element */
                             <img
                               src={file}
                               alt={`${activePreview.title} #${i + 1}`}
@@ -1029,7 +1047,11 @@ export default function Home() {
                   ) : activePreview.img ? (
                     <div className="w-full flex items-center justify-center rounded-3xl p-4 text-center">
                       <div
-                        onClick={() => setZoomedMedia(activePreview.img!)}
+                        onClick={() => {
+                          if (activePreview.img) {
+                            setZoomedMedia(activePreview.img);
+                          }
+                        }}
                         className="max-w-md w-full aspect-square cursor-pointer transition-all hover:scale-[1.03] rounded-3xl p-4 liquid-glass-3d flex items-center justify-center"
                       >
                         {activePreview.img.endsWith('.mp4') ? (
@@ -1042,7 +1064,6 @@ export default function Home() {
                             className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none"
                           />
                         ) : (
-                          /* eslint-disable-next-line @next/next/no-img-element */
                           <img
                             src={activePreview.img}
                             alt={activePreview.title}
@@ -1087,7 +1108,7 @@ export default function Home() {
               onClick={() => setZoomedMedia(null)}
               className="absolute -top-12 right-0 sm:right-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center text-lg transition-all cursor-pointer border border-white/30 shadow-xl font-bold"
             >
-              ✕
+              &times;
             </button>
 
             {zoomedMedia.endsWith('.mp4') ? (
@@ -1099,7 +1120,6 @@ export default function Home() {
                 className="max-h-[80vh] sm:max-h-[85vh] max-w-full rounded-3xl shadow-2xl border border-slate-700 bg-black"
               />
             ) : (
-              /* eslint-disable-next-line @next/next/no-img-element */
               <img
                 src={zoomedMedia}
                 alt="Preview diperbesar"

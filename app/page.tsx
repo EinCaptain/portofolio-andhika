@@ -95,7 +95,7 @@ export default function Home() {
         {/* VIEW 1: BERANDA UTAMA */}
         {currentView === 'main' && (
           <div className="space-y-6 sm:space-y-8">
-            {/* GAMBAR 1 (TOP): HERO CARD */}
+            {/* HERO CARD */}
             <section
               id="home"
               className="relative overflow-hidden flex flex-col justify-center p-8 sm:p-12 text-slate-900 liquid-glass-3d rounded-3xl min-h-[300px] sm:min-h-[360px] w-full"
@@ -149,7 +149,7 @@ export default function Home() {
               </div>
             </section>
 
-            {/* GAMBAR 1 (BOTTOM): ABOUT ME CARD */}
+            {/* ABOUT ME CARD */}
             <section id="about" className="p-8 sm:p-10 text-slate-900 liquid-glass-3d rounded-3xl overflow-hidden w-full space-y-3">
               <span className="text-[12px] font-black text-slate-800 tracking-wider uppercase block">
                 ABOUT ME
@@ -193,7 +193,7 @@ export default function Home() {
               </div>
             </section>
 
-            {/* GAMBAR 2 (TOP): SERVICES & EXPERTISE SECTION */}
+            {/* SERVICES & EXPERTISE SECTION */}
             <section id="services" className="space-y-4 w-full">
               <div className="p-6 text-slate-900 liquid-glass-3d rounded-full px-8">
                 <span className="text-[11px] font-extrabold text-slate-700 tracking-wider uppercase block">What I Do</span>
@@ -243,7 +243,7 @@ export default function Home() {
               </div>
             </section>
 
-            {/* GAMBAR 2 (BOTTOM): FEATURED PROJECTS SECTION */}
+            {/* FEATURED PROJECTS SECTION */}
             <section id="work" className="space-y-4 w-full">
               <div className="p-6 text-slate-900 liquid-glass-3d rounded-full px-8">
                 <span className="text-[11px] font-extrabold text-slate-700 tracking-wider uppercase block">Case Studies</span>
@@ -307,7 +307,7 @@ export default function Home() {
               </div>
             </section>
 
-            {/* GAMBAR 3 (TOP): TOOLS & SOFTWARE PROFICIENCY SECTION */}
+            {/* TOOLS & SOFTWARE PROFICIENCY SECTION */}
             <section id="tools" className="space-y-4 w-full">
               <div className="p-6 text-slate-900 liquid-glass-3d rounded-full px-8">
                 <span className="text-[11px] font-extrabold text-slate-700 tracking-wider uppercase block">Technical Stack</span>
@@ -385,7 +385,7 @@ export default function Home() {
               </div>
             </section>
 
-            {/* GAMBAR 3 (BOTTOM): FOOTER / LET'S CONNECT CARD */}
+            {/* FOOTER CARD */}
             <footer
               id="contact"
               className="p-6 sm:p-8 text-slate-900 liquid-glass-3d rounded-full overflow-hidden w-full px-8 flex flex-col sm:flex-row items-center justify-between gap-4"
@@ -1132,4 +1132,3 @@ export default function Home() {
     </div>
   );
 }
-      

@@ -364,47 +364,6 @@ export default function Home() {
               </div>
             </section>
 
-            {/* SECTION: SERVICES & EXPERTISE */}
-            <section id="services" className="mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
-              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
-                <h2 className="text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">SERVICES & EXPERTISE</h2>
-              </div>
-              <div className="grid grid-cols-4 gap-[20px]">
-                {[
-                  {
-                    title: 'Social Media Management',
-                    desc: 'Penyusunan content planner, pengelolaan kanal media sosial harian, penulisan copywriting yang persuasif, dan strategi peningkatan interaksi audiens.'
-                  },
-                  {
-                    title: 'Graphic Design & Visual Content',
-                    desc: 'Perancangan graphic design untuk kebutuhan konten media sosial, materi promosi digital, dan penguatan identitas visual produk.'
-                  },
-                  {
-                    title: 'Commercial Photography',
-                    desc: 'Pengambilan foto produk komersial dan penyuntingan warna (photo editing) secara mendetail menggunakan Adobe Lightroom untuk estetika visual merek.'
-                  },
-                  {
-                    title: 'Videography & Video Editing',
-                    desc: 'Produksi konten video dari tahap pengambilan gambar (videography) hingga penyuntingan akhir (video editing) menggunakan CapCut dan Adobe Premiere Pro.'
-                  }
-                ].map((item, idx) => (
-                  <div
-                    key={idx}
-                    /* Perbaikan 1: Gunakan h-auto, min-h-[250px], padding p-7, dan flex-col gap-4 */
-                    className="w-full h-auto min-h-[250px] rounded-[28px] p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
-                  >
-                    {/* Perbaikan 1: Font dikecilkan ke text-[14px], ditambah whitespace-nowrap dan tracking-tight */}
-                    <h3 className="text-[14px] font-bold text-slate-900 leading-snug whitespace-nowrap tracking-tight">
-                      {item.title}
-                    </h3>
-                    <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
-                      {item.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
-
             {/* SECTION: FEATURED PROJECTS */}
             <section id="work" className="mt-[20px] flex flex-col shrink-0 w-full max-w-[1239px]">
               <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">

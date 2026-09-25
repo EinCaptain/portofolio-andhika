@@ -140,40 +140,30 @@ export default function Home() {
         {/* VIEW 1: BERANDA UTAMA */}
         {currentView === 'main' && (
           <>
-            {/* SECTION: HEADER - TELAH DIPERBAIKI */}
+            {/* SECTION: HEADER (SUDAH DIPERBAIKI) */}
             <section
               id="home"
-              className="w-[1239px] h-[430px] rounded-[28px] relative bg-white/40 shadow-sm border border-white overflow-hidden shrink-0"
+              className="w-full max-w-[1239px] h-[430px] rounded-[28px] relative bg-[#f1f5f9] flex px-[50px] py-[40px] overflow-hidden shrink-0 shadow-sm border border-white"
             >
-              {/* FOTO HERO PROFILE */}
-              {!profileImgError && (
-                <img
-                  src="/profile.png"
-                  alt="Andhika Rievaldy"
-                  className="absolute bottom-0 right-[40px] w-[318px] h-[380px] object-contain object-bottom drop-shadow-xl pointer-events-none z-10"
-                  onError={() => setProfileImgError(true)}
-                />
-              )}
-
               {/* AREA KIRI: TEKS JUDUL & KONTAK INFO */}
-              <div className="absolute top-[50px] left-[50px] flex flex-col gap-8 z-20">
+              <div className="flex flex-col justify-start gap-6 z-20">
                 
                 {/* Teks Judul */}
                 <div className="flex flex-col">
-                  <div className="text-slate-700 font-extrabold text-[12px] tracking-widest uppercase mb-2">
+                  <div className="text-slate-700 font-extrabold text-[12px] tracking-widest uppercase mb-2 leading-none">
                     MARKETING COMMUNICATION
                   </div>
-                  <h1 className="text-[64px] leading-[1.1] font-black text-slate-900 tracking-tight whitespace-nowrap">
+                  <h1 className="text-[64px] font-black text-slate-900 tracking-tight leading-[1.1] whitespace-nowrap">
                     ANDHIKA <br />
                     RIEVALDY
                   </h1>
                 </div>
 
                 {/* Grid Info Kontak */}
-                <div className="grid grid-cols-2 gap-4 w-fit">
+                <div className="grid grid-cols-2 gap-4 w-fit mt-2">
                   <a
                     href="mailto:andhikarievaldy07@gmail.com"
-                    className="px-6 py-3 bg-white rounded-[14px] flex items-center gap-3 hover:bg-slate-50 border border-slate-100 shadow-sm transition-all"
+                    className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
                   >
                     <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -185,7 +175,7 @@ export default function Home() {
                     href="https://www.linkedin.com/in/rievaldyandhika/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 bg-white rounded-[14px] flex items-center gap-3 hover:bg-slate-50 border border-slate-100 shadow-sm transition-all"
+                    className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
                   >
                     <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
@@ -199,7 +189,7 @@ export default function Home() {
                     href="https://wa.me/6285179770217"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-3 bg-white rounded-[14px] flex items-center gap-3 hover:bg-slate-50 border border-slate-100 shadow-sm transition-all"
+                    className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
                   >
                     <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -207,7 +197,7 @@ export default function Home() {
                     <span className="text-slate-900 font-bold text-[13px] truncate">+62 851-7977-0217</span>
                   </a>
 
-                  <div className="px-6 py-3 bg-white rounded-[14px] flex items-center gap-3 border border-slate-100 shadow-sm select-none">
+                  <div className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white border border-slate-100 shadow-sm select-none">
                     <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                       <circle cx="12" cy="10" r="3" />
@@ -217,8 +207,8 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* NAVIGASI BAWAH */}
-              <div className="absolute bottom-[30px] left-[45%] -translate-x-1/2 flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-200 z-20">
+              {/* NAVIGASI BAWAH (ABSOLUTE POS) */}
+              <div className="absolute bottom-[24px] left-[45%] -translate-x-1/2 z-20 flex items-center gap-1 bg-white px-2 py-2 rounded-full shadow-sm">
                 <a href="#home" className="px-5 py-2 rounded-full bg-slate-900 text-white font-bold text-[12px]">
                   Home
                 </a>
@@ -238,6 +228,16 @@ export default function Home() {
                   Links
                 </a>
               </div>
+
+              {/* FOTO HERO PROFILE (ABSOLUTE POS) */}
+              {!profileImgError && (
+                <img
+                  src="/profile.png"
+                  alt="Andhika Rievaldy"
+                  className="absolute bottom-0 right-[40px] w-[318px] h-[380px] object-contain object-bottom z-10 drop-shadow-xl pointer-events-none"
+                  onError={() => setProfileImgError(true)}
+                />
+              )}
             </section>
 
             {/* SECTION: ABOUT ME */}

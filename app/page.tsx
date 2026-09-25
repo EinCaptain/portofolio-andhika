@@ -140,104 +140,103 @@ export default function Home() {
         {/* VIEW 1: BERANDA UTAMA */}
         {currentView === 'main' && (
           <>
-            {/* SECTION: HEADER */}
+            {/* SECTION: HEADER - TELAH DIPERBAIKI */}
             <section
               id="home"
-              className="relative w-[1239px] h-[430px] rounded-[28px] p-10 bg-white/40 shadow-sm border border-white flex flex-col justify-between overflow-hidden shrink-0"
+              className="w-[1239px] h-[430px] rounded-[28px] relative bg-white/40 shadow-sm border border-white overflow-hidden shrink-0"
             >
               {/* FOTO HERO PROFILE */}
               {!profileImgError && (
-                <div className="absolute right-0 bottom-0 top-0 w-1/2 pointer-events-none z-10 flex items-end justify-end pr-8">
-                  <img
-                    src="/profile.png"
-                    alt="Andhika Rievaldy"
-                    className="w-[318px] h-[380px] object-contain object-bottom drop-shadow-xl"
-                    onError={() => setProfileImgError(true)}
-                  />
-                </div>
+                <img
+                  src="/profile.png"
+                  alt="Andhika Rievaldy"
+                  className="absolute bottom-0 right-[40px] w-[318px] h-[380px] object-contain object-bottom drop-shadow-xl pointer-events-none z-10"
+                  onError={() => setProfileImgError(true)}
+                />
               )}
 
-              {/* AREA TEKS HERO UTAMA */}
-              <div className="relative z-20 w-[600px] flex flex-col pt-4">
-                <div className="text-slate-700 font-extrabold text-[12px] tracking-widest uppercase whitespace-nowrap mb-2">
-                  MARKETING COMMUNICATION
+              {/* AREA KIRI: TEKS JUDUL & KONTAK INFO */}
+              <div className="absolute top-[50px] left-[50px] flex flex-col gap-8 z-20">
+                
+                {/* Teks Judul */}
+                <div className="flex flex-col">
+                  <div className="text-slate-700 font-extrabold text-[12px] tracking-widest uppercase mb-2">
+                    MARKETING COMMUNICATION
+                  </div>
+                  <h1 className="text-[64px] leading-[1.1] font-black text-slate-900 tracking-tight whitespace-nowrap">
+                    ANDHIKA <br />
+                    RIEVALDY
+                  </h1>
                 </div>
 
-                <h1 className="text-[64px] font-black text-slate-900 tracking-tight leading-none whitespace-nowrap">
-                  ANDHIKA <br />
-                  RIEVALDY
-                </h1>
-              </div>
+                {/* Grid Info Kontak */}
+                <div className="grid grid-cols-2 gap-4 w-fit">
+                  <a
+                    href="mailto:andhikarievaldy07@gmail.com"
+                    className="px-6 py-3 bg-white rounded-[14px] flex items-center gap-3 hover:bg-slate-50 border border-slate-100 shadow-sm transition-all"
+                  >
+                    <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                    </svg>
+                    <span className="text-slate-900 font-bold text-[13px] truncate">andhikarievaldy07@gmail.com</span>
+                  </a>
 
-              {/* BARIS INFO: EMAIL, PHONE, LINKEDIN, LOCATION */}
-              <div className="grid grid-cols-2 gap-4 relative z-20 w-[650px] mt-6">
-                <a
-                  href="mailto:andhikarievaldy07@gmail.com"
-                  className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
-                >
-                  <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                  <span className="text-slate-900 font-bold text-[13px] truncate">andhikarievaldy07@gmail.com</span>
-                </a>
+                  <a
+                    href="https://www.linkedin.com/in/rievaldyandhika/"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-white rounded-[14px] flex items-center gap-3 hover:bg-slate-50 border border-slate-100 shadow-sm transition-all"
+                  >
+                    <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+                      <rect x="2" y="9" width="4" height="12" />
+                      <circle cx="4" cy="4" r="2" />
+                    </svg>
+                    <span className="text-slate-900 font-bold text-[13px] truncate">linkedin.com/in/rievaldyandhika</span>
+                  </a>
 
-                <a
-                  href="https://www.linkedin.com/in/rievaldyandhika/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
-                >
-                  <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-                    <rect x="2" y="9" width="4" height="12" />
-                    <circle cx="4" cy="4" r="2" />
-                  </svg>
-                  <span className="text-slate-900 font-bold text-[13px] truncate">linkedin.com/in/rievaldyandhika</span>
-                </a>
+                  <a
+                    href="https://wa.me/6285179770217"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="px-6 py-3 bg-white rounded-[14px] flex items-center gap-3 hover:bg-slate-50 border border-slate-100 shadow-sm transition-all"
+                  >
+                    <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                    </svg>
+                    <span className="text-slate-900 font-bold text-[13px] truncate">+62 851-7977-0217</span>
+                  </a>
 
-                <a
-                  href="https://wa.me/6285179770217"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
-                >
-                  <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                  <span className="text-slate-900 font-bold text-[13px] truncate">+62 851-7977-0217</span>
-                </a>
-
-                <div className="flex items-center gap-2.5 px-4 py-3 rounded-2xl bg-white border border-slate-100 shadow-sm select-none">
-                  <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                    <circle cx="12" cy="10" r="3" />
-                  </svg>
-                  <span className="text-slate-900 font-bold text-[13px] truncate">Tangerang, Indonesia</span>
+                  <div className="px-6 py-3 bg-white rounded-[14px] flex items-center gap-3 border border-slate-100 shadow-sm select-none">
+                    <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                      <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    <span className="text-slate-900 font-bold text-[13px] truncate">Tangerang, Indonesia</span>
+                  </div>
                 </div>
               </div>
 
               {/* NAVIGASI BAWAH */}
-              <div className="absolute bottom-6 left-0 right-0 flex justify-center z-20">
-                <div className="rounded-full p-1.5 flex items-center gap-1 text-[12px] bg-white border border-slate-200 shadow-sm">
-                  <a href="#home" className="px-5 py-2 rounded-full bg-slate-900 text-white font-bold">
-                    Home
-                  </a>
-                  <a href="#about" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors">
-                    About
-                  </a>
-                  <a href="#services" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors">
-                    Services
-                  </a>
-                  <a href="#work" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors">
-                    Work
-                  </a>
-                  <a href="#tools" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors">
-                    Software
-                  </a>
-                  <a href="#contact" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors">
-                    Links
-                  </a>
-                </div>
+              <div className="absolute bottom-[30px] left-[45%] -translate-x-1/2 flex items-center gap-2 bg-white px-4 py-2 rounded-full shadow-sm border border-slate-200 z-20">
+                <a href="#home" className="px-5 py-2 rounded-full bg-slate-900 text-white font-bold text-[12px]">
+                  Home
+                </a>
+                <a href="#about" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
+                  About
+                </a>
+                <a href="#services" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
+                  Services
+                </a>
+                <a href="#work" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
+                  Work
+                </a>
+                <a href="#tools" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
+                  Software
+                </a>
+                <a href="#contact" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
+                  Links
+                </a>
               </div>
             </section>
 

@@ -87,6 +87,26 @@ export default function Home() {
   const [zoomedMedia, setZoomedMedia] = useState<string | null>(null);
   const [profileImgError, setProfileImgError] = useState(false);
 
+  // FUNGSI SMOOTH SCROLL (Sesuai Instruksi 1)
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    if (currentView !== 'main') {
+      setCurrentView('main');
+      // Beri sedikit jeda agar DOM kembali ke 'main' sebelum scroll
+      setTimeout(() => {
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } else {
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
+  };
+
   const openCert = (title: string, src: string, type: 'pdf' | 'image') => {
     setActiveCert({ title, src, type });
   };
@@ -133,20 +153,19 @@ export default function Home() {
       className="min-h-screen text-slate-900 font-sans antialiased relative selection:bg-slate-900 selection:text-white"
       style={{ backgroundColor: '#E2E8F0', overflowX: 'hidden' }}
     >
-      {/* MAIN CONTAINER */}
-      <div
-        className="w-[1440px] h-[2355px] mx-auto py-[130px] px-[100px] flex flex-col relative z-10"
-      >
+      {/* MAIN CONTAINER (Tinggi fixed dihapus, diganti min-h-screen agar fleksibel) */}
+      <div className="w-full max-w-[1440px] min-h-screen mx-auto py-[130px] px-[100px] flex flex-col relative z-10">
+        
         {/* VIEW 1: BERANDA UTAMA */}
         {currentView === 'main' && (
           <>
-            {/* SECTION: HEADER (SUDAH DIPERBAIKI) */}
+            {/* SECTION: HEADER */}
             <section
               id="home"
-              className="w-full max-w-[1239px] h-[430px] rounded-[28px] relative bg-[#f1f5f9] flex px-[50px] py-[40px] overflow-hidden shrink-0 shadow-sm border border-white"
+              className="w-full max-w-[1239px] min-h-[430px] h-auto rounded-[28px] relative bg-[#f1f5f9] flex px-[50px] py-[40px] overflow-hidden shrink-0 shadow-sm border border-white"
             >
               {/* AREA KIRI: TEKS JUDUL & KONTAK INFO */}
-              <div className="flex flex-col justify-start gap-6 z-20">
+              <div className="flex flex-col justify-start gap-6 z-20 w-full relative">
                 
                 {/* Teks Judul */}
                 <div className="flex flex-col">
@@ -160,7 +179,7 @@ export default function Home() {
                 </div>
 
                 {/* Grid Info Kontak */}
-                <div className="grid grid-cols-2 gap-4 w-fit mt-2">
+                <div className="grid grid-cols-2 gap-4 w-fit mt-2 pb-16">
                   <a
                     href="mailto:andhikarievaldy07@gmail.com"
                     className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
@@ -207,29 +226,29 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* NAVIGASI BAWAH (ABSOLUTE POS) */}
-              <div className="absolute bottom-[24px] left-[45%] -translate-x-1/2 z-20 flex items-center gap-1 bg-white px-2 py-2 rounded-full shadow-sm">
-                <a href="#home" className="px-5 py-2 rounded-full bg-slate-900 text-white font-bold text-[12px]">
+              {/* NAVIGASI BAWAH dengan Fungsi handleScroll Presisi */}
+              <div className="absolute bottom-[24px] left-[45%] -translate-x-1/2 z-30 flex items-center gap-1 bg-white px-2 py-2 rounded-full shadow-md">
+                <a href="#home" onClick={(e) => handleScroll(e, 'home')} className="px-5 py-2 rounded-full bg-slate-900 text-white font-bold text-[12px] transition-colors">
                   Home
                 </a>
-                <a href="#about" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
+                <a href="#about" onClick={(e) => handleScroll(e, 'home')} className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
                   About
                 </a>
-                <a href="#services" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
+                <a href="#services" onClick={(e) => handleScroll(e, 'services')} className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
                   Services
                 </a>
-                <a href="#work" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
+                <a href="#work" onClick={(e) => handleScroll(e, 'services')} className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
                   Work
                 </a>
-                <a href="#tools" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
+                <a href="#tools" onClick={(e) => handleScroll(e, 'tools')} className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
                   Software
                 </a>
-                <a href="#contact" className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
+                <a href="#contact" onClick={(e) => handleScroll(e, 'tools')} className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
                   Links
                 </a>
               </div>
 
-              {/* FOTO HERO PROFILE (ABSOLUTE POS) */}
+              {/* FOTO HERO PROFILE */}
               {!profileImgError && (
                 <img
                   src="/profile.png"
@@ -243,7 +262,7 @@ export default function Home() {
             {/* SECTION: ABOUT ME */}
             <section
               id="about"
-              className="mt-[20px] w-[1239px] h-[205px] rounded-[28px] bg-white/40 shadow-sm border border-white p-8 flex items-center shrink-0"
+              className="mt-[20px] w-full max-w-[1239px] min-h-[205px] h-auto rounded-[28px] bg-white/40 shadow-sm border border-white p-8 flex items-center shrink-0"
             >
               <div className="flex w-full justify-between items-start gap-12">
                 <div className="flex-1 space-y-2">
@@ -253,7 +272,7 @@ export default function Home() {
                   <h2 className="text-[28px] font-black text-slate-900 leading-tight whitespace-nowrap">
                     Rievaldy Andhika Koswara, S.I.Kom
                   </h2>
-                  <p className="text-[14px] font-normal text-slate-700 leading-relaxed text-justify mt-2">
+                  <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify mt-2">
                     Saya adalah lulusan Marketing Communication yang berfokus pada penguatan identitas merek dan eksekusi strategi media digital.
                     Berpengalaman dalam merangkai narasi merek, memproduksi konten kreatif, serta mengoptimalkan performa kanal digital untuk membangun hubungan bermakna dengan target audiens.
                   </p>
@@ -304,8 +323,8 @@ export default function Home() {
             </section>
 
             {/* SECTION: SERVICES & EXPERTISE */}
-            <section id="services" className="mt-[60px] flex flex-col shrink-0 w-[1239px]">
-              <div className="w-[1239px] h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
+            <section id="services" className="mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
+              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
                 <h2 className="text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">SERVICES & EXPERTISE</h2>
               </div>
               <div className="grid grid-cols-4 gap-[20px]">
@@ -329,7 +348,7 @@ export default function Home() {
                 ].map((item, idx) => (
                   <div
                     key={idx}
-                    className="w-[295px] h-[257px] rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col justify-center gap-3 hover:scale-[1.02] transition-transform"
+                    className="w-full min-h-[257px] h-full rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col justify-center gap-3 hover:scale-[1.02] transition-transform"
                   >
                     <h3 className="text-[18px] font-bold text-slate-900 leading-snug">
                       {item.title}
@@ -343,9 +362,9 @@ export default function Home() {
             </section>
 
             {/* SECTION: FEATURED PROJECTS */}
-            <section id="work" className="mt-[20px] flex flex-col shrink-0 w-[1239px]">
-              <div className="w-[1239px] h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
-                <h2 className="text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">SERVICES & EXPERTISE</h2>
+            <section id="work" className="mt-[20px] flex flex-col shrink-0 w-full max-w-[1239px]">
+              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
+                <h2 className="text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">FEATURED PROJECTS</h2>
               </div>
 
               <div className="grid grid-cols-2 gap-[20px]">
@@ -377,16 +396,16 @@ export default function Home() {
                 ].map((proj, idx) => (
                   <div
                     key={idx}
-                    className="w-[610px] h-[118px] rounded-[28px] p-5 bg-white/40 shadow-sm border border-white flex flex-col justify-between hover:scale-[1.01] transition-transform"
+                    className="w-full min-h-[118px] h-full rounded-[28px] p-5 bg-white/40 shadow-sm border border-white flex flex-col justify-between hover:scale-[1.01] transition-transform gap-3"
                   >
                     <div>
                       <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-widest block mb-1 whitespace-nowrap">
                         {proj.tag}
                       </span>
-                      <h3 className="text-[18px] font-black text-slate-900 whitespace-nowrap truncate">{proj.name}</h3>
+                      <h3 className="text-[16px] font-black text-slate-900 leading-tight">{proj.name}</h3>
                     </div>
-                    <div className="flex justify-between items-end gap-4">
-                       <p className="text-[12px] font-normal text-slate-700 leading-tight text-justify line-clamp-2">
+                    <div className="flex justify-between items-end gap-4 mt-1">
+                       <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
                         {proj.desc}
                       </p>
                       <button
@@ -403,8 +422,8 @@ export default function Home() {
             </section>
 
             {/* SECTION: TOOLS & SOFTWARE PROFICIENCY */}
-            <section id="tools" className="mt-[60px] flex flex-col shrink-0 w-[1239px]">
-               <div className="w-[1239px] h-[58px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
+            <section id="tools" className="mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
+               <div className="w-full h-[58px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
                 <h2 className="text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">TOOLS & SOFTWARE PROFICIENCY</h2>
               </div>
               <div className="grid grid-cols-3 gap-[20px]">
@@ -457,17 +476,17 @@ export default function Home() {
                 ].map((tool, idx) => (
                   <div
                     key={idx}
-                    className="w-[398px] h-[128px] rounded-[18px] p-5 bg-white/40 shadow-sm border border-white flex flex-col justify-center hover:scale-[1.02] transition-transform"
+                    className="w-full min-h-[128px] h-full rounded-[18px] p-5 bg-white/40 shadow-sm border border-white flex flex-col justify-center hover:scale-[1.02] transition-transform gap-1.5"
                   >
-                    <div className="flex items-center justify-between mb-2">
-                       <h3 className="text-[16px] font-bold text-slate-900 whitespace-nowrap truncate">
+                    <div className="flex items-start justify-between mb-1 gap-2">
+                       <h3 className="text-[15px] font-bold text-slate-900 leading-tight">
                         {tool.name}
                       </h3>
-                      <span className="text-[9px] font-extrabold text-slate-700 uppercase tracking-widest whitespace-nowrap">
+                      <span className="text-[9px] font-extrabold text-slate-700 uppercase tracking-widest whitespace-nowrap mt-1">
                         {tool.category}
                       </span>
                     </div>
-                    <p className="text-[12px] font-normal text-slate-700 leading-snug text-justify">
+                    <p className="text-[12px] font-normal text-slate-700 leading-relaxed text-justify mt-1">
                       {tool.desc}
                     </p>
                   </div>
@@ -476,8 +495,8 @@ export default function Home() {
             </section>
 
             {/* SECTION: FOOTER / LET'S CONNECT */}
-            <section id="contact" className="mt-[20px] flex shrink-0 w-[1239px]">
-              <div className="w-[1239px] h-[115px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center justify-between">
+            <section id="contact" className="mt-[20px] flex shrink-0 w-full max-w-[1239px]">
+              <div className="w-full min-h-[115px] h-auto py-5 rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center justify-between">
                 <div>
                   <span className="text-[11px] font-extrabold text-slate-700 tracking-widest uppercase block whitespace-nowrap mb-1">
                     LET'S CONNECT

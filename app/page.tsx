@@ -87,6 +87,39 @@ export default function Home() {
   const [zoomedMedia, setZoomedMedia] = useState<string | null>(null);
   const [profileImgError, setProfileImgError] = useState(false);
 
+  // --- TAMBAHAN STATE & LOGIC UNTUK MENU NAVIGASI (SLIDING PILL) ---
+  const [activeMenu, setActiveMenu] = useState('home');
+  const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
+  const navRefs = React.useRef<(HTMLAnchorElement | null)[]>([]);
+
+  // Array untuk merapikan menu & memperbaiki target scroll yang sebelumnya terduplikasi
+  const navMenus = React.useMemo(() => [
+    { id: 'home', label: 'Home', target: 'home' },
+    { id: 'about', label: 'About', target: 'about' },
+    { id: 'services', label: 'Services', target: 'services' },
+    { id: 'work', label: 'Work', target: 'work' },
+    { id: 'tools', label: 'Software', target: 'tools' },
+    { id: 'contact', label: 'Links', target: 'contact' },
+  ], []);
+
+  React.useEffect(() => {
+    const updatePill = () => {
+      const activeIndex = navMenus.findIndex(m => m.id === activeMenu);
+      const activeEl = navRefs.current[activeIndex];
+      if (activeEl) {
+        setPillStyle({
+          left: activeEl.offsetLeft,
+          width: activeEl.offsetWidth
+        });
+      }
+    };
+
+    // Delay super kecil agar DOM & Font termuat sebelum menghitung ukuran width
+    setTimeout(updatePill, 50);
+    window.addEventListener('resize', updatePill);
+    return () => window.removeEventListener('resize', updatePill);
+  }, [activeMenu, navMenus]);
+
   // FUNGSI SMOOTH SCROLL (Sesuai Instruksi 1)
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
@@ -226,26 +259,36 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* NAVIGASI BAWAH dengan Fungsi handleScroll Presisi */}
-              <div className="absolute bottom-[24px] left-[45%] -translate-x-1/2 z-30 flex items-center gap-1 bg-white px-2 py-2 rounded-full shadow-md">
-                <a href="#home" onClick={(e) => handleScroll(e, 'home')} className="px-5 py-2 rounded-full bg-slate-900 text-white font-bold text-[12px] transition-colors">
-                  Home
-                </a>
-                <a href="#about" onClick={(e) => handleScroll(e, 'home')} className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
-                  About
-                </a>
-                <a href="#services" onClick={(e) => handleScroll(e, 'services')} className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
-                  Services
-                </a>
-                <a href="#work" onClick={(e) => handleScroll(e, 'services')} className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
-                  Work
-                </a>
-                <a href="#tools" onClick={(e) => handleScroll(e, 'tools')} className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
-                  Software
-                </a>
-                <a href="#contact" onClick={(e) => handleScroll(e, 'tools')} className="px-4 py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold text-[12px] transition-colors">
-                  Links
-                </a>
+              {/* NAVIGASI BAWAH dengan Fungsi handleScroll Presisi & Sliding Pill */}
+              <div className="absolute bottom-[24px] left-[45%] -translate-x-1/2 z-30 flex items-center gap-1 bg-white p-1.5 rounded-full shadow-md">
+                
+                {/* Efek Sliding Pill (Background Hitam) */}
+                <div
+                  className="absolute top-1.5 bottom-1.5 bg-slate-900 rounded-full transition-all duration-300 ease-in-out shadow-sm"
+                  style={{ left: `${pillStyle.left}px`, width: `${pillStyle.width}px` }}
+                />
+
+                {/* Perulangan Dinamis untuk Tombol Menu */}
+                {navMenus.map((menu, index) => (
+                  <a
+                    key={menu.id}
+                    href={`#${menu.id}`}
+                    ref={(el) => {
+                      navRefs.current[index] = el;
+                    }}
+                    onClick={(e) => {
+                      setActiveMenu(menu.id);
+                      handleScroll(e, menu.target);
+                    }}
+                    className={`relative z-10 px-4 py-2 rounded-full font-bold text-[12px] transition-colors duration-300 whitespace-nowrap ${
+                      activeMenu === menu.id 
+                        ? 'text-white' 
+                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                    }`}
+                  >
+                    {menu.label}
+                  </a>
+                ))}
               </div>
 
               {/* FOTO HERO PROFILE */}

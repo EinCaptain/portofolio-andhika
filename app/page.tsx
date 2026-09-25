@@ -183,36 +183,36 @@ export default function Home() {
       className="min-h-screen text-slate-900 font-sans antialiased relative selection:bg-slate-900 selection:text-white"
       style={{ backgroundColor: '#E2E8F0', overflowX: 'hidden' }}
     >
-      {/* MAIN CONTAINER: Responsif padding & lebar */}
-      <div className="w-full max-w-[1440px] min-h-screen mx-auto py-10 sm:py-16 lg:py-[130px] px-4 sm:px-8 lg:px-[100px] flex flex-col relative z-10">
+      {/* MAIN CONTAINER RESPONSIF */}
+      <div className="w-full max-w-[1440px] min-h-screen mx-auto py-8 px-4 sm:py-16 sm:px-8 lg:py-[130px] lg:px-[100px] flex flex-col relative z-10">
         
         {/* VIEW 1: BERANDA UTAMA */}
         {currentView === 'main' && (
           <>
-            {/* SECTION: HEADER */}
+            {/* SECTION: HEADER RESPONSIF */}
             <section
               id="home"
-              className="w-full max-w-[1239px] min-h-[430px] h-auto rounded-[28px] relative bg-[#f1f5f9] flex flex-col lg:flex-row px-6 sm:px-[50px] py-8 sm:py-[40px] overflow-hidden shrink-0 shadow-sm border border-white"
+              className="w-full max-w-[1239px] h-auto min-h-screen sm:min-h-[430px] rounded-[28px] relative bg-[#f1f5f9] flex flex-col md:flex-row px-6 py-8 sm:px-[50px] sm:py-[40px] overflow-hidden shrink-0 shadow-sm border border-white"
             >
               {/* AREA KIRI: TEKS JUDUL & KONTAK INFO */}
-              <div className="flex flex-col justify-start gap-6 z-20 w-full relative">
+              <div className="flex flex-col justify-start gap-4 sm:gap-6 z-20 w-full relative pb-20 sm:pb-24 md:pb-16">
                 
                 {/* Teks Judul */}
                 <div className="flex flex-col">
-                  <div className="text-slate-700 font-extrabold text-[12px] tracking-widest uppercase mb-2 leading-none">
+                  <div className="text-slate-700 font-extrabold text-[11px] sm:text-[12px] tracking-widest uppercase mb-2 leading-none">
                     MARKETING COMMUNICATION
                   </div>
-                  <h1 className="text-4xl sm:text-5xl lg:text-[64px] font-black text-slate-900 tracking-tight leading-[1.1]">
-                    ANDHIKA <br className="hidden sm:block" />
+                  <h1 className="text-4xl sm:text-5xl lg:text-[64px] font-black text-slate-900 tracking-tight leading-[1.1] whitespace-normal sm:whitespace-nowrap">
+                    ANDHIKA <br />
                     RIEVALDY
                   </h1>
                 </div>
 
-                {/* Grid Info Kontak: Responsif 1 kolom di HP, 2 kolom di md ke atas */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:w-fit mt-2 pb-16 lg:pb-16">
+                {/* Grid Info Kontak */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full sm:w-fit mt-2">
                   <a
                     href="mailto:andhikarievaldy07@gmail.com"
-                    className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
+                    className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
                   >
                     <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
@@ -224,7 +224,7 @@ export default function Home() {
                     href="https://www.linkedin.com/in/rievaldyandhika/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
+                    className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
                   >
                     <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
@@ -238,7 +238,7 @@ export default function Home() {
                     href="https://wa.me/6285179770217"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
+                    className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
                   >
                     <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
@@ -246,7 +246,7 @@ export default function Home() {
                     <span className="text-slate-900 font-bold text-[13px] truncate">+62 851-7977-0217</span>
                   </a>
 
-                  <div className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white border border-slate-100 shadow-sm select-none">
+                  <div className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white border border-slate-100 shadow-sm select-none">
                     <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                       <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                       <circle cx="12" cy="10" r="3" />
@@ -256,16 +256,16 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* NAVIGASI BAWAH: Fleksibel, di tengah pada HP & absolut pada desktop */}
-              <div className="relative lg:absolute bottom-4 lg:bottom-[24px] left-1/2 lg:left-[45%] -translate-x-1/2 z-30 flex flex-wrap justify-center items-center gap-1 bg-white p-1.5 rounded-full shadow-md mt-6 lg:mt-0">
+              {/* NAVIGASI BAWAH DENGAN EFEK SLIDING PILL (Responsif Wrap/Overflow) */}
+              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 md:left-[45%] md:-translate-x-1/2 z-30 flex items-center gap-1 bg-white p-1.5 rounded-full shadow-md max-w-[95%] overflow-x-auto">
                 
-                {/* Efek Sliding Pill (Background Hitam) */}
+                {/* Efek Sliding Pill Background Hitam */}
                 <div
                   className="absolute top-1.5 bottom-1.5 bg-slate-900 rounded-full transition-all duration-300 ease-in-out shadow-sm"
                   style={{ left: `${pillStyle.left}px`, width: `${pillStyle.width}px` }}
                 />
 
-                {/* Perulangan Dinamis untuk Tombol Menu */}
+                {/* Tombol Menu Navigasi Dinamis */}
                 {navMenus.map((menu, index) => (
                   <a
                     key={menu.id}
@@ -288,12 +288,12 @@ export default function Home() {
                 ))}
               </div>
 
-              {/* FOTO HERO PROFILE: Transparan/Menyesuaikan di HP, posisi semula di Desktop */}
+              {/* FOTO HERO PROFILE (Responsif: Di HP tampil kecil wajar di bawah/tengah, di md+ absolute kanan bawah) */}
               {!profileImgError && (
                 <img
                   src="/profile.png"
                   alt="Andhika Rievaldy"
-                  className="absolute bottom-0 right-4 lg:right-[40px] w-[220px] sm:w-[280px] lg:w-[318px] h-auto lg:h-[380px] object-contain object-bottom z-10 opacity-30 lg:opacity-100 drop-shadow-xl pointer-events-none"
+                  className="mt-6 mx-auto md:mt-0 md:absolute md:bottom-0 md:right-[40px] w-40 h-48 sm:w-48 sm:h-56 md:w-[318px] md:h-[380px] object-contain object-bottom z-10 drop-shadow-xl pointer-events-none"
                   onError={() => setProfileImgError(true)}
                 />
               )}
@@ -302,7 +302,7 @@ export default function Home() {
             {/* SECTION: ABOUT ME */}
             <section
               id="about"
-              className="mt-[20px] w-full max-w-[1239px] min-h-[205px] h-auto rounded-[28px] bg-white/40 shadow-sm border border-white p-6 sm:p-8 flex items-center shrink-0"
+              className="mt-5 w-full max-w-[1239px] min-h-[205px] h-auto rounded-[28px] bg-white/40 shadow-sm border border-white p-6 sm:p-8 flex items-center shrink-0"
             >
               <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-8 lg:gap-12">
                 <div className="flex-1 space-y-2">
@@ -362,12 +362,12 @@ export default function Home() {
               </div>
             </section>
 
-            {/* SECTION: SERVICES & EXPERTISE: Responsif 1 kolom (HP), 2 kolom (Tablet), 4 kolom (Desktop) */}
-            <section id="services" className="mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
-              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-[20px]">
-                <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">SERVICES & EXPERTISE</h2>
+            {/* SECTION: SERVICES & EXPERTISE (Responsif: 1 col di HP, 2 col di Tablet, 4 col di Desktop) */}
+            <section id="services" className="mt-10 sm:mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
+              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-5">
+                <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 tracking-wide uppercase">SERVICES & EXPERTISE</h2>
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px]">
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
                 {[
                   {
                     title: 'Social Media Management',
@@ -388,7 +388,7 @@ export default function Home() {
                 ].map((item, idx) => (
                   <div
                     key={idx}
-                    className="w-full h-auto min-h-[200px] rounded-[28px] p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
+                    className="w-full h-auto min-h-[200px] rounded-[28px] p-6 sm:p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
                   >
                     <h3 className="text-[14px] font-bold text-slate-900 leading-snug tracking-tight">
                       {item.title}
@@ -401,13 +401,13 @@ export default function Home() {
               </div>
             </section>
 
-            {/* SECTION: FEATURED PROJECTS: Responsif 1 kolom (HP) & 2 kolom (Desktop) */}
-            <section id="work" className="mt-[20px] flex flex-col shrink-0 w-full max-w-[1239px]">
-              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-[20px]">
-                <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">FEATURED PROJECTS</h2>
+            {/* SECTION: FEATURED PROJECTS (Responsif: 1 col di HP, 2 col di Desktop) */}
+            <section id="work" className="mt-5 flex flex-col shrink-0 w-full max-w-[1239px]">
+              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-5">
+                <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 tracking-wide uppercase">FEATURED PROJECTS</h2>
               </div>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px]">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
                 {[
                   {
                     tag: 'STRATEGY & CONTENT',
@@ -436,7 +436,7 @@ export default function Home() {
                 ].map((proj, idx) => (
                   <div
                     key={idx}
-                    className="w-full h-auto min-h-[118px] rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:scale-[1.01] transition-transform"
+                    className="w-full h-auto min-h-[118px] rounded-[28px] p-5 sm:p-6 bg-white/40 shadow-sm border border-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:scale-[1.01] transition-transform"
                   >
                     <div className="flex-1 flex flex-col gap-2 sm:pr-6">
                       <div>
@@ -455,7 +455,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={proj.action}
-                      className="shrink-0 w-full sm:w-auto px-4 py-2 rounded-full text-[12px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm text-center"
+                      className="w-full sm:w-auto shrink-0 px-4 py-2 rounded-full text-[12px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm whitespace-nowrap text-center"
                     >
                       See Portfolio
                     </button>
@@ -464,12 +464,12 @@ export default function Home() {
               </div>
             </section>
 
-            {/* SECTION: TOOLS & SOFTWARE PROFICIENCY: Responsif 1 kolom (HP), 2 kolom (Tablet), 3 kolom (Desktop) */}
-            <section id="tools" className="mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
-               <div className="w-full h-[58px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-[20px]">
-                <h2 className="text-[16px] sm:text-[20px] font-black text-slate-900 tracking-wide uppercase">TOOLS & SOFTWARE PROFICIENCY</h2>
+            {/* SECTION: TOOLS & SOFTWARE PROFICIENCY (Responsif: 1 col di HP, 2 col di Tablet, 3 col di Desktop) */}
+            <section id="tools" className="mt-10 sm:mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
+               <div className="w-full h-auto sm:h-[58px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 py-3 sm:py-0 flex items-center mb-5">
+                <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 tracking-wide uppercase">TOOLS & SOFTWARE PROFICIENCY</h2>
                </div>
-               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px]">
+               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                 {[
                   {
                     name: 'Adobe Photoshop',
@@ -538,8 +538,8 @@ export default function Home() {
             </section>
 
             {/* SECTION: FOOTER / LET'S CONNECT */}
-            <section id="contact" className="mt-[20px] flex shrink-0 w-full max-w-[1239px]">
-              <div className="w-full min-h-[115px] h-auto py-6 sm:py-5 rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
+            <section id="contact" className="mt-5 flex shrink-0 w-full max-w-[1239px]">
+              <div className="w-full min-h-[115px] h-auto py-6 sm:py-5 rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
                 <div>
                   <span className="text-[11px] font-extrabold text-slate-700 tracking-widest uppercase block mb-1">
                     LET'S CONNECT
@@ -548,10 +548,10 @@ export default function Home() {
                     INTERESTED IN WORKING TOGETHER?
                   </h2>
                 </div>
-                <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full lg:w-auto">
+                <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
                   <a
                     href="mailto:andhikarievaldy07@gmail.com"
-                    className="flex-1 sm:flex-none text-center px-6 py-2.5 rounded-full text-white font-bold text-[13px] bg-slate-800 hover:bg-slate-900 transition-all shadow-sm"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-full text-white font-bold text-[13px] bg-slate-800 hover:bg-slate-900 transition-all shadow-sm text-center whitespace-nowrap"
                   >
                     Send Email Direct
                   </a>
@@ -559,7 +559,7 @@ export default function Home() {
                     href="https://www.linkedin.com/in/rievaldyandhika/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="flex-1 sm:flex-none text-center px-6 py-2.5 rounded-full text-slate-900 font-bold text-[13px] bg-white hover:bg-slate-50 border border-slate-200 transition-all shadow-sm"
+                    className="w-full sm:w-auto px-6 py-2.5 rounded-full text-slate-900 font-bold text-[13px] bg-white hover:bg-slate-50 border border-slate-200 transition-all shadow-sm text-center whitespace-nowrap"
                   >
                     LinkedIn Profile
                   </a>
@@ -572,7 +572,10 @@ export default function Home() {
         {/* VIEW 2: SOCIAL MEDIA MANAGEMENT */}
         {currentView === 'social-media' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden w-full" style={{ maxWidth: '1500px' }}>
+            <div
+              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
+              style={{ width: '100%', maxWidth: '1500px' }}
+            >
               <div className="relative z-10 space-y-6">
                 <div>
                   <button
@@ -592,6 +595,7 @@ export default function Home() {
                   <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
                     Social Media Management
                   </h1>
+
                   <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
                     Kumpulan dokumentasi eksekusi strategi media sosial, penyusunan jadwal konten, penulisan narasi copywriting, serta pengelolaan interaksi merek.
                   </p>
@@ -599,7 +603,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ width: '100%' }}>
               {[
                 {
                   name: 'Diatera Technology',
@@ -668,7 +672,8 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-8 transition-all duration-300 space-y-5 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden w-full"
+                  className="p-6 sm:p-8 transition-all duration-300 space-y-5 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden"
+                  style={{ width: '100%' }}
                 >
                   <div className="space-y-3 relative z-10">
                     <h2 className="text-[24px] md:text-[32px] font-black text-slate-900 leading-tight">{item.name}</h2>
@@ -695,7 +700,10 @@ export default function Home() {
         {/* VIEW 3: COMMERCIAL PHOTOGRAPHY */}
         {currentView === 'photography' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden w-full" style={{ maxWidth: '1500px' }}>
+            <div
+              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
+              style={{ width: '100%', maxWidth: '1500px' }}
+            >
               <div className="relative z-10 space-y-6">
                 <div>
                   <button
@@ -715,6 +723,7 @@ export default function Home() {
                   <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
                     Commercial Photography
                   </h1>
+
                   <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
                     Pengarahan visual, konsep tata cahaya, dan pengambilan foto komersial produk yang disempurnakan dengan teknik retouching profesional serta color grading Adobe Lightroom.
                   </p>
@@ -722,7 +731,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ width: '100%' }}>
               {[
                 {
                   name: 'Product Photography – Glovecare',
@@ -746,7 +755,8 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden w-full"
+                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden"
+                  style={{ width: '100%' }}
                 >
                   <div className="space-y-2.5 relative z-10">
                     <h2 className="text-[18px] md:text-[22px] font-black text-slate-900 leading-snug">{item.name}</h2>
@@ -773,7 +783,10 @@ export default function Home() {
         {/* VIEW 4: VIDEOGRAPHY & VIDEO EDITING */}
         {currentView === 'videography' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden w-full" style={{ maxWidth: '1500px' }}>
+            <div
+              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
+              style={{ width: '100%', maxWidth: '1500px' }}
+            >
               <div className="relative z-10 space-y-6">
                 <div>
                   <button
@@ -793,6 +806,7 @@ export default function Home() {
                   <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
                     Videography & Video Editing
                   </h1>
+
                   <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
                     Produksi dan penyuntingan video komersial, proyek kreatif, serta konten vlogging berbasis penceritaan visual yang dinamis.
                   </p>
@@ -800,7 +814,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ width: '100%' }}>
               {[
                 {
                   name: 'Commercial & Brand Project',
@@ -832,7 +846,8 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden w-full"
+                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden"
+                  style={{ width: '100%' }}
                 >
                   <div className="space-y-2.5 relative z-10">
                     <h2 className="text-[18px] md:text-[22px] font-black text-slate-900 leading-snug">{item.name}</h2>
@@ -859,7 +874,10 @@ export default function Home() {
         {/* VIEW 5: GRAPHIC DESIGN & VISUAL CONTENT */}
         {currentView === 'graphic-design' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden w-full" style={{ maxWidth: '1500px' }}>
+            <div
+              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
+              style={{ width: '100%', maxWidth: '1500px' }}
+            >
               <div className="relative z-10 space-y-6">
                 <div>
                   <button
@@ -879,6 +897,7 @@ export default function Home() {
                   <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
                     Graphic Design & Visual Content
                   </h1>
+
                   <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
                     Perancangan identitas visual, media promosi seminar, materi e-commerce, filter AR interaktif, serta desain merchandise operasional merek.
                   </p>
@@ -886,7 +905,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ width: '100%' }}>
               {[
                 {
                   name: 'Banner Seminar – Esa Unggul University',
@@ -995,7 +1014,8 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden w-full"
+                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden"
+                  style={{ width: '100%' }}
                 >
                   <div className="space-y-2.5 relative z-10">
                     <h2 className="text-[18px] md:text-[22px] font-black text-slate-900 leading-snug">{item.name}</h2>
@@ -1216,7 +1236,7 @@ export default function Home() {
               ) : (
                 <div className="w-full space-y-5">
                   {activePreview.mediaList && activePreview.mediaList.length > 0 ? (
-                    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 max-h-[65vh] overflow-y-auto p-4 bg-white/30 backdrop-blur-xl rounded-3xl border border-white/60 shadow-inner">
+                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-h-[65vh] overflow-y-auto p-4 bg-white/30 backdrop-blur-xl rounded-3xl border border-white/60 shadow-inner">
                       {activePreview.mediaList.map((file, i) => (
                         <div
                           key={i}

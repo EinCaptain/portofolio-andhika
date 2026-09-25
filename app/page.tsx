@@ -350,10 +350,12 @@ export default function Home() {
                     key={idx}
                     className="w-full min-h-[257px] h-full rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col justify-center gap-3 hover:scale-[1.02] transition-transform"
                   >
-                    <h3 className="text-[18px] font-bold text-slate-900 leading-snug">
+                    {/* Perbaikan Font: text-[15px] dan ditambahkan truncate agar 1 baris */}
+                    <h3 className="text-[15px] font-bold text-slate-900 leading-snug truncate">
                       {item.title}
                     </h3>
-                    <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
+                    {/* Perbaikan Teks: text-[12px] agar teks justify terlihat padat dan rapi */}
+                    <p className="text-[12px] font-normal text-slate-700 leading-relaxed text-justify">
                       {item.desc}
                     </p>
                   </div>
@@ -394,24 +396,29 @@ export default function Home() {
                     action: goToVideography
                   }
                 ].map((proj, idx) => (
+                  /* Komentar dipindahkan ke atas agar tidak error di dalam tag pembuka */
+                  /* Perbaikan Layout: min-h-[160px], h-full, dan flex-col justify-between */
                   <div
                     key={idx}
-                    className="w-full min-h-[118px] h-full rounded-[28px] p-5 bg-white/40 shadow-sm border border-white flex flex-col justify-between hover:scale-[1.01] transition-transform gap-3"
+                    className="w-full min-h-[160px] h-full rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col justify-between hover:scale-[1.01] transition-transform"
                   >
-                    <div>
-                      <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-widest block mb-1 whitespace-nowrap">
+                    <div className="flex flex-col">
+                      <span className="text-[11px] font-extrabold text-slate-700 uppercase tracking-widest block mb-1 whitespace-nowrap">
                         {proj.tag}
                       </span>
-                      <h3 className="text-[16px] font-black text-slate-900 leading-tight">{proj.name}</h3>
-                    </div>
-                    <div className="flex justify-between items-end gap-4 mt-1">
-                       <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
+                      <h3 className="text-[18px] font-black text-slate-900 leading-tight">{proj.name}</h3>
+                      
+                      <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify mt-3">
                         {proj.desc}
                       </p>
+                    </div>
+                    
+                    {/* Perbaikan Tombol: Dibungkus dengan flex justify-end dan mt-4 agar dorong ke pojok */}
+                    <div className="w-full flex justify-end mt-4">
                       <button
                         type="button"
                         onClick={proj.action}
-                        className="shrink-0 px-4 py-1.5 rounded-full text-[11px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm whitespace-nowrap"
+                        className="px-5 py-2 rounded-full text-[12px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm whitespace-nowrap"
                       >
                         See Portfolio
                       </button>

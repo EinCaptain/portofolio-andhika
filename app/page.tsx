@@ -87,12 +87,11 @@ export default function Home() {
   const [zoomedMedia, setZoomedMedia] = useState<string | null>(null);
   const [profileImgError, setProfileImgError] = useState(false);
 
-  // --- TAMBAHAN STATE & LOGIC UNTUK MENU NAVIGASI (SLIDING PILL) ---
+  // --- STATE & LOGIC UNTUK MENU NAVIGASI (SLIDING PILL) ---
   const [activeMenu, setActiveMenu] = useState('home');
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
   const navRefs = React.useRef<(HTMLAnchorElement | null)[]>([]);
 
-  // Array untuk merapikan menu & memperbaiki target scroll yang sebelumnya terduplikasi
   const navMenus = React.useMemo(() => [
     { id: 'home', label: 'Home', target: 'home' },
     { id: 'about', label: 'About', target: 'about' },
@@ -114,18 +113,16 @@ export default function Home() {
       }
     };
 
-    // Delay super kecil agar DOM & Font termuat sebelum menghitung ukuran width
     setTimeout(updatePill, 50);
     window.addEventListener('resize', updatePill);
     return () => window.removeEventListener('resize', updatePill);
   }, [activeMenu, navMenus]);
 
-  // FUNGSI SMOOTH SCROLL (Sesuai Instruksi 1)
+  // FUNGSI SMOOTH SCROLL
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     if (currentView !== 'main') {
       setCurrentView('main');
-      // Beri sedikit jeda agar DOM kembali ke 'main' sebelum scroll
       setTimeout(() => {
         const target = document.getElementById(targetId);
         if (target) {
@@ -186,8 +183,8 @@ export default function Home() {
       className="min-h-screen text-slate-900 font-sans antialiased relative selection:bg-slate-900 selection:text-white"
       style={{ backgroundColor: '#E2E8F0', overflowX: 'hidden' }}
     >
-      {/* MAIN CONTAINER (Tinggi fixed dihapus, diganti min-h-screen agar fleksibel) */}
-      <div className="w-full max-w-[1440px] min-h-screen mx-auto py-[130px] px-[100px] flex flex-col relative z-10">
+      {/* MAIN CONTAINER: Responsif padding & lebar */}
+      <div className="w-full max-w-[1440px] min-h-screen mx-auto py-10 sm:py-16 lg:py-[130px] px-4 sm:px-8 lg:px-[100px] flex flex-col relative z-10">
         
         {/* VIEW 1: BERANDA UTAMA */}
         {currentView === 'main' && (
@@ -195,7 +192,7 @@ export default function Home() {
             {/* SECTION: HEADER */}
             <section
               id="home"
-              className="w-full max-w-[1239px] min-h-[430px] h-auto rounded-[28px] relative bg-[#f1f5f9] flex px-[50px] py-[40px] overflow-hidden shrink-0 shadow-sm border border-white"
+              className="w-full max-w-[1239px] min-h-[430px] h-auto rounded-[28px] relative bg-[#f1f5f9] flex flex-col lg:flex-row px-6 sm:px-[50px] py-8 sm:py-[40px] overflow-hidden shrink-0 shadow-sm border border-white"
             >
               {/* AREA KIRI: TEKS JUDUL & KONTAK INFO */}
               <div className="flex flex-col justify-start gap-6 z-20 w-full relative">
@@ -205,14 +202,14 @@ export default function Home() {
                   <div className="text-slate-700 font-extrabold text-[12px] tracking-widest uppercase mb-2 leading-none">
                     MARKETING COMMUNICATION
                   </div>
-                  <h1 className="text-[64px] font-black text-slate-900 tracking-tight leading-[1.1] whitespace-nowrap">
-                    ANDHIKA <br />
+                  <h1 className="text-4xl sm:text-5xl lg:text-[64px] font-black text-slate-900 tracking-tight leading-[1.1]">
+                    ANDHIKA <br className="hidden sm:block" />
                     RIEVALDY
                   </h1>
                 </div>
 
-                {/* Grid Info Kontak */}
-                <div className="grid grid-cols-2 gap-4 w-fit mt-2 pb-16">
+                {/* Grid Info Kontak: Responsif 1 kolom di HP, 2 kolom di md ke atas */}
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 w-full lg:w-fit mt-2 pb-16 lg:pb-16">
                   <a
                     href="mailto:andhikarievaldy07@gmail.com"
                     className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
@@ -259,8 +256,8 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* NAVIGASI BAWAH dengan Fungsi handleScroll Presisi & Sliding Pill */}
-              <div className="absolute bottom-[24px] left-[45%] -translate-x-1/2 z-30 flex items-center gap-1 bg-white p-1.5 rounded-full shadow-md">
+              {/* NAVIGASI BAWAH: Fleksibel, di tengah pada HP & absolut pada desktop */}
+              <div className="relative lg:absolute bottom-4 lg:bottom-[24px] left-1/2 lg:left-[45%] -translate-x-1/2 z-30 flex flex-wrap justify-center items-center gap-1 bg-white p-1.5 rounded-full shadow-md mt-6 lg:mt-0">
                 
                 {/* Efek Sliding Pill (Background Hitam) */}
                 <div
@@ -280,7 +277,7 @@ export default function Home() {
                       setActiveMenu(menu.id);
                       handleScroll(e, menu.target);
                     }}
-                    className={`relative z-10 px-4 py-2 rounded-full font-bold text-[12px] transition-colors duration-300 whitespace-nowrap ${
+                    className={`relative z-10 px-3 sm:px-4 py-2 rounded-full font-bold text-[11px] sm:text-[12px] transition-colors duration-300 whitespace-nowrap ${
                       activeMenu === menu.id 
                         ? 'text-white' 
                         : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -291,12 +288,12 @@ export default function Home() {
                 ))}
               </div>
 
-              {/* FOTO HERO PROFILE */}
+              {/* FOTO HERO PROFILE: Transparan/Menyesuaikan di HP, posisi semula di Desktop */}
               {!profileImgError && (
                 <img
                   src="/profile.png"
                   alt="Andhika Rievaldy"
-                  className="absolute bottom-0 right-[40px] w-[318px] h-[380px] object-contain object-bottom z-10 drop-shadow-xl pointer-events-none"
+                  className="absolute bottom-0 right-4 lg:right-[40px] w-[220px] sm:w-[280px] lg:w-[318px] h-auto lg:h-[380px] object-contain object-bottom z-10 opacity-30 lg:opacity-100 drop-shadow-xl pointer-events-none"
                   onError={() => setProfileImgError(true)}
                 />
               )}
@@ -305,14 +302,14 @@ export default function Home() {
             {/* SECTION: ABOUT ME */}
             <section
               id="about"
-              className="mt-[20px] w-full max-w-[1239px] min-h-[205px] h-auto rounded-[28px] bg-white/40 shadow-sm border border-white p-8 flex items-center shrink-0"
+              className="mt-[20px] w-full max-w-[1239px] min-h-[205px] h-auto rounded-[28px] bg-white/40 shadow-sm border border-white p-6 sm:p-8 flex items-center shrink-0"
             >
-              <div className="flex w-full justify-between items-start gap-12">
+              <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-8 lg:gap-12">
                 <div className="flex-1 space-y-2">
                   <span className="text-[12px] font-extrabold text-slate-700 tracking-widest uppercase whitespace-nowrap block">
                     ABOUT ME
                   </span>
-                  <h2 className="text-[28px] font-black text-slate-900 leading-tight whitespace-nowrap">
+                  <h2 className="text-2xl sm:text-[28px] font-black text-slate-900 leading-tight">
                     Rievaldy Andhika Koswara, S.I.Kom
                   </h2>
                   <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify mt-2">
@@ -321,7 +318,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                <div className="w-[350px] shrink-0 flex flex-col gap-3">
+                <div className="w-full lg:w-[350px] shrink-0 flex flex-col gap-3">
                   <span className="text-[12px] font-extrabold text-slate-700 tracking-widest uppercase whitespace-nowrap block">
                     CERTIFICATIONS & LICENSES
                   </span>
@@ -365,12 +362,12 @@ export default function Home() {
               </div>
             </section>
 
-            {/* SECTION: SERVICES & EXPERTISE */}
+            {/* SECTION: SERVICES & EXPERTISE: Responsif 1 kolom (HP), 2 kolom (Tablet), 4 kolom (Desktop) */}
             <section id="services" className="mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
-              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
-                <h2 className="text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">SERVICES & EXPERTISE</h2>
+              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-[20px]">
+                <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">SERVICES & EXPERTISE</h2>
               </div>
-              <div className="grid grid-cols-4 gap-[20px]">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-[20px]">
                 {[
                   {
                     title: 'Social Media Management',
@@ -391,10 +388,9 @@ export default function Home() {
                 ].map((item, idx) => (
                   <div
                     key={idx}
-                    /* PERUBAHAN: w-full menjadi w-[295px] dan min-h-[250px] menjadi min-h-[200px] */
-                    className="w-[295px] h-auto min-h-[200px] rounded-[28px] p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
+                    className="w-full h-auto min-h-[200px] rounded-[28px] p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
                   >
-                    <h3 className="text-[14px] font-bold text-slate-900 leading-snug whitespace-nowrap tracking-tight">
+                    <h3 className="text-[14px] font-bold text-slate-900 leading-snug tracking-tight">
                       {item.title}
                     </h3>
                     <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
@@ -405,13 +401,13 @@ export default function Home() {
               </div>
             </section>
 
-            {/* SECTION: FEATURED PROJECTS */}
+            {/* SECTION: FEATURED PROJECTS: Responsif 1 kolom (HP) & 2 kolom (Desktop) */}
             <section id="work" className="mt-[20px] flex flex-col shrink-0 w-full max-w-[1239px]">
-              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
-                <h2 className="text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">FEATURED PROJECTS</h2>
+              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-[20px]">
+                <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">FEATURED PROJECTS</h2>
               </div>
 
-              <div className="grid grid-cols-2 gap-[20px]">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-[20px]">
                 {[
                   {
                     tag: 'STRATEGY & CONTENT',
@@ -440,13 +436,11 @@ export default function Home() {
                 ].map((proj, idx) => (
                   <div
                     key={idx}
-                    /* Perbaikan 2: Kontainer diubah menjadi flex-row, justify-between, items-center */
-                    className="w-full h-auto min-h-[118px] rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-row items-center justify-between hover:scale-[1.01] transition-transform"
+                    className="w-full h-auto min-h-[118px] rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:scale-[1.01] transition-transform"
                   >
-                    {/* Perbaikan 2: Area Teks di sisi kiri dibungkus dengan flex-1 flex-col gap-2 pr-6 */}
-                    <div className="flex-1 flex flex-col gap-2 pr-6">
+                    <div className="flex-1 flex flex-col gap-2 sm:pr-6">
                       <div>
-                        <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-widest block mb-1 whitespace-nowrap">
+                        <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-widest block mb-1">
                           {proj.tag}
                         </span>
                         <h3 className="text-[16px] font-black text-slate-900 leading-tight">
@@ -458,11 +452,10 @@ export default function Home() {
                       </p>
                     </div>
                     
-                    {/* Perbaikan 2: Tombol diposisikan sebagai elemen kedua (sisi kanan) dengan shrink-0 */}
                     <button
                       type="button"
                       onClick={proj.action}
-                      className="shrink-0 px-4 py-2 rounded-full text-[12px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm whitespace-nowrap"
+                      className="shrink-0 w-full sm:w-auto px-4 py-2 rounded-full text-[12px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm text-center"
                     >
                       See Portfolio
                     </button>
@@ -471,12 +464,12 @@ export default function Home() {
               </div>
             </section>
 
-            {/* SECTION: TOOLS & SOFTWARE PROFICIENCY */}
+            {/* SECTION: TOOLS & SOFTWARE PROFICIENCY: Responsif 1 kolom (HP), 2 kolom (Tablet), 3 kolom (Desktop) */}
             <section id="tools" className="mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
-               <div className="w-full h-[58px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
-                <h2 className="text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">TOOLS & SOFTWARE PROFICIENCY</h2>
-              </div>
-              <div className="grid grid-cols-3 gap-[20px]">
+               <div className="w-full h-[58px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-[20px]">
+                <h2 className="text-[16px] sm:text-[20px] font-black text-slate-900 tracking-wide uppercase">TOOLS & SOFTWARE PROFICIENCY</h2>
+               </div>
+               <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[20px]">
                 {[
                   {
                     name: 'Adobe Photoshop',
@@ -546,19 +539,19 @@ export default function Home() {
 
             {/* SECTION: FOOTER / LET'S CONNECT */}
             <section id="contact" className="mt-[20px] flex shrink-0 w-full max-w-[1239px]">
-              <div className="w-full min-h-[115px] h-auto py-5 rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center justify-between">
+              <div className="w-full min-h-[115px] h-auto py-6 sm:py-5 rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex flex-col lg:flex-row items-start lg:items-center justify-between gap-4">
                 <div>
-                  <span className="text-[11px] font-extrabold text-slate-700 tracking-widest uppercase block whitespace-nowrap mb-1">
+                  <span className="text-[11px] font-extrabold text-slate-700 tracking-widest uppercase block mb-1">
                     LET'S CONNECT
                   </span>
-                  <h2 className="text-[24px] font-black text-slate-900 whitespace-nowrap tracking-tight">
+                  <h2 className="text-xl sm:text-[24px] font-black text-slate-900 tracking-tight">
                     INTERESTED IN WORKING TOGETHER?
                   </h2>
                 </div>
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4 w-full lg:w-auto">
                   <a
                     href="mailto:andhikarievaldy07@gmail.com"
-                    className="px-6 py-2.5 rounded-full text-white font-bold text-[13px] bg-slate-800 hover:bg-slate-900 transition-all shadow-sm whitespace-nowrap"
+                    className="flex-1 sm:flex-none text-center px-6 py-2.5 rounded-full text-white font-bold text-[13px] bg-slate-800 hover:bg-slate-900 transition-all shadow-sm"
                   >
                     Send Email Direct
                   </a>
@@ -566,7 +559,7 @@ export default function Home() {
                     href="https://www.linkedin.com/in/rievaldyandhika/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="px-6 py-2.5 rounded-full text-slate-900 font-bold text-[13px] bg-white hover:bg-slate-50 border border-slate-200 transition-all shadow-sm whitespace-nowrap"
+                    className="flex-1 sm:flex-none text-center px-6 py-2.5 rounded-full text-slate-900 font-bold text-[13px] bg-white hover:bg-slate-50 border border-slate-200 transition-all shadow-sm"
                   >
                     LinkedIn Profile
                   </a>
@@ -579,10 +572,7 @@ export default function Home() {
         {/* VIEW 2: SOCIAL MEDIA MANAGEMENT */}
         {currentView === 'social-media' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div
-              className="p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
-              style={{ width: '100%', maxWidth: '1500px' }}
-            >
+            <div className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden w-full" style={{ maxWidth: '1500px' }}>
               <div className="relative z-10 space-y-6">
                 <div>
                   <button
@@ -602,7 +592,6 @@ export default function Home() {
                   <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
                     Social Media Management
                   </h1>
-
                   <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
                     Kumpulan dokumentasi eksekusi strategi media sosial, penyusunan jadwal konten, penulisan narasi copywriting, serta pengelolaan interaksi merek.
                   </p>
@@ -610,7 +599,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 w-full">
               {[
                 {
                   name: 'Diatera Technology',
@@ -679,8 +668,7 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-8 transition-all duration-300 space-y-5 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden"
-                  style={{ width: '100%' }}
+                  className="p-6 sm:p-8 transition-all duration-300 space-y-5 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden w-full"
                 >
                   <div className="space-y-3 relative z-10">
                     <h2 className="text-[24px] md:text-[32px] font-black text-slate-900 leading-tight">{item.name}</h2>
@@ -707,10 +695,7 @@ export default function Home() {
         {/* VIEW 3: COMMERCIAL PHOTOGRAPHY */}
         {currentView === 'photography' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div
-              className="p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
-              style={{ width: '100%', maxWidth: '1500px' }}
-            >
+            <div className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden w-full" style={{ maxWidth: '1500px' }}>
               <div className="relative z-10 space-y-6">
                 <div>
                   <button
@@ -730,7 +715,6 @@ export default function Home() {
                   <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
                     Commercial Photography
                   </h1>
-
                   <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
                     Pengarahan visual, konsep tata cahaya, dan pengambilan foto komersial produk yang disempurnakan dengan teknik retouching profesional serta color grading Adobe Lightroom.
                   </p>
@@ -738,7 +722,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
               {[
                 {
                   name: 'Product Photography – Glovecare',
@@ -762,8 +746,7 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden"
-                  style={{ width: '100%' }}
+                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden w-full"
                 >
                   <div className="space-y-2.5 relative z-10">
                     <h2 className="text-[18px] md:text-[22px] font-black text-slate-900 leading-snug">{item.name}</h2>
@@ -790,10 +773,7 @@ export default function Home() {
         {/* VIEW 4: VIDEOGRAPHY & VIDEO EDITING */}
         {currentView === 'videography' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div
-              className="p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
-              style={{ width: '100%', maxWidth: '1500px' }}
-            >
+            <div className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden w-full" style={{ maxWidth: '1500px' }}>
               <div className="relative z-10 space-y-6">
                 <div>
                   <button
@@ -813,7 +793,6 @@ export default function Home() {
                   <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
                     Videography & Video Editing
                   </h1>
-
                   <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
                     Produksi dan penyuntingan video komersial, proyek kreatif, serta konten vlogging berbasis penceritaan visual yang dinamis.
                   </p>
@@ -821,7 +800,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
               {[
                 {
                   name: 'Commercial & Brand Project',
@@ -853,8 +832,7 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden"
-                  style={{ width: '100%' }}
+                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden w-full"
                 >
                   <div className="space-y-2.5 relative z-10">
                     <h2 className="text-[18px] md:text-[22px] font-black text-slate-900 leading-snug">{item.name}</h2>
@@ -881,10 +859,7 @@ export default function Home() {
         {/* VIEW 5: GRAPHIC DESIGN & VISUAL CONTENT */}
         {currentView === 'graphic-design' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
-            <div
-              className="p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
-              style={{ width: '100%', maxWidth: '1500px' }}
-            >
+            <div className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden w-full" style={{ maxWidth: '1500px' }}>
               <div className="relative z-10 space-y-6">
                 <div>
                   <button
@@ -904,7 +879,6 @@ export default function Home() {
                   <h1 className="text-[28px] sm:text-[36px] md:text-[42px] font-black text-slate-900 leading-tight">
                     Graphic Design & Visual Content
                   </h1>
-
                   <p className="text-[15px] md:text-[16px] font-normal text-slate-700 leading-relaxed text-justify">
                     Perancangan identitas visual, media promosi seminar, materi e-commerce, filter AR interaktif, serta desain merchandise operasional merek.
                   </p>
@@ -912,7 +886,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-3 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 w-full">
               {[
                 {
                   name: 'Banner Seminar – Esa Unggul University',
@@ -1021,8 +995,7 @@ export default function Home() {
               ].map((item, idx) => (
                 <div
                   key={idx}
-                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden"
-                  style={{ width: '100%' }}
+                  className="p-6 sm:p-7 transition-all duration-300 space-y-4 flex flex-col justify-between liquid-glass-3d hover:scale-[1.015] overflow-hidden w-full"
                 >
                   <div className="space-y-2.5 relative z-10">
                     <h2 className="text-[18px] md:text-[22px] font-black text-slate-900 leading-snug">{item.name}</h2>
@@ -1243,7 +1216,7 @@ export default function Home() {
               ) : (
                 <div className="w-full space-y-5">
                   {activePreview.mediaList && activePreview.mediaList.length > 0 ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 max-h-[65vh] overflow-y-auto p-4 bg-white/30 backdrop-blur-xl rounded-3xl border border-white/60 shadow-inner">
+                    <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 gap-4 max-h-[65vh] overflow-y-auto p-4 bg-white/30 backdrop-blur-xl rounded-3xl border border-white/60 shadow-inner">
                       {activePreview.mediaList.map((file, i) => (
                         <div
                           key={i}

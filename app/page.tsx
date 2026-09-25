@@ -348,10 +348,9 @@ export default function Home() {
                 ].map((item, idx) => (
                   <div
                     key={idx}
-                    /* Perbaikan 1: Gunakan h-auto, min-h-[250px], padding p-7, dan flex-col gap-4 */
-                    className="w-full h-auto min-h-[250px] rounded-[28px] p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
+                    /* PERUBAHAN: w-full menjadi w-[295px] dan min-h-[250px] menjadi min-h-[200px] */
+                    className="w-[295px] h-auto min-h-[200px] rounded-[28px] p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
                   >
-                    {/* Perbaikan 1: Font dikecilkan ke text-[14px], ditambah whitespace-nowrap dan tracking-tight */}
                     <h3 className="text-[14px] font-bold text-slate-900 leading-snug whitespace-nowrap tracking-tight">
                       {item.title}
                     </h3>

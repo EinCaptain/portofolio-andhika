@@ -364,6 +364,47 @@ export default function Home() {
               </div>
             </section>
 
+            {/* SECTION: SERVICES & EXPERTISE */}
+            <section id="services" className="mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
+              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
+                <h2 className="text-[20px] font-black text-slate-900 whitespace-nowrap tracking-wide uppercase">SERVICES & EXPERTISE</h2>
+              </div>
+              <div className="grid grid-cols-4 gap-[20px]">
+                {[
+                  {
+                    title: 'Social Media Management',
+                    desc: 'Penyusunan content planner, pengelolaan kanal media sosial harian, penulisan copywriting yang persuasif, dan strategi peningkatan interaksi audiens.'
+                  },
+                  {
+                    title: 'Graphic Design & Visual Content',
+                    desc: 'Perancangan graphic design untuk kebutuhan konten media sosial, materi promosi digital, dan penguatan identitas visual produk.'
+                  },
+                  {
+                    title: 'Commercial Photography',
+                    desc: 'Pengambilan foto produk komersial dan penyuntingan warna (photo editing) secara mendetail menggunakan Adobe Lightroom untuk estetika visual merek.'
+                  },
+                  {
+                    title: 'Videography & Video Editing',
+                    desc: 'Produksi konten video dari tahap pengambilan gambar (videography) hingga penyuntingan akhir (video editing) menggunakan CapCut dan Adobe Premiere Pro.'
+                  }
+                ].map((item, idx) => (
+                  <div
+                    key={idx}
+                    /* Perbaikan 1: Gunakan h-auto, min-h-[250px], padding p-7, dan flex-col gap-4 */
+                    className="w-full h-auto min-h-[250px] rounded-[28px] p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
+                  >
+                    {/* Perbaikan 1: Font dikecilkan ke text-[14px], ditambah whitespace-nowrap dan tracking-tight */}
+                    <h3 className="text-[14px] font-bold text-slate-900 leading-snug whitespace-nowrap tracking-tight">
+                      {item.title}
+                    </h3>
+                    <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
+                      {item.desc}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </section>
+
             {/* SECTION: FEATURED PROJECTS */}
             <section id="work" className="mt-[20px] flex flex-col shrink-0 w-full max-w-[1239px]">
               <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-[20px]">
@@ -399,36 +440,32 @@ export default function Home() {
                 ].map((proj, idx) => (
                   <div
                     key={idx}
-                    /* Perbaikan Tinggi Card: h-auto min-h-[118px] p-6 */
-                    className="w-full h-auto min-h-[118px] rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col justify-between hover:scale-[1.01] transition-transform"
+                    /* Perbaikan 2: Kontainer diubah menjadi flex-row, justify-between, items-center */
+                    className="w-full h-auto min-h-[118px] rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-row items-center justify-between hover:scale-[1.01] transition-transform"
                   >
-                    {/* Bagian Atas: Kategori & Judul */}
-                    <div className="flex flex-col">
-                      <span className="text-[11px] font-extrabold text-slate-700 uppercase tracking-widest block mb-1 whitespace-nowrap">
-                        {proj.tag}
-                      </span>
-                      {/* Perbaikan Font Judul: text-[16px] agar rapi di satu baris */}
-                      <h3 className="text-[16px] font-black text-slate-900 leading-tight">
-                        {proj.name}
-                      </h3>
-                    </div>
-                    
-                    {/* Perbaikan Layout Bawah: Teks di Kiri, Tombol di Kanan */}
-                    <div className="flex flex-row items-end justify-between gap-4 mt-2">
-                      {/* flex-1 agar teks mengisi ruang kosong */}
-                      <p className="flex-1 text-[12px] font-normal text-slate-700 leading-relaxed text-justify">
+                    {/* Perbaikan 2: Area Teks di sisi kiri dibungkus dengan flex-1 flex-col gap-2 pr-6 */}
+                    <div className="flex-1 flex flex-col gap-2 pr-6">
+                      <div>
+                        <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-widest block mb-1 whitespace-nowrap">
+                          {proj.tag}
+                        </span>
+                        <h3 className="text-[16px] font-black text-slate-900 leading-tight">
+                          {proj.name}
+                        </h3>
+                      </div>
+                      <p className="text-[12px] font-normal text-slate-700 leading-relaxed text-justify">
                         {proj.desc}
                       </p>
-                      
-                      {/* shrink-0 agar tombol tidak gepeng ditekan oleh teks */}
-                      <button
-                        type="button"
-                        onClick={proj.action}
-                        className="shrink-0 px-5 py-2 rounded-full text-[12px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm whitespace-nowrap"
-                      >
-                        See Portfolio
-                      </button>
                     </div>
+                    
+                    {/* Perbaikan 2: Tombol diposisikan sebagai elemen kedua (sisi kanan) dengan shrink-0 */}
+                    <button
+                      type="button"
+                      onClick={proj.action}
+                      className="shrink-0 px-4 py-2 rounded-full text-[12px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm whitespace-nowrap"
+                    >
+                      See Portfolio
+                    </button>
                   </div>
                 ))}
               </div>

@@ -348,13 +348,14 @@ export default function Home() {
                 ].map((item, idx) => (
                   <div
                     key={idx}
-                    className="w-full min-h-[257px] h-full rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col justify-center gap-3 hover:scale-[1.02] transition-transform"
+                    /* Perbaikan: h-auto min-h-[257px] dan justify-start agar tidak kaku */
+                    className="w-full h-auto min-h-[257px] rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col justify-start gap-3 hover:scale-[1.02] transition-transform"
                   >
-                    {/* Perbaikan Font: text-[15px] dan ditambahkan truncate agar 1 baris */}
-                    <h3 className="text-[15px] font-bold text-slate-900 leading-snug truncate">
+                    {/* Perbaikan Font Judul: text-[15px] md:text-[16px] leading-tight font-black (tanpa truncate agar rapi jika turun 1 baris) */}
+                    <h3 className="text-[15px] md:text-[16px] leading-tight font-black text-slate-900">
                       {item.title}
                     </h3>
-                    {/* Perbaikan Teks: text-[12px] agar teks justify terlihat padat dan rapi */}
+                    {/* Perbaikan Teks Deskripsi: text-[12px] text-justify leading-relaxed */}
                     <p className="text-[12px] font-normal text-slate-700 leading-relaxed text-justify">
                       {item.desc}
                     </p>
@@ -396,29 +397,34 @@ export default function Home() {
                     action: goToVideography
                   }
                 ].map((proj, idx) => (
-                  /* Komentar dipindahkan ke atas agar tidak error di dalam tag pembuka */
-                  /* Perbaikan Layout: min-h-[160px], h-full, dan flex-col justify-between */
                   <div
                     key={idx}
-                    className="w-full min-h-[160px] h-full rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col justify-between hover:scale-[1.01] transition-transform"
+                    /* Perbaikan Tinggi Card: h-auto min-h-[118px] p-6 */
+                    className="w-full h-auto min-h-[118px] rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col justify-between hover:scale-[1.01] transition-transform"
                   >
+                    {/* Bagian Atas: Kategori & Judul */}
                     <div className="flex flex-col">
                       <span className="text-[11px] font-extrabold text-slate-700 uppercase tracking-widest block mb-1 whitespace-nowrap">
                         {proj.tag}
                       </span>
-                      <h3 className="text-[18px] font-black text-slate-900 leading-tight">{proj.name}</h3>
-                      
-                      <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify mt-3">
-                        {proj.desc}
-                      </p>
+                      {/* Perbaikan Font Judul: text-[16px] agar rapi di satu baris */}
+                      <h3 className="text-[16px] font-black text-slate-900 leading-tight">
+                        {proj.name}
+                      </h3>
                     </div>
                     
-                    {/* Perbaikan Tombol: Dibungkus dengan flex justify-end dan mt-4 agar dorong ke pojok */}
-                    <div className="w-full flex justify-end mt-4">
+                    {/* Perbaikan Layout Bawah: Teks di Kiri, Tombol di Kanan */}
+                    <div className="flex flex-row items-end justify-between gap-4 mt-2">
+                      {/* flex-1 agar teks mengisi ruang kosong */}
+                      <p className="flex-1 text-[12px] font-normal text-slate-700 leading-relaxed text-justify">
+                        {proj.desc}
+                      </p>
+                      
+                      {/* shrink-0 agar tombol tidak gepeng ditekan oleh teks */}
                       <button
                         type="button"
                         onClick={proj.action}
-                        className="px-5 py-2 rounded-full text-[12px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm whitespace-nowrap"
+                        className="shrink-0 px-5 py-2 rounded-full text-[12px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm whitespace-nowrap"
                       >
                         See Portfolio
                       </button>

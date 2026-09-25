@@ -348,15 +348,14 @@ export default function Home() {
                 ].map((item, idx) => (
                   <div
                     key={idx}
-                    /* Perbaikan: h-auto min-h-[257px] dan justify-start agar tidak kaku */
-                    className="w-full h-auto min-h-[257px] rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-col justify-start gap-3 hover:scale-[1.02] transition-transform"
+                    /* Perbaikan 1: Gunakan h-auto, min-h-[250px], padding p-7, dan flex-col gap-4 */
+                    className="w-full h-auto min-h-[250px] rounded-[28px] p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
                   >
-                    {/* Perbaikan Font Judul: text-[15px] md:text-[16px] leading-tight font-black (tanpa truncate agar rapi jika turun 1 baris) */}
-                    <h3 className="text-[15px] md:text-[16px] leading-tight font-black text-slate-900">
+                    {/* Perbaikan 1: Font dikecilkan ke text-[14px], ditambah whitespace-nowrap dan tracking-tight */}
+                    <h3 className="text-[14px] font-bold text-slate-900 leading-snug whitespace-nowrap tracking-tight">
                       {item.title}
                     </h3>
-                    {/* Perbaikan Teks Deskripsi: text-[12px] text-justify leading-relaxed */}
-                    <p className="text-[12px] font-normal text-slate-700 leading-relaxed text-justify">
+                    <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
                       {item.desc}
                     </p>
                   </div>

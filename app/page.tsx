@@ -93,12 +93,12 @@ export default function Home() {
   const navRefs = React.useRef<(HTMLAnchorElement | null)[]>([]);
 
   const navMenus = React.useMemo(() => [
-    { id: 'home', label: 'Home', target: 'home' },
-    { id: 'about', label: 'About', target: 'about' },
-    { id: 'services', label: 'Services', target: 'services' },
-    { id: 'work', label: 'Work', target: 'work' },
-    { id: 'tools', label: 'Software', target: 'tools' },
-    { id: 'contact', label: 'Links', target: 'contact' },
+    { id: 'home', label: 'Home', target: 'home-about' },
+    { id: 'about', label: 'About', target: 'home-about' },
+    { id: 'services', label: 'Services', target: 'services-work' },
+    { id: 'work', label: 'Work', target: 'services-work' },
+    { id: 'tools', label: 'Software', target: 'software-links' },
+    { id: 'contact', label: 'Links', target: 'software-links' },
   ], []);
 
   React.useEffect(() => {
@@ -118,7 +118,7 @@ export default function Home() {
     return () => window.removeEventListener('resize', updatePill);
   }, [activeMenu, navMenus]);
 
-  // FUNGSI SMOOTH SCROLL
+  // FUNGSI SMOOTH SCROLL DENGAN TARGET ID YANG DISESUAIKAN
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     if (currentView !== 'main') {
@@ -183,389 +183,398 @@ export default function Home() {
       className="min-h-screen text-slate-900 font-sans antialiased relative selection:bg-slate-900 selection:text-white"
       style={{ backgroundColor: '#E2E8F0', overflowX: 'hidden' }}
     >
-      {/* MAIN CONTAINER RESPONSIF */}
-      <div className="w-full max-w-[1440px] min-h-screen mx-auto py-8 px-4 sm:py-16 sm:px-8 lg:py-[130px] lg:px-[100px] flex flex-col relative z-10">
+      {/* MAIN CONTAINER UTAMA: Lebar 1440px dan Tinggi 2355px */}
+      <div className="w-[1440px] h-[2355px] mx-auto py-8 px-4 sm:py-16 sm:px-8 lg:py-[130px] lg:px-[100px] flex flex-col relative z-10">
         
         {/* VIEW 1: BERANDA UTAMA */}
         {currentView === 'main' && (
           <>
-            {/* SECTION: HEADER RESPONSIF */}
-            <section
-              id="home"
-              className="w-full max-w-[1239px] h-auto min-h-screen sm:min-h-[430px] rounded-[28px] relative bg-[#f1f5f9] flex flex-col md:flex-row px-6 py-8 sm:px-[50px] sm:py-[40px] overflow-hidden shrink-0 shadow-sm border border-white"
-            >
-              {/* AREA KIRI: TEKS JUDUL & KONTAK INFO */}
-              <div className="flex flex-col justify-start gap-4 sm:gap-6 z-20 w-full relative pb-20 sm:pb-24 md:pb-16">
-                
-                {/* Teks Judul */}
-                <div className="flex flex-col">
-                  <div className="text-slate-700 font-extrabold text-[11px] sm:text-[12px] tracking-widest uppercase mb-2 leading-none">
-                    MARKETING COMMUNICATION
-                  </div>
-                  <h1 className="text-4xl sm:text-5xl lg:text-[64px] font-black text-slate-900 tracking-tight leading-[1.1] whitespace-normal sm:whitespace-nowrap">
-                    ANDHIKA <br />
-                    RIEVALDY
-                  </h1>
-                </div>
-
-                {/* Grid Info Kontak */}
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full sm:w-fit mt-2">
-                  <a
-                    href="mailto:andhikarievaldy07@gmail.com"
-                    className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
-                  >
-                    <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                    </svg>
-                    <span className="text-slate-900 font-bold text-[13px] truncate">andhikarievaldy07@gmail.com</span>
-                  </a>
-
-                  <a
-                    href="https://www.linkedin.com/in/rievaldyandhika/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
-                  >
-                    <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-                      <rect x="2" y="9" width="4" height="12" />
-                      <circle cx="4" cy="4" r="2" />
-                    </svg>
-                    <span className="text-slate-900 font-bold text-[13px] truncate">linkedin.com/in/rievaldyandhika</span>
-                  </a>
-
-                  <a
-                    href="https://wa.me/6285179770217"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
-                  >
-                    <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                    </svg>
-                    <span className="text-slate-900 font-bold text-[13px] truncate">+62 851-7977-0217</span>
-                  </a>
-
-                  <div className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white border border-slate-100 shadow-sm select-none">
-                    <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                      <circle cx="12" cy="10" r="3" />
-                    </svg>
-                    <span className="text-slate-900 font-bold text-[13px] truncate">Tangerang, Indonesia</span>
-                  </div>
-                </div>
-              </div>
-
-              {/* NAVIGASI BAWAH DENGAN EFEK SLIDING PILL (Responsif Wrap/Overflow) */}
-              <div className="absolute bottom-4 left-1/2 -translate-x-1/2 md:left-[45%] md:-translate-x-1/2 z-30 flex items-center gap-1 bg-white p-1.5 rounded-full shadow-md max-w-[95%] overflow-x-auto">
-                
-                {/* Efek Sliding Pill Background Hitam */}
-                <div
-                  className="absolute top-1.5 bottom-1.5 bg-slate-900 rounded-full transition-all duration-300 ease-in-out shadow-sm"
-                  style={{ left: `${pillStyle.left}px`, width: `${pillStyle.width}px` }}
-                />
-
-                {/* Tombol Menu Navigasi Dinamis */}
-                {navMenus.map((menu, index) => (
-                  <a
-                    key={menu.id}
-                    href={`#${menu.id}`}
-                    ref={(el) => {
-                      navRefs.current[index] = el;
-                    }}
-                    onClick={(e) => {
-                      setActiveMenu(menu.id);
-                      handleScroll(e, menu.target);
-                    }}
-                    className={`relative z-10 px-3 sm:px-4 py-2 rounded-full font-bold text-[11px] sm:text-[12px] transition-colors duration-300 whitespace-nowrap ${
-                      activeMenu === menu.id 
-                        ? 'text-white' 
-                        : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
-                    }`}
-                  >
-                    {menu.label}
-                  </a>
-                ))}
-              </div>
-
-              {/* FOTO HERO PROFILE (Responsif: Di HP tampil kecil wajar di bawah/tengah, di md+ absolute kanan bawah) */}
-              {!profileImgError && (
-                <img
-                  src="/profile.png"
-                  alt="Andhika Rievaldy"
-                  className="mt-6 mx-auto md:mt-0 md:absolute md:bottom-0 md:right-[40px] w-40 h-48 sm:w-48 sm:h-56 md:w-[318px] md:h-[380px] object-contain object-bottom z-10 drop-shadow-xl pointer-events-none"
-                  onError={() => setProfileImgError(true)}
-                />
-              )}
-            </section>
-
-            {/* SECTION: ABOUT ME */}
-            <section
-              id="about"
-              className="mt-5 w-full max-w-[1239px] min-h-[205px] h-auto rounded-[28px] bg-white/40 shadow-sm border border-white p-6 sm:p-8 flex items-center shrink-0"
-            >
-              <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-8 lg:gap-12">
-                <div className="flex-1 space-y-2">
-                  <span className="text-[12px] font-extrabold text-slate-700 tracking-widest uppercase whitespace-nowrap block">
-                    ABOUT ME
-                  </span>
-                  <h2 className="text-2xl sm:text-[28px] font-black text-slate-900 leading-tight">
-                    Rievaldy Andhika Koswara, S.I.Kom
-                  </h2>
-                  <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify mt-2">
-                    Saya adalah lulusan Marketing Communication yang berfokus pada penguatan identitas merek dan eksekusi strategi media digital.
-                    Berpengalaman dalam merangkai narasi merek, memproduksi konten kreatif, serta mengoptimalkan performa kanal digital untuk membangun hubungan bermakna dengan target audiens.
-                  </p>
-                </div>
-
-                <div className="w-full lg:w-[350px] shrink-0 flex flex-col gap-3">
-                  <span className="text-[12px] font-extrabold text-slate-700 tracking-widest uppercase whitespace-nowrap block">
-                    CERTIFICATIONS & LICENSES
-                  </span>
-
-                  <button
-                    type="button"
-                    onClick={() => openCert('Sertifikat LSP BNSP', '/certificates/sertifikat-bnsp.pdf', 'pdf')}
-                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm cursor-pointer transition-all"
-                  >
-                    <div className="flex items-center gap-3">
-                      <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 15l-2 5l2-1.5l2 1.5l-2-5" />
-                        <circle cx="12" cy="9" r="6" />
-                      </svg>
-                      <span className="font-bold text-[13px] text-slate-900 whitespace-nowrap">Sertifikat LSP BNSP</span>
+            {/* AREA ATAS: (Home & About Me) - Tinggi ±785px */}
+            <div id="home-about" className="flex flex-col w-full shrink-0">
+              {/* SECTION: HEADER */}
+              <section
+                id="home"
+                className="w-full max-w-[1239px] h-auto min-h-screen sm:min-h-[430px] rounded-[28px] relative bg-[#f1f5f9] flex flex-col md:flex-row px-6 py-8 sm:px-[50px] sm:py-[40px] overflow-hidden shrink-0 shadow-sm border border-white"
+              >
+                {/* AREA KIRI: TEKS JUDUL & KONTAK INFO */}
+                <div className="flex flex-col justify-start gap-4 sm:gap-6 z-20 w-full relative pb-20 sm:pb-24 md:pb-16">
+                  
+                  {/* Teks Judul */}
+                  <div className="flex flex-col">
+                    <div className="text-slate-700 font-extrabold text-[11px] sm:text-[12px] tracking-widest uppercase mb-2 leading-none">
+                      MARKETING COMMUNICATION
                     </div>
-                    <svg width="16" height="16" className="text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </button>
+                    <h1 className="text-4xl sm:text-5xl lg:text-[64px] font-black text-slate-900 tracking-tight leading-[1.1] whitespace-normal sm:whitespace-nowrap">
+                      ANDHIKA <br />
+                      RIEVALDY
+                    </h1>
+                  </div>
 
-                  <button
-                    type="button"
-                    onClick={() => openCert('Sertifikat Digital Marketing RevoU', '/certificates/sertifikat-revou.pdf', 'pdf')}
-                    className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm cursor-pointer transition-all"
-                  >
-                    <div className="flex items-center gap-3">
+                  {/* Grid Info Kontak */}
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4 w-full sm:w-fit mt-2">
+                    <a
+                      href="mailto:andhikarievaldy07@gmail.com"
+                      className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
+                    >
                       <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                        <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
+                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
-                      <span className="font-bold text-[13px] text-slate-900 whitespace-nowrap">Sertifikat Digital Marketing RevoU</span>
-                    </div>
-                    <svg width="16" height="16" className="text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </button>
-                </div>
-              </div>
-            </section>
+                      <span className="text-slate-900 font-bold text-[13px] truncate">andhikarievaldy07@gmail.com</span>
+                    </a>
 
-            {/* SECTION: SERVICES & EXPERTISE (Responsif: 1 col di HP, 2 col di Tablet, 4 col di Desktop) */}
-            <section id="services" className="mt-10 sm:mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
-              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-5">
-                <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 tracking-wide uppercase">SERVICES & EXPERTISE</h2>
-              </div>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
-                {[
-                  {
-                    title: 'Social Media Management',
-                    desc: 'Penyusunan content planner, pengelolaan kanal media sosial harian, penulisan copywriting yang persuasif, dan strategi peningkatan interaksi audiens.'
-                  },
-                  {
-                    title: 'Graphic Design & Visual Content',
-                    desc: 'Perancangan graphic design untuk kebutuhan konten media sosial, materi promosi digital, dan penguatan identitas visual produk.'
-                  },
-                  {
-                    title: 'Commercial Photography',
-                    desc: 'Pengambilan foto produk komersial dan penyuntingan warna (photo editing) secara mendetail menggunakan Adobe Lightroom untuk estetika visual merek.'
-                  },
-                  {
-                    title: 'Videography & Video Editing',
-                    desc: 'Produksi konten video dari tahap pengambilan gambar (videography) hingga penyuntingan akhir (video editing) menggunakan CapCut dan Adobe Premiere Pro.'
-                  }
-                ].map((item, idx) => (
+                    <a
+                      href="https://www.linkedin.com/in/rievaldyandhika/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
+                    >
+                      <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
+                        <rect x="2" y="9" width="4" height="12" />
+                        <circle cx="4" cy="4" r="2" />
+                      </svg>
+                      <span className="text-slate-900 font-bold text-[13px] truncate">linkedin.com/in/rievaldyandhika</span>
+                    </a>
+
+                    <a
+                      href="https://wa.me/6285179770217"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
+                    >
+                      <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+                      </svg>
+                      <span className="text-slate-900 font-bold text-[13px] truncate">+62 851-7977-0217</span>
+                    </a>
+
+                    <div className="flex items-center gap-2.5 px-4 sm:px-5 py-3 rounded-2xl bg-white border border-slate-100 shadow-sm select-none">
+                      <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                      </svg>
+                      <span className="text-slate-900 font-bold text-[13px] truncate">Tangerang, Indonesia</span>
+                    </div>
+                  </div>
+                </div>
+
+                {/* NAVIGASI BAWAH DENGAN EFEK SLIDING PILL */}
+                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 md:left-[45%] md:-translate-x-1/2 z-30 flex items-center gap-1 bg-white p-1.5 rounded-full shadow-md max-w-[95%] overflow-x-auto">
+                  
+                  {/* Efek Sliding Pill Background Hitam */}
                   <div
-                    key={idx}
-                    className="w-full h-auto min-h-[200px] rounded-[28px] p-6 sm:p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
-                  >
-                    <h3 className="text-[14px] font-bold text-slate-900 leading-snug tracking-tight">
-                      {item.title}
-                    </h3>
-                    <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
-                      {item.desc}
+                    className="absolute top-1.5 bottom-1.5 bg-slate-900 rounded-full transition-all duration-300 ease-in-out shadow-sm"
+                    style={{ left: `${pillStyle.left}px`, width: `${pillStyle.width}px` }}
+                  />
+
+                  {/* Tombol Menu Navigasi Dinamis */}
+                  {navMenus.map((menu, index) => (
+                    <a
+                      key={menu.id}
+                      href={`#${menu.id}`}
+                      ref={(el) => {
+                        navRefs.current[index] = el;
+                      }}
+                      onClick={(e) => {
+                        setActiveMenu(menu.id);
+                        handleScroll(e, menu.target);
+                      }}
+                      className={`relative z-10 px-3 sm:px-4 py-2 rounded-full font-bold text-[11px] sm:text-[12px] transition-colors duration-300 whitespace-nowrap ${
+                        activeMenu === menu.id 
+                          ? 'text-white' 
+                          : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
+                      }`}
+                    >
+                      {menu.label}
+                    </a>
+                  ))}
+                </div>
+
+                {/* FOTO HERO PROFILE */}
+                {!profileImgError && (
+                  <img
+                    src="/profile.png"
+                    alt="Andhika Rievaldy"
+                    className="mt-6 mx-auto md:mt-0 md:absolute md:bottom-0 md:right-[40px] w-40 h-48 sm:w-48 sm:h-56 md:w-[318px] md:h-[380px] object-contain object-bottom z-10 drop-shadow-xl pointer-events-none"
+                    onError={() => setProfileImgError(true)}
+                  />
+                )}
+              </section>
+
+              {/* SECTION: ABOUT ME */}
+              <section
+                id="about"
+                className="mt-5 w-full max-w-[1239px] min-h-[205px] h-auto rounded-[28px] bg-white/40 shadow-sm border border-white p-6 sm:p-8 flex items-center shrink-0"
+              >
+                <div className="flex flex-col lg:flex-row w-full justify-between items-start gap-8 lg:gap-12">
+                  <div className="flex-1 space-y-2">
+                    <span className="text-[12px] font-extrabold text-slate-700 tracking-widest uppercase whitespace-nowrap block">
+                      ABOUT ME
+                    </span>
+                    <h2 className="text-2xl sm:text-[28px] font-black text-slate-900 leading-tight">
+                      Rievaldy Andhika Koswara, S.I.Kom
+                    </h2>
+                    <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify mt-2">
+                      Saya adalah lulusan Marketing Communication yang berfokus pada penguatan identitas merek dan eksekusi strategi media digital.
+                      Berpengalaman dalam merangkai narasi merek, memproduksi konten kreatif, serta mengoptimalkan performa kanal digital untuk membangun hubungan bermakna dengan target audiens.
                     </p>
                   </div>
-                ))}
-              </div>
-            </section>
 
-            {/* SECTION: FEATURED PROJECTS (Responsif: 1 col di HP, 2 col di Desktop) */}
-            <section id="work" className="mt-5 flex flex-col shrink-0 w-full max-w-[1239px]">
-              <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-5">
-                <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 tracking-wide uppercase">FEATURED PROJECTS</h2>
-              </div>
+                  <div className="w-full lg:w-[350px] shrink-0 flex flex-col gap-3">
+                    <span className="text-[12px] font-extrabold text-slate-700 tracking-widest uppercase whitespace-nowrap block">
+                      CERTIFICATIONS & LICENSES
+                    </span>
 
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
-                {[
-                  {
-                    tag: 'STRATEGY & CONTENT',
-                    name: 'Social Media Management',
-                    desc: 'Menyusun content planner, penulisan copywriting persuasif, serta pengelolaan kanal media sosial harian untuk membangun interaksi dan pertumbuhan engagement audiens.',
-                    action: goToSocialMedia
-                  },
-                  {
-                    tag: 'GRAPHIC & BRANDING',
-                    name: 'Graphic Design & Visual Content',
-                    desc: 'Perancangan elemen grafis dan materi promosi visual yang konsisten untuk kebutuhan konten media sosial, publikasi digital, serta penguatan identitas produk.',
-                    action: goToGraphicDesign
-                  },
-                  {
-                    tag: 'VISUAL & RETOUCHING',
-                    name: 'Commercial Photography',
-                    desc: 'Pengarahan estetika visual dan pengambilan foto produk komersial, disempurnakan dengan teknik retouching serta color grading menggunakan Adobe Lightroom.',
-                    action: goToPhotography
-                  },
-                  {
-                    tag: 'VIDEO PRODUCTION',
-                    name: 'Videography & Video Editing',
-                    desc: 'Produksi konten video dari proses pengambilan gambar hingga penyuntingan akhir (video editing) menggunakan Adobe Premiere Pro dan CapCut untuk hasil yang dinamis.',
-                    action: goToVideography
-                  }
-                ].map((proj, idx) => (
-                  <div
-                    key={idx}
-                    className="w-full h-auto min-h-[118px] rounded-[28px] p-5 sm:p-6 bg-white/40 shadow-sm border border-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:scale-[1.01] transition-transform"
-                  >
-                    <div className="flex-1 flex flex-col gap-2 sm:pr-6">
-                      <div>
-                        <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-widest block mb-1">
-                          {proj.tag}
-                        </span>
-                        <h3 className="text-[16px] font-black text-slate-900 leading-tight">
-                          {proj.name}
-                        </h3>
-                      </div>
-                      <p className="text-[12px] font-normal text-slate-700 leading-relaxed text-justify">
-                        {proj.desc}
-                      </p>
-                    </div>
-                    
                     <button
                       type="button"
-                      onClick={proj.action}
-                      className="w-full sm:w-auto shrink-0 px-4 py-2 rounded-full text-[12px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm whitespace-nowrap text-center"
+                      onClick={() => openCert('Sertifikat LSP BNSP', '/certificates/sertifikat-bnsp.pdf', 'pdf')}
+                      className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm cursor-pointer transition-all"
                     >
-                      See Portfolio
+                      <div className="flex items-center gap-3">
+                        <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M12 15l-2 5l2-1.5l2 1.5l-2-5" />
+                          <circle cx="12" cy="9" r="6" />
+                        </svg>
+                        <span className="font-bold text-[13px] text-slate-900 whitespace-nowrap">Sertifikat LSP BNSP</span>
+                      </div>
+                      <svg width="16" height="16" className="text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
+                    </button>
+
+                    <button
+                      type="button"
+                      onClick={() => openCert('Sertifikat Digital Marketing RevoU', '/certificates/sertifikat-revou.pdf', 'pdf')}
+                      className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm cursor-pointer transition-all"
+                    >
+                      <div className="flex items-center gap-3">
+                        <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                          <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                          <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
+                        </svg>
+                        <span className="font-bold text-[13px] text-slate-900 whitespace-nowrap">Sertifikat Digital Marketing RevoU</span>
+                      </div>
+                      <svg width="16" height="16" className="text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <line x1="5" y1="12" x2="19" y2="12" />
+                        <polyline points="12 5 19 12 12 19" />
+                      </svg>
                     </button>
                   </div>
-                ))}
-              </div>
-            </section>
+                </div>
+              </section>
+            </div>
 
-            {/* SECTION: TOOLS & SOFTWARE PROFICIENCY (Responsif: 1 col di HP, 2 col di Tablet, 3 col di Desktop) */}
-            <section id="tools" className="mt-10 sm:mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
-               <div className="w-full h-auto sm:h-[58px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 py-3 sm:py-0 flex items-center mb-5">
-                <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 tracking-wide uppercase">TOOLS & SOFTWARE PROFICIENCY</h2>
-               </div>
-               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
-                {[
-                  {
-                    name: 'Adobe Photoshop',
-                    category: 'Visual & Retouching',
-                    desc: 'Pengolahan dan retouching foto komersial, manipulasi gambar terdistribusi, serta penyempurnaan estetika materi promosi digital.'
-                  },
-                  {
-                    name: 'Adobe Illustrator',
-                    category: 'Vector & Graphic Design',
-                    desc: 'Perancangan aset vektor, desain logo utama, tata letak konten grafik, dan pembuatan komponen identitas visual merek.'
-                  },
-                  {
-                    name: 'Adobe Premiere Pro',
-                    category: 'Video Production',
-                    desc: 'Penyuntingan video komersial lanskap, perangkaian alur cerita sinematik, penyelarasan audio, dan teknik color grading.'
-                  },
-                  {
-                    name: 'Canva Pro',
-                    category: 'Fast Visual Design',
-                    desc: 'Penyusunan materi desain cepat untuk konten harian media sosial, infografis presentasi, dan kolaborasi tata letak promosi.'
-                  },
-                  {
-                    name: 'CapCut Pro',
-                    category: 'Short-Form Video Editing',
-                    desc: 'Produksi dan penyuntingan konten video pendek (Reels, TikTok, & Short) dengan alur transisi dinamis, efek teks, dan tren audio.'
-                  },
-                  {
-                    name: 'Meta Spark Studio',
-                    category: 'Augmented Reality (AR)',
-                    desc: 'Pengembangan filter AR interaktif untuk kebutuhan liputan acara secara langsung (live report) guna meningkatkan engagement audiens.'
-                  },
-                  {
-                    name: 'Meta Business Suite',
-                    category: 'Social Media Operations',
-                    desc: 'Manajemen penjadwalan publikasi konten Instagram & Facebook, pemantauan matriks performa, serta manajemen interaksi audiens.'
-                  },
-                  {
-                    name: 'Google Docs',
-                    category: 'Copywriting & Planning',
-                    desc: 'Penyusunan naskah copywriting, pembuatan kalender konten terstruktur, pengerjaan creative brief, serta dokumentasi strategi narasi.'
-                  },
-                  {
-                    name: 'Google Sheets',
-                    category: 'Analytics & Reporting',
-                    desc: 'Pengolahan dan analisis data Key Performance Indicator (KPI) kampanye digital, pemetaaan basis data, serta pelaporan performa media.'
-                  }
-                ].map((tool, idx) => (
-                  <div
-                    key={idx}
-                    className="w-full min-h-[128px] h-full rounded-[18px] p-5 bg-white/40 shadow-sm border border-white flex flex-col justify-center hover:scale-[1.02] transition-transform gap-1.5"
-                  >
-                    <div className="flex items-start justify-between mb-1 gap-2">
-                       <h3 className="text-[15px] font-bold text-slate-900 leading-tight">
-                        {tool.name}
+            {/* AREA TENGAH: (Services & Featured Projects) - Tinggi ±1570px */}
+            <div id="services-work" className="flex flex-col w-full shrink-0">
+              {/* SECTION: SERVICES & EXPERTISE */}
+              <section id="services" className="mt-10 sm:mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
+                <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-5">
+                  <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 tracking-wide uppercase">SERVICES & EXPERTISE</h2>
+                </div>
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5">
+                  {[
+                    {
+                      title: 'Social Media Management',
+                      desc: 'Penyusunan content planner, pengelolaan kanal media sosial harian, penulisan copywriting yang persuasif, dan strategi peningkatan interaksi audiens.'
+                    },
+                    {
+                      title: 'Graphic Design & Visual Content',
+                      desc: 'Perancangan graphic design untuk kebutuhan konten media sosial, materi promosi digital, dan penguatan identitas visual produk.'
+                    },
+                    {
+                      title: 'Commercial Photography',
+                      desc: 'Pengambilan foto produk komersial dan penyuntingan warna (photo editing) secara mendetail menggunakan Adobe Lightroom untuk estetika visual merek.'
+                    },
+                    {
+                      title: 'Videography & Video Editing',
+                      desc: 'Produksi konten video dari tahap pengambilan gambar (videography) hingga penyuntingan akhir (video editing) menggunakan CapCut dan Adobe Premiere Pro.'
+                    }
+                  ].map((item, idx) => (
+                    <div
+                      key={idx}
+                      className="w-full h-auto min-h-[200px] rounded-[28px] p-6 sm:p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
+                    >
+                      <h3 className="text-[14px] font-bold text-slate-900 leading-snug tracking-tight">
+                        {item.title}
                       </h3>
-                      <span className="text-[9px] font-extrabold text-slate-700 uppercase tracking-widest whitespace-nowrap mt-1">
-                        {tool.category}
-                      </span>
+                      <p className="text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
+                        {item.desc}
+                      </p>
                     </div>
-                    <p className="text-[12px] font-normal text-slate-700 leading-relaxed text-justify mt-1">
-                      {tool.desc}
-                    </p>
-                  </div>
-                ))}
-              </div>
-            </section>
+                  ))}
+                </div>
+              </section>
 
-            {/* SECTION: FOOTER / LET'S CONNECT */}
-            <section id="contact" className="mt-5 flex shrink-0 w-full max-w-[1239px]">
-              <div className="w-full min-h-[115px] h-auto py-6 sm:py-5 rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
-                <div>
-                  <span className="text-[11px] font-extrabold text-slate-700 tracking-widest uppercase block mb-1">
-                    LET'S CONNECT
-                  </span>
-                  <h2 className="text-xl sm:text-[24px] font-black text-slate-900 tracking-tight">
-                    INTERESTED IN WORKING TOGETHER?
-                  </h2>
+              {/* SECTION: FEATURED PROJECTS */}
+              <section id="work" className="mt-5 flex flex-col shrink-0 w-full max-w-[1239px]">
+                <div className="w-full h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex items-center mb-5">
+                  <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 tracking-wide uppercase">FEATURED PROJECTS</h2>
                 </div>
-                <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
-                  <a
-                    href="mailto:andhikarievaldy07@gmail.com"
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-full text-white font-bold text-[13px] bg-slate-800 hover:bg-slate-900 transition-all shadow-sm text-center whitespace-nowrap"
-                  >
-                    Send Email Direct
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/rievaldyandhika/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="w-full sm:w-auto px-6 py-2.5 rounded-full text-slate-900 font-bold text-[13px] bg-white hover:bg-slate-50 border border-slate-200 transition-all shadow-sm text-center whitespace-nowrap"
-                  >
-                    LinkedIn Profile
-                  </a>
+
+                <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+                  {[
+                    {
+                      tag: 'STRATEGY & CONTENT',
+                      name: 'Social Media Management',
+                      desc: 'Menyusun content planner, penulisan copywriting persuasif, serta pengelolaan kanal media sosial harian untuk membangun interaksi dan pertumbuhan engagement audiens.',
+                      action: goToSocialMedia
+                    },
+                    {
+                      tag: 'GRAPHIC & BRANDING',
+                      name: 'Graphic Design & Visual Content',
+                      desc: 'Perancangan elemen grafis dan materi promosi visual yang konsisten untuk kebutuhan konten media sosial, publikasi digital, serta penguatan identitas produk.',
+                      action: goToGraphicDesign
+                    },
+                    {
+                      tag: 'VISUAL & RETOUCHING',
+                      name: 'Commercial Photography',
+                      desc: 'Pengarahan estetika visual dan pengambilan foto produk komersial, disempurnakan dengan teknik retouching serta color grading menggunakan Adobe Lightroom.',
+                      action: goToPhotography
+                    },
+                    {
+                      tag: 'VIDEO PRODUCTION',
+                      name: 'Videography & Video Editing',
+                      desc: 'Produksi konten video dari proses pengambilan gambar hingga penyuntingan akhir (video editing) menggunakan Adobe Premiere Pro dan CapCut untuk hasil yang dinamis.',
+                      action: goToVideography
+                    }
+                  ].map((proj, idx) => (
+                    <div
+                      key={idx}
+                      className="w-full h-auto min-h-[118px] rounded-[28px] p-5 sm:p-6 bg-white/40 shadow-sm border border-white flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4 hover:scale-[1.01] transition-transform"
+                    >
+                      <div className="flex-1 flex flex-col gap-2 sm:pr-6">
+                        <div>
+                          <span className="text-[10px] font-extrabold text-slate-700 uppercase tracking-widest block mb-1">
+                            {proj.tag}
+                          </span>
+                          <h3 className="text-[16px] font-black text-slate-900 leading-tight">
+                            {proj.name}
+                          </h3>
+                        </div>
+                        <p className="text-[12px] font-normal text-slate-700 leading-relaxed text-justify">
+                          {proj.desc}
+                        </p>
+                      </div>
+                      
+                      <button
+                        type="button"
+                        onClick={proj.action}
+                        className="w-full sm:w-auto shrink-0 px-4 py-2 rounded-full text-[12px] font-bold text-white bg-slate-800 hover:bg-slate-900 transition-all shadow-sm whitespace-nowrap text-center"
+                      >
+                        See Portfolio
+                      </button>
+                    </div>
+                  ))}
                 </div>
-              </div>
-            </section>
+              </section>
+            </div>
+
+            {/* AREA BAWAH: (Tools & Software Proficiency & Footer Links) - Tinggi ±2355px */}
+            <div id="software-links" className="flex flex-col w-full shrink-0">
+              {/* SECTION: TOOLS & SOFTWARE PROFICIENCY */}
+              <section id="tools" className="mt-10 sm:mt-[60px] flex flex-col shrink-0 w-full max-w-[1239px]">
+                 <div className="w-full h-auto sm:h-[58px] rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 py-3 sm:py-0 flex items-center mb-5">
+                  <h2 className="text-[18px] sm:text-[20px] font-black text-slate-900 tracking-wide uppercase">TOOLS & SOFTWARE PROFICIENCY</h2>
+                 </div>
+                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+                  {[
+                    {
+                      name: 'Adobe Photoshop',
+                      category: 'Visual & Retouching',
+                      desc: 'Pengolahan dan retouching foto komersial, manipulasi gambar terdistribusi, serta penyempurnaan estetika materi promosi digital.'
+                    },
+                    {
+                      name: 'Adobe Illustrator',
+                      category: 'Vector & Graphic Design',
+                      desc: 'Perancangan aset vektor, desain logo utama, tata letak konten grafik, dan pembuatan komponen identitas visual merek.'
+                    },
+                    {
+                      name: 'Adobe Premiere Pro',
+                      category: 'Video Production',
+                      desc: 'Penyuntingan video komersial lanskap, perangkaian alur cerita sinematik, penyelarasan audio, dan teknik color grading.'
+                    },
+                    {
+                      name: 'Canva Pro',
+                      category: 'Fast Visual Design',
+                      desc: 'Penyusunan materi desain cepat untuk konten harian media sosial, infografis presentasi, dan kolaborasi tata letak promosi.'
+                    },
+                    {
+                      name: 'CapCut Pro',
+                      category: 'Short-Form Video Editing',
+                      desc: 'Produksi dan penyuntingan konten video pendek (Reels, TikTok, & Short) dengan alur transisi dinamis, efek teks, dan tren audio.'
+                    },
+                    {
+                      name: 'Meta Spark Studio',
+                      category: 'Augmented Reality (AR)',
+                      desc: 'Pengembangan filter AR interaktif untuk kebutuhan liputan acara secara langsung (live report) guna meningkatkan engagement audiens.'
+                    },
+                    {
+                      name: 'Meta Business Suite',
+                      category: 'Social Media Operations',
+                      desc: 'Manajemen penjadwalan publikasi konten Instagram & Facebook, pemantauan matriks performa, serta manajemen interaksi audiens.'
+                    },
+                    {
+                      name: 'Google Docs',
+                      category: 'Copywriting & Planning',
+                      desc: 'Penyusunan naskah copywriting, pembuatan kalender konten terstruktur, pengerjaan creative brief, serta dokumentasi strategi narasi.'
+                    },
+                    {
+                      name: 'Google Sheets',
+                      category: 'Analytics & Reporting',
+                      desc: 'Pengolahan dan analisis data Key Performance Indicator (KPI) kampanye digital, pemetaaan basis data, serta pelaporan performa media.'
+                    }
+                  ].map((tool, idx) => (
+                    <div
+                      key={idx}
+                      className="w-full min-h-[128px] h-full rounded-[18px] p-5 bg-white/40 shadow-sm border border-white flex flex-col justify-center hover:scale-[1.02] transition-transform gap-1.5"
+                    >
+                      <div className="flex items-start justify-between mb-1 gap-2">
+                         <h3 className="text-[15px] font-bold text-slate-900 leading-tight">
+                          {tool.name}
+                        </h3>
+                        <span className="text-[9px] font-extrabold text-slate-700 uppercase tracking-widest whitespace-nowrap mt-1">
+                          {tool.category}
+                        </span>
+                      </div>
+                      <p className="text-[12px] font-normal text-slate-700 leading-relaxed text-justify mt-1">
+                        {tool.desc}
+                      </p>
+                    </div>
+                  ))}
+                </div>
+              </section>
+
+              {/* SECTION: FOOTER / LET'S CONNECT */}
+              <section id="contact" className="mt-5 flex shrink-0 w-full max-w-[1239px]">
+                <div className="w-full min-h-[115px] h-auto py-6 sm:py-5 rounded-[18px] bg-white/40 shadow-sm border border-white px-6 sm:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+                  <div>
+                    <span className="text-[11px] font-extrabold text-slate-700 tracking-widest uppercase block mb-1">
+                      LET'S CONNECT
+                    </span>
+                    <h2 className="text-xl sm:text-[24px] font-black text-slate-900 tracking-tight">
+                      INTERESTED IN WORKING TOGETHER?
+                    </h2>
+                  </div>
+                  <div className="flex flex-col sm:flex-row items-center gap-3 w-full sm:w-auto">
+                    <a
+                      href="mailto:andhikarievaldy07@gmail.com"
+                      className="w-full sm:w-auto px-6 py-2.5 rounded-full text-white font-bold text-[13px] bg-slate-800 hover:bg-slate-900 transition-all shadow-sm text-center whitespace-nowrap"
+                    >
+                      Send Email Direct
+                    </a>
+                    <a
+                      href="https://www.linkedin.com/in/rievaldyandhika/"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="w-full sm:w-auto px-6 py-2.5 rounded-full text-slate-900 font-bold text-[13px] bg-white hover:bg-slate-50 border border-slate-200 transition-all shadow-sm text-center whitespace-nowrap"
+                    >
+                      LinkedIn Profile
+                    </a>
+                  </div>
+                </div>
+              </section>
+            </div>
           </>
         )}
 

@@ -29,7 +29,7 @@ function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; al
 
   if (hasError) {
     return (
-      <div className="w-full h-full aspect-square rounded-xl border border-slate-200 bg-slate-100 flex items-center justify-center p-2 text-xs text-slate-500 break-all">
+      <div className="w-full h-full aspect-square rounded-xl border border-slate-200 bg-slate-100 flex items-center justify-center p-2 text-xs text-slate-500 break-all font-sans">
         {src}
       </div>
     );
@@ -74,7 +74,7 @@ function InstagramAvatar({ username, displayName, avatarImg }: { username?: stri
   }
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white font-bold text-sm uppercase">
+    <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white font-bold text-sm uppercase font-sans">
       {username ? username.substring(0, 2) : 'IG'}
     </div>
   );
@@ -202,11 +202,11 @@ export default function Home() {
                   
                   {/* Teks Judul dengan batasan Tipografi Presisi */}
                   <div className="flex flex-col relative z-20">
-                    <div className="text-slate-700 font-extrabold text-[15px] tracking-widest uppercase mb-2 leading-none font-sans">
+                    <div className="text-slate-700 font-extrabold text-[15px] tracking-widest uppercase mb-2 font-sans">
                       MARKETING COMMUNICATION
                     </div>
-                    {/* H1 menggunakan font-sans, text-[65.5px], font-black, leading-tight */}
-                    <h1 className="text-[65.5px] font-black leading-tight text-slate-900 font-sans whitespace-nowrap">
+                    {/* H1 menggunakan font-sans, text-[65.5px], font-black, leading-[1.05] */}
+                    <h1 className="text-[65.5px] font-black leading-[1.05] text-slate-900 font-sans whitespace-nowrap">
                       ANDHIKA<br />RIEVALDY
                     </h1>
                   </div>
@@ -287,7 +287,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                {/* FOTO HERO PROFILE: w-[335px], h-[430px], absolute bottom-0 right-40 */}
+                {/* FOTO HERO PROFILE: w-[335px], h-[430px], absolute bottom-0 right-[40px] */}
                 {!profileImgError && (
                   <img
                     src="/profile.png"
@@ -310,7 +310,7 @@ export default function Home() {
                       ABOUT ME
                     </span>
                     {/* Teks: text-[28px] */}
-                    <h2 className="text-[28px] font-black text-slate-900 leading-tight mt-1 font-sans">
+                    <h2 className="text-[28px] font-bold text-slate-900 leading-tight mt-1 font-sans">
                       Rievaldy Andhika Koswara, S.I.Kom
                     </h2>
                     {/* Deskripsi: text-[12px], Maksimal 35 Kata */}
@@ -592,7 +592,7 @@ export default function Home() {
 
         {/* VIEW 2: SOCIAL MEDIA MANAGEMENT */}
         {currentView === 'social-media' && (
-          <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
+          <div className="space-y-10 w-full mx-auto font-sans" style={{ maxWidth: '1500px' }}>
             <div
               className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden font-sans"
               style={{ width: '100%', maxWidth: '1500px' }}
@@ -720,7 +720,7 @@ export default function Home() {
 
         {/* VIEW 3: COMMERCIAL PHOTOGRAPHY */}
         {currentView === 'photography' && (
-          <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
+          <div className="space-y-10 w-full mx-auto font-sans" style={{ maxWidth: '1500px' }}>
             <div
               className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden font-sans"
               style={{ width: '100%', maxWidth: '1500px' }}
@@ -803,7 +803,7 @@ export default function Home() {
 
         {/* VIEW 4: VIDEOGRAPHY & VIDEO EDITING */}
         {currentView === 'videography' && (
-          <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
+          <div className="space-y-10 w-full mx-auto font-sans" style={{ maxWidth: '1500px' }}>
             <div
               className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden font-sans"
               style={{ width: '100%', maxWidth: '1500px' }}
@@ -894,7 +894,7 @@ export default function Home() {
 
         {/* VIEW 5: GRAPHIC DESIGN & VISUAL CONTENT */}
         {currentView === 'graphic-design' && (
-          <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
+          <div className="space-y-10 w-full mx-auto font-sans" style={{ maxWidth: '1500px' }}>
             <div
               className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden font-sans"
               style={{ width: '100%', maxWidth: '1500px' }}

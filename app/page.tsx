@@ -202,15 +202,15 @@ export default function Home() {
                   
                   {/* Teks Judul */}
                   <div className="flex flex-col relative z-20">
-                    <div className="text-slate-700 font-extrabold text-[15px] tracking-widest uppercase mb-1 leading-none font-sans">
+                    <div className="text-slate-900 font-black text-[15px] tracking-widest uppercase mb-1 leading-none font-sans">
                       MARKETING COMMUNICATION
                     </div>
                     {/* Logo Nama */}
-                    <div className="relative mt-2">
+                    <div className="relative -ml-2 -mt-1">
                       <img 
                         src="/nama.png" 
                         alt="Andhika Rievaldy" 
-                        className="w-[450px] h-auto object-contain drop-shadow-sm pointer-events-none"
+                        className="w-[414px] h-[512px] object-contain object-left-top drop-shadow-sm pointer-events-none"
                       />
                     </div>
                   </div>

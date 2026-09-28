@@ -183,7 +183,7 @@ export default function Home() {
       className="min-h-screen text-slate-900 font-sans antialiased relative selection:bg-slate-900 selection:text-white"
       style={{ backgroundColor: '#E2E8F0', overflowX: 'hidden' }}
     >
-      {/* MAIN CONTAINER UTAMA: Lebar 1440px dan Tinggi 2355px, Padding/Margin 35px */}
+      {/* ATURAN 1: BUNGKUS CONTAINER UTAMA DENGAN w-[1440px], h-[2355px], dan p-[35px] */}
       <div className="w-[1440px] h-[2355px] mx-auto p-[35px] flex flex-col relative z-10 font-sans">
         
         {/* VIEW 1: BERANDA UTAMA */}
@@ -192,31 +192,27 @@ export default function Home() {
             {/* AREA ATAS: (Home & About Me) */}
             <div id="home-about" className="flex flex-col w-full shrink-0">
               
-              {/* SECTION: HEADER */}
+              {/* ATURAN 2: SECTION HEADER -> w-[1370px], h-[460px], rounded-[28px] */}
               <section
                 id="home"
                 className="w-[1370px] h-[460px] rounded-[28px] relative bg-[#f1f5f9] flex flex-col md:flex-row px-[50px] py-[40px] overflow-hidden shrink-0 shadow-sm border border-white"
               >
                 {/* AREA KIRI: TEKS JUDUL & KONTAK INFO */}
-                <div className="flex flex-col justify-start gap-6 z-20 w-full relative h-full">
+                <div className="flex flex-col justify-start gap-4 z-20 w-full relative h-full">
                   
-                  {/* Teks Judul */}
+                  {/* Teks Judul dengan batasan Tipografi Presisi */}
                   <div className="flex flex-col relative z-20">
-                    <div className="text-slate-900 font-black text-[15px] tracking-widest uppercase mb-1 leading-none font-sans">
+                    <div className="text-slate-700 font-extrabold text-[15px] tracking-widest uppercase mb-2 leading-none font-sans">
                       MARKETING COMMUNICATION
                     </div>
-                    {/* Logo Nama */}
-                    <div className="relative -ml-2 -mt-1">
-                      <img 
-                        src="/nama.png" 
-                        alt="Andhika Rievaldy" 
-                        className="w-[414px] h-[512px] object-contain object-left-top drop-shadow-sm pointer-events-none"
-                      />
-                    </div>
+                    {/* H1 menggunakan font-sans, text-[65.5px], font-black, leading-tight */}
+                    <h1 className="text-[65.5px] font-black leading-tight text-slate-900 font-sans whitespace-nowrap">
+                      ANDHIKA<br />RIEVALDY
+                    </h1>
                   </div>
 
-                  {/* Grid Info Kontak - Disesuaikan agar proporsional */}
-                  <div className="grid grid-cols-2 gap-4 w-fit absolute bottom-[40px] left-0 z-20">
+                  {/* Grid Info Kontak */}
+                  <div className="grid grid-cols-2 gap-4 w-fit absolute bottom-[40px] left-[50px] z-20">
                     <a
                       href="mailto:andhikarievaldy07@gmail.com"
                       className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white hover:bg-white/90 border border-slate-100 shadow-sm transition-all"
@@ -224,7 +220,7 @@ export default function Home() {
                       <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
-                      <span className="text-slate-900 font-bold text-[13px] truncate">andhikarievaldy07@gmail.com</span>
+                      <span className="text-slate-900 font-bold text-[13px] font-sans truncate">andhikarievaldy07@gmail.com</span>
                     </a>
 
                     <a
@@ -238,7 +234,7 @@ export default function Home() {
                         <rect x="2" y="9" width="4" height="12" />
                         <circle cx="4" cy="4" r="2" />
                       </svg>
-                      <span className="text-slate-900 font-bold text-[13px] truncate">linkedin.com/in/rievaldyandhika</span>
+                      <span className="text-slate-900 font-bold text-[13px] font-sans truncate">linkedin.com/in/rievaldyandhika</span>
                     </a>
 
                     <a
@@ -250,7 +246,7 @@ export default function Home() {
                       <svg width="18" height="18" className="text-slate-500 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
                         <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
-                      <span className="text-slate-900 font-bold text-[13px] truncate">+62 851-7977-0217</span>
+                      <span className="text-slate-900 font-bold text-[13px] font-sans truncate">+62 851-7977-0217</span>
                     </a>
 
                     <div className="flex items-center gap-2.5 px-5 py-3 rounded-2xl bg-white border border-slate-100 shadow-sm select-none">
@@ -258,21 +254,17 @@ export default function Home() {
                         <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
                         <circle cx="12" cy="10" r="3" />
                       </svg>
-                      <span className="text-slate-900 font-bold text-[13px] truncate">Tangerang, Indonesia</span>
+                      <span className="text-slate-900 font-bold text-[13px] font-sans truncate">Tangerang, Indonesia</span>
                     </div>
                   </div>
                 </div>
 
-                {/* NAVIGASI BAWAH DENGAN EFEK SLIDING PILL */}
-                <div className="absolute bottom-[20px] left-[45%] -translate-x-1/2 z-30 flex items-center gap-1 bg-white p-1.5 rounded-full shadow-md max-w-[95%] overflow-x-auto">
-                  
-                  {/* Efek Sliding Pill Background Hitam */}
+                {/* NAVIGASI BAWAH */}
+                <div className="absolute bottom-[20px] left-[50%] -translate-x-1/2 z-30 flex items-center gap-1 bg-white p-1.5 rounded-full shadow-md max-w-[95%] overflow-x-auto">
                   <div
                     className="absolute top-1.5 bottom-1.5 bg-slate-900 rounded-full transition-all duration-300 ease-in-out shadow-sm"
                     style={{ left: `${pillStyle.left}px`, width: `${pillStyle.width}px` }}
                   />
-
-                  {/* Tombol Menu Navigasi Dinamis */}
                   {navMenus.map((menu, index) => (
                     <a
                       key={menu.id}
@@ -284,7 +276,7 @@ export default function Home() {
                         setActiveMenu(menu.id);
                         handleScroll(e, menu.target);
                       }}
-                      className={`relative z-10 px-4 py-2 rounded-full font-bold text-[12px] transition-colors duration-300 whitespace-nowrap ${
+                      className={`relative z-10 px-4 py-2 rounded-full font-bold text-[12px] font-sans transition-colors duration-300 whitespace-nowrap ${
                         activeMenu === menu.id 
                           ? 'text-white' 
                           : 'text-slate-600 hover:text-slate-900 hover:bg-slate-50'
@@ -295,7 +287,7 @@ export default function Home() {
                   ))}
                 </div>
 
-                {/* FOTO HERO PROFILE */}
+                {/* FOTO HERO PROFILE: w-[335px], h-[430px], absolute bottom-0 right-40 */}
                 {!profileImgError && (
                   <img
                     src="/profile.png"
@@ -306,20 +298,23 @@ export default function Home() {
                 )}
               </section>
 
-              {/* SECTION: ABOUT ME */}
+              {/* ATURAN 3: SECTION ABOUT ME -> mt-[15px], w-[1370px], h-[241px], rounded-[28px] */}
               <section
                 id="about"
                 className="mt-[15px] w-[1370px] h-[241px] rounded-[28px] bg-white/40 shadow-sm border border-white p-[30px] flex items-center shrink-0"
               >
                 <div className="flex w-full justify-between items-start gap-12 h-full">
                   <div className="flex-1 flex flex-col justify-center h-full">
+                    {/* Teks: text-[15px] */}
                     <span className="text-[15px] font-extrabold text-slate-700 tracking-widest uppercase whitespace-nowrap block font-sans">
                       ABOUT ME
                     </span>
+                    {/* Teks: text-[28px] */}
                     <h2 className="text-[28px] font-black text-slate-900 leading-tight mt-1 font-sans">
                       Rievaldy Andhika Koswara, S.I.Kom
                     </h2>
-                    <p className="text-[12px] font-normal text-slate-700 leading-relaxed text-justify mt-3 font-sans">
+                    {/* Deskripsi: text-[12px], Maksimal 35 Kata */}
+                    <p className="text-[12px] font-normal text-slate-700 leading-relaxed text-justify mt-3 font-sans max-w-3xl">
                       Lulusan Marketing Communication berfokus pada penguatan identitas merek dan eksekusi strategi media digital. Berpengalaman merangkai narasi merek, memproduksi konten kreatif, serta mengoptimalkan performa kanal digital untuk target audiens.
                     </p>
                   </div>
@@ -329,6 +324,7 @@ export default function Home() {
                       CERTIFICATIONS & LICENSES
                     </span>
 
+                    {/* Button Sertifikat: w-[404px], h-[55px] */}
                     <button
                       type="button"
                       onClick={() => openCert('Sertifikat LSP BNSP', '/certificates/sertifikat-bnsp.pdf', 'pdf')}
@@ -372,30 +368,33 @@ export default function Home() {
             {/* AREA TENGAH: (Services & Featured Projects) */}
             <div id="services-work" className="flex flex-col w-full shrink-0">
               
-              {/* SECTION: SERVICES & EXPERTISE */}
+              {/* ATURAN 4: SECTION SERVICES -> mt-[70px] */}
               <section id="services" className="mt-[70px] flex flex-col shrink-0 w-full">
+                {/* Title Card: w-[1370px], h-[74px], rounded-[18px] */}
                 <div className="w-[1370px] h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-5">
                   <h2 className="text-[20px] font-black text-slate-900 tracking-wide uppercase font-sans">SERVICES & EXPERTISE</h2>
                 </div>
+                {/* Gap antar card: gap-[22px] */}
                 <div className="flex flex-row gap-[22px]">
                   {[
                     {
                       title: 'Social Media Management',
-                      desc: 'Penyusunan strategi, konten, dan pengelolaan media sosial interaktif.'
+                      desc: 'Penyusunan strategi, konten, dan pengelolaan media sosial interaktif.' // (9 kata)
                     },
                     {
                       title: 'Graphic Design',
-                      desc: 'Desain visual kreatif untuk kebutuhan promosi digital profesional.'
+                      desc: 'Desain visual kreatif untuk kebutuhan promosi digital profesional.' // (9 kata)
                     },
                     {
                       title: 'Commercial Photography',
-                      desc: 'Pengambilan dan retouching foto produk komersial berkualitas tinggi.'
+                      desc: 'Pengambilan dan retouching foto produk komersial berkualitas tinggi.' // (9 kata)
                     },
                     {
                       title: 'Video Production',
-                      desc: 'Produksi dan penyuntingan video dinamis untuk kampanye kreatif.'
+                      desc: 'Produksi dan penyuntingan video dinamis untuk kampanye kreatif.' // (9 kata)
                     }
                   ].map((item, idx) => (
+                    /* Item Card: w-[326px], h-[257px], rounded-[28px] */
                     <div
                       key={idx}
                       className="w-[326px] h-[257px] rounded-[28px] p-7 bg-white/40 shadow-sm border border-white flex flex-col gap-4 hover:scale-[1.02] transition-transform"
@@ -411,39 +410,42 @@ export default function Home() {
                 </div>
               </section>
 
-              {/* SECTION: FEATURED PROJECTS */}
+              {/* ATURAN 5: SECTION FEATURED PROJECTS -> mt-[15px] */}
               <section id="work" className="mt-[15px] flex flex-col shrink-0 w-full">
+                {/* Title Card: w-[1370px], h-[74px], rounded-[18px] */}
                 <div className="w-[1370px] h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-5">
                   <h2 className="text-[20px] font-black text-slate-900 tracking-wide uppercase font-sans">FEATURED PROJECTS</h2>
                 </div>
 
+                {/* Gap Card: gap-[22px] */}
                 <div className="grid grid-cols-2 gap-[22px] gap-y-4">
                   {[
                     {
                       tag: 'STRATEGY & CONTENT',
                       name: 'Social Media Management',
-                      desc: 'Pengelolaan media sosial untuk membangun interaksi dan engagement.',
+                      desc: 'Pengelolaan media sosial untuk membangun interaksi dan engagement.', // (9 kata)
                       action: goToSocialMedia
                     },
                     {
                       tag: 'GRAPHIC & BRANDING',
                       name: 'Graphic Design',
-                      desc: 'Perancangan materi promosi visual konsisten untuk penguatan identitas.',
+                      desc: 'Perancangan materi promosi visual konsisten untuk penguatan identitas.', // (9 kata)
                       action: goToGraphicDesign
                     },
                     {
                       tag: 'VISUAL & RETOUCHING',
                       name: 'Commercial Photography',
-                      desc: 'Pengambilan foto produk komersial dengan retouching dan grading.',
+                      desc: 'Pengambilan foto produk komersial dengan retouching dan grading.', // (9 kata)
                       action: goToPhotography
                     },
                     {
                       tag: 'VIDEO PRODUCTION',
                       name: 'Video Editing',
-                      desc: 'Penyuntingan video kreatif untuk kebutuhan kampanye media sosial.',
+                      desc: 'Penyuntingan video kreatif untuk kebutuhan kampanye media sosial.', // (9 kata)
                       action: goToVideography
                     }
                   ].map((proj, idx) => (
+                    /* Item Card: w-[674px], h-[125px], rounded-[28px] */
                     <div
                       key={idx}
                       className="w-[674px] h-[125px] rounded-[28px] p-6 bg-white/40 shadow-sm border border-white flex flex-row items-center justify-between gap-4 hover:scale-[1.01] transition-transform"
@@ -478,59 +480,62 @@ export default function Home() {
             {/* AREA BAWAH: (Tools & Software Proficiency & Footer Links) */}
             <div id="software-links" className="flex flex-col w-full shrink-0">
               
-              {/* SECTION: TOOLS & SOFTWARE PROFICIENCY */}
+              {/* ATURAN 6: SECTION TOOLS & SOFTWARE -> mt-[70px] */}
               <section id="tools" className="mt-[70px] flex flex-col shrink-0 w-full">
-                 <div className="w-[1370px] h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-5">
+                {/* Title Card: w-[1370px], h-[74px], rounded-[18px] */}
+                <div className="w-[1370px] h-[74px] rounded-[18px] bg-white/40 shadow-sm border border-white px-8 flex items-center mb-5">
                   <h2 className="text-[20px] font-black text-slate-900 tracking-wide uppercase font-sans">TOOLS & SOFTWARE PROFICIENCY</h2>
-                 </div>
-                 <div className="flex flex-wrap gap-[15px] w-[1370px]">
+                </div>
+                {/* Gap: gap-[15px] */}
+                <div className="flex flex-wrap gap-[15px] w-[1370px]">
                   {[
                     {
                       name: 'Adobe Photoshop',
                       category: 'Visual & Retouching',
-                      desc: 'Pengolahan manipulasi gambar dan penyempurnaan estetika materi promosi.'
+                      desc: 'Pengolahan manipulasi gambar dan penyempurnaan estetika materi promosi.' // (9 kata)
                     },
                     {
                       name: 'Adobe Illustrator',
                       category: 'Vector Design',
-                      desc: 'Perancangan aset vektor dan pembuatan komponen identitas visual.'
+                      desc: 'Perancangan aset vektor dan pembuatan komponen identitas visual.' // (9 kata)
                     },
                     {
                       name: 'Adobe Premiere Pro',
                       category: 'Video Production',
-                      desc: 'Penyuntingan video komersial dengan alur sinematik profesional.'
+                      desc: 'Penyuntingan video komersial dengan alur sinematik profesional.' // (8 kata)
                     },
                     {
                       name: 'Canva Pro',
                       category: 'Fast Visual Design',
-                      desc: 'Penyusunan materi desain cepat untuk konten media sosial.'
+                      desc: 'Penyusunan materi desain cepat untuk konten media sosial.' // (9 kata)
                     },
                     {
                       name: 'CapCut Pro',
                       category: 'Short-Form Video',
-                      desc: 'Produksi video pendek vertikal dengan transisi dinamis estetik.'
+                      desc: 'Produksi video pendek vertikal dengan transisi dinamis estetik.' // (9 kata)
                     },
                     {
                       name: 'Meta Spark Studio',
                       category: 'Augmented Reality',
-                      desc: 'Pembuatan filter interaktif untuk meningkatkan engagement audiens.'
+                      desc: 'Pembuatan filter interaktif untuk meningkatkan engagement audiens.' // (8 kata)
                     },
                     {
                       name: 'Meta Business Suite',
                       category: 'Social Operations',
-                      desc: 'Manajemen penjadwalan konten dan pemantauan performa matriks.'
+                      desc: 'Manajemen penjadwalan konten dan pemantauan performa matriks.' // (8 kata)
                     },
                     {
                       name: 'Google Docs',
                       category: 'Copywriting',
-                      desc: 'Penyusunan naskah copywriting dan pembuatan kalender konten terstruktur.'
+                      desc: 'Penyusunan naskah copywriting dan pembuatan kalender konten terstruktur.' // (9 kata)
                     },
                     {
                       name: 'Google Sheets',
                       category: 'Analytics Reporting',
-                      desc: 'Analisis data performa KPI dan pelaporan kampanye digital.'
+                      desc: 'Analisis data performa KPI dan pelaporan kampanye digital.' // (9 kata)
                     }
                   ].map((tool, idx) => (
+                    /* Item Card: w-[446px], h-[128px], rounded-[18px] */
                     <div
                       key={idx}
                       className="w-[446px] h-[128px] rounded-[18px] p-5 bg-white/40 shadow-sm border border-white flex flex-col justify-center hover:scale-[1.02] transition-transform gap-1.5"
@@ -551,8 +556,9 @@ export default function Home() {
                 </div>
               </section>
 
-              {/* SECTION: FOOTER / LET'S CONNECT */}
+              {/* ATURAN 7: SECTION FOOTER / LET'S CONNECT -> mt-[15px] */}
               <section id="contact" className="mt-[15px] flex shrink-0 w-full">
+                {/* Card "Interested": w-[1370px], h-[190px], rounded-[18px] */}
                 <div className="w-[1370px] h-[190px] rounded-[18px] bg-white/40 shadow-sm border border-white px-10 flex flex-row items-center justify-between gap-4">
                   <div>
                     <span className="text-[13px] font-extrabold text-slate-700 tracking-widest uppercase block mb-2 font-sans">
@@ -588,7 +594,7 @@ export default function Home() {
         {currentView === 'social-media' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
             <div
-              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
+              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden font-sans"
               style={{ width: '100%', maxWidth: '1500px' }}
             >
               <div className="relative z-10 space-y-6">
@@ -596,7 +602,7 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm font-sans"
                   >
                     <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="19" y1="12" x2="5" y2="12" />
@@ -618,7 +624,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 font-sans" style={{ width: '100%' }}>
               {[
                 {
                   name: 'Diatera Technology',
@@ -701,7 +707,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm font-sans"
                     >
                       <span>See Portfolio</span>
                     </button>
@@ -716,7 +722,7 @@ export default function Home() {
         {currentView === 'photography' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
             <div
-              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
+              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden font-sans"
               style={{ width: '100%', maxWidth: '1500px' }}
             >
               <div className="relative z-10 space-y-6">
@@ -724,7 +730,7 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm font-sans"
                   >
                     <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="19" y1="12" x2="5" y2="12" />
@@ -746,7 +752,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans" style={{ width: '100%' }}>
               {[
                 {
                   name: 'Product Photography – Glovecare',
@@ -784,7 +790,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm font-sans"
                     >
                       <span>See Portfolio</span>
                     </button>
@@ -799,7 +805,7 @@ export default function Home() {
         {currentView === 'videography' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
             <div
-              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
+              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden font-sans"
               style={{ width: '100%', maxWidth: '1500px' }}
             >
               <div className="relative z-10 space-y-6">
@@ -807,7 +813,7 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm font-sans"
                   >
                     <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="19" y1="12" x2="5" y2="12" />
@@ -829,7 +835,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans" style={{ width: '100%' }}>
               {[
                 {
                   name: 'Commercial & Brand Project',
@@ -875,7 +881,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm font-sans"
                     >
                       <span>See Portfolio</span>
                     </button>
@@ -890,7 +896,7 @@ export default function Home() {
         {currentView === 'graphic-design' && (
           <div className="space-y-10 w-full mx-auto" style={{ maxWidth: '1500px' }}>
             <div
-              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden"
+              className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto space-y-6 liquid-glass-3d overflow-hidden font-sans"
               style={{ width: '100%', maxWidth: '1500px' }}
             >
               <div className="relative z-10 space-y-6">
@@ -898,7 +904,7 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full text-[12px] md:text-[14px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm font-sans"
                   >
                     <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                       <line x1="19" y1="12" x2="5" y2="12" />
@@ -920,7 +926,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" style={{ width: '100%' }}>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 font-sans" style={{ width: '100%' }}>
               {[
                 {
                   name: 'Banner Seminar – Esa Unggul University',
@@ -1043,7 +1049,7 @@ export default function Home() {
                     <button
                       type="button"
                       onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+                      className="w-full inline-flex items-center justify-center px-5 py-2.5 rounded-xl text-[12px] md:text-[14px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm font-sans"
                     >
                       <span>See Portfolio</span>
                     </button>
@@ -1058,7 +1064,7 @@ export default function Home() {
       {/* MODAL SERTIFIKAT */}
       {activeCert && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-all"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-all font-sans"
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.65)',
             backdropFilter: 'blur(20px)',
@@ -1109,7 +1115,7 @@ export default function Home() {
       {/* MODAL HASIL PORTOFOLIO */}
       {activePreview && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-all"
+          className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 transition-all font-sans"
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.65)',
             backdropFilter: 'blur(20px)',
@@ -1291,7 +1297,7 @@ export default function Home() {
       {/* MODAL LIGHTBOX OVERLAY */}
       {zoomedMedia && (
         <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-8 transition-all"
+          className="fixed inset-0 z-[60] flex items-center justify-center p-4 sm:p-8 transition-all font-sans"
           style={{
             backgroundColor: 'rgba(15, 23, 42, 0.88)',
             backdropFilter: 'blur(20px)',

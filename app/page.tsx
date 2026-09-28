@@ -205,36 +205,13 @@ export default function Home() {
                     <div className="text-slate-700 font-extrabold text-[15px] tracking-widest uppercase mb-1 leading-none font-sans">
                       MARKETING COMMUNICATION
                     </div>
-                    {/* Teks Menumpuk Proporsional */}
-                    <div className="relative">
-                      <h1 
-                        className="text-slate-900 tracking-tight leading-none absolute top-0 left-0 z-10 whitespace-nowrap"
-                        style={{ fontFamily: 'TAN Jambore', fontSize: '65.5px' }}
-                      >
-                        ANDHIKA
-                      </h1>
-                      <h1 
-                        className="tracking-tight leading-none absolute top-[45px] left-0 z-0 whitespace-nowrap"
-                        style={{ 
-                          fontFamily: 'Anaconda Wildstyle', 
-                          fontSize: '60.5px', 
-                          color: 'transparent', 
-                          WebkitTextStroke: '1.5px #ecf1f7' 
-                        }}
-                      >
-                        RIEVALDY
-                      </h1>
-                      <h1 
-                        className="tracking-tight leading-none absolute top-[45px] left-0 z-20 whitespace-nowrap opacity-80"
-                        style={{ 
-                          fontFamily: 'Anaconda Wildstyle', 
-                          fontSize: '60.5px', 
-                          color: 'transparent', 
-                          WebkitTextStroke: '1px #0f172a' 
-                        }}
-                      >
-                        RIEVALDY
-                      </h1>
+                    {/* Logo Nama */}
+                    <div className="relative mt-2">
+                      <img 
+                        src="/nama.png" 
+                        alt="Andhika Rievaldy" 
+                        className="w-[450px] h-auto object-contain drop-shadow-sm pointer-events-none"
+                      />
                     </div>
                   </div>
 

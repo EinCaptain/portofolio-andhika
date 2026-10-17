@@ -212,9 +212,9 @@ export default function Home() {
 
               {/* FOTO HERO PROFILE UTAMA */}
               {!profileImgError && (
-                <div className="relative md:absolute right-0 bottom-0 w-full md:w-[280px] lg:w-[320px] h-[280px] md:h-[360px] mt-6 md:mt-0 flex items-end justify-center md:justify-end z-0 pointer-events-none">
+                <div className="relative md:absolute right-0 bottom-0 w-full md:w-[280px] lg:w-[350px] h-[280px] md:h-[400px] mt-6 md:mt-0 flex items-end justify-center md:justify-end z-0 pointer-events-none">
                   <img
-                    src="/profile.png"
+                    src="/hero-image.png"
                     alt="Andhika Rievaldy"
                     className="w-auto h-full object-contain object-bottom drop-shadow-xl transition-transform duration-300 group-hover:scale-105"
                     onError={() => setProfileImgError(true)}
@@ -228,9 +228,9 @@ export default function Home() {
               
               {/* Header Profile Avatar */}
               <div className="flex items-center gap-4 border-b border-slate-100 pb-4">
-                <div className="w-14 h-14 rounded-full bg-slate-900 p-0.5 shrink-0 overflow-hidden shadow-md">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-slate-900 p-0.5 shrink-0 overflow-hidden shadow-md">
                   {!profileImgError ? (
-                    <img src="/profile.png" alt="Avatar" className="w-full h-full object-cover object-top rounded-full bg-slate-200" />
+                    <img src="/avatar.jpg" alt="Avatar" className="w-full h-full object-cover object-center rounded-full bg-slate-200" />
                   ) : (
                     <div className="w-full h-full flex items-center justify-center text-white font-bold text-lg">AR</div>
                   )}

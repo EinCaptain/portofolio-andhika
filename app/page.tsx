@@ -212,7 +212,7 @@ export default function Home() {
 
               {/* FOTO HERO PROFILE UTAMA */}
               {!profileImgError && (
-                <div className="relative md:absolute right-6 bottom-0 w-full md:w-[320px] sm:w-[380px] lg:w-[485px] h-[360px] sm:h-[420px] md:h-[460px] lg:h-[500px] mt-6 md:mt-0 flex items-end justify-center md:justify-end z-0 pointer-events-none">
+                <div className="relative md:absolute right-6 bottom-0 w-full md:w-[320px] sm:w-[380px] lg:w-[485px] h-[460px] sm:h-[420px] md:h-[460px] lg:h-[500px] mt-6 md:mt-0 flex items-end justify-center md:justify-end z-0 pointer-events-none">
                   <img
                     src="/hero-image.png"
                     alt="Andhika Rievaldy"

@@ -199,13 +199,9 @@ export default function Home() {
                   <a
                     href="#card-projects"
                     onClick={(e) => handleScroll(e, 'card-projects')}
-                    className="inline-flex items-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm px-6 py-3 rounded-full transition-all shadow-sm group-hover:scale-[1.02]"
+                    className="inline-flex items-center justify-center bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm px-6 py-3 rounded-full transition-all shadow-sm group-hover:scale-[1.02]"
                   >
                     <span>Jelajahi Karya</span>
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
                   </a>
                 </div>
               </div>
@@ -277,18 +273,23 @@ export default function Home() {
                   <button
                     type="button"
                     onClick={() => openCert('Sertifikat LSP BNSP', '/certificates/sertifikat-bnsp.pdf', 'pdf')}
-                    className="w-full flex items-center justify-between p-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 text-xs font-bold transition-all cursor-pointer"
+                    className="w-full flex items-center justify-center p-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 text-xs font-bold transition-all cursor-pointer text-center"
                   >
                     <span>Sertifikat LSP BNSP</span>
-                    <span className="text-xs">→</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => openCert('Sertifikat Digital Marketing RevoU', '/certificates/sertifikat-revou.pdf', 'pdf')}
-                    className="w-full flex items-center justify-between p-2.5 rounded-xl bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200 text-xs font-bold transition-all cursor-pointer"
+                    className="w-full flex items-center justify-center p-2.5 rounded-xl bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200 text-xs font-bold transition-all cursor-pointer text-center"
                   >
                     <span>Sertifikat RevoU</span>
-                    <span className="text-xs">→</span>
+                  </button>
+                  <button
+                    type="button"
+                    onClick={() => openCert('Sertifikat Pelatihan Digital Marketing', '/certificates/pelatihan-digital-marketing.pdf', 'pdf')}
+                    className="w-full flex items-center justify-center p-2.5 rounded-xl bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200 text-xs font-bold transition-all cursor-pointer text-center"
+                  >
+                    <span>Sertifikat Pelatihan Digital Marketing</span>
                   </button>
                 </div>
               </div>
@@ -407,7 +408,7 @@ export default function Home() {
                       onClick={proj.action}
                       className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 transition-all cursor-pointer text-center"
                     >
-                      Lihat Portfolio →
+                      Lihat Portfolio
                     </button>
                   </div>
                 ))}

@@ -210,9 +210,9 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* FOTO HERO PROFILE UTAMA */}
+              {/* FOTO HERO PROFILE UTAMA (UPDATED STYLING) */}
               {!profileImgError && (
-                <div className="relative md:absolute right-6 bottom-0 w-full md:w-[450px] sm:w-[400px] lg:w-[500px] h-[550px] sm:h-[500px] md:h-[500px] lg:h-[500px] mt-6 md:mt-0 flex items-end justify-center md:justify-end z-0 pointer-events-none">
+                <div className="relative md:absolute right-6 bottom-0 w-full md:w-[320px] sm:w-[380px] lg:w-[485px] h-[360px] sm:h-[420px] md:h-[460px] lg:h-[500px] mt-6 md:mt-0 flex items-end justify-center md:justify-end z-0 pointer-events-none">
                   <img
                     src="/hero-image.png"
                     alt="Andhika Rievaldy"

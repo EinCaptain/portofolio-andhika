@@ -286,7 +286,7 @@ export default function Home() {
                   </button>
                   <button
                     type="button"
-                    onClick={() => openCert('Sertifikat Pelatihan Digital Marketing', '/certificates/pelatihan-digital-marketing.pdf', 'pdf')}
+                    onClick={() => openCert('Sertifikat Pelatihan Digital Marketing', '/certificates/sertifikat-digital-marketing-afaq-academy.pdf', 'pdf')}
                     className="w-full flex items-center justify-center p-2.5 rounded-xl bg-slate-100 text-slate-900 hover:bg-slate-200 border border-slate-200 text-xs font-bold transition-all cursor-pointer text-center"
                   >
                     <span>Sertifikat Pelatihan Digital Marketing</span>

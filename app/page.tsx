@@ -184,7 +184,7 @@ export default function Home() {
 
             {/* CARD 1: HERO / PORTOFOLIO UTAMA (Col Span 2) */}
             <div className="lg:col-span-2 bg-white rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 md:p-10 border border-slate-200/80 shadow-sm relative overflow-hidden flex flex-col justify-between min-h-[420px] group">
-              <div className="space-y-4 max-w-lg z-10">
+              <div className="space-y-4 max-w-xs sm:max-w-md lg:max-w-lg w-full z-10">
                 <span className="inline-block px-3.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-extrabold text-xs tracking-wider uppercase font-sans">
                   CREATIVE PROFESSIONAL
                 </span>
@@ -210,12 +210,12 @@ export default function Home() {
                 </div>
               </div>
 
-              {/* FOTO HERO PROFILE UTAMA (UPDATED STYLING) */}
+              {/* FOTO HERO PROFILE UTAMA */}
               {!profileImgError && (
                 <img
                   src="/hero-image.png"
                   alt="Andhika Rievaldy"
-                  className="absolute bottom-0 right-8 z-0 pointer-events-none w-auto h-[200px] object-contain object-bottom drop-shadow-xl transition-transform duration-300 group-hover:scale-105"
+                  className="absolute bottom-0 right-4 sm:right-8 z-0 pointer-events-none w-auto h-[85%] sm:h-[90%] lg:h-[95%] object-contain object-bottom drop-shadow-xl transition-transform duration-300 group-hover:scale-105"
                   onError={() => setProfileImgError(true)}
                 />
               )}

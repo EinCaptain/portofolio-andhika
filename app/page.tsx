@@ -226,16 +226,16 @@ export default function Home() {
               
               {/* Header Profile Avatar */}
               <div className="flex items-center gap-4 border-b border-slate-100 pb-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-slate-900 p-0.5 shrink-0 overflow-hidden shadow-md">
+                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full shrink-0 overflow-hidden shadow-md">
                   {!profileImgError ? (
                     <img src="/avatar.jpg" alt="Avatar" className="w-full h-full object-cover object-center rounded-full bg-slate-200" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-white font-bold text-lg">AR</div>
+                    <div className="w-full h-full flex items-center justify-center text-white font-bold text-lg bg-slate-900">RK</div>
                   )}
                 </div>
                 <div>
-                  <h2 className="text-lg font-bold text-slate-900 leading-snug">Andhika Rievaldy</h2>
-                  <p className="text-xs font-semibold text-slate-500">Marketing Communication Specialist</p>
+                  <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">Rievaldy Andhika Koswara, S.I.Kom</h2>
+                  <p className="text-xs font-semibold text-slate-500 pt-0.5">Marketing Communication Specialist</p>
                 </div>
               </div>
 
@@ -336,7 +336,7 @@ export default function Home() {
               ].map((srv, idx) => (
                 <div
                   key={idx}
-                  className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-sm transition-all duration-300 hover:bg-slate-900 hover:text-white flex flex-col justify-between group cursor-default min-h-[200px]"
+                  className="bg-white rounded-3xl p-6 sm:p-7 border border-slate-200/80 shadow-sm transition-all duration-300 hover:bg-slate-900 hover:text-white flex flex-col justify-start group cursor-default min-h-[200px]"
                 >
                   <div className="space-y-4">
                     <div className="w-12 h-12 rounded-2xl bg-slate-100 group-hover:bg-slate-800 text-slate-900 group-hover:text-white flex items-center justify-center transition-colors">
@@ -346,9 +346,6 @@ export default function Home() {
                     <p className="text-xs text-slate-600 group-hover:text-slate-300 leading-relaxed text-justify">
                       {srv.desc}
                     </p>
-                  </div>
-                  <div className="pt-4 flex items-center justify-end">
-                    <span className="text-xs font-bold text-slate-400 group-hover:text-slate-200 transition-colors">Learn More →</span>
                   </div>
                 </div>
               ))}

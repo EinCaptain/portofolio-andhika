@@ -184,13 +184,13 @@ export default function Home() {
 
             {/* CARD 1: HERO / PORTOFOLIO UTAMA (Col Span 2) */}
             <div className="lg:col-span-2 bg-white rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 md:p-10 border border-slate-200/80 shadow-sm relative overflow-hidden flex flex-col justify-between min-h-[420px] group">
-              <div className="space-y-4 max-w-xs sm:max-w-md lg:w-[60%] w-full z-10">
+              <div className="space-y-4 max-w-xs sm:max-w-xl lg:w-[65%] w-full z-10">
                 <span className="inline-block px-3.5 py-1 rounded-full bg-slate-100 border border-slate-200 text-slate-700 font-extrabold text-xs tracking-wider uppercase font-sans">
                   CREATIVE PROFESSIONAL
                 </span>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-black text-slate-900 leading-tight tracking-tight font-sans">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight tracking-tight font-sans">
                   Portofolio<br />
-                  <span className="text-slate-700">Andhika Rievaldy</span>
+                  <span className="text-slate-700 whitespace-nowrap">Andhika Rievaldy</span>
                 </h1>
                 <p className="text-slate-600 text-sm sm:text-base leading-relaxed font-sans text-justify pt-1">
                   Membangun identitas visual yang kuat dan eksekusi strategi media digital. Berpengalaman merangkai narasi merek, memproduksi konten kreatif, serta mengoptimalkan performa kanal digital.

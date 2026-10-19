@@ -759,21 +759,23 @@ export default function Home() {
               </button>
             </div>
 
-            {/* Area Tampilan Gambar / PDF Sertifikat (Scrollable apabila melebihi tinggi layar) */}
-            <div className="flex-1 overflow-y-auto rounded-xl bg-white p-2 flex justify-center items-start border border-stone-200">
-              {activeCert?.type === 'pdf' ? (
-                <iframe
-                  src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
-                  className="w-full h-[75vh] min-h-[550px] border-0 rounded-lg"
-                  title={activeCert.title}
-                />
-              ) : (
-                <img
-                  src={activeCert?.src}
-                  alt={activeCert?.title}
-                  className="w-full h-auto max-h-[75vh] object-contain rounded-lg"
-                />
-              )}
+            {/* Area Tampilan Gambar / PDF Sertifikat */}
+            <div className="flex-1 overflow-y-auto bg-transparent p-0">
+              <div className="w-fit h-fit mx-auto p-0 bg-transparent rounded-lg overflow-hidden">
+                {activeCert?.type === 'pdf' ? (
+                  <iframe
+                    src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
+                    className="w-full h-[75vh] min-h-[550px] border-0 rounded-lg bg-white"
+                    title={activeCert.title}
+                  />
+                ) : (
+                  <img
+                    src={activeCert?.src}
+                    alt={activeCert?.title}
+                    className="w-full h-auto max-h-[80vh] object-contain block rounded-lg"
+                  />
+                )}
+              </div>
             </div>
           </div>
         </div>

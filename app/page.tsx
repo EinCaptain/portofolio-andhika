@@ -146,6 +146,9 @@ export default function Home() {
   const goToGraphicDesign = () => { setCurrentView('graphic-design'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
   const goToMain = () => { setCurrentView('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
+  // Logika Pengecekan Orientasi Sertifikat
+  const isPortraitCert = activeCert?.title.toUpperCase().includes('BNSP');
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#d0c2bb] to-[#ede6e3] text-stone-900 font-sans antialiased selection:bg-[#2b2624] selection:text-white py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
       
@@ -736,17 +739,30 @@ export default function Home() {
 
       </div>
 
-      {/* MODAL SERTIFIKAT */}
+      {/* MODAL SERTIFIKAT (CREDENTIAL VIEWER) */}
       {activeCert && (
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-stone-900/60 backdrop-blur-md" onClick={closeCert}>
-          <div className="relative w-full max-w-4xl bg-white/90 backdrop-blur-2xl rounded-3xl p-6 flex flex-col overflow-hidden shadow-2xl border border-white/60" onClick={(e) => e.stopPropagation()}>
+          <div 
+            className={`relative w-full bg-white/90 backdrop-blur-2xl rounded-3xl p-5 sm:p-6 flex flex-col overflow-hidden shadow-2xl border border-white/60 transition-all duration-300 ${
+              isPortraitCert ? 'max-w-[620px]' : 'max-w-[950px]'
+            }`} 
+            onClick={(e) => e.stopPropagation()}
+          >
             <div className="flex items-center justify-between pb-3 border-b border-stone-200 mb-4">
               <h3 className="text-lg font-bold text-stone-900">{activeCert.title}</h3>
-              <button type="button" onClick={closeCert} className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-800 font-bold">✕</button>
+              <button type="button" onClick={closeCert} className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-800 font-bold transition-colors">✕</button>
             </div>
-            <div className="w-full aspect-[1.414/1] max-h-[75vh] overflow-hidden rounded-xl bg-stone-100">
+            <div 
+              className={`w-full overflow-hidden rounded-xl bg-stone-100 transition-all duration-300 ${
+                isPortraitCert ? 'aspect-[1/1.414] max-h-[80vh]' : 'aspect-[1.414/1] max-h-[75vh]'
+              }`}
+            >
               {activeCert.type === 'pdf' ? (
-                <iframe src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`} className="w-full h-full border-0 rounded-xl" title={activeCert.title} />
+                <iframe 
+                  src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=0&view=${isPortraitCert ? 'Fit' : 'FitH'}`} 
+                  className="w-full h-full border-0 rounded-xl" 
+                  title={activeCert.title} 
+                />
               ) : (
                 <img src={activeCert.src} alt={activeCert.title} className="w-full h-full object-contain" />
               )}

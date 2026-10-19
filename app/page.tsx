@@ -255,7 +255,7 @@ export default function Home() {
                 <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">CONTACT INFO</span>
                 <div className="flex flex-col gap-2">
                   <a href="mailto:andhikarievaldy07@gmail.com" className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-stone-800 transition-colors truncate shadow-sm">
-                    <svg width="15" height="15" className="text-stone-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <svg width="15" height="15" className="text-stone-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 0-2-2H5a2 2 0 0-2 2v10a2 2 0 002 2z"/></svg>
                     <span className="truncate">andhikarievaldy07@gmail.com</span>
                   </a>
                   <a href="https://wa.me/6285179770217" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-stone-800 transition-colors shadow-sm">
@@ -323,11 +323,11 @@ export default function Home() {
                   desc: 'Creative visual designs for professional digital promotional needs.',
                   icon: (
                     <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 2a10 10 0 0 0-10 10c0 5.523 4.477 10 10 10a2.5 2.5 0 0 0 2.5-2.5c0-.42-.11-.8-.3-1.13-.23-.41-.33-.87-.33-1.37a2.5 2.5 0 0 1 2.5-2.5h1.63a5 5 0 0 0 5-5c0-4.97-4.03-9-9-9z"/>
-                      <circle cx="7.5" cy="10.5" r="1"/>
-                      <circle cx="12" cy="7.5" r="1"/>
-                      <circle cx="16.5" cy="10.5" r="1"/>
-                      <circle cx="10.5" cy="15.5" r="1"/>
+                      <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+                      <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+                      <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+                      <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+                      <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.72 1.7-1.61 0-.43-.17-.83-.44-1.13-.27-.3-.43-.7-.43-1.13 0-.89.72-1.61 1.61-1.61h1.83c3.16 0 5.73-2.57 5.73-5.73 0-4.82-4.18-8.8-9-8.8z"/>
                     </svg>
                   )
                 },
@@ -336,8 +336,7 @@ export default function Home() {
                   desc: 'High-quality commercial product photography and retouching.',
                   icon: (
                     <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
-                      <circle cx="12" cy="13" r="3"/>
+                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>
                     </svg>
                   )
                 },
@@ -346,8 +345,7 @@ export default function Home() {
                   desc: 'Dynamic video production and editing for creative marketing campaigns.',
                   icon: (
                     <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="23 7 16 12 23 17 23 7"/>
-                      <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                      <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
                     </svg>
                   )
                 }

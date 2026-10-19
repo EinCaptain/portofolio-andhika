@@ -310,7 +310,11 @@ export default function Home() {
                   desc: 'Developing interactive social media strategies, content, and channel management.',
                   icon: (
                     <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                      <circle cx="18" cy="5" r="3"/>
+                      <circle cx="6" cy="12" r="3"/>
+                      <circle cx="18" cy="19" r="3"/>
+                      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
                     </svg>
                   )
                 },
@@ -319,7 +323,11 @@ export default function Home() {
                   desc: 'Creative visual designs for professional digital promotional needs.',
                   icon: (
                     <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M12 19l7-7 3 3-7 7-3-3z"/><path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/><path d="M2 2l7.586 7.586"/>
+                      <path d="M12 2a10 10 0 0 0-10 10c0 5.523 4.477 10 10 10a2.5 2.5 0 0 0 2.5-2.5c0-.42-.11-.8-.3-1.13-.23-.41-.33-.87-.33-1.37a2.5 2.5 0 0 1 2.5-2.5h1.63a5 5 0 0 0 5-5c0-4.97-4.03-9-9-9z"/>
+                      <circle cx="7.5" cy="10.5" r="1"/>
+                      <circle cx="12" cy="7.5" r="1"/>
+                      <circle cx="16.5" cy="10.5" r="1"/>
+                      <circle cx="10.5" cy="15.5" r="1"/>
                     </svg>
                   )
                 },
@@ -328,7 +336,8 @@ export default function Home() {
                   desc: 'High-quality commercial product photography and retouching.',
                   icon: (
                     <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>
+                      <path d="M14.5 4h-5L7 7H4a2 2 0 0 0-2 2v9a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2h-3l-2.5-3z"/>
+                      <circle cx="12" cy="13" r="3"/>
                     </svg>
                   )
                 },
@@ -337,7 +346,8 @@ export default function Home() {
                   desc: 'Dynamic video production and editing for creative marketing campaigns.',
                   icon: (
                     <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                      <polygon points="23 7 16 12 23 17 23 7"/>
+                      <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
                     </svg>
                   )
                 }
@@ -434,10 +444,7 @@ export default function Home() {
                     { name: 'Premiere Pro', cat: 'Video' },
                     { name: 'Canva Pro', cat: 'Design' },
                     { name: 'CapCut Pro', cat: 'Shorts' },
-                    { name: 'Meta Spark', cat: 'AR Filter' },
-                    { name: 'Meta Suite', cat: 'Social' },
-                    { name: 'Google Docs', cat: 'Copywriting' },
-                    { name: 'Google Sheets', cat: 'Analytics' }
+                    { name: 'Meta Suite', cat: 'Social' }
                   ].map((tool, idx) => (
                     <div key={idx} className="p-2.5 rounded-xl bg-white/50 border border-white/60 flex flex-col hover:bg-white/80 transition-colors shadow-sm">
                       <span className="font-bold text-xs text-stone-900">{tool.name}</span>

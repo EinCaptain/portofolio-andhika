@@ -29,7 +29,7 @@ function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; al
 
   if (hasError) {
     return (
-      <div className="w-full h-full aspect-square rounded-xl border border-white/40 bg-white/30 backdrop-blur-md flex items-center justify-center p-2 text-xs text-slate-600 break-all font-sans">
+      <div className="w-full h-full aspect-square rounded-xl border border-white/40 bg-white/30 backdrop-blur-md flex items-center justify-center p-2 text-xs text-stone-600 break-all font-sans">
         {src}
       </div>
     );
@@ -43,7 +43,7 @@ function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; al
         loop
         autoPlay
         playsInline
-        className="w-full h-full aspect-square object-contain rounded-xl shadow-sm border border-slate-200 bg-slate-900 pointer-events-none"
+        className="w-full h-full aspect-square object-contain rounded-xl shadow-sm border border-stone-200 bg-stone-900 pointer-events-none"
         onError={() => setHasError(true)}
       />
     );
@@ -74,7 +74,7 @@ function InstagramAvatar({ username, displayName, avatarImg }: { username?: stri
   }
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white font-bold text-sm uppercase font-sans">
+    <div className="w-full h-full flex items-center justify-center bg-[#2b2624] text-white font-bold text-sm uppercase font-sans">
       {username ? username.substring(0, 2) : 'IG'}
     </div>
   );
@@ -147,13 +147,13 @@ export default function Home() {
   const goToMain = () => { setCurrentView('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-[#d0c2bb] to-[#ede6e3] text-slate-900 font-sans antialiased selection:bg-slate-900 selection:text-white py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
+    <div className="min-h-screen bg-gradient-to-br from-[#d0c2bb] to-[#ede6e3] text-stone-900 font-sans antialiased selection:bg-[#2b2624] selection:text-white py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
       
       {/* FLOATING NAVBAR */}
       {currentView === 'main' && (
         <div className="fixed top-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1 bg-white/70 backdrop-blur-xl p-1.5 rounded-full shadow-lg border border-white/60">
           <div
-            className="absolute top-1.5 bottom-1.5 bg-slate-900 rounded-full transition-all duration-300 ease-in-out shadow-sm"
+            className="absolute top-1.5 bottom-1.5 bg-[#2b2624] rounded-full transition-all duration-300 ease-in-out shadow-sm"
             style={{ left: `${pillStyle.left}px`, width: `${pillStyle.width}px` }}
           />
           {navMenus.map((menu, index) => (
@@ -166,7 +166,7 @@ export default function Home() {
                 handleScroll(e, menu.target);
               }}
               className={`relative z-10 px-4 py-1.5 rounded-full font-bold text-xs font-sans transition-colors duration-300 whitespace-nowrap ${
-                activeMenu === menu.id ? 'text-white' : 'text-slate-700 hover:text-slate-900'
+                activeMenu === menu.id ? 'text-white' : 'text-stone-700 hover:text-stone-900'
               }`}
             >
               {menu.label}
@@ -185,21 +185,21 @@ export default function Home() {
             {/* CARD 1: HERO / PORTOFOLIO UTAMA (Col Span 2) */}
             <div className="lg:col-span-2 bg-white/60 backdrop-blur-xl rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 md:p-10 border border-white/50 shadow-lg relative overflow-hidden flex flex-col justify-between min-h-[420px] group">
               <div className="space-y-4 max-w-xs sm:max-w-xl lg:w-[65%] w-full z-10">
-                <span className="inline-block px-3.5 py-1 rounded-full bg-white/50 backdrop-blur-md border border-white/60 text-slate-800 font-extrabold text-xs tracking-wider uppercase font-sans">
+                <span className="inline-block px-3.5 py-1 rounded-full bg-white/50 backdrop-blur-md border border-white/60 text-stone-800 font-extrabold text-xs tracking-wider uppercase font-sans">
                   CREATIVE PROFESSIONAL
                 </span>
-                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-900 leading-tight tracking-tight font-sans">
+                <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-stone-900 leading-tight tracking-tight font-sans">
                   Portfolio<br />
-                  <span className="text-slate-700 whitespace-nowrap">Andhika Rievaldy</span>
+                  <span className="text-stone-700 whitespace-nowrap">Andhika Rievaldy</span>
                 </h1>
-                <p className="text-slate-700 text-sm sm:text-base leading-relaxed font-sans text-justify pt-1">
+                <p className="text-stone-700 text-sm sm:text-base leading-relaxed font-sans text-justify pt-1">
                   Building a strong visual identity and executing digital media strategies. Experienced in crafting brand narratives, producing creative content, and optimizing digital channel performance.
                 </p>
                 <div className="pt-3 flex flex-wrap gap-3 z-20">
                   <a
                     href="#card-projects"
                     onClick={(e) => handleScroll(e, 'card-projects')}
-                    className="inline-flex items-center justify-center bg-slate-900 hover:bg-slate-800 text-white font-bold text-sm px-6 py-3 rounded-full transition-all shadow-md group-hover:scale-[1.02]"
+                    className="inline-flex items-center justify-center bg-[#2b2624] hover:bg-[#3a3330] text-white font-bold text-sm px-6 py-3 rounded-full transition-all shadow-md group-hover:scale-[1.02]"
                   >
                     <span>Explore Works</span>
                   </a>
@@ -221,46 +221,53 @@ export default function Home() {
             <div id="card-profile" className="lg:col-span-1 bg-white/60 backdrop-blur-xl rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 border border-white/50 shadow-lg flex flex-col justify-between space-y-6">
               
               {/* Header Profile Avatar */}
-              <div className="flex items-center gap-4 border-b border-white/40 pb-4">
-                <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full shrink-0 overflow-hidden shadow-md">
+              <div className="flex items-center gap-3 border-b border-white/40 pb-4">
+                <div 
+                  onClick={() => setZoomedMedia('/avatar.jpg')}
+                  className="w-16 h-16 sm:w-20 sm:h-20 rounded-full shrink-0 overflow-hidden shadow-md cursor-pointer hover:scale-105 hover:opacity-90 transition-all duration-300 bg-stone-200"
+                >
                   {!profileImgError ? (
-                    <img src="/avatar.jpg" alt="Avatar" className="w-full h-full object-cover object-center rounded-full bg-slate-200" />
+                    <img src="/avatar.jpg" alt="Avatar" className="w-full h-full object-cover object-center rounded-full" />
                   ) : (
-                    <div className="w-full h-full flex items-center justify-center text-white font-bold text-lg bg-slate-900">RK</div>
+                    <div className="w-full h-full flex items-center justify-center text-white font-bold text-lg bg-[#2b2624]">RK</div>
                   )}
                 </div>
-                <div>
-                  <h2 className="text-base sm:text-lg font-bold text-slate-900 leading-snug">Rievaldy Andhika Koswara, S.I.Kom</h2>
-                  <p className="text-xs font-semibold text-slate-600 pt-0.5">Marketing Communication Specialist</p>
+                <div className="min-w-0 flex-1">
+                  <h2 className="text-base sm:text-base font-bold text-stone-900 leading-snug whitespace-nowrap tracking-tight truncate">
+                    Rievaldy Andhika Koswara, S.I.Kom
+                  </h2>
+                  <p className="text-xs font-semibold text-stone-600 pt-0.5 truncate">
+                    Marketing Communication Specialist
+                  </p>
                 </div>
               </div>
 
               {/* About Me */}
               <div className="space-y-1.5">
-                <span className="text-[11px] font-extrabold text-slate-500 tracking-widest uppercase">ABOUT ME</span>
-                <p className="text-xs text-slate-700 leading-relaxed text-justify">
+                <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">ABOUT ME</span>
+                <p className="text-xs text-stone-700 leading-relaxed text-justify">
                   Marketing Communication graduate focusing on strengthening brand identity and executing digital media strategies. Experienced in crafting brand narratives, producing creative content, and optimizing digital channel performance.
                 </p>
               </div>
 
               {/* Contact Info Chips */}
               <div className="space-y-1.5">
-                <span className="text-[11px] font-extrabold text-slate-500 tracking-widest uppercase">CONTACT INFO</span>
+                <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">CONTACT INFO</span>
                 <div className="flex flex-col gap-2">
-                  <a href="mailto:andhikarievaldy07@gmail.com" className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-slate-800 transition-colors truncate shadow-sm">
-                    <svg width="15" height="15" className="text-slate-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                  <a href="mailto:andhikarievaldy07@gmail.com" className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-stone-800 transition-colors truncate shadow-sm">
+                    <svg width="15" height="15" className="text-stone-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
                     <span className="truncate">andhikarievaldy07@gmail.com</span>
                   </a>
-                  <a href="https://wa.me/6285179770217" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-slate-800 transition-colors shadow-sm">
-                    <svg width="15" height="15" className="text-slate-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
+                  <a href="https://wa.me/6285179770217" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-stone-800 transition-colors shadow-sm">
+                    <svg width="15" height="15" className="text-stone-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/></svg>
                     <span>+62 851-7977-0217</span>
                   </a>
-                  <a href="https://www.linkedin.com/in/rievaldyandhika/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-slate-800 transition-colors truncate shadow-sm">
-                    <svg width="15" height="15" className="text-slate-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+                  <a href="https://www.linkedin.com/in/rievaldyandhika/" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-stone-800 transition-colors truncate shadow-sm">
+                    <svg width="15" height="15" className="text-stone-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
                     <span className="truncate">linkedin.com/in/rievaldyandhika</span>
                   </a>
-                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 border border-white/60 text-xs font-bold text-slate-800 shadow-sm">
-                    <svg width="15" height="15" className="text-slate-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <div className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 border border-white/60 text-xs font-bold text-stone-800 shadow-sm">
+                    <svg width="15" height="15" className="text-stone-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     <span>Tangerang, Indonesia</span>
                   </div>
                 </div>
@@ -268,26 +275,26 @@ export default function Home() {
 
               {/* Sertifikat Buttons */}
               <div className="space-y-2 pt-2 border-t border-white/40">
-                <span className="text-[11px] font-extrabold text-slate-500 tracking-widest uppercase">CERTIFICATIONS</span>
+                <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">CERTIFICATIONS</span>
                 <div className="flex flex-col gap-2">
                   <button
                     type="button"
                     onClick={() => openCert('Sertifikat LSP BNSP', '/certificates/sertifikat-bnsp.pdf', 'pdf')}
-                    className="w-full flex items-center justify-center p-2.5 rounded-xl bg-slate-900 text-white hover:bg-slate-800 text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
+                    className="w-full flex items-center justify-center p-2.5 rounded-xl bg-[#2b2624] text-white hover:bg-[#3a3330] text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
                   >
                     <span>Sertifikat LSP BNSP</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => openCert('Sertifikat Digital Marketing Revou', '/certificates/sertifikat-digital-marketing-revou.pdf', 'pdf')}
-                    className="w-full flex items-center justify-center p-2.5 rounded-xl bg-white/60 text-slate-900 hover:bg-white/80 border border-white/70 text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
+                    className="w-full flex items-center justify-center p-2.5 rounded-xl bg-white/60 text-stone-900 hover:bg-white/80 border border-white/70 text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
                   >
                     <span>Sertifikat Digital Marketing Revou</span>
                   </button>
                   <button
                     type="button"
                     onClick={() => openCert('Sertifikat Digital Marketing Afaq Academy', '/certificates/sertifikat-digital-marketing-afaq-academy.pdf', 'pdf')}
-                    className="w-full flex items-center justify-center p-2.5 rounded-xl bg-white/60 text-slate-900 hover:bg-white/80 border border-white/70 text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
+                    className="w-full flex items-center justify-center p-2.5 rounded-xl bg-white/60 text-stone-900 hover:bg-white/80 border border-white/70 text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
                   >
                     <span>Sertifikat Digital Marketing Afaq Academy</span>
                   </button>
@@ -337,14 +344,14 @@ export default function Home() {
               ].map((srv, idx) => (
                 <div
                   key={idx}
-                  className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-white/50 shadow-lg transition-all duration-300 hover:bg-slate-900 hover:text-white flex flex-col justify-start group cursor-default min-h-[200px]"
+                  className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-white/50 shadow-lg transition-all duration-300 hover:bg-[#2b2624] hover:text-white flex flex-col justify-start group cursor-default min-h-[200px]"
                 >
                   <div className="space-y-4">
-                    <div className="w-12 h-12 rounded-2xl bg-white/50 group-hover:bg-slate-800 text-slate-900 group-hover:text-white flex items-center justify-center transition-colors shadow-sm">
+                    <div className="w-12 h-12 rounded-2xl bg-white/50 group-hover:bg-[#3a3330] text-stone-900 group-hover:text-white flex items-center justify-center transition-colors shadow-sm">
                       {srv.icon}
                     </div>
                     <h3 className="text-lg font-bold leading-snug group-hover:text-white">{srv.title}</h3>
-                    <p className="text-xs text-slate-700 group-hover:text-slate-300 leading-relaxed text-justify">
+                    <p className="text-xs text-stone-700 group-hover:text-stone-300 leading-relaxed text-justify">
                       {srv.desc}
                     </p>
                   </div>
@@ -356,8 +363,8 @@ export default function Home() {
             <div id="card-projects" className="lg:col-span-2 bg-white/60 backdrop-blur-xl rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 border border-white/50 shadow-lg space-y-6">
               <div className="flex items-center justify-between border-b border-white/40 pb-4">
                 <div>
-                  <span className="text-[11px] font-extrabold text-slate-500 tracking-widest uppercase">PORTFOLIO</span>
-                  <h2 className="text-2xl font-black text-slate-900">Featured Projects</h2>
+                  <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">PORTFOLIO</span>
+                  <h2 className="text-2xl font-black text-stone-900">Featured Projects</h2>
                 </div>
               </div>
 
@@ -393,20 +400,20 @@ export default function Home() {
                     className="p-5 rounded-2xl bg-white/50 backdrop-blur-md border border-white/60 hover:border-white/90 flex flex-col justify-between space-y-4 hover:shadow-md transition-all group"
                   >
                     <div className="space-y-1.5">
-                      <span className="text-[10px] font-extrabold text-slate-500 uppercase tracking-wider block">
+                      <span className="text-[10px] font-extrabold text-stone-500 uppercase tracking-wider block">
                         {proj.tag}
                       </span>
-                      <h3 className="text-base font-black text-slate-900 group-hover:text-blue-700 transition-colors">
+                      <h3 className="text-base font-black text-stone-900 group-hover:text-stone-700 transition-colors">
                         {proj.name}
                       </h3>
-                      <p className="text-xs text-slate-700 leading-relaxed">
+                      <p className="text-xs text-stone-700 leading-relaxed">
                         {proj.desc}
                       </p>
                     </div>
                     <button
                       type="button"
                       onClick={proj.action}
-                      className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 transition-all cursor-pointer text-center shadow-sm"
+                      className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer text-center shadow-sm"
                     >
                       View Portfolio
                     </button>
@@ -418,8 +425,8 @@ export default function Home() {
             {/* CARD KANAN BAWAH: SOFTWARE SKILLS (Col Span 1) */}
             <div id="card-skills" className="lg:col-span-1 bg-white/60 backdrop-blur-xl rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 border border-white/50 shadow-lg flex flex-col justify-between space-y-6">
               <div>
-                <span className="text-[11px] font-extrabold text-slate-500 tracking-widest uppercase">PROFICIENCY</span>
-                <h2 className="text-2xl font-black text-slate-900 mb-4">Software Skills</h2>
+                <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">PROFICIENCY</span>
+                <h2 className="text-2xl font-black text-stone-900 mb-4">Software Skills</h2>
                 <div className="grid grid-cols-2 gap-2">
                   {[
                     { name: 'Photoshop', cat: 'Editing' },
@@ -433,20 +440,20 @@ export default function Home() {
                     { name: 'Google Sheets', cat: 'Analytics' }
                   ].map((tool, idx) => (
                     <div key={idx} className="p-2.5 rounded-xl bg-white/50 border border-white/60 flex flex-col hover:bg-white/80 transition-colors shadow-sm">
-                      <span className="font-bold text-xs text-slate-900">{tool.name}</span>
-                      <span className="text-[10px] text-slate-500 font-semibold">{tool.cat}</span>
+                      <span className="font-bold text-xs text-stone-900">{tool.name}</span>
+                      <span className="text-[10px] text-stone-500 font-semibold">{tool.cat}</span>
                     </div>
                   ))}
                 </div>
               </div>
 
               {/* FOOTER CONNECT */}
-              <div className="p-4 rounded-2xl bg-slate-900 text-white space-y-3 shadow-md">
-                <span className="text-[10px] font-extrabold text-slate-400 tracking-wider uppercase block">LET'S CONNECT</span>
+              <div className="p-4 rounded-2xl bg-[#2b2624] text-white space-y-3 shadow-md">
+                <span className="text-[10px] font-extrabold text-stone-400 tracking-wider uppercase block">LET'S CONNECT</span>
                 <h3 className="text-sm font-bold leading-snug">Interested in collaborating on a creative project?</h3>
                 <a
                   href="mailto:andhikarievaldy07@gmail.com"
-                  className="inline-block w-full py-2 bg-white text-slate-900 text-xs font-bold text-center rounded-xl hover:bg-slate-100 transition-colors shadow-sm"
+                  className="inline-block w-full py-2 bg-white text-stone-900 text-xs font-bold text-center rounded-xl hover:bg-stone-100 transition-colors shadow-sm"
                 >
                   Email Me Directly
                 </a>
@@ -463,12 +470,12 @@ export default function Home() {
               <button
                 type="button"
                 onClick={goToMain}
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm"
               >
                 ← Back to Home
               </button>
-              <h1 className="text-3xl sm:text-4xl font-black text-slate-900">Social Media Management</h1>
-              <p className="text-sm text-slate-700 leading-relaxed">
+              <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Social Media Management</h1>
+              <p className="text-sm text-stone-700 leading-relaxed">
                 A documentation collection of social media strategy execution, content calendar planning, copywriting narrative creation, and brand audience engagement.
               </p>
             </div>
@@ -526,13 +533,13 @@ export default function Home() {
               ].map((item, idx) => (
                 <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
-                    <h2 className="text-xl font-bold text-slate-900">{item.name}</h2>
-                    <p className="text-xs text-slate-700 leading-relaxed">{item.desc}</p>
+                    <h2 className="text-xl font-bold text-stone-900">{item.name}</h2>
+                    <p className="text-xs text-stone-700 leading-relaxed">{item.desc}</p>
                   </div>
                   <button
                     type="button"
                     onClick={item.action}
-                    className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 transition-all cursor-pointer shadow-sm"
+                    className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm"
                   >
                     View Portfolio
                   </button>
@@ -546,11 +553,11 @@ export default function Home() {
         {currentView === 'photography' && (
           <div className="space-y-6">
             <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/50 shadow-lg space-y-4">
-              <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
+              <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
                 ← Back to Home
               </button>
-              <h1 className="text-3xl sm:text-4xl font-black text-slate-900">Commercial Photography</h1>
-              <p className="text-sm text-slate-700 leading-relaxed">
+              <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Commercial Photography</h1>
+              <p className="text-sm text-stone-700 leading-relaxed">
                 Visual direction, studio lighting setup, and commercial product photography enhanced with professional retouching techniques.
               </p>
             </div>
@@ -572,10 +579,10 @@ export default function Home() {
               ].map((item, idx) => (
                 <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
-                    <h2 className="text-xl font-bold text-slate-900">{item.name}</h2>
-                    <p className="text-xs text-slate-700 leading-relaxed">{item.desc}</p>
+                    <h2 className="text-xl font-bold text-stone-900">{item.name}</h2>
+                    <p className="text-xs text-stone-700 leading-relaxed">{item.desc}</p>
                   </div>
-                  <button type="button" onClick={item.action} className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 transition-all cursor-pointer shadow-sm">
+                  <button type="button" onClick={item.action} className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm">
                     View Portfolio
                   </button>
                 </div>
@@ -588,11 +595,11 @@ export default function Home() {
         {currentView === 'videography' && (
           <div className="space-y-6">
             <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/50 shadow-lg space-y-4">
-              <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
+              <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
                 ← Back to Home
               </button>
-              <h1 className="text-3xl sm:text-4xl font-black text-slate-900">Videography & Video Editing</h1>
-              <p className="text-sm text-slate-700 leading-relaxed">
+              <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Videography & Video Editing</h1>
+              <p className="text-sm text-stone-700 leading-relaxed">
                 Production and editing of commercial videos, creative projects, and vlogging content driven by dynamic visual storytelling.
               </p>
             </div>
@@ -617,10 +624,10 @@ export default function Home() {
               ].map((item, idx) => (
                 <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
-                    <h2 className="text-xl font-bold text-slate-900">{item.name}</h2>
-                    <p className="text-xs text-slate-700 leading-relaxed">{item.desc}</p>
+                    <h2 className="text-xl font-bold text-stone-900">{item.name}</h2>
+                    <p className="text-xs text-stone-700 leading-relaxed">{item.desc}</p>
                   </div>
-                  <button type="button" onClick={item.action} className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 transition-all cursor-pointer shadow-sm">
+                  <button type="button" onClick={item.action} className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm">
                     View Portfolio
                   </button>
                 </div>
@@ -633,11 +640,11 @@ export default function Home() {
         {currentView === 'graphic-design' && (
           <div className="space-y-6">
             <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/50 shadow-lg space-y-4">
-              <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-slate-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
+              <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
                 ← Back to Home
               </button>
-              <h1 className="text-3xl sm:text-4xl font-black text-slate-900">Graphic Design & Visual Content</h1>
-              <p className="text-sm text-slate-700 leading-relaxed">
+              <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Graphic Design & Visual Content</h1>
+              <p className="text-sm text-stone-700 leading-relaxed">
                 Designing visual identities, seminar promotional media, e-commerce assets, interactive AR filters, and operational brand merchandise.
               </p>
             </div>
@@ -710,10 +717,10 @@ export default function Home() {
               ].map((item, idx) => (
                 <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
                   <div className="space-y-2">
-                    <h2 className="text-xl font-bold text-slate-900">{item.name}</h2>
-                    <p className="text-xs text-slate-700 leading-relaxed">{item.desc}</p>
+                    <h2 className="text-xl font-bold text-stone-900">{item.name}</h2>
+                    <p className="text-xs text-stone-700 leading-relaxed">{item.desc}</p>
                   </div>
-                  <button type="button" onClick={item.action} className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 transition-all cursor-pointer shadow-sm">
+                  <button type="button" onClick={item.action} className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm">
                     View Portfolio
                   </button>
                 </div>
@@ -726,13 +733,13 @@ export default function Home() {
 
       {/* MODAL SERTIFIKAT */}
       {activeCert && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-md" onClick={closeCert}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-stone-900/60 backdrop-blur-md" onClick={closeCert}>
           <div className="relative w-full max-w-4xl bg-white/90 backdrop-blur-2xl rounded-3xl p-6 flex flex-col overflow-hidden shadow-2xl border border-white/60" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between pb-3 border-b border-slate-200 mb-4">
-              <h3 className="text-lg font-bold text-slate-900">{activeCert.title}</h3>
-              <button type="button" onClick={closeCert} className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center text-slate-800 font-bold">✕</button>
+            <div className="flex items-center justify-between pb-3 border-b border-stone-200 mb-4">
+              <h3 className="text-lg font-bold text-stone-900">{activeCert.title}</h3>
+              <button type="button" onClick={closeCert} className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center text-stone-800 font-bold">✕</button>
             </div>
-            <div className="w-full aspect-[1.414/1] max-h-[75vh] overflow-hidden rounded-xl bg-slate-100">
+            <div className="w-full aspect-[1.414/1] max-h-[75vh] overflow-hidden rounded-xl bg-stone-100">
               {activeCert.type === 'pdf' ? (
                 <iframe src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`} className="w-full h-full border-0 rounded-xl" title={activeCert.title} />
               ) : (
@@ -745,39 +752,39 @@ export default function Home() {
 
       {/* MODAL HASIL PORTOFOLIO */}
       {activePreview && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-slate-900/60 backdrop-blur-md" onClick={closePreview}>
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-stone-900/60 backdrop-blur-md" onClick={closePreview}>
           <div className="relative w-full max-w-5xl bg-white/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 space-y-6 overflow-hidden max-h-[90vh] flex flex-col shadow-2xl border border-white/60" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between pb-4 border-b border-slate-200">
-              <h3 className="text-xl font-black text-slate-900">Portfolio - {activePreview.title}</h3>
-              <button type="button" onClick={closePreview} className="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 flex items-center justify-center font-bold">✕</button>
+            <div className="flex items-center justify-between pb-4 border-b border-stone-200">
+              <h3 className="text-xl font-black text-stone-900">Portfolio - {activePreview.title}</h3>
+              <button type="button" onClick={closePreview} className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center font-bold">✕</button>
             </div>
 
             <div className="overflow-y-auto space-y-6 pr-1 max-h-[75vh]">
               {activePreview.username ? (
                 <div className="space-y-6">
                   <div className="p-6 rounded-2xl bg-white/60 border border-white/80 flex flex-col sm:flex-row items-start sm:items-center gap-6 shadow-sm">
-                    <div className="w-20 h-20 rounded-full bg-slate-900 p-0.5 shrink-0 overflow-hidden">
+                    <div className="w-20 h-20 rounded-full bg-[#2b2624] p-0.5 shrink-0 overflow-hidden">
                       <InstagramAvatar username={activePreview.username} displayName={activePreview.displayName} avatarImg={activePreview.avatarImg} />
                     </div>
                     <div className="space-y-2 flex-1">
                       <div className="flex flex-wrap items-center gap-3">
-                        <h2 className="text-xl font-bold text-slate-900">{activePreview.username}</h2>
-                        <a href={activePreview.instagramUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 rounded-xl text-xs font-bold text-white bg-slate-900 hover:bg-slate-800 shadow-sm">
+                        <h2 className="text-xl font-bold text-stone-900">{activePreview.username}</h2>
+                        <a href={activePreview.instagramUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] shadow-sm">
                           Visit Instagram
                         </a>
                       </div>
-                      <div className="flex gap-4 text-xs font-medium text-slate-600">
+                      <div className="flex gap-4 text-xs font-medium text-stone-600">
                         <span><b>{activePreview.postsCount}</b> posts</span>
                         <span><b>{activePreview.followersCount}</b> followers</span>
                         <span><b>{activePreview.followingCount}</b> following</span>
                       </div>
-                      <p className="text-xs text-slate-700 whitespace-pre-line">{activePreview.bio?.join('\n')}</p>
+                      <p className="text-xs text-stone-700 whitespace-pre-line">{activePreview.bio?.join('\n')}</p>
                     </div>
                   </div>
 
                   <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
                     {activePreview.posts?.map((post, index) => (
-                      <div key={index} className="rounded-2xl overflow-hidden border border-slate-200 min-h-[400px]">
+                      <div key={index} className="rounded-2xl overflow-hidden border border-stone-200 min-h-[400px]">
                         <iframe src={post.embedUrl} className="w-full h-full min-h-[400px] border-0" scrolling="no" allow="autoplay" title={`IG Post ${index + 1}`} />
                       </div>
                     ))}
@@ -809,7 +816,7 @@ export default function Home() {
 
       {/* LIGHTBOX OVERLAY */}
       {zoomedMedia && (
-        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-slate-900/90 backdrop-blur-md" onClick={() => setZoomedMedia(null)}>
+        <div className="fixed inset-0 z-[60] flex items-center justify-center p-4 bg-stone-900/90 backdrop-blur-md" onClick={() => setZoomedMedia(null)}>
           <div className="relative max-w-4xl max-h-[90vh] w-full flex items-center justify-center" onClick={(e) => e.stopPropagation()}>
             <button type="button" onClick={() => setZoomedMedia(null)} className="absolute -top-12 right-0 w-10 h-10 rounded-full bg-white/20 text-white flex items-center justify-center text-lg font-bold">✕</button>
             {zoomedMedia.endsWith('.mp4') ? (

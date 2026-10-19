@@ -233,10 +233,10 @@ export default function Home() {
                   )}
                 </div>
                 <div className="min-w-0 flex-1">
-                  <h2 className="text-base sm:text-base font-bold text-stone-900 leading-snug whitespace-nowrap tracking-tight truncate">
+                  <h2 className="text-[13px] sm:text-[14px] font-bold text-stone-900 leading-tight tracking-tight">
                     Rievaldy Andhika Koswara, S.I.Kom
                   </h2>
-                  <p className="text-xs font-semibold text-stone-600 pt-0.5 truncate">
+                  <p className="text-xs font-semibold text-stone-600 pt-1">
                     Marketing Communication Specialist
                   </p>
                 </div>

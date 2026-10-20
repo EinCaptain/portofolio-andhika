@@ -760,18 +760,38 @@ export default function Home() {
 
             {/* Area Gambar dengan Scrollbar Otomatis Jika Layar Pendek */}
             <div className="flex-1 overflow-y-auto w-full flex justify-center items-start rounded-lg bg-white/40 p-1">
-              {activeCert?.type === 'pdf' ? (
-                <iframe
-                  src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
-                  className="w-full h-[75vh] min-h-[550px] border-0 rounded-md bg-white"
-                  title={activeCert.title}
-                />
+              {/* LOGIKA PERCABANGAN KHUSUS SERTIFIKAT BNSP */}
+              {activeCert?.title?.includes('BNSP') ? (
+                <div className="relative w-full max-w-md aspect-[1/1.414] max-h-[80vh] overflow-hidden rounded-lg border border-stone-200 bg-white mx-auto shadow-sm">
+                  {activeCert?.type === 'pdf' ? (
+                    <iframe
+                      src={`${activeCert.src}#page=1&toolbar=0&navpanes=0&scrollbar=0`}
+                      className="w-full h-full border-0"
+                      title={activeCert.title}
+                    />
+                  ) : (
+                    <img 
+                      src={activeCert?.src} 
+                      alt={activeCert?.title} 
+                      className="w-full h-auto object-cover object-top block"
+                    />
+                  )}
+                </div>
               ) : (
-                <img 
-                  src={activeCert?.src} 
-                  alt={activeCert?.title} 
-                  className="w-full h-auto object-contain block rounded-md"
-                />
+                /* LOGIKA UNTUK SERTIFIKAT LAINNYA (LANDSCAPE) */
+                activeCert?.type === 'pdf' ? (
+                  <iframe
+                    src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
+                    className="w-full h-[75vh] min-h-[550px] border-0 rounded-md bg-white"
+                    title={activeCert.title}
+                  />
+                ) : (
+                  <img 
+                    src={activeCert?.src} 
+                    alt={activeCert?.title} 
+                    className="w-full h-auto object-contain block rounded-md"
+                  />
+                )
               )}
             </div>
 

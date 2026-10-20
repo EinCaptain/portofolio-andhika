@@ -738,45 +738,43 @@ export default function Home() {
 
       {/* MODAL SERTIFIKAT (CREDENTIAL VIEWER) */}
       {activeCert && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm" onClick={closeCert}>
-          <div
-            className={`relative bg-[#ede6e3] rounded-2xl p-5 sm:p-6 shadow-2xl transition-all w-full max-h-[90vh] flex flex-col ${
-              activeCert?.title?.includes('BNSP')
-                ? 'max-w-xl' // Modal lebih ramping untuk Sertifikat Portrait (BNSP)
-                : 'max-w-4xl' // Modal lebih lebar untuk Sertifikat Landscape (RevoU & Afaq)
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/60 backdrop-blur-sm" onClick={closeCert}>
+          <div 
+            className={`relative bg-[#ede6e3] rounded-2xl p-3 sm:p-4 shadow-2xl transition-all w-full max-h-[88vh] flex flex-col ${
+              activeCert?.title?.includes('BNSP') ? 'max-w-lg' : 'max-w-4xl'
             }`}
             onClick={(e) => e.stopPropagation()}
           >
+            
             {/* Header Modal */}
-            <div className="flex items-center justify-between mb-4 pb-2 border-b border-stone-300">
-              <h3 className="text-lg font-bold text-stone-900">{activeCert?.title}</h3>
-              <button
+            <div className="flex items-center justify-between pb-2 mb-2 border-b border-stone-300/60">
+              <h3 className="text-sm sm:text-base font-bold text-stone-900">{activeCert?.title}</h3>
+              <button 
                 type="button"
                 onClick={closeCert}
-                className="p-1.5 rounded-full hover:bg-stone-300/50 text-stone-700 transition-colors font-bold"
+                className="p-1 rounded-full hover:bg-stone-300/50 text-stone-700 transition-colors text-sm font-bold"
               >
                 ✕
               </button>
             </div>
 
-            {/* Area Tampilan Gambar / PDF Sertifikat */}
-            <div className="flex-1 overflow-y-auto bg-transparent p-0">
-              <div className="w-fit h-fit mx-auto p-0 bg-transparent rounded-lg overflow-hidden">
-                {activeCert?.type === 'pdf' ? (
-                  <iframe
-                    src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
-                    className="w-full h-[75vh] min-h-[550px] border-0 rounded-lg bg-white"
-                    title={activeCert.title}
-                  />
-                ) : (
-                  <img
-                    src={activeCert?.src}
-                    alt={activeCert?.title}
-                    className="w-full h-auto max-h-[80vh] object-contain block rounded-lg"
-                  />
-                )}
-              </div>
+            {/* Area Gambar dengan Scrollbar Otomatis Jika Layar Pendek */}
+            <div className="flex-1 overflow-y-auto w-full flex justify-center items-start rounded-lg bg-white/40 p-1">
+              {activeCert?.type === 'pdf' ? (
+                <iframe
+                  src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
+                  className="w-full h-[75vh] min-h-[550px] border-0 rounded-md bg-white"
+                  title={activeCert.title}
+                />
+              ) : (
+                <img 
+                  src={activeCert?.src} 
+                  alt={activeCert?.title} 
+                  className="w-full h-auto object-contain block rounded-md"
+                />
+              )}
             </div>
+
           </div>
         </div>
       )}

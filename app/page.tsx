@@ -523,7 +523,6 @@ export default function Home() {
                     postsCount: '25', followersCount: '394', followingCount: '0',
                     bio: ['Smart Detailing Made Easy', '#CareYouCanSee', 'Bikin mobil glowing tanpa ribet.', '👇 Pilih produk favoritmu! 👇'],
                     website: 'linktr.ee/GlovecareOfficial',
-                    // Semua URL embed di bawah ini telah dikonversi ke format embed/captioned/ otomatis
                     posts: [
                       { url: 'https://www.instagram.com/reel/DLPA--khhxM/', embedUrl: 'https://www.instagram.com/reel/DLPA--khhxM/embed/captioned/' },
                       { url: 'https://www.instagram.com/reel/DLGsFF8hi1Q/', embedUrl: 'https://www.instagram.com/reel/DLGsFF8hi1Q/embed/captioned/' },
@@ -849,18 +848,21 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* GRID POSTINGAN IFRAME 3 KOLOM & KONTROL SCROLL max-h-[70vh] */}
+                  {/* GRID POSTINGAN IFRAME DENGAN CROPPING & KONTROL SCROLL */}
                   <div className="max-h-[70vh] overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-2">
                     {activePreview.posts?.map((post, index) => (
-                      <div key={index} className="w-full bg-white rounded-2xl overflow-hidden border border-stone-200/80 shadow-sm">
-                        <iframe
-                          src={post.embedUrl}
-                          className="w-full h-[520px] border-0 overflow-hidden rounded-2xl"
-                          frameBorder="0"
-                          scrolling="no"
-                          allowTransparency={true}
-                          title={`IG Post ${index + 1}`}
-                        />
+                      <div key={index} className="w-full bg-white rounded-2xl overflow-hidden border border-stone-200/80 shadow-sm relative">
+                        {/* Pembungkus Cropping: Menarik iframe ke atas untuk menyembunyikan header */}
+                        <div className="w-full overflow-hidden -mt-[54px]">
+                          <iframe
+                            src={post.embedUrl}
+                            className="w-full h-[580px] border-0"
+                            frameBorder="0"
+                            scrolling="no"
+                            allowTransparency={true}
+                            title={`IG Post ${index + 1}`}
+                          />
+                        </div>
                       </div>
                     ))}
                   </div>

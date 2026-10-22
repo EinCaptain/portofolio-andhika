@@ -24,6 +24,7 @@ type PreviewData = {
   mediaList?: string[];
 };
 
+// --- KOMPONEN PENDUKUNG --- //
 function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; alt?: string }) {
   const [hasError, setHasError] = useState(false);
 
@@ -59,6 +60,28 @@ function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; al
   );
 }
 
+function InstagramAvatar({ username, displayName, avatarImg }: { username?: string; displayName?: string; avatarImg?: string }) {
+  const [imgError, setImgError] = useState(false);
+
+  if (avatarImg && !imgError) {
+    return (
+      <img
+        src={avatarImg}
+        alt={displayName || username || 'Avatar'}
+        className="w-full h-full object-cover"
+        onError={() => setImgError(true)}
+      />
+    );
+  }
+
+  return (
+    <div className="w-full h-full flex items-center justify-center bg-[#2b2624] text-white font-bold text-sm uppercase font-sans">
+      {username ? username.substring(0, 2) : 'IG'}
+    </div>
+  );
+}
+
+// --- KOMPONEN UTAMA --- //
 export default function Home() {
   const [currentView, setCurrentView] = useState<'main' | 'social-media' | 'photography' | 'videography' | 'graphic-design'>('main');
   const [activeCert, setActiveCert] = useState<{ title: string; src: string; type: 'pdf' | 'image' } | null>(null);
@@ -66,7 +89,7 @@ export default function Home() {
   const [zoomedMedia, setZoomedMedia] = useState<string | null>(null);
   const [profileImgError, setProfileImgError] = useState(false);
 
-  // --- STATE & LOGIC NAVIGASI SLIDING PILL ---
+  // --- STATE & LOGIC NAVIGASI SLIDING PILL --- //
   const [activeMenu, setActiveMenu] = useState('home');
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
   const navRefs = React.useRef<(HTMLAnchorElement | null)[]>([]);
@@ -160,7 +183,6 @@ export default function Home() {
         {/* VIEW 1: BERANDA UTAMA (BENTO GRID LAYOUT) */}
         {currentView === 'main' && (
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
-
             {/* CARD 1: HERO / PORTOFOLIO UTAMA (Col Span 2) */}
             <div className="lg:col-span-2 bg-white/60 backdrop-blur-xl rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 md:p-10 border border-white/50 shadow-lg relative overflow-hidden flex flex-col justify-between min-h-[420px] group">
               <div className="space-y-4 max-w-xs sm:max-w-xl lg:w-[65%] w-full z-10">
@@ -501,6 +523,7 @@ export default function Home() {
                     postsCount: '25', followersCount: '394', followingCount: '0',
                     bio: ['Smart Detailing Made Easy', '#CareYouCanSee', 'Bikin mobil glowing tanpa ribet.', '👇 Pilih produk favoritmu! 👇'],
                     website: 'linktr.ee/GlovecareOfficial',
+                    // HANYA MASUKKAN SELURUH URL 25 POSTINGAN GLOVECARE DI BAWAH INI
                     posts: [
                       { url: 'https://www.instagram.com/p/DJnWHO7tVf6/', embedUrl: 'https://www.instagram.com/p/DJnWHO7tVf6/embed' },
                       { url: 'https://www.instagram.com/p/DJx3JZGKcM-/?img_index=1', embedUrl: 'https://www.instagram.com/p/DJx3JZGKcM-/embed' },
@@ -511,6 +534,7 @@ export default function Home() {
                       { url: 'https://www.instagram.com/p/DKs7pifuCl0/', embedUrl: 'https://www.instagram.com/p/DKs7pifuCl0/embed' },
                       { url: 'https://www.instagram.com/p/DKx-yHLOtZB/', embedUrl: 'https://www.instagram.com/p/DKx-yHLOtZB/embed' },
                       { url: 'https://www.instagram.com/p/DK6d85chp0T/', embedUrl: 'https://www.instagram.com/p/DK6d85chp0T/embed' }
+                      // Tambahkan sisa objek data array { url, embedUrl } postingan yang lain disini...
                     ]
                   })
                 }
@@ -783,26 +807,51 @@ export default function Home() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-stone-900/60 backdrop-blur-md" onClick={closePreview}>
           <div className="relative w-full max-w-5xl bg-white/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 space-y-6 overflow-hidden max-h-[90vh] flex flex-col shadow-2xl border border-white/60" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between pb-4 border-b border-stone-200">
+              {/* 1. MENGGANTI JUDUL MODAL MENJADI {activePreview.title} */}
               <h3 className="text-xl font-black text-stone-900">{activePreview.title}</h3>
               <button type="button" onClick={closePreview} className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center font-bold">✕</button>
             </div>
 
-            <div className="w-full flex-1">
+            <div className="w-full flex-1 overflow-hidden flex flex-col">
               {activePreview.username ? (
-                /* VIEW SOCIAL MEDIA (Hanya Grid Postingan, Profile Header Dihapus) */
-                <div className="max-h-[80vh] overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pr-2 pb-4">
-                  {activePreview.posts?.map((post, index) => (
-                    <div key={index} className="rounded-2xl overflow-hidden border border-stone-200 bg-white h-[450px] shadow-sm relative">
-                      {/* Negative Top CSS Trick memotong persis bagian mini-header instagram setinggi 54px */}
-                      <iframe 
-                        src={post.embedUrl} 
-                        className="absolute top-[-54px] left-0 w-full h-[calc(100%+54px)] border-0" 
-                        scrolling="yes" 
-                        allow="autoplay" 
-                        title={`IG Post ${index + 1}`} 
-                      />
+                <div className="flex flex-col space-y-6 h-full">
+                  {/* 2. TETAP TAMPILKAN HEADER PROFIL UTAMA */}
+                  <div className="p-6 rounded-2xl bg-white/60 border border-white/80 flex flex-col sm:flex-row items-start sm:items-center gap-6 shadow-sm shrink-0">
+                    <div className="w-20 h-20 rounded-full bg-[#2b2624] p-0.5 shrink-0 overflow-hidden">
+                      <InstagramAvatar username={activePreview.username} displayName={activePreview.displayName} avatarImg={activePreview.avatarImg} />
                     </div>
-                  ))}
+                    <div className="space-y-2 flex-1">
+                      <div className="flex flex-wrap items-center gap-3">
+                        <h2 className="text-xl font-bold text-stone-900">{activePreview.username}</h2>
+                        <a href={activePreview.instagramUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] shadow-sm">
+                          Visit Instagram
+                        </a>
+                      </div>
+                      <div className="flex gap-4 text-xs font-medium text-stone-600">
+                        <span><b>{activePreview.postsCount}</b> posts</span>
+                        <span><b>{activePreview.followersCount}</b> followers</span>
+                        <span><b>{activePreview.followingCount}</b> following</span>
+                      </div>
+                      <p className="text-xs text-stone-700 whitespace-pre-line">{activePreview.bio?.join('\n')}</p>
+                    </div>
+                  </div>
+
+                  {/* 3 & 4. GRID POSTINGAN TANPA MINI-HEADER DENGAN SCROLLBAR KHUSUS 65vh */}
+                  <div className="max-h-[65vh] overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-1">
+                    {/* .slice(0, 9) tidak ada, otomatis memunculkan seberapapun panjang array posts (misal: 25) */}
+                    {activePreview.posts?.map((post, index) => (
+                      <div key={index} className="rounded-2xl overflow-hidden border border-stone-200 bg-white h-[450px] shadow-sm relative">
+                        {/* Negative Top CSS Trick memotong persis bagian mini-header instagram */}
+                        <iframe 
+                          src={post.embedUrl} 
+                          className="absolute top-[-54px] left-0 w-full h-[calc(100%+54px)] border-0" 
+                          scrolling="yes" 
+                          allow="autoplay" 
+                          title={`IG Post ${index + 1}`} 
+                        />
+                      </div>
+                    ))}
+                  </div>
                 </div>
               ) : (
                 /* VIEW PORTOFOLIO LAINNYA */

@@ -59,27 +59,6 @@ function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; al
   );
 }
 
-function InstagramAvatar({ username, displayName, avatarImg }: { username?: string; displayName?: string; avatarImg?: string }) {
-  const [imgError, setImgError] = useState(false);
-
-  if (avatarImg && !imgError) {
-    return (
-      <img
-        src={avatarImg}
-        alt={displayName || username || 'Avatar'}
-        className="w-full h-full object-cover"
-        onError={() => setImgError(true)}
-      />
-    );
-  }
-
-  return (
-    <div className="w-full h-full flex items-center justify-center bg-[#2b2624] text-white font-bold text-sm uppercase font-sans">
-      {username ? username.substring(0, 2) : 'IG'}
-    </div>
-  );
-}
-
 export default function Home() {
   const [currentView, setCurrentView] = useState<'main' | 'social-media' | 'photography' | 'videography' | 'graphic-design'>('main');
   const [activeCert, setActiveCert] = useState<{ title: string; src: string; type: 'pdf' | 'image' } | null>(null);
@@ -804,43 +783,30 @@ export default function Home() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-stone-900/60 backdrop-blur-md" onClick={closePreview}>
           <div className="relative w-full max-w-5xl bg-white/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 space-y-6 overflow-hidden max-h-[90vh] flex flex-col shadow-2xl border border-white/60" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between pb-4 border-b border-stone-200">
-              <h3 className="text-xl font-black text-stone-900">Portfolio - {activePreview.title}</h3>
+              <h3 className="text-xl font-black text-stone-900">{activePreview.title}</h3>
               <button type="button" onClick={closePreview} className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center font-bold">✕</button>
             </div>
 
-            <div className="overflow-y-auto space-y-6 pr-1 max-h-[75vh]">
+            <div className="w-full flex-1">
               {activePreview.username ? (
-                <div className="space-y-6">
-                  <div className="p-6 rounded-2xl bg-white/60 border border-white/80 flex flex-col sm:flex-row items-start sm:items-center gap-6 shadow-sm">
-                    <div className="w-20 h-20 rounded-full bg-[#2b2624] p-0.5 shrink-0 overflow-hidden">
-                      <InstagramAvatar username={activePreview.username} displayName={activePreview.displayName} avatarImg={activePreview.avatarImg} />
+                /* VIEW SOCIAL MEDIA (Hanya Grid Postingan, Profile Header Dihapus) */
+                <div className="max-h-[80vh] overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pr-2 pb-4">
+                  {activePreview.posts?.map((post, index) => (
+                    <div key={index} className="rounded-2xl overflow-hidden border border-stone-200 bg-white h-[450px] shadow-sm relative">
+                      {/* Negative Top CSS Trick memotong persis bagian mini-header instagram setinggi 54px */}
+                      <iframe 
+                        src={post.embedUrl} 
+                        className="absolute top-[-54px] left-0 w-full h-[calc(100%+54px)] border-0" 
+                        scrolling="yes" 
+                        allow="autoplay" 
+                        title={`IG Post ${index + 1}`} 
+                      />
                     </div>
-                    <div className="space-y-2 flex-1">
-                      <div className="flex flex-wrap items-center gap-3">
-                        <h2 className="text-xl font-bold text-stone-900">{activePreview.username}</h2>
-                        <a href={activePreview.instagramUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] shadow-sm">
-                          Visit Instagram
-                        </a>
-                      </div>
-                      <div className="flex gap-4 text-xs font-medium text-stone-600">
-                        <span><b>{activePreview.postsCount}</b> posts</span>
-                        <span><b>{activePreview.followersCount}</b> followers</span>
-                        <span><b>{activePreview.followingCount}</b> following</span>
-                      </div>
-                      <p className="text-xs text-stone-700 whitespace-pre-line">{activePreview.bio?.join('\n')}</p>
-                    </div>
-                  </div>
-
-                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-                    {activePreview.posts?.map((post, index) => (
-                      <div key={index} className="rounded-2xl overflow-hidden border border-stone-200 min-h-[400px]">
-                        <iframe src={post.embedUrl} className="w-full h-full min-h-[400px] border-0" scrolling="no" allow="autoplay" title={`IG Post ${index + 1}`} />
-                      </div>
-                    ))}
-                  </div>
+                  ))}
                 </div>
               ) : (
-                <div className="space-y-4">
+                /* VIEW PORTOFOLIO LAINNYA */
+                <div className="max-h-[80vh] overflow-y-auto pr-2 pb-4 space-y-4">
                   {activePreview.mediaList && activePreview.mediaList.length > 0 ? (
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4 bg-white/50 rounded-2xl border border-white/60">
                       {activePreview.mediaList.map((file, i) => (

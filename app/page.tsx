@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 
 type PostItem = {
   url: string;
-  embedUrl: string;
+  embedUrl?: string;  // Opsional (masih dipakai oleh Diatera Tech)
+  mediaSrc?: string;  // Sumber gambar lokal/thumbnail (untuk card kustom)
+  caption?: string;   // Teks caption
+  hashtags?: string;  // Kumpulan hashtag
 };
 
 type PreviewData = {
@@ -30,8 +33,8 @@ function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; al
 
   if (hasError) {
     return (
-      <div className="w-full h-full aspect-square rounded-xl border border-white/40 bg-white/30 backdrop-blur-md flex items-center justify-center p-2 text-xs text-stone-600 break-all font-sans">
-        {src}
+      <div className="w-full h-full aspect-square rounded-xl border border-white/40 bg-white/30 backdrop-blur-md flex items-center justify-center p-2 text-xs text-stone-600 break-all font-sans text-center">
+        Image/Video not found:<br/>{src}
       </div>
     );
   }
@@ -44,7 +47,7 @@ function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; al
         loop
         autoPlay
         playsInline
-        className="w-full h-full aspect-square object-contain rounded-xl shadow-sm border border-stone-200 bg-stone-900 pointer-events-none"
+        className="w-full h-full aspect-square object-cover rounded-xl shadow-sm border border-stone-200 bg-stone-900 pointer-events-none"
         onError={() => setHasError(true)}
       />
     );
@@ -54,7 +57,7 @@ function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; al
     <img
       src={src}
       alt={alt || title}
-      className="w-full h-full aspect-square object-contain rounded-xl shadow-sm border border-white/60 bg-white/80 hover:scale-[1.03] transition-transform duration-200 pointer-events-none"
+      className="w-full h-full aspect-square object-cover rounded-xl shadow-sm border border-stone-100 hover:scale-[1.03] transition-transform duration-200 pointer-events-none"
       onError={() => setHasError(true)}
     />
   );
@@ -501,11 +504,11 @@ export default function Home() {
                     bio: ['Smart Solutions, Seamless Integration, Embrace the IoT Advantage 🌐💡', '📩 : support@diatera.com', 'Learn More', '👇👇👇👇👇'],
                     website: 'www.diatera.com',
                     posts: [
-                      { url: 'https://www.instagram.com/p/C7qLDlSpypd/?img_index=1', embedUrl: 'https://www.instagram.com/p/C7qLDlSpypd/embed' },
+                      { url: 'https://www.instagram.com/p/C7qLDlSpypd/', embedUrl: 'https://www.instagram.com/p/C7qLDlSpypd/embed' },
                       { url: 'https://www.instagram.com/p/C7SvsGjPA6i/', embedUrl: 'https://www.instagram.com/p/C7SvsGjPA6i/embed' },
-                      { url: 'https://www.instagram.com/p/C7RqeQcJvmb/?img_index=1', embedUrl: 'https://www.instagram.com/p/C7RqeQcJvmb/embed' },
-                      { url: 'https://www.instagram.com/p/C7RTunxJW2X/?img_index=1', embedUrl: 'https://www.instagram.com/p/C7RTunxJW2X/embed' },
-                      { url: 'https://www.instagram.com/p/C7OsO0mpYIZ/?img_index=2', embedUrl: 'https://www.instagram.com/p/C7OsO0mpYIZ/embed' },
+                      { url: 'https://www.instagram.com/p/C7RqeQcJvmb/', embedUrl: 'https://www.instagram.com/p/C7RqeQcJvmb/embed' },
+                      { url: 'https://www.instagram.com/p/C7RTunxJW2X/', embedUrl: 'https://www.instagram.com/p/C7RTunxJW2X/embed' },
+                      { url: 'https://www.instagram.com/p/C7OsO0mpYIZ/', embedUrl: 'https://www.instagram.com/p/C7OsO0mpYIZ/embed' },
                       { url: 'https://www.instagram.com/p/C5e8-6pJ0hc/', embedUrl: 'https://www.instagram.com/p/C5e8-6pJ0hc/embed' }
                     ]
                   })
@@ -523,18 +526,32 @@ export default function Home() {
                     postsCount: '25', followersCount: '394', followingCount: '0',
                     bio: ['Smart Detailing Made Easy', '#CareYouCanSee', 'Bikin mobil glowing tanpa ribet.', '👇 Pilih produk favoritmu! 👇'],
                     website: 'linktr.ee/GlovecareOfficial',
-                    // HANYA MASUKKAN SELURUH URL 25 POSTINGAN GLOVECARE DI BAWAH INI
+                    // FORMAT BARU: Field mediaSrc dan caption untuk Custom Card Component
                     posts: [
-                      { url: 'https://www.instagram.com/p/DJnWHO7tVf6/', embedUrl: 'https://www.instagram.com/p/DJnWHO7tVf6/embed' },
-                      { url: 'https://www.instagram.com/p/DJx3JZGKcM-/?img_index=1', embedUrl: 'https://www.instagram.com/p/DJx3JZGKcM-/embed' },
-                      { url: 'https://www.instagram.com/p/DJlvOFltV4y/', embedUrl: 'https://www.instagram.com/p/DJlvOFltV4y/embed' },
-                      { url: 'https://www.instagram.com/p/DJlTyGfKe8J/?img_index=1', embedUrl: 'https://www.instagram.com/p/DJlTyGfKe8J/embed' },
-                      { url: 'https://www.instagram.com/p/DJk--3fSfbp/', embedUrl: 'https://www.instagram.com/p/DJk--3fSfbp/embed' },
-                      { url: 'https://www.instagram.com/p/DJbcCVkNMJR/', embedUrl: 'https://www.instagram.com/p/DJbcCVkNMJR/embed' },
-                      { url: 'https://www.instagram.com/p/DKs7pifuCl0/', embedUrl: 'https://www.instagram.com/p/DKs7pifuCl0/embed' },
-                      { url: 'https://www.instagram.com/p/DKx-yHLOtZB/', embedUrl: 'https://www.instagram.com/p/DKx-yHLOtZB/embed' },
-                      { url: 'https://www.instagram.com/p/DK6d85chp0T/', embedUrl: 'https://www.instagram.com/p/DK6d85chp0T/embed' }
-                      // Tambahkan sisa objek data array { url, embedUrl } postingan yang lain disini...
+                      { url: 'https://www.instagram.com/reel/DLPA--khhxM/', mediaSrc: '/portofolio/glovecare-1.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/reel/DLGsFF8hi1Q/', mediaSrc: '/portofolio/glovecare-2.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/reel/DK6d85chp0T/', mediaSrc: '/portofolio/glovecare-3.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/reel/DKx-yHLOtZB/', mediaSrc: '/portofolio/glovecare-4.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/reel/DKs7pifuCl0/', mediaSrc: '/portofolio/glovecare-5.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DKoQT5hq95Y/', mediaSrc: '/portofolio/glovecare-6.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DKga_IGJiVb/', mediaSrc: '/portofolio/glovecare-7.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DKeYmjgssWM/', mediaSrc: '/portofolio/glovecare-8.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/reel/DKdWT8juNEj/', mediaSrc: '/portofolio/glovecare-9.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJ0VJivtvPE/', mediaSrc: '/portofolio/glovecare-10.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJynBKhyKZg/', mediaSrc: '/portofolio/glovecare-11.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJyLjfcqlwQ/', mediaSrc: '/portofolio/glovecare-12.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJx3JZGKcM-/', mediaSrc: '/portofolio/glovecare-13.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJnWHO7tVf6/', mediaSrc: '/portofolio/glovecare-14.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJlvOFltV4y/', mediaSrc: '/portofolio/glovecare-15.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJlTyGfKe8J/', mediaSrc: '/portofolio/glovecare-16.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJk--3fSfbp/', mediaSrc: '/portofolio/glovecare-17.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJjKTPztGvR/', mediaSrc: '/portofolio/glovecare-18.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJin-SHK7ZD/', mediaSrc: '/portofolio/glovecare-19.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJiMealtL_U/', mediaSrc: '/portofolio/glovecare-20.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJgljxvS25F/', mediaSrc: '/portofolio/glovecare-21.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJew0DvNL95/', mediaSrc: '/portofolio/glovecare-22.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJbcCVkNMJR/', mediaSrc: '/portofolio/glovecare-23.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' },
+                      { url: 'https://www.instagram.com/p/DJaeEc8SnHW/', mediaSrc: '/portofolio/glovecare-24.jpg', caption: 'Lengkapi perawatan harian Anda...\n\nTulis isi caption sebenarnya disini.', hashtags: '#Glovecare #CareYouCanSee #Detailing' }
                     ]
                   })
                 }
@@ -807,7 +824,6 @@ export default function Home() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-stone-900/60 backdrop-blur-md" onClick={closePreview}>
           <div className="relative w-full max-w-5xl bg-white/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 space-y-6 overflow-hidden max-h-[90vh] flex flex-col shadow-2xl border border-white/60" onClick={(e) => e.stopPropagation()}>
             <div className="flex items-center justify-between pb-4 border-b border-stone-200">
-              {/* 1. MENGGANTI JUDUL MODAL MENJADI {activePreview.title} */}
               <h3 className="text-xl font-black text-stone-900">{activePreview.title}</h3>
               <button type="button" onClick={closePreview} className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center font-bold">✕</button>
             </div>
@@ -815,7 +831,7 @@ export default function Home() {
             <div className="w-full flex-1 overflow-hidden flex flex-col">
               {activePreview.username ? (
                 <div className="flex flex-col space-y-6 h-full">
-                  {/* 2. TETAP TAMPILKAN HEADER PROFIL UTAMA */}
+                  {/* HEADER PROFIL UTAMA */}
                   <div className="p-6 rounded-2xl bg-white/60 border border-white/80 flex flex-col sm:flex-row items-start sm:items-center gap-6 shadow-sm shrink-0">
                     <div className="w-20 h-20 rounded-full bg-[#2b2624] p-0.5 shrink-0 overflow-hidden">
                       <InstagramAvatar username={activePreview.username} displayName={activePreview.displayName} avatarImg={activePreview.avatarImg} />
@@ -836,21 +852,52 @@ export default function Home() {
                     </div>
                   </div>
 
-                  {/* 3 & 4. GRID POSTINGAN TANPA MINI-HEADER DENGAN SCROLLBAR KHUSUS 65vh */}
-                  <div className="max-h-[65vh] overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-1">
-                    {/* .slice(0, 9) tidak ada, otomatis memunculkan seberapapun panjang array posts (misal: 25) */}
-                    {activePreview.posts?.map((post, index) => (
-                      <div key={index} className="rounded-2xl overflow-hidden border border-stone-200 bg-white h-[450px] shadow-sm relative">
-                        {/* Negative Top CSS Trick memotong persis bagian mini-header instagram */}
-                        <iframe 
-                          src={post.embedUrl} 
-                          className="absolute top-[-54px] left-0 w-full h-[calc(100%+54px)] border-0" 
-                          scrolling="yes" 
-                          allow="autoplay" 
-                          title={`IG Post ${index + 1}`} 
-                        />
-                      </div>
-                    ))}
+                  {/* GRID POSTINGAN & KONTROL SCROLL max-h-[70vh] */}
+                  <div className="max-h-[70vh] overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 p-1">
+                    {activePreview.posts?.map((post, index) => {
+                      
+                      // 1. FALLBACK UNTUK DIATERA TECH (yang masih menggunakan iframe embed lama)
+                      if (post.embedUrl) {
+                        return (
+                          <div key={index} className="rounded-2xl overflow-hidden border border-stone-200 bg-white h-[450px] shadow-sm relative">
+                            <iframe 
+                              src={post.embedUrl} 
+                              className="absolute top-[-54px] left-0 w-full h-[calc(100%+54px)] border-0" 
+                              scrolling="yes" 
+                              allow="autoplay" 
+                              title={`IG Post ${index + 1}`} 
+                            />
+                          </div>
+                        );
+                      }
+
+                      // 2. KARTU CUSTOM UNTUK GLOVECARE (menggunakan data local: mediaSrc, caption, hashtags)
+                      return (
+                        <div key={index} className="bg-white rounded-2xl p-4 shadow-sm border border-stone-200/60 flex flex-col gap-3">
+                          {/* Media: Gambar/Video Postingan (Bisa di-klik untuk Lightbox) */}
+                          {post.mediaSrc && (
+                            <div 
+                              className="w-full aspect-square rounded-xl overflow-hidden cursor-pointer bg-stone-100"
+                              onClick={() => setZoomedMedia(post.mediaSrc!)}
+                            >
+                              <SmartMediaDisplay src={post.mediaSrc} title={`Post ${index + 1}`} />
+                            </div>
+                          )}
+                          
+                          {/* Caption Bersih & Hashtag */}
+                          <div className="text-[13px] text-stone-700 leading-relaxed whitespace-pre-line break-words">
+                            <span className="font-bold text-stone-900 mr-1">{activePreview.username}</span>
+                            {post.caption}
+                            
+                            {post.hashtags && (
+                              <span className="block mt-2 text-blue-600 font-medium">
+                                {post.hashtags}
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
               ) : (

@@ -43,7 +43,6 @@ const videoEditingProjects: VideoProject[] = [
     title: "Commercial & Brand Campaign",
     category: "Short-form Content / Reels",
     videoUrl: "/portofolio/video-editing-1.mp4",
-    aspectRatio: "portrait",
     description: "Penyuntingan video kreatif untuk meningkatkan engagement merek dengan ritme yang dinamis."
   },
   {
@@ -51,7 +50,6 @@ const videoEditingProjects: VideoProject[] = [
     title: "Social Media Promotional Reel",
     category: "Promotional Content",
     videoUrl: "/portofolio/video-editing-2.mp4",
-    aspectRatio: "portrait",
     description: "Eksekusi pemotongan video bertempo cepat, transisi halus, dan penyelarasan audio."
   }
 ];
@@ -120,6 +118,18 @@ export default function Home() {
   const [activePreview, setActivePreview] = useState<PreviewData | null>(null);
   const [zoomedMedia, setZoomedMedia] = useState<string | null>(null);
   const [profileImgError, setProfileImgError] = useState(false);
+
+  // --- STATE DETEKSI ORIENTASI VIDEO OTOMATIS --- //
+  const [videoOrientations, setVideoOrientations] = useState<Record<number, 'portrait' | 'landscape'>>({});
+
+  const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLVideoElement, Event>, id: number) => {
+    const { videoWidth, videoHeight } = e.currentTarget;
+    const isPortrait = videoHeight > videoWidth;
+    setVideoOrientations(prev => ({
+      ...prev,
+      [id]: isPortrait ? 'portrait' : 'landscape'
+    }));
+  };
 
   // --- STATE & LOGIC NAVIGASI SLIDING PILL --- //
   const [activeMenu, setActiveMenu] = useState('home');
@@ -889,33 +899,42 @@ export default function Home() {
                   </div>
                 </div>
               ) : activePreview.videoProjects ? (
-                /* NEW VIEW: PORTOFOLIO VIDEO EDITING INTERAKTIF (VERTIKAL) */
+                /* NEW VIEW: PORTOFOLIO VIDEO EDITING DENGAN DETEKSI OTOMATIS */
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2 max-h-[75vh] overflow-y-auto">
-                  {activePreview.videoProjects.map((video) => (
-                    <div key={video.id} className="bg-white/80 rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col justify-between">
-                      
-                      {/* Container Player Video Vertikal (9:16) */}
-                      <div className="w-full max-w-[260px] aspect-[9/16] bg-stone-900 rounded-xl overflow-hidden mb-3 mx-auto relative flex items-center justify-center shadow-inner">
-                        <video 
-                          controls 
-                          playsInline 
-                          preload="metadata"
-                          className="w-full h-full object-cover"
-                        >
-                          <source src={video.videoUrl} type="video/mp4" />
-                          Browser Anda tidak mendukung pemutar video ini.
-                        </video>
-                      </div>
+                  {activePreview.videoProjects.map((video) => {
+                    const orientation = videoOrientations[video.id] || 'landscape'; // Default landscape sebelum metadata dimuat
 
-                      {/* Deskripsi Video */}
-                      <div className="text-left mt-2">
-                        <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">{video.category}</span>
-                        <h4 className="text-base font-bold text-stone-900 mt-0.5">{video.title}</h4>
-                        <p className="text-xs text-stone-600 mt-1 leading-relaxed">{video.description}</p>
-                      </div>
+                    return (
+                      <div key={video.id} className="bg-white/80 rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col justify-between">
+                        
+                        {/* Container Player Video Otomatis Berubah Sesuai Rasio */}
+                        <div className={`w-full bg-stone-900 rounded-xl overflow-hidden mb-3 relative flex items-center justify-center transition-all duration-300 shadow-inner ${
+                          orientation === 'portrait' 
+                            ? 'max-w-[260px] aspect-[9/16] mx-auto' 
+                            : 'w-full aspect-video'
+                        }`}>
+                          <video 
+                            controls 
+                            playsInline 
+                            preload="metadata"
+                            onLoadedMetadata={(e) => handleLoadedMetadata(e, video.id)}
+                            className="w-full h-full object-contain"
+                          >
+                            <source src={video.videoUrl} type="video/mp4" />
+                            Browser Anda tidak mendukung pemutar video ini.
+                          </video>
+                        </div>
 
-                    </div>
-                  ))}
+                        {/* Deskripsi Video */}
+                        <div className="text-left mt-2">
+                          <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">{video.category}</span>
+                          <h4 className="text-base font-bold text-stone-900 mt-0.5">{video.title}</h4>
+                          <p className="text-xs text-stone-600 mt-1 leading-relaxed">{video.description}</p>
+                        </div>
+
+                      </div>
+                    );
+                  })}
                 </div>
               ) : (
                 /* VIEW PORTOFOLIO LAINNYA */

@@ -51,6 +51,13 @@ const videoEditingProjects: VideoProject[] = [
     category: "Promotional Content",
     videoUrl: "/portofolio/video-editing-2.mp4",
     description: "Eksekusi pemotongan video bertempo cepat, transisi halus, dan penyelarasan audio."
+  },
+  {
+    id: 3,
+    title: "Creative Visual Showcase",
+    category: "Motion & Editing",
+    videoUrl: "/portofolio/video-editing-3.mp4",
+    description: "Penyuntingan visual interaktif dengan penggabungan efek dan ritme audio yang presisi."
   }
 ];
 

@@ -15,7 +15,7 @@ type VideoProject = {
   thumbnail?: string;
   description: string;
   orientation?: 'horizontal' | 'vertical'; // Opsional agar kompatibel dengan data lama
-  aspectRatio?: 'portrait' | 'landscape'; // Properti baru untuk pengaturan rasio
+  aspectRatio?: 'portrait' | 'landscape'; // Opsional
 };
 
 type PreviewData = {

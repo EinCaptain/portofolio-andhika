@@ -14,7 +14,8 @@ type VideoProject = {
   videoUrl: string;
   thumbnail?: string;
   description: string;
-  orientation?: 'horizontal' | 'vertical'; // Opsional agar kompatibel dengan data baru
+  orientation?: 'horizontal' | 'vertical'; // Opsional agar kompatibel dengan data lama
+  aspectRatio?: 'portrait' | 'landscape'; // Properti baru untuk pengaturan rasio
 };
 
 type PreviewData = {
@@ -41,15 +42,17 @@ const videoEditingProjects: VideoProject[] = [
     id: 1,
     title: "Commercial & Brand Campaign",
     category: "Short-form Content / Reels",
-    videoUrl: "/videos/video-editing-1.mp4",
-    description: "Penyuntingan video kreatif untuk meningkatkan engagement merek dengan ritme yang dinamis dan color grading yang hangat."
+    videoUrl: "/portofolio/video-editing-1.mp4",
+    aspectRatio: "portrait",
+    description: "Penyuntingan video kreatif untuk meningkatkan engagement merek dengan ritme yang dinamis."
   },
   {
     id: 2,
     title: "Social Media Promotional Reel",
     category: "Promotional Content",
-    videoUrl: "/videos/video-editing-2.mp4",
-    description: "Eksekusi pemotongan video bertempo cepat, transisi halus, dan penyelarasan audio untuk kampanye media sosial."
+    videoUrl: "/portofolio/video-editing-2.mp4",
+    aspectRatio: "portrait",
+    description: "Eksekusi pemotongan video bertempo cepat, transisi halus, dan penyelarasan audio."
   }
 ];
 
@@ -886,32 +889,33 @@ export default function Home() {
                   </div>
                 </div>
               ) : activePreview.videoProjects ? (
-                /* NEW VIEW: PORTOFOLIO VIDEO EDITING INTERAKTIF */
-                <div className="max-h-[80vh] overflow-y-auto pr-2 pb-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2">
-                    {activePreview.videoProjects.map((video) => (
-                      <div key={video.id} className="bg-white/80 rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col">
-                        {/* Container Player Video */}
-                        <div className="w-full aspect-[9/16] sm:aspect-video bg-stone-900 rounded-xl overflow-hidden mb-3 relative">
-                          <video 
-                            src={video.videoUrl} 
-                            controls 
-                            playsInline 
-                            preload="metadata"
-                            className="w-full h-full object-contain"
-                          />
-                        </div>
-                        {/* Detail Informasi Video */}
-                        <div className="flex-1 flex flex-col justify-between">
-                          <div>
-                            <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">{video.category}</span>
-                            <h4 className="text-base font-bold text-stone-900 mt-0.5">{video.title}</h4>
-                            <p className="text-xs text-stone-600 mt-1 leading-relaxed">{video.description}</p>
-                          </div>
-                        </div>
+                /* NEW VIEW: PORTOFOLIO VIDEO EDITING INTERAKTIF (VERTIKAL) */
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2 max-h-[75vh] overflow-y-auto">
+                  {activePreview.videoProjects.map((video) => (
+                    <div key={video.id} className="bg-white/80 rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col justify-between">
+                      
+                      {/* Container Player Video Vertikal (9:16) */}
+                      <div className="w-full max-w-[260px] aspect-[9/16] bg-stone-900 rounded-xl overflow-hidden mb-3 mx-auto relative flex items-center justify-center shadow-inner">
+                        <video 
+                          controls 
+                          playsInline 
+                          preload="metadata"
+                          className="w-full h-full object-cover"
+                        >
+                          <source src={video.videoUrl} type="video/mp4" />
+                          Browser Anda tidak mendukung pemutar video ini.
+                        </video>
                       </div>
-                    ))}
-                  </div>
+
+                      {/* Deskripsi Video */}
+                      <div className="text-left mt-2">
+                        <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">{video.category}</span>
+                        <h4 className="text-base font-bold text-stone-900 mt-0.5">{video.title}</h4>
+                        <p className="text-xs text-stone-600 mt-1 leading-relaxed">{video.description}</p>
+                      </div>
+
+                    </div>
+                  ))}
                 </div>
               ) : (
                 /* VIEW PORTOFOLIO LAINNYA */

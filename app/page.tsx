@@ -43,6 +43,7 @@ const videoEditingProjects: VideoProject[] = [
     title: "Commercial & Brand Campaign",
     category: "Short-form Content / Reels",
     videoUrl: "/portofolio/video-editing-1.mp4",
+    aspectRatio: "landscape",
     description: "Penyuntingan video kreatif untuk meningkatkan engagement merek dengan ritme yang dinamis."
   },
   {
@@ -50,6 +51,7 @@ const videoEditingProjects: VideoProject[] = [
     title: "Social Media Promotional Reel",
     category: "Promotional Content",
     videoUrl: "/portofolio/video-editing-2.mp4",
+    aspectRatio: "portrait",
     description: "Eksekusi pemotongan video bertempo cepat, transisi halus, dan penyelarasan audio."
   },
   {
@@ -57,6 +59,7 @@ const videoEditingProjects: VideoProject[] = [
     title: "Creative Visual Showcase",
     category: "Motion & Editing",
     videoUrl: "/portofolio/video-editing-3.mp4",
+    aspectRatio: "portrait",
     description: "Penyuntingan visual interaktif dengan penggabungan efek dan ritme audio yang presisi."
   }
 ];
@@ -906,55 +909,80 @@ export default function Home() {
                   </div>
                 </div>
               ) : activePreview.videoProjects ? (
-                /* NEW VIEW: PORTOFOLIO VIDEO EDITING DENGAN FLEXBOX ALIH-ALIH GRID */
-                <div className="flex flex-col md:flex-row justify-center items-start gap-6 p-4 max-h-[75vh] overflow-y-auto w-full">
-                  {activePreview.videoProjects.map((video) => {
-                    const isPortrait = videoOrientations[video.id] === 'portrait';
+                /* PORTOFOLIO VIDEO EDITING: LAYOUT BERTINGKAT (1 LANSKAP ATAS, 2 VERTIKAL BAWAH) */
+                (() => {
+                  const landscapeVideo = activePreview.videoProjects.find(v => v.aspectRatio === 'landscape' || videoOrientations[v.id] === 'landscape');
+                  const portraitVideos = activePreview.videoProjects.filter(v => v.aspectRatio === 'portrait' || videoOrientations[v.id] === 'portrait');
 
-                    return (
-                      <div 
-                        key={video.id} 
-                        className={`bg-white rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col transition-all duration-300 ${
-                          isPortrait 
-                            ? 'w-full max-w-[280px] shrink-0 mx-auto md:mx-0' 
-                            : 'w-full max-w-md shrink-0'
-                        }`}
-                      >
-                        {/* Frame Video */}
-                        <div className={`w-full bg-stone-900 rounded-xl overflow-hidden mb-3 ${
-                          isPortrait ? 'aspect-[9/16]' : 'aspect-video'
-                        }`}>
-                          <video 
-                            controls 
-                            playsInline 
-                            preload="metadata"
-                            onLoadedMetadata={(e) => handleLoadedMetadata(e, video.id)}
-                            className="w-full h-full object-contain"
-                          >
-                            <source src={video.videoUrl} type="video/mp4" />
-                            Browser Anda tidak mendukung pemutar video ini.
-                          </video>
-                        </div>
-
-                        {/* Detail Deskripsi */}
-                        <div className="flex-1 flex flex-col justify-between">
+                  return (
+                    <div className="flex flex-col items-center gap-6 p-4 max-h-[78vh] overflow-y-auto w-full">
+                      
+                      {/* 1. BAGIAN ATAS: 1 Video Lanskap di Tengah */}
+                      {landscapeVideo && (
+                        <div className="w-full max-w-xl mx-auto bg-white rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col">
+                          <div className="w-full aspect-video bg-stone-900 rounded-xl overflow-hidden mb-3">
+                            <video 
+                              controls 
+                              playsInline 
+                              preload="metadata"
+                              onLoadedMetadata={(e) => handleLoadedMetadata(e, landscapeVideo.id)}
+                              className="w-full h-full object-contain"
+                            >
+                              <source src={landscapeVideo.videoUrl} type="video/mp4" />
+                            </video>
+                          </div>
                           <div>
                             <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
-                              {video.category}
+                              {landscapeVideo.category}
                             </span>
                             <h4 className="text-base font-bold text-stone-900 mt-0.5">
-                              {video.title}
+                              {landscapeVideo.title}
                             </h4>
                             <p className="text-xs text-stone-600 mt-1 leading-relaxed">
-                              {video.description}
+                              {landscapeVideo.description}
                             </p>
                           </div>
                         </div>
+                      )}
 
+                      {/* 2. BAGIAN BAWAH: 2 Video Vertikal Berdampingan */}
+                      <div className="flex flex-col sm:flex-row justify-center items-start gap-5 w-full max-w-xl mx-auto">
+                        {portraitVideos.map((video) => (
+                          <div 
+                            key={video.id} 
+                            className="w-full sm:w-1/2 max-w-[260px] mx-auto sm:mx-0 bg-white rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col justify-between shrink-0"
+                          >
+                            <div className="w-full aspect-[9/16] bg-stone-900 rounded-xl overflow-hidden mb-3">
+                              <video 
+                                controls 
+                                playsInline 
+                                preload="metadata"
+                                onLoadedMetadata={(e) => handleLoadedMetadata(e, video.id)}
+                                className="w-full h-full object-cover"
+                              >
+                                <source src={video.videoUrl} type="video/mp4" />
+                              </video>
+                            </div>
+                            <div className="flex-1 flex flex-col justify-between">
+                              <div>
+                                <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+                                  {video.category}
+                                </span>
+                                <h4 className="text-sm font-bold text-stone-900 mt-0.5 leading-snug">
+                                  {video.title}
+                                </h4>
+                                <p className="text-[11px] text-stone-600 mt-1 leading-relaxed">
+                                  {video.description}
+                                </p>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
                       </div>
-                    );
-                  })}
-                </div>
+
+                    </div>
+                  );
+                })()
               ) : (
                 /* VIEW PORTOFOLIO LAINNYA */
                 <div className="max-h-[80vh] overflow-y-auto pr-2 pb-4 space-y-4">

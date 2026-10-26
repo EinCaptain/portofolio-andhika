@@ -899,19 +899,21 @@ export default function Home() {
                   </div>
                 </div>
               ) : activePreview.videoProjects ? (
-                /* NEW VIEW: PORTOFOLIO VIDEO EDITING DENGAN BORDER FIT CONTENT */
-                <div className="flex flex-wrap md:flex-nowrap justify-center items-start gap-6 p-2 max-h-[75vh] overflow-y-auto">
+                /* NEW VIEW: PORTOFOLIO VIDEO EDITING DENGAN FLEXBOX ALIH-ALIH GRID */
+                <div className="flex flex-col md:flex-row justify-center items-start gap-6 p-4 max-h-[75vh] overflow-y-auto w-full">
                   {activePreview.videoProjects.map((video) => {
                     const isPortrait = videoOrientations[video.id] === 'portrait';
 
                     return (
                       <div 
                         key={video.id} 
-                        className={`bg-white/90 rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col justify-between transition-all ${
-                          isPortrait ? 'w-full max-w-[280px]' : 'w-full max-w-md'
+                        className={`bg-white rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col transition-all duration-300 ${
+                          isPortrait 
+                            ? 'w-full max-w-[280px] shrink-0 mx-auto md:mx-0' 
+                            : 'w-full max-w-md shrink-0'
                         }`}
                       >
-                        {/* Frame Video Pas Sesuai Bentuk Format */}
+                        {/* Frame Video */}
                         <div className={`w-full bg-stone-900 rounded-xl overflow-hidden mb-3 ${
                           isPortrait ? 'aspect-[9/16]' : 'aspect-video'
                         }`}>
@@ -920,24 +922,26 @@ export default function Home() {
                             playsInline 
                             preload="metadata"
                             onLoadedMetadata={(e) => handleLoadedMetadata(e, video.id)}
-                            className="w-full h-full object-cover rounded-xl"
+                            className="w-full h-full object-contain"
                           >
                             <source src={video.videoUrl} type="video/mp4" />
                             Browser Anda tidak mendukung pemutar video ini.
                           </video>
                         </div>
 
-                        {/* Info Deskripsi Video */}
-                        <div>
-                          <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
-                            {video.category}
-                          </span>
-                          <h4 className="text-base font-bold text-stone-900 mt-0.5">
-                            {video.title}
-                          </h4>
-                          <p className="text-xs text-stone-600 mt-1 leading-relaxed">
-                            {video.description}
-                          </p>
+                        {/* Detail Deskripsi */}
+                        <div className="flex-1 flex flex-col justify-between">
+                          <div>
+                            <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+                              {video.category}
+                            </span>
+                            <h4 className="text-base font-bold text-stone-900 mt-0.5">
+                              {video.title}
+                            </h4>
+                            <p className="text-xs text-stone-600 mt-1 leading-relaxed">
+                              {video.description}
+                            </p>
+                          </div>
                         </div>
 
                       </div>

@@ -14,6 +14,7 @@ type VideoProject = {
   videoUrl: string;
   thumbnail?: string;
   description: string;
+  orientation: 'horizontal' | 'vertical'; // Properti baru untuk mengatur format aspect ratio
 };
 
 type PreviewData = {
@@ -31,32 +32,34 @@ type PreviewData = {
   posts?: PostItem[];
   img?: string;
   mediaList?: string[];
-  videoProjects?: VideoProject[]; // Ditambahkan untuk menampung data video editing
+  videoProjects?: VideoProject[];
 };
 
 // --- DATA VIDEO EDITING --- //
 const videoEditingProjects: VideoProject[] = [
   {
     id: 1,
-    title: "Commercial Brand Video",
-    category: "Short-form Content / Reels",
-    videoUrl: "/videos/video-editing-1.mp4",
-    thumbnail: "/videos/thumbnails/thumb-1.jpg", // Opsional jika menggunakan poster
-    description: "Dynamic video editing focused on brand engagement and visual storytelling."
+    title: "Commercial & Brand Project",
+    category: "Landscape Narrative",
+    videoUrl: "/portofolio/video-project-landscape.mp4",
+    description: "Landscape-format narrative concept video production focusing on brand messaging delivery and visual aesthetics.",
+    orientation: 'horizontal'
   },
   {
     id: 2,
-    title: "Promotional Campaign Reel",
-    category: "Social Media Ads",
-    videoUrl: "/videos/video-editing-2.mp4",
-    description: "High-energy editing with fast cuts, color grading, and custom motion graphics."
+    title: "Short-Form Campaign Video",
+    category: "Social Media / Reels",
+    videoUrl: "/portofolio/video-project-vertical.mp4",
+    description: "Vertical-format creative video editing specifically designed for social media campaigns and audience engagement.",
+    orientation: 'vertical'
   },
   {
     id: 3,
-    title: "Product Showcase Video",
-    category: "Commercial Showcase",
-    videoUrl: "/videos/video-editing-3.mp4",
-    description: "Sleek and clean product presentation video with smooth transitions."
+    title: "Creative Vlog & Lifestyle",
+    category: "Vertical Storytelling",
+    videoUrl: "/portofolio/video-vlog-vertical.mp4",
+    description: "Vertical-format personal storytelling and daily journey documentation with a casual and aesthetic editing flow.",
+    orientation: 'vertical'
   }
 ];
 
@@ -893,21 +896,29 @@ export default function Home() {
                   </div>
                 </div>
               ) : activePreview.videoProjects ? (
-                /* NEW VIEW: PORTOFOLIO VIDEO EDITING INTERAKTIF */
+                /* NEW VIEW: PORTOFOLIO VIDEO EDITING INTERAKTIF (MIXED ASPECT RATIOS) */
                 <div className="max-h-[80vh] overflow-y-auto pr-2 pb-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2">
+                  {/* Grid diset items-start agar kolom card yang vertikal dan horizontal tidak saling menstimulasi stretching */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2 items-start">
                     {activePreview.videoProjects.map((vid) => (
-                      <div key={vid.id} className="bg-white/60 backdrop-blur-xl border border-stone-200/60 rounded-2xl p-4 flex flex-col space-y-3 shadow-sm hover:shadow-md transition-shadow">
-                        <div className="w-full aspect-video rounded-xl overflow-hidden bg-stone-900 shadow-inner relative group">
+                      <div key={vid.id} className="bg-white/60 backdrop-blur-xl border border-stone-200/60 rounded-2xl p-4 flex flex-col space-y-4 shadow-sm hover:shadow-md transition-shadow">
+                        
+                        {/* Kondisi Aspect Ratio & Lebar Berdasarkan Orientasi */}
+                        <div className={`w-full overflow-hidden bg-stone-900 shadow-inner relative group rounded-xl ${
+                          vid.orientation === 'vertical' 
+                            ? 'aspect-[9/16] max-w-[280px] sm:max-w-sm mx-auto' 
+                            : 'aspect-video'
+                        }`}>
                           <video
                             src={vid.videoUrl}
                             poster={vid.thumbnail}
                             controls
                             playsInline
                             preload="metadata"
-                            className="w-full h-full object-cover"
+                            className="w-full h-full object-contain bg-black"
                           />
                         </div>
+
                         <div className="space-y-1">
                           <span className="text-[10px] font-extrabold text-stone-500 uppercase tracking-wider block">
                             {vid.category}

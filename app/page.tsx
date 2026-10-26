@@ -7,6 +7,15 @@ type PostItem = {
   embedUrl: string; // Menggunakan URL embed berformat /embed/captioned/
 };
 
+type VideoProject = {
+  id: number;
+  title: string;
+  category: string;
+  videoUrl: string;
+  thumbnail?: string;
+  description: string;
+};
+
 type PreviewData = {
   title: string;
   instagramUrl?: string;
@@ -22,7 +31,34 @@ type PreviewData = {
   posts?: PostItem[];
   img?: string;
   mediaList?: string[];
+  videoProjects?: VideoProject[]; // Ditambahkan untuk menampung data video editing
 };
+
+// --- DATA VIDEO EDITING --- //
+const videoEditingProjects: VideoProject[] = [
+  {
+    id: 1,
+    title: "Commercial Brand Video",
+    category: "Short-form Content / Reels",
+    videoUrl: "/videos/video-editing-1.mp4",
+    thumbnail: "/videos/thumbnails/thumb-1.jpg", // Opsional jika menggunakan poster
+    description: "Dynamic video editing focused on brand engagement and visual storytelling."
+  },
+  {
+    id: 2,
+    title: "Promotional Campaign Reel",
+    category: "Social Media Ads",
+    videoUrl: "/videos/video-editing-2.mp4",
+    description: "High-energy editing with fast cuts, color grading, and custom motion graphics."
+  },
+  {
+    id: 3,
+    title: "Product Showcase Video",
+    category: "Commercial Showcase",
+    videoUrl: "/videos/video-editing-3.mp4",
+    description: "Sleek and clean product presentation video with smooth transitions."
+  }
+];
 
 // --- KOMPONEN PENDUKUNG --- //
 function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; alt?: string }) {
@@ -625,34 +661,23 @@ export default function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {[
-                {
-                  name: 'Commercial & Brand Project',
-                  desc: 'Landscape-format narrative concept video production focusing on brand messaging delivery and visual aesthetics.',
-                  action: () => openPreview({ title: 'Commercial & Brand Project', mediaList: ['/portofolio/video-project-landscape.mp4'] })
-                },
-                {
-                  name: 'Short-Form Campaign Video',
-                  desc: 'Vertical-format creative video editing specifically designed for social media campaigns and audience engagement.',
-                  action: () => openPreview({ title: 'Short-Form Campaign Video', mediaList: ['/portofolio/video-project-vertical.mp4'] })
-                },
-                {
-                  name: 'Creative Vlog & Lifestyle',
-                  desc: 'Vertical-format personal storytelling and daily journey documentation with a casual and aesthetic editing flow.',
-                  action: () => openPreview({ title: 'Creative Vlog & Lifestyle', mediaList: ['/portofolio/video-vlog-vertical.mp4'] })
-                }
-              ].map((item, idx) => (
-                <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
-                  <div className="space-y-2">
-                    <h2 className="text-xl font-bold text-stone-900">{item.name}</h2>
-                    <p className="text-xs text-stone-700 leading-relaxed">{item.desc}</p>
-                  </div>
-                  <button type="button" onClick={item.action} className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm">
-                    View Portfolio
-                  </button>
+            {/* Menyatukan Koleksi Video Menjadi 1 Card Utama yang Membuka Modal */}
+            <div className="grid grid-cols-1 gap-6">
+              <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/50 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                <div className="space-y-3 flex-1">
+                  <h2 className="text-2xl font-bold text-stone-900">Video Editing Portfolio</h2>
+                  <p className="text-sm text-stone-700 leading-relaxed max-w-3xl">
+                    An interactive curated collection of commercial brand videos, social media ad campaigns, and crisp product showcases. Showcasing dynamic cuts, professional color grading, and custom motion graphics.
+                  </p>
                 </div>
-              ))}
+                <button 
+                  type="button" 
+                  onClick={() => openPreview({ title: 'Video Editing Collection', videoProjects: videoEditingProjects })} 
+                  className="w-full md:w-auto px-8 py-3.5 rounded-xl text-sm font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm whitespace-nowrap text-center"
+                >
+                  Open Video Player
+                </button>
+              </div>
             </div>
           </div>
         )}
@@ -862,6 +887,37 @@ export default function Home() {
                             allowTransparency={true}
                             title={`IG Post ${index + 1}`}
                           />
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              ) : activePreview.videoProjects ? (
+                /* NEW VIEW: PORTOFOLIO VIDEO EDITING INTERAKTIF */
+                <div className="max-h-[80vh] overflow-y-auto pr-2 pb-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2">
+                    {activePreview.videoProjects.map((vid) => (
+                      <div key={vid.id} className="bg-white/60 backdrop-blur-xl border border-stone-200/60 rounded-2xl p-4 flex flex-col space-y-3 shadow-sm hover:shadow-md transition-shadow">
+                        <div className="w-full aspect-video rounded-xl overflow-hidden bg-stone-900 shadow-inner relative group">
+                          <video
+                            src={vid.videoUrl}
+                            poster={vid.thumbnail}
+                            controls
+                            playsInline
+                            preload="metadata"
+                            className="w-full h-full object-cover"
+                          />
+                        </div>
+                        <div className="space-y-1">
+                          <span className="text-[10px] font-extrabold text-stone-500 uppercase tracking-wider block">
+                            {vid.category}
+                          </span>
+                          <h4 className="text-base font-bold text-stone-900 leading-tight">
+                            {vid.title}
+                          </h4>
+                          <p className="text-xs text-stone-700 leading-relaxed pt-1">
+                            {vid.description}
+                          </p>
                         </div>
                       </div>
                     ))}

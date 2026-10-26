@@ -14,7 +14,7 @@ type VideoProject = {
   videoUrl: string;
   thumbnail?: string;
   description: string;
-  orientation: 'horizontal' | 'vertical'; // Properti baru untuk mengatur format aspect ratio
+  orientation?: 'horizontal' | 'vertical'; // Opsional agar kompatibel dengan data baru
 };
 
 type PreviewData = {
@@ -39,27 +39,17 @@ type PreviewData = {
 const videoEditingProjects: VideoProject[] = [
   {
     id: 1,
-    title: "Commercial & Brand Project",
-    category: "Landscape Narrative",
-    videoUrl: "/portofolio/video-project-landscape.mp4",
-    description: "Landscape-format narrative concept video production focusing on brand messaging delivery and visual aesthetics.",
-    orientation: 'horizontal'
+    title: "Commercial & Brand Campaign",
+    category: "Short-form Content / Reels",
+    videoUrl: "/videos/video-editing-1.mp4",
+    description: "Penyuntingan video kreatif untuk meningkatkan engagement merek dengan ritme yang dinamis dan color grading yang hangat."
   },
   {
     id: 2,
-    title: "Short-Form Campaign Video",
-    category: "Social Media / Reels",
-    videoUrl: "/portofolio/video-project-vertical.mp4",
-    description: "Vertical-format creative video editing specifically designed for social media campaigns and audience engagement.",
-    orientation: 'vertical'
-  },
-  {
-    id: 3,
-    title: "Creative Vlog & Lifestyle",
-    category: "Vertical Storytelling",
-    videoUrl: "/portofolio/video-vlog-vertical.mp4",
-    description: "Vertical-format personal storytelling and daily journey documentation with a casual and aesthetic editing flow.",
-    orientation: 'vertical'
+    title: "Social Media Promotional Reel",
+    category: "Promotional Content",
+    videoUrl: "/videos/video-editing-2.mp4",
+    description: "Eksekusi pemotongan video bertempo cepat, transisi halus, dan penyelarasan audio untuk kampanye media sosial."
   }
 ];
 
@@ -896,39 +886,28 @@ export default function Home() {
                   </div>
                 </div>
               ) : activePreview.videoProjects ? (
-                /* NEW VIEW: PORTOFOLIO VIDEO EDITING INTERAKTIF (MIXED ASPECT RATIOS) */
+                /* NEW VIEW: PORTOFOLIO VIDEO EDITING INTERAKTIF */
                 <div className="max-h-[80vh] overflow-y-auto pr-2 pb-4">
-                  {/* Grid diset items-start agar kolom card yang vertikal dan horizontal tidak saling menstimulasi stretching */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2 items-start">
-                    {activePreview.videoProjects.map((vid) => (
-                      <div key={vid.id} className="bg-white/60 backdrop-blur-xl border border-stone-200/60 rounded-2xl p-4 flex flex-col space-y-4 shadow-sm hover:shadow-md transition-shadow">
-                        
-                        {/* Kondisi Aspect Ratio & Lebar Berdasarkan Orientasi */}
-                        <div className={`w-full overflow-hidden bg-stone-900 shadow-inner relative group rounded-xl ${
-                          vid.orientation === 'vertical' 
-                            ? 'aspect-[9/16] max-w-[280px] sm:max-w-sm mx-auto' 
-                            : 'aspect-video'
-                        }`}>
-                          <video
-                            src={vid.videoUrl}
-                            poster={vid.thumbnail}
-                            controls
-                            playsInline
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2">
+                    {activePreview.videoProjects.map((video) => (
+                      <div key={video.id} className="bg-white/80 rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col">
+                        {/* Container Player Video */}
+                        <div className="w-full aspect-[9/16] sm:aspect-video bg-stone-900 rounded-xl overflow-hidden mb-3 relative">
+                          <video 
+                            src={video.videoUrl} 
+                            controls 
+                            playsInline 
                             preload="metadata"
-                            className="w-full h-full object-contain bg-black"
+                            className="w-full h-full object-contain"
                           />
                         </div>
-
-                        <div className="space-y-1">
-                          <span className="text-[10px] font-extrabold text-stone-500 uppercase tracking-wider block">
-                            {vid.category}
-                          </span>
-                          <h4 className="text-base font-bold text-stone-900 leading-tight">
-                            {vid.title}
-                          </h4>
-                          <p className="text-xs text-stone-700 leading-relaxed pt-1">
-                            {vid.description}
-                          </p>
+                        {/* Detail Informasi Video */}
+                        <div className="flex-1 flex flex-col justify-between">
+                          <div>
+                            <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">{video.category}</span>
+                            <h4 className="text-base font-bold text-stone-900 mt-0.5">{video.title}</h4>
+                            <p className="text-xs text-stone-600 mt-1 leading-relaxed">{video.description}</p>
+                          </div>
                         </div>
                       </div>
                     ))}

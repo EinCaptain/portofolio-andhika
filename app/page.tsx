@@ -858,9 +858,9 @@ export default function Home() {
 
       {/* MODAL HASIL PORTOFOLIO */}
       {activePreview && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 sm:p-6 bg-stone-900/60 backdrop-blur-md" onClick={closePreview}>
-          <div className="relative w-full max-w-5xl bg-white/90 backdrop-blur-2xl rounded-3xl p-6 sm:p-8 space-y-6 overflow-hidden max-h-[90vh] flex flex-col shadow-2xl border border-white/60" onClick={(e) => e.stopPropagation()}>
-            <div className="flex items-center justify-between pb-4 border-b border-stone-200">
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-stone-900/60 backdrop-blur-md" onClick={closePreview}>
+          <div className={`relative w-full ${activePreview.videoProjects ? 'max-w-3xl p-4 sm:p-6' : 'max-w-5xl p-6 sm:p-8'} bg-white/90 backdrop-blur-2xl rounded-3xl space-y-4 overflow-hidden max-h-[92vh] flex flex-col shadow-2xl border border-white/60`} onClick={(e) => e.stopPropagation()}>
+            <div className="flex items-center justify-between pb-3 border-b border-stone-200">
               <h3 className="text-xl font-black text-stone-900">{activePreview.title}</h3>
               <button type="button" onClick={closePreview} className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center font-bold">✕</button>
             </div>
@@ -915,12 +915,12 @@ export default function Home() {
                   const portraitVideos = activePreview.videoProjects.filter(v => v.aspectRatio === 'portrait' || videoOrientations[v.id] === 'portrait');
 
                   return (
-                    <div className="flex flex-col items-center gap-6 p-4 max-h-[78vh] overflow-y-auto w-full">
+                    <div className="flex flex-col items-center gap-5 p-2 sm:p-4 max-h-[82vh] overflow-y-auto w-full">
                       
-                      {/* 1. BAGIAN ATAS: 1 Video Lanskap di Tengah */}
+                      {/* 1. VIDEO LANSKAP (Lebih Besar & Pas di Tengah) */}
                       {landscapeVideo && (
-                        <div className="w-full max-w-xl mx-auto bg-white rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col">
-                          <div className="w-full aspect-video bg-stone-900 rounded-xl overflow-hidden mb-3">
+                        <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl p-3 sm:p-4 border border-stone-200/80 shadow-sm flex flex-col">
+                          <div className="w-full aspect-video bg-stone-900 rounded-xl overflow-hidden mb-2.5">
                             <video 
                               controls 
                               playsInline 
@@ -932,7 +932,7 @@ export default function Home() {
                             </video>
                           </div>
                           <div>
-                            <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+                            <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-stone-500">
                               {landscapeVideo.category}
                             </span>
                             <h4 className="text-base font-bold text-stone-900 mt-0.5">
@@ -945,14 +945,14 @@ export default function Home() {
                         </div>
                       )}
 
-                      {/* 2. BAGIAN BAWAH: 2 Video Vertikal Berdampingan */}
-                      <div className="flex flex-col sm:flex-row justify-center items-start gap-5 w-full max-w-xl mx-auto">
+                      {/* 2. DUA VIDEO VERTIKAL (Lebih Besar & Pas Berdampingan) */}
+                      <div className="flex flex-col sm:flex-row justify-center items-stretch gap-4 sm:gap-5 w-full max-w-2xl mx-auto">
                         {portraitVideos.map((video) => (
                           <div 
                             key={video.id} 
-                            className="w-full sm:w-1/2 max-w-[260px] mx-auto sm:mx-0 bg-white rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col justify-between shrink-0"
+                            className="w-full sm:w-1/2 max-w-[310px] mx-auto bg-white rounded-2xl p-3 sm:p-4 border border-stone-200/80 shadow-sm flex flex-col justify-between"
                           >
-                            <div className="w-full aspect-[9/16] bg-stone-900 rounded-xl overflow-hidden mb-3">
+                            <div className="w-full aspect-[9/16] bg-stone-900 rounded-xl overflow-hidden mb-2.5">
                               <video 
                                 controls 
                                 playsInline 
@@ -965,13 +965,13 @@ export default function Home() {
                             </div>
                             <div className="flex-1 flex flex-col justify-between">
                               <div>
-                                <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+                                <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-stone-500">
                                   {video.category}
                                 </span>
-                                <h4 className="text-sm font-bold text-stone-900 mt-0.5 leading-snug">
+                                <h4 className="text-sm sm:text-base font-bold text-stone-900 mt-0.5 leading-snug">
                                   {video.title}
                                 </h4>
-                                <p className="text-[11px] text-stone-600 mt-1 leading-relaxed">
+                                <p className="text-xs text-stone-600 mt-1 leading-relaxed">
                                   {video.description}
                                 </p>
                               </div>

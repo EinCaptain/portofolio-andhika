@@ -298,7 +298,7 @@ export default function Home() {
                 <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">CONTACT INFO</span>
                 <div className="flex flex-col gap-2">
                   <a href="mailto:andhikarievaldy07@gmail.com" className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-stone-800 transition-colors truncate shadow-sm">
-                    <svg width="15" height="15" className="text-stone-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>
+                    <svg width="15" height="15" className="text-stone-600 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2"><path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 0-2-2H5a2 2 0 0-2 2v10a2 2 0 002 2z"/></svg>
                     <span className="truncate">andhikarievaldy07@gmail.com</span>
                   </a>
                   <a href="https://wa.me/6285179770217" target="_blank" rel="noopener noreferrer" className="flex items-center gap-2.5 p-2.5 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-stone-800 transition-colors shadow-sm">
@@ -899,37 +899,45 @@ export default function Home() {
                   </div>
                 </div>
               ) : activePreview.videoProjects ? (
-                /* NEW VIEW: PORTOFOLIO VIDEO EDITING DENGAN DETEKSI OTOMATIS */
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 p-2 max-h-[75vh] overflow-y-auto">
+                /* NEW VIEW: PORTOFOLIO VIDEO EDITING DENGAN BORDER FIT CONTENT */
+                <div className="flex flex-wrap md:flex-nowrap justify-center items-start gap-6 p-2 max-h-[75vh] overflow-y-auto">
                   {activePreview.videoProjects.map((video) => {
-                    const orientation = videoOrientations[video.id] || 'landscape'; // Default landscape sebelum metadata dimuat
+                    const isPortrait = videoOrientations[video.id] === 'portrait';
 
                     return (
-                      <div key={video.id} className="bg-white/80 rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col justify-between">
-                        
-                        {/* Container Player Video Otomatis Berubah Sesuai Rasio */}
-                        <div className={`w-full bg-stone-900 rounded-xl overflow-hidden mb-3 relative flex items-center justify-center transition-all duration-300 shadow-inner ${
-                          orientation === 'portrait' 
-                            ? 'max-w-[260px] aspect-[9/16] mx-auto' 
-                            : 'w-full aspect-video'
+                      <div 
+                        key={video.id} 
+                        className={`bg-white/90 rounded-2xl p-4 border border-stone-200/80 shadow-sm flex flex-col justify-between transition-all ${
+                          isPortrait ? 'w-full max-w-[280px]' : 'w-full max-w-md'
+                        }`}
+                      >
+                        {/* Frame Video Pas Sesuai Bentuk Format */}
+                        <div className={`w-full bg-stone-900 rounded-xl overflow-hidden mb-3 ${
+                          isPortrait ? 'aspect-[9/16]' : 'aspect-video'
                         }`}>
                           <video 
                             controls 
                             playsInline 
                             preload="metadata"
                             onLoadedMetadata={(e) => handleLoadedMetadata(e, video.id)}
-                            className="w-full h-full object-contain"
+                            className="w-full h-full object-cover rounded-xl"
                           >
                             <source src={video.videoUrl} type="video/mp4" />
                             Browser Anda tidak mendukung pemutar video ini.
                           </video>
                         </div>
 
-                        {/* Deskripsi Video */}
-                        <div className="text-left mt-2">
-                          <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">{video.category}</span>
-                          <h4 className="text-base font-bold text-stone-900 mt-0.5">{video.title}</h4>
-                          <p className="text-xs text-stone-600 mt-1 leading-relaxed">{video.description}</p>
+                        {/* Info Deskripsi Video */}
+                        <div>
+                          <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+                            {video.category}
+                          </span>
+                          <h4 className="text-base font-bold text-stone-900 mt-0.5">
+                            {video.title}
+                          </h4>
+                          <p className="text-xs text-stone-600 mt-1 leading-relaxed">
+                            {video.description}
+                          </p>
                         </div>
 
                       </div>

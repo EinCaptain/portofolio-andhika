@@ -36,15 +36,15 @@ type PreviewData = {
   videoProjects?: VideoProject[];
 };
 
-// --- DATA VIDEO EDITING --- //
+// --- DATA VIDEO EDITING (PROFESSIONAL ENGLISH) --- //
 const videoEditingProjects: VideoProject[] = [
   {
     id: 1,
     title: "Commercial & Brand Campaign",
-    category: "Short-form Content / Reels",
+    category: "Short-Form Content / Reels",
     videoUrl: "/portofolio/video-editing-1.mp4",
     aspectRatio: "landscape",
-    description: "Penyuntingan video kreatif untuk meningkatkan engagement merek dengan ritme yang dinamis."
+    description: "Creative video editing designed to boost brand engagement through dynamic pacing and visual storytelling."
   },
   {
     id: 2,
@@ -52,7 +52,7 @@ const videoEditingProjects: VideoProject[] = [
     category: "Promotional Content",
     videoUrl: "/portofolio/video-editing-2.mp4",
     aspectRatio: "portrait",
-    description: "Eksekusi pemotongan video bertempo cepat, transisi halus, dan penyelarasan audio."
+    description: "Fast-paced video cuts, smooth transitions, and precise audio sync tailored for social media campaigns."
   },
   {
     id: 3,
@@ -60,7 +60,7 @@ const videoEditingProjects: VideoProject[] = [
     category: "Motion & Editing",
     videoUrl: "/portofolio/video-editing-3.mp4",
     aspectRatio: "portrait",
-    description: "Penyuntingan visual interaktif dengan penggabungan efek dan ritme audio yang presisi."
+    description: "Engaging short-form video editing featuring custom motion graphics and crisp audio-visual synchronization."
   }
 ];
 

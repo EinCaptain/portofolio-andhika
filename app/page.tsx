@@ -1,12 +1,64 @@
 'use client';
 
 import React, { useState } from 'react';
+import { Phone, MapPin } from 'lucide-react';
 
-/* eslint-disable @next/next/no-img-element */
+// --- KOMPONEN IKON MAIL KUSTOM (PADDED VIEWBOX - ANTI CROP 100%) --- //
+function MailIcon({ size = 20, className = '', strokeWidth = 2 }: { size?: number; className?: string; strokeWidth?: number }) {
+  return (
+    <svg 
+      xmlns="http://www.w3.org/2000/svg" 
+      width={size} 
+      height={size} 
+      viewBox="-2 -2 28 28" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth={strokeWidth} 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={`shrink-0 overflow-visible text-stone-700 ${className}`}
+    >
+      <rect width="20" height="16" x="2" y="4" rx="2" />
+      <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" />
+    </svg>
+  );
+}
+
+// --- KOMPONEN IKON LINKEDIN KUSTOM (ANTI-ERROR DEPRECATION) --- //
+function LinkedinIcon({ size = 18, className = '', strokeWidth = 2 }: { size?: number; className?: string; strokeWidth?: number }) {
+  return (
+    <svg 
+      width={size} 
+      height={size} 
+      viewBox="0 0 24 24" 
+      fill="none" 
+      stroke="currentColor" 
+      strokeWidth={strokeWidth} 
+      strokeLinecap="round" 
+      strokeLinejoin="round" 
+      className={`shrink-0 overflow-visible ${className}`}
+    >
+      <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+      <rect x="2" y="9" width="4" height="12" />
+      <circle cx="4" cy="4" r="2" />
+    </svg>
+  );
+}
 
 type PostItem = {
   url: string;
-  embedUrl: string;
+  embedUrl: string; // Menggunakan URL embed berformat /embed/captioned/
+};
+
+type VideoProject = {
+  id: number;
+  title: string;
+  category: string;
+  videoUrl: string;
+  thumbnail?: string;
+  description: string;
+  orientation?: 'horizontal' | 'vertical'; // Opsional agar kompatibel dengan data lama
+  aspectRatio?: 'portrait' | 'landscape'; // Opsional
 };
 
 type PreviewData = {
@@ -24,15 +76,73 @@ type PreviewData = {
   posts?: PostItem[];
   img?: string;
   mediaList?: string[];
+  videoProjects?: VideoProject[];
 };
 
+// --- DATA CONTACT INFO --- //
+const contactInfoList = [
+  {
+    id: 'email',
+    icon: MailIcon,
+    label: 'andhikarievaldy07@gmail.com',
+    href: 'mailto:andhikarievaldy07@gmail.com'
+  },
+  {
+    id: 'phone',
+    icon: Phone,
+    label: '+62 851-7977-0217',
+    href: 'https://wa.me/6285179770217'
+  },
+  {
+    id: 'linkedin',
+    icon: LinkedinIcon,
+    label: 'linkedin.com/in/rievaldyandhika',
+    href: 'https://linkedin.com/in/rievaldyandhika'
+  },
+  {
+    id: 'location',
+    icon: MapPin,
+    label: 'Tangerang, Indonesia',
+    href: null
+  }
+];
+
+// --- DATA VIDEO EDITING (PROFESSIONAL ENGLISH) --- //
+const videoEditingProjects: VideoProject[] = [
+  {
+    id: 1,
+    title: "Commercial & Brand Campaign",
+    category: "Short-Form Content / Reels",
+    videoUrl: "/portofolio/video-editing-1.mp4",
+    aspectRatio: "landscape",
+    description: "Creative video editing designed to boost brand engagement through dynamic pacing and visual storytelling."
+  },
+  {
+    id: 2,
+    title: "Social Media Promotional Reel",
+    category: "Promotional Content",
+    videoUrl: "/portofolio/video-editing-2.mp4",
+    aspectRatio: "portrait",
+    description: "Fast-paced video cuts, smooth transitions, and precise audio sync tailored for social media campaigns."
+  },
+  {
+    id: 3,
+    title: "Creative Visual Showcase",
+    category: "Motion & Editing",
+    videoUrl: "/portofolio/video-editing-3.mp4",
+    aspectRatio: "portrait",
+    description: "Engaging short-form video editing featuring custom motion graphics and crisp audio-visual synchronization."
+  }
+];
+
+// --- KOMPONEN PENDUKUNG --- //
 function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; alt?: string }) {
   const [hasError, setHasError] = useState(false);
 
   if (hasError) {
     return (
-      <div className="w-full h-full aspect-square rounded-2xl border border-white/60 bg-white/20 backdrop-blur-md flex items-center justify-center p-3 text-xs text-slate-600 break-all">
-        {src}
+      <div className="w-full h-full aspect-square rounded-xl border border-white/40 bg-white/30 backdrop-blur-md flex items-center justify-center p-2 text-xs text-stone-600 break-all font-sans text-center">
+        Image/Video not found:<br/>{src}
       </div>
     );
   }
@@ -45,7 +155,7 @@ function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; al
         loop
         autoPlay
         playsInline
-        className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none"
+        className="w-full h-full aspect-square object-cover rounded-xl shadow-sm border border-stone-200 bg-stone-900 pointer-events-none"
         onError={() => setHasError(true)}
       />
     );
@@ -55,7 +165,7 @@ function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; al
     <img
       src={src}
       alt={alt || title}
-      className="w-full h-full aspect-square object-contain rounded-2xl pointer-events-none drop-shadow-md"
+      className="w-full h-full aspect-square object-cover rounded-xl shadow-sm border border-stone-100 hover:scale-[1.03] transition-transform duration-200 pointer-events-none"
       onError={() => setHasError(true)}
     />
   );
@@ -69,19 +179,20 @@ function InstagramAvatar({ username, displayName, avatarImg }: { username?: stri
       <img
         src={avatarImg}
         alt={displayName || username || 'Avatar'}
-        className="w-full h-full object-cover rounded-full"
+        className="w-full h-full object-cover"
         onError={() => setImgError(true)}
       />
     );
   }
 
   return (
-    <div className="w-full h-full flex items-center justify-center bg-slate-800 text-white font-bold text-sm uppercase rounded-full">
+    <div className="w-full h-full flex items-center justify-center bg-[#2b2624] text-white font-bold text-sm uppercase font-sans">
       {username ? username.substring(0, 2) : 'IG'}
     </div>
   );
 }
 
+// --- KOMPONEN UTAMA --- //
 export default function Home() {
   const [currentView, setCurrentView] = useState<'main' | 'social-media' | 'photography' | 'videography' | 'graphic-design'>('main');
   const [activeCert, setActiveCert] = useState<{ title: string; src: string; type: 'pdf' | 'image' } | null>(null);
@@ -89,1241 +200,913 @@ export default function Home() {
   const [zoomedMedia, setZoomedMedia] = useState<string | null>(null);
   const [profileImgError, setProfileImgError] = useState(false);
 
-  const openCert = (title: string, src: string, type: 'pdf' | 'image') => {
-    setActiveCert({ title, src, type });
+  // --- STATE DETEKSI ORIENTASI VIDEO OTOMATIS --- //
+  const [videoOrientations, setVideoOrientations] = useState<Record<number, 'portrait' | 'landscape'>>({});
+
+  const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLVideoElement, Event>, id: number) => {
+    const { videoWidth, videoHeight } = e.currentTarget;
+    const isPortrait = videoHeight > videoWidth;
+    setVideoOrientations(prev => ({
+      ...prev,
+      [id]: isPortrait ? 'portrait' : 'landscape'
+    }));
   };
 
-  const closeCert = () => {
-    setActiveCert(null);
+  // --- STATE & LOGIC NAVIGASI SLIDING PILL --- //
+  const [activeMenu, setActiveMenu] = useState('home');
+  const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
+  const navRefs = React.useRef<(HTMLAnchorElement | null)[]>([]);
+
+  const navMenus = React.useMemo(() => [
+    { id: 'home', label: 'Home', target: 'bento-grid' },
+    { id: 'about', label: 'About', target: 'card-profile' },
+    { id: 'services', label: 'Services', target: 'card-services' },
+    { id: 'work', label: 'Work', target: 'card-projects' },
+    { id: 'tools', label: 'Software', target: 'card-skills' },
+  ], []);
+
+  React.useEffect(() => {
+    const updatePill = () => {
+      const activeIndex = navMenus.findIndex(m => m.id === activeMenu);
+      const activeEl = navRefs.current[activeIndex];
+      if (activeEl) {
+        setPillStyle({
+          left: activeEl.offsetLeft,
+          width: activeEl.offsetWidth
+        });
+      }
+    };
+
+    setTimeout(updatePill, 50);
+    window.addEventListener('resize', updatePill);
+    return () => window.removeEventListener('resize', updatePill);
+  }, [activeMenu, navMenus]);
+
+  const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
+    e.preventDefault();
+    if (currentView !== 'main') {
+      setCurrentView('main');
+      setTimeout(() => {
+        const target = document.getElementById(targetId);
+        if (target) {
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      }, 100);
+    } else {
+      const target = document.getElementById(targetId);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }
   };
 
-  const openPreview = (data: PreviewData) => {
-    setActivePreview(data);
-  };
+  const openCert = (title: string, src: string, type: 'pdf' | 'image') => setActiveCert({ title, src, type });
+  const closeCert = () => setActiveCert(null);
+  const openPreview = (data: PreviewData) => setActivePreview(data);
+  const closePreview = () => setActivePreview(null);
 
-  const closePreview = () => {
-    setActivePreview(null);
-  };
-
-  const goToSocialMedia = () => {
-    setCurrentView('social-media');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const goToPhotography = () => {
-    setCurrentView('photography');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const goToVideography = () => {
-    setCurrentView('videography');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const goToGraphicDesign = () => {
-    setCurrentView('graphic-design');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  const goToMain = () => {
-    setCurrentView('main');
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
+  const goToSocialMedia = () => { setCurrentView('social-media'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  const goToPhotography = () => { setCurrentView('photography'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  const goToVideography = () => { setCurrentView('videography'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  const goToGraphicDesign = () => { setCurrentView('graphic-design'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+  const goToMain = () => { setCurrentView('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
   return (
-    <div
-      className="min-h-screen text-slate-900 font-sans antialiased relative selection:bg-slate-900 selection:text-white overflow-x-hidden"
-      style={{ backgroundColor: '#E2E8F0' }}
-    >
-      {/* AMBIENT LIGHTING BACKGROUND */}
-      <div
-        className="fixed inset-0 pointer-events-none z-0"
-        style={{
-          background: 'radial-gradient(circle at 75% 25%, rgba(147, 197, 253, 0.6) 0%, rgba(199, 210, 254, 0.35) 45%, #E2E8F0 80%)',
-        }}
-      />
-
-      <div
-        className="fixed -top-32 -left-32 w-[350px] sm:w-[650px] h-[350px] sm:h-[650px] pointer-events-none z-0 rounded-full"
-        style={{
-          background: 'radial-gradient(circle, rgba(165, 180, 252, 0.55) 0%, rgba(226, 232, 240, 0) 70%)',
-          filter: 'blur(90px)',
-        }}
-      />
-
-      {/* MAIN CONTAINER */}
-      <div className="relative z-10 mx-auto px-3 sm:px-6 py-6 md:py-12 space-y-10 md:space-y-14 w-full max-w-[1500px]">
-        
-        {/* VIEW 1: BERANDA UTAMA */}
-        {currentView === 'main' && (
-          <div className="space-y-10 md:space-y-14">
-            {/* HERO CARD */}
-            <section
-              id="home"
-              className="relative overflow-hidden flex flex-col justify-between p-6 sm:p-8 md:p-12 text-slate-900 mx-auto liquid-glass-3d rounded-3xl min-h-[580px] lg:min-h-[640px] w-full max-w-[1500px]"
+    <div className="min-h-screen bg-gradient-to-br from-[#d0c2bb] to-[#ede6e3] text-stone-900 font-sans antialiased selection:bg-[#2b2624] selection:text-white py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
+      
+      {/* FLOATING NAVBAR */}
+      {currentView === 'main' && (
+        <div className="fixed top-4 left-1/2 -translate-x-1/2 z-40 flex items-center gap-1 bg-white/70 backdrop-blur-xl p-1.5 rounded-full shadow-lg border border-white/60">
+          <div
+            className="absolute top-1.5 bottom-1.5 bg-[#2b2624] rounded-full transition-all duration-300 ease-in-out shadow-sm"
+            style={{ left: `${pillStyle.left}px`, width: `${pillStyle.width}px` }}
+          />
+          {navMenus.map((menu, index) => (
+            <a
+              key={menu.id}
+              href={`#${menu.id}`}
+              ref={(el) => { navRefs.current[index] = el; }}
+              onClick={(e) => {
+                setActiveMenu(menu.id);
+                handleScroll(e, menu.target);
+              }}
+              className={`relative z-10 px-4 py-1.5 rounded-full font-bold text-xs font-sans transition-colors duration-300 whitespace-nowrap ${
+                activeMenu === menu.id ? 'text-white' : 'text-stone-700 hover:text-stone-900'
+              }`}
             >
-              {/* BARIS ATAS: STATUS BADGE & CREDENTIALS */}
-              <div className="flex items-center justify-between w-full relative z-20 gap-2">
-                <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-[11px] sm:text-[12px] md:text-[13px] text-slate-800 bg-white/80 backdrop-blur-md border border-white/90 shadow-sm font-bold">
-                  <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse shrink-0" />
-                  <span>Open to work</span>
-                </div>
+              {menu.label}
+            </a>
+          ))}
+        </div>
+      )}
 
-                <a
-                  href="#about"
-                  className="px-4 sm:px-5 py-2 rounded-full text-white font-bold text-[11px] sm:text-[12px] md:text-[13px] transition-all shadow-md bg-slate-900/90 hover:bg-slate-900 border border-slate-700/50 backdrop-blur-md pointer-events-auto"
-                >
-                  View Credentials
-                </a>
-              </div>
-
-              {/* GRID HERO: TEKS & FOTO PROFIL */}
-              <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8 items-end my-auto pt-6 pb-2 relative z-20">
-                {/* TEKS HERO */}
-                <div className="lg:col-span-7 flex flex-col justify-center text-center lg:text-left max-w-[620px] mx-auto lg:mx-0">
-                  <div className="text-slate-700 font-extrabold text-[11px] sm:text-[12px] md:text-[13px] tracking-widest uppercase mb-2">
-                    Marketing Communication Specialist
-                  </div>
-
-                  <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-slate-900 tracking-tight leading-[0.95]">
-                    Andhika <br />
-                    <span className="text-slate-800">Rievaldy</span>
+      {/* CONTAINER UTAMA BENTO GRID */}
+      <main>
+        <div id="bento-grid" className="max-w-7xl mx-auto pt-10 sm:pt-12 space-y-6">
+          
+          {/* VIEW 1: BERANDA UTAMA (BENTO GRID LAYOUT) */}
+          {currentView === 'main' && (
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 md:gap-6">
+              {/* CARD 1: HERO / PORTOFOLIO UTAMA (Col Span 2) */}
+              <div className="lg:col-span-2 bg-white/60 backdrop-blur-xl rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 md:p-10 border border-white/50 shadow-lg relative overflow-hidden flex flex-col justify-between min-h-[420px] group">
+                <div className="space-y-4 max-w-xs sm:max-w-xl lg:w-[65%] w-full z-10">
+                  <span className="inline-block px-3.5 py-1 rounded-full bg-white/50 backdrop-blur-md border border-white/60 text-stone-800 font-extrabold text-xs tracking-wider uppercase font-sans">
+                    CREATIVE PROFESSIONAL
+                  </span>
+                  <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black text-stone-900 leading-tight tracking-tight font-sans">
+                    Portfolio<br />
+                    <span className="text-stone-700 whitespace-nowrap">Andhika Rievaldy</span>
                   </h1>
-
-                  {/* KONTAK GRID */}
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-2.5 pt-6 text-[12px] sm:text-[13.5px] text-slate-700 font-medium text-left">
+                  <p className="text-stone-700 text-sm sm:text-base leading-relaxed font-sans text-justify pt-1">
+                    Building a strong visual identity and executing digital media strategies. Experienced in crafting brand narratives, producing creative content, and optimizing digital channel performance.
+                  </p>
+                  <div className="pt-3 flex flex-wrap gap-3 z-20">
                     <a
-                      href="mailto:andhikarievaldy@gmail.com"
-                      className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl transition-all bg-white/70 backdrop-blur-md border border-white/90 hover:bg-white/90 shadow-sm group cursor-pointer"
+                      href="#card-projects"
+                      onClick={(e) => handleScroll(e, 'card-projects')}
+                      className="inline-flex items-center justify-center bg-[#2b2624] hover:bg-[#3a3330] text-white font-bold text-sm px-6 py-3 rounded-full transition-all shadow-md group-hover:scale-[1.02]"
                     >
-                      <svg className="w-4 h-4 text-slate-800 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 0-2-2H5a2 2 0 0-2 2v10a2 2 0 002 2z" />
-                      </svg>
-                      <span className="truncate text-slate-900 font-bold">andhikarievaldy@gmail.com</span>
+                      <span>Explore Works</span>
                     </a>
-
-                    <a
-                      href="https://www.linkedin.com/in/rievaldyandhika/"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl transition-all bg-white/70 backdrop-blur-md border border-white/90 hover:bg-white/90 shadow-sm group cursor-pointer"
-                    >
-                      <svg className="w-4 h-4 text-slate-800 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6z" />
-                        <rect x="2" y="9" width="4" height="12" />
-                        <circle cx="4" cy="4" r="2" />
-                      </svg>
-                      <span className="truncate text-slate-900 font-bold">linkedin.com/in/rievaldyandhika</span>
-                    </a>
-
-                    <a
-                      href="https://wa.me/6285179770217"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl transition-all bg-white/70 backdrop-blur-md border border-white/90 hover:bg-white/90 shadow-sm group cursor-pointer"
-                    >
-                      <svg className="w-4 h-4 text-slate-800 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 0 1-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                      </svg>
-                      <span className="text-slate-900 font-bold">+62 851-7977-0217</span>
-                    </a>
-
-                    <div className="flex items-center gap-2.5 p-2.5 sm:p-3 rounded-2xl bg-white/70 backdrop-blur-md border border-white/90 select-none shadow-sm">
-                      <svg className="w-4 h-4 text-slate-800 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
-                        <circle cx="12" cy="10" r="3" />
-                      </svg>
-                      <span className="text-slate-900 font-bold">Tangerang, Indonesia</span>
-                    </div>
                   </div>
                 </div>
 
-                {/* FOTO HERO PROFIL */}
+                {/* FOTO HERO PROFILE UTAMA */}
                 {!profileImgError && (
-                  <div className="lg:col-span-5 flex justify-center lg:justify-end items-end h-full mt-4 lg:mt-0">
-                    <img
-                      src="/profile.png"
-                      alt="Andhika Rievaldy"
-                      className="w-48 sm:w-64 lg:w-[380px] max-w-full h-auto object-contain object-bottom drop-shadow-[0_20px_35px_rgba(15,23,42,0.18)]"
-                      onError={() => setProfileImgError(true)}
-                    />
-                  </div>
+                  <img
+                    src="/hero-image.png"
+                    alt="Andhika Rievaldy"
+                    className="absolute bottom-0 right-0 lg:right-[-10px] z-0 pointer-events-none w-auto h-[85%] sm:h-[90%] lg:h-[95%] object-contain object-bottom drop-shadow-xl transition-transform duration-300 group-hover:scale-105"
+                    onError={() => setProfileImgError(true)}
+                  />
                 )}
               </div>
 
-              {/* NAVIGASI BAWAH MELAYANG */}
-              <div className="flex justify-center relative z-20 pt-3">
-                <div className="rounded-full p-1 sm:p-1.5 flex items-center gap-1 text-[11px] sm:text-[12px] md:text-[13px] bg-white/80 backdrop-blur-lg border border-white shadow-sm max-w-full overflow-x-auto scrollbar-none">
-                  <a href="#home" className="px-3.5 sm:px-4.5 py-1.5 sm:py-2 rounded-full bg-slate-900 text-white font-bold shadow-sm whitespace-nowrap">
-                    Home
-                  </a>
-                  <a href="#about" className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors whitespace-nowrap">
-                    About
-                  </a>
-                  <a href="#tools" className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors whitespace-nowrap">
-                    Software
-                  </a>
-                  <a href="#services" className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors whitespace-nowrap">
-                    Services
-                  </a>
-                  <a href="#work" className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors whitespace-nowrap">
-                    Work
-                  </a>
-                  <a href="#contact" className="px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-slate-700 hover:text-slate-950 font-bold transition-colors whitespace-nowrap">
-                    Links
-                  </a>
-                </div>
-              </div>
-            </section>
-
-            {/* ABOUT ME SECTION */}
-            <section id="about" className="p-6 sm:p-8 md:p-12 text-slate-900 mx-auto liquid-glass-3d rounded-3xl overflow-hidden w-full max-w-[1500px]">
-              <div className="grid md:grid-cols-12 gap-8 items-center relative z-10">
-                <div className="md:col-span-7 space-y-4">
-                  <div>
-                    <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block">
-                      About Me
-                    </span>
-                    <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900 leading-tight mt-1">
+              {/* CARD 2: PROFILE, ABOUT, & CONTACT (Col Span 1) */}
+              <div id="card-profile" className="lg:col-span-1 bg-white/60 backdrop-blur-xl rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 border border-white/50 shadow-lg flex flex-col justify-between space-y-6">
+                
+                {/* Header Profile Avatar */}
+                <div className="flex items-center gap-3 border-b border-white/40 pb-4">
+                  <div 
+                    onClick={() => setZoomedMedia('/avatar.jpg')}
+                    className="w-16 h-16 sm:w-20 sm:h-20 rounded-full shrink-0 overflow-hidden shadow-md cursor-pointer hover:scale-105 hover:opacity-90 transition-all duration-300 bg-stone-200"
+                  >
+                    {!profileImgError ? (
+                      <img src="/avatar.jpg" alt="Avatar" className="w-full h-full object-cover object-center rounded-full" />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center text-white font-bold text-lg bg-[#2b2624]">RK</div>
+                    )}
+                  </div>
+                  <div className="min-w-0 flex-1">
+                    <h2 className="text-[13px] sm:text-[14px] font-bold text-stone-900 leading-tight tracking-tight">
                       Rievaldy Andhika Koswara, S.I.Kom
                     </h2>
+                    <p className="text-xs font-semibold text-stone-600 pt-1">
+                      Marketing Communication Specialist
+                    </p>
                   </div>
+                </div>
 
-                  <p className="text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-700 leading-relaxed text-justify">
-                    Saya adalah lulusan Marketing Communication yang berfokus pada penguatan identitas merek dan eksekusi strategi media digital.
-                    Berpengalaman dalam merangkai narasi merek, memproduksi konten kreatif, serta mengoptimalkan performa kanal digital untuk membangun hubungan bermakna dengan target audiens.
+                {/* About Me */}
+                <div className="space-y-1.5">
+                  <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">ABOUT ME</span>
+                  <p className="text-xs text-stone-700 leading-relaxed text-justify">
+                    Marketing Communication graduate focusing on strengthening brand identity and executing digital media strategies. Experienced in crafting brand narratives, producing creative content, and optimizing digital channel performance.
                   </p>
                 </div>
 
-                <div className="md:col-span-5 space-y-3">
-                  <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block mb-1">
-                    Certifications & Licenses
-                  </span>
+                {/* Contact Info Chips (Bebas Overflow-Hidden & Anti-Crop) */}
+                <div className="space-y-1.5">
+                  <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">CONTACT INFO</span>
+                  <div className="flex flex-col gap-2">
+                    {contactInfoList.map((item) => {
+                      const Icon = item.icon;
+                      const cardContent = (
+                        <div className="flex items-center gap-3.5 p-2 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-stone-800 transition-colors shadow-sm group">
+                          {/* Wrapper Ikon Tanpa Batasan Tinggi Ketat & Tanpa Overflow Hidden */}
+                          <div className="min-w-8 min-h-8 p-1.5 flex items-center justify-center shrink-0 rounded-xl bg-stone-200/40 group-hover:bg-stone-200/70 transition-colors overflow-visible">
+                            <Icon 
+                              size={18} 
+                              strokeWidth={2} 
+                              className="text-stone-700 group-hover:text-stone-900 transition-colors overflow-visible" 
+                            />
+                          </div>
+                          <span className="truncate">{item.label}</span>
+                        </div>
+                      );
 
-                  <button
-                    type="button"
-                    onClick={() => openCert('Sertifikat LSP BNSP', '/certificates/sertifikat-bnsp.pdf', 'pdf')}
-                    className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-900 transition-all bg-white/70 backdrop-blur-md border border-white hover:bg-white/90 shadow-sm group cursor-pointer text-left"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-7 h-7 rounded-xl flex items-center justify-center text-slate-800 bg-white/90 shrink-0 border border-slate-200/80 shadow-sm">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 15l-2 5l2-1.5l2 1.5l-2-5" />
-                          <circle cx="12" cy="9" r="6" />
-                        </svg>
-                      </div>
-                      <span className="font-bold text-slate-900">Sertifikat LSP BNSP</span>
-                    </div>
-                    <svg width="14" height="14" className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </button>
+                      return item.href ? (
+                        <a
+                          key={item.id}
+                          href={item.href}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="block"
+                        >
+                          {cardContent}
+                        </a>
+                      ) : (
+                        <div key={item.id}>{cardContent}</div>
+                      );
+                    })}
+                  </div>
+                </div>
 
-                  <button
-                    type="button"
-                    onClick={() => openCert('Sertifikat Digital Marketing RevoU', '/certificates/sertifikat-revou.pdf', 'pdf')}
-                    className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-900 transition-all bg-white/70 backdrop-blur-md border border-white hover:bg-white/90 shadow-sm group cursor-pointer text-left"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-7 h-7 rounded-xl flex items-center justify-center text-slate-800 bg-white/90 shrink-0 border border-slate-200/80 shadow-sm">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                          <path d="M6 12v5c0 2 2 3 6 3s6-1 6-3v-5" />
-                        </svg>
-                      </div>
-                      <span className="font-bold text-slate-900">Sertifikat Digital Marketing RevoU</span>
-                    </div>
-                    <svg width="14" height="14" className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </button>
-
-                  <button
-                    type="button"
-                    onClick={() => openCert('Sertifikat Workshop Copywriter', '/certificates/sertifikat-copywriter.jpg', 'image')}
-                    className="w-full flex items-center justify-between p-3 sm:p-3.5 rounded-2xl text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-900 transition-all bg-white/70 backdrop-blur-md border border-white hover:bg-white/90 shadow-sm group cursor-pointer text-left"
-                  >
-                    <div className="flex items-center gap-2.5">
-                      <div className="w-7 h-7 rounded-xl flex items-center justify-center text-slate-800 bg-white/90 shrink-0 border border-slate-200/80 shadow-sm">
-                        <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                          <path d="M12 20h9" />
-                          <path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z" />
-                        </svg>
-                      </div>
-                      <span className="font-bold text-slate-900">Sertifikat Workshop Copywriter</span>
-                    </div>
-                    <svg width="14" height="14" className="w-3.5 h-3.5 text-slate-400 group-hover:text-slate-900 group-hover:translate-x-0.5 transition-all" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="5" y1="12" x2="19" y2="12" />
-                      <polyline points="12 5 19 12 12 19" />
-                    </svg>
-                  </button>
+                {/* Sertifikat Buttons */}
+                <div className="space-y-2 pt-2 border-t border-white/40">
+                  <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">CERTIFICATIONS</span>
+                  <div className="flex flex-col gap-2">
+                    <button
+                      type="button"
+                      onClick={() => openCert('Sertifikat LSP BNSP', '/certificates/sertifikat-bnsp.pdf', 'pdf')}
+                      className="w-full flex items-center justify-center p-2.5 rounded-xl bg-[#2b2624] text-white hover:bg-[#3a3330] text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
+                    >
+                      <span>Sertifikat LSP BNSP</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openCert('Sertifikat Digital Marketing Revou', '/certificates/sertifikat-digital-marketing-revou.pdf', 'pdf')}
+                      className="w-full flex items-center justify-center p-2.5 rounded-xl bg-white/60 text-stone-900 hover:bg-white/80 border border-white/70 text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
+                    >
+                      <span>Sertifikat Digital Marketing Revou</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => openCert('Sertifikat Digital Marketing Afaq Academy', '/certificates/sertifikat-digital-marketing-afaq-academy.pdf', 'pdf')}
+                      className="w-full flex items-center justify-center p-2.5 rounded-xl bg-white/60 text-stone-900 hover:bg-white/80 border border-white/70 text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
+                    >
+                      <span>Sertifikat Digital Marketing Afaq Academy</span>
+                    </button>
+                  </div>
                 </div>
               </div>
-            </section>
 
-            {/* TECHNICAL STACK SECTION */}
-            <section id="tools" className="space-y-5 mx-auto w-full max-w-[1500px]">
-              <div>
-                <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block">Technical Stack</span>
-                <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900 mt-0.5">Tools & Software Proficiency</h2>
-              </div>
-
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5">
+              {/* CARD BARIS TENGAH: SERVICES (4 Card Berjejer) */}
+              <div id="card-services" className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 w-full lg:col-span-3">
                 {[
                   {
-                    name: 'Adobe Photoshop',
-                    category: 'Visual & Retouching',
-                    desc: 'Pengolahan dan retouching foto komersial, manipulasi gambar terdistribusi, serta penyempurnaan estetika materi promosi digital.'
-                  },
-                  {
-                    name: 'Adobe Illustrator',
-                    category: 'Vector & Graphic Design',
-                    desc: 'Perancangan aset vektor, desain logo utama, tata letak konten grafik, dan pembuatan komponen identitas visual merek.'
-                  },
-                  {
-                    name: 'Adobe Premiere Pro',
-                    category: 'Video Production',
-                    desc: 'Penyuntingan video komersial lanskap, perangkaian alur cerita sinematik, penyelarasan audio, dan teknik color grading.'
-                  },
-                  {
-                    name: 'Canva Pro',
-                    category: 'Fast Visual Design',
-                    desc: 'Penyusunan materi desain cepat untuk konten harian media sosial, infografis presentasi, dan kolaborasi tata letak promosi.'
-                  },
-                  {
-                    name: 'CapCut Pro',
-                    category: 'Short-Form Video Editing',
-                    desc: 'Produksi dan penyuntingan konten video pendek (Reels, TikTok, & Short) dengan alur transisi dinamis, efek teks, dan tren audio.'
-                  },
-                  {
-                    name: 'Meta Spark Studio',
-                    category: 'Augmented Reality (AR)',
-                    desc: 'Pengembangan filter AR interaktif untuk kebutuhan liputan acara secara langsung (live report) guna meningkatkan engagement audiens.'
-                  },
-                  {
-                    name: 'Meta Business Suite',
-                    category: 'Social Media Operations',
-                    desc: 'Manajemen penjadwalan publikasi konten Instagram & Facebook, pemantauan matriks performa, serta manajemen interaksi audiens.'
-                  },
-                  {
-                    name: 'Google Docs',
-                    category: 'Copywriting & Planning',
-                    desc: 'Penyusunan naskah copywriting, pembuatan kalender konten terstruktur, pengerjaan creative brief, serta dokumentasi strategi narasi.'
-                  },
-                  {
-                    name: 'Google Sheets / Spreadsheet',
-                    category: 'Analytics & Reporting',
-                    desc: 'Pengolahan dan analisis data Key Performance Indicator (KPI) kampanye digital, pemetaaan basis data, serta pelaporan performa media.'
-                  }
-                ].map((tool, idx) => (
-                  <div
-                    key={idx}
-                    className="p-5 sm:p-6 transition-all duration-300 h-full flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
-                  >
-                    <div className="space-y-3 relative z-10">
-                      <div className="flex items-start justify-between gap-3">
-                        <h3 className="text-[14px] sm:text-[15px] md:text-[16px] font-bold text-slate-900 leading-snug text-left">
-                          {tool.name}
-                        </h3>
-                        <span className="text-[9px] sm:text-[9.5px] font-extrabold text-slate-600 uppercase tracking-wider bg-white/60 px-2.5 py-1 rounded-full border border-white/80 shrink-0">
-                          {tool.category}
-                        </span>
-                      </div>
-
-                      <p className="text-[11.5px] sm:text-[12px] font-normal text-slate-600 leading-relaxed text-left">
-                        {tool.desc}
-                      </p>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* SERVICES SECTION */}
-            <section id="services" className="space-y-5 mx-auto w-full max-w-[1500px]">
-              <div>
-                <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block">What I Do</span>
-                <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900 mt-0.5">Services & Expertise</h2>
-              </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-5">
-                {[
-                  {
-                    icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <circle cx="18" cy="5" r="3" />
-                        <circle cx="6" cy="12" r="3" />
-                        <circle cx="18" cy="19" r="3" />
-                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
-                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
-                      </svg>
-                    ),
                     title: 'Social Media Management',
-                    desc: 'Penyusunan content planner, pengelolaan kanal media sosial harian, penulisan copywriting yang persuasif, dan strategi peningkatan interaksi audiens.'
+                    desc: 'Developing interactive social media strategies, content, and channel management.',
+                    icon: (
+                      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="18" cy="5" r="3"/>
+                        <circle cx="6" cy="12" r="3"/>
+                        <circle cx="18" cy="19" r="3"/>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                      </svg>
+                    )
                   },
                   {
+                    title: 'Graphic Design',
+                    desc: 'Creative visual designs for professional digital promotional needs.',
                     icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M12 19l7-7 3 3-7 7-3-3z" />
-                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z" />
-                        <path d="M2 2l7.586 7.586" />
-                        <circle cx="11" cy="11" r="2" />
+                      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <circle cx="13.5" cy="6.5" r=".5" fill="currentColor"/>
+                        <circle cx="17.5" cy="10.5" r=".5" fill="currentColor"/>
+                        <circle cx="8.5" cy="7.5" r=".5" fill="currentColor"/>
+                        <circle cx="6.5" cy="12.5" r=".5" fill="currentColor"/>
+                        <path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.92 0 1.7-.72 1.7-1.61 0-.43-.17-.83-.44-1.13-.27-.3-.43-.7-.43-1.13 0-.89.72-1.61 1.61-1.61h1.83c3.16 0 5.73-2.57 5.73-5.73 0-4.82-4.18-8.8-9-8.8z"/>
                       </svg>
-                    ),
-                    title: 'Graphic Design & Visual Content',
-                    desc: 'Perancangan graphic design untuk kebutuhan konten media sosial, materi promosi digital, dan penguatan identitas visual produk.'
+                    )
                   },
                   {
-                    icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                        <circle cx="12" cy="13" r="4" />
-                      </svg>
-                    ),
                     title: 'Commercial Photography',
-                    desc: 'Pengambilan foto produk komersial dan penyuntingan warna (photo editing) secara mendetail menggunakan Adobe Lightroom untuk estetika visual merek.'
+                    desc: 'High-quality commercial product photography and retouching.',
+                    icon: (
+                      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/>
+                      </svg>
+                    )
                   },
                   {
+                    title: 'Video Production',
+                    desc: 'Dynamic video production and editing for creative marketing campaigns.',
                     icon: (
-                      <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
-                        <rect x="2" y="4" width="20" height="16" rx="2" />
-                        <polygon points="10,9 15,12 10,15" />
+                      <svg width="24" height="24" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polygon points="23 7 16 12 23 17 23 7"/><rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
                       </svg>
-                    ),
-                    title: 'Videography & Video Editing',
-                    desc: 'Produksi konten video dari tahap pengambilan gambar (videography) hingga penyuntingan akhir (video editing) menggunakan CapCut dan Adobe Premiere Pro.'
+                    )
                   }
-                ].map((item, idx) => (
+                ].map((srv, idx) => (
                   <div
                     key={idx}
-                    className="p-4 sm:p-5 transition-all duration-300 space-y-2.5 h-full flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden"
+                    className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-7 border border-white/50 shadow-lg transition-all duration-300 hover:bg-[#2b2624] hover:text-white flex flex-col justify-start group cursor-default min-h-[200px]"
                   >
-                    <div className="space-y-2 relative z-10">
-                      <div className="w-8 h-8 rounded-2xl text-slate-800 bg-white/80 border border-white flex items-center justify-center shrink-0 shadow-sm">
-                        {item.icon}
+                    <div className="space-y-4">
+                      <div className="w-12 h-12 rounded-2xl bg-white/50 group-hover:bg-[#3a3330] text-stone-900 group-hover:text-white flex items-center justify-center transition-colors shadow-sm">
+                        {srv.icon}
                       </div>
-                      <h3 className="text-[13.5px] sm:text-[14.5px] font-bold text-slate-900 leading-snug text-left">
-                        {item.title}
-                      </h3>
-                      <p className="text-[11px] sm:text-[12px] font-normal text-slate-600 leading-relaxed text-left">
-                        {item.desc}
+                      <h3 className="text-lg font-bold leading-snug group-hover:text-white">{srv.title}</h3>
+                      <p className="text-xs text-stone-700 group-hover:text-stone-300 leading-relaxed text-justify">
+                        {srv.desc}
                       </p>
                     </div>
                   </div>
                 ))}
               </div>
-            </section>
 
-            {/* FEATURED PROJECTS SECTION */}
-            <section id="work" className="space-y-5 mx-auto w-full max-w-[1500px]">
-              <div>
-                <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block">Case Studies</span>
-                <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900 mt-0.5">Featured Projects</h2>
-              </div>
+              {/* CARD KIRI BAWAH: FEATURED PROJECTS (Col Span 2) */}
+              <div id="card-projects" className="lg:col-span-2 bg-white/60 backdrop-blur-xl rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 border border-white/50 shadow-lg space-y-6">
+                <div className="flex items-center justify-between border-b border-white/40 pb-4">
+                  <div>
+                    <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">PORTFOLIO</span>
+                    <h2 className="text-2xl font-black text-stone-900">Featured Projects</h2>
+                  </div>
+                </div>
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-                {[
-                  {
-                    tag: 'STRATEGY & CONTENT',
-                    name: 'Social Media Management',
-                    desc: 'Menyusun content planner, penulisan copywriting persuasif, serta pengelolaan kanal media sosial harian untuk membangun interaksi dan pertumbuhan engagement audiens.',
-                    action: goToSocialMedia
-                  },
-                  {
-                    tag: 'GRAPHIC & BRANDING',
-                    name: 'Graphic Design & Visual Content',
-                    desc: 'Perancangan elemen grafis dan materi promosi visual yang konsisten untuk kebutuhan konten media sosial, publikasi digital, serta penguatan identitas produk.',
-                    action: goToGraphicDesign
-                  },
-                  {
-                    tag: 'VISUAL & RETOUCHING',
-                    name: 'Commercial Photography',
-                    desc: 'Pengarahan estetika visual dan pengambilan foto produk komersial, disempurnakan dengan teknik retouching serta color grading menggunakan Adobe Lightroom.',
-                    action: goToPhotography
-                  },
-                  {
-                    tag: 'VIDEO PRODUCTION',
-                    name: 'Videography & Video Editing',
-                    desc: 'Produksi konten video dari proses pengambilan gambar hingga penyuntingan akhir (video editing) menggunakan Adobe Premiere Pro dan CapCut untuk hasil yang dinamis.',
-                    action: goToVideography
-                  }
-                ].map((proj, idx) => (
-                  <div
-                    key={idx}
-                    className="p-4 sm:p-5 transition-all duration-300 space-y-3 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
-                  >
-                    <div className="space-y-1.5 relative z-10">
-                      <span className="text-[9.5px] sm:text-[10px] font-extrabold text-slate-700 uppercase tracking-widest block">
-                        {proj.tag}
-                      </span>
-                      <h3 className="text-[15px] sm:text-[16.5px] md:text-[18px] font-extrabold text-slate-900 leading-snug">{proj.name}</h3>
-                      <p className="text-[11px] sm:text-[12px] font-normal text-slate-600 leading-relaxed text-left">
-                        {proj.desc}
-                      </p>
-                    </div>
-
-                    <div className="pt-1 relative z-10">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  {[
+                    {
+                      tag: 'STRATEGY & CONTENT',
+                      name: 'Social Media Management',
+                      desc: 'Managing social media channels to build audience interaction and engagement.',
+                      action: goToSocialMedia
+                    },
+                    {
+                      tag: 'GRAPHIC & BRANDING',
+                      name: 'Graphic Design',
+                      desc: 'Designing consistent visual promotional materials for brand identity strengthening.',
+                      action: goToGraphicDesign
+                    },
+                    {
+                      tag: 'VISUAL & RETOUCHING',
+                      name: 'Commercial Photography',
+                      desc: 'Commercial product photography with detailed retouching and color grading.',
+                      action: goToPhotography
+                    },
+                    {
+                      tag: 'VIDEO PRODUCTION',
+                      name: 'Video Production',
+                      desc: 'Creative video production and editing tailored for social media marketing campaigns.',
+                      action: goToVideography
+                    }
+                  ].map((proj, idx) => (
+                    <div
+                      key={idx}
+                      className="p-5 rounded-2xl bg-white/50 backdrop-blur-md border border-white/60 hover:border-white/90 flex flex-col justify-between space-y-4 hover:shadow-md transition-all group"
+                    >
+                      <div className="space-y-1.5">
+                        <span className="text-[10px] font-extrabold text-stone-500 uppercase tracking-wider block">
+                          {proj.tag}
+                        </span>
+                        <h3 className="text-base font-black text-stone-900 group-hover:text-stone-700 transition-colors">
+                          {proj.name}
+                        </h3>
+                        <p className="text-xs text-stone-700 leading-relaxed">
+                          {proj.desc}
+                        </p>
+                      </div>
                       <button
                         type="button"
                         onClick={proj.action}
-                        className="inline-flex items-center justify-center px-4 py-1.5 rounded-2xl text-[11px] sm:text-[12px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+                        className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer text-center shadow-sm"
                       >
-                        <span>See Portfolio</span>
+                        View Portfolio
                       </button>
                     </div>
-                  </div>
-                ))}
-              </div>
-            </section>
-
-            {/* FOOTER SECTION */}
-            <footer
-              id="contact"
-              className="p-6 sm:p-8 md:p-12 text-center space-y-6 text-slate-900 mx-auto liquid-glass-3d rounded-3xl overflow-hidden w-full max-w-[1500px]"
-            >
-              <div className="relative z-10 space-y-4">
-                <span className="text-[11px] md:text-[12px] font-extrabold text-slate-700 tracking-wider uppercase block">Let&apos;s Connect</span>
-                <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900">Interested in Working Together?</h2>
-                <div className="flex flex-wrap justify-center gap-3 sm:gap-4 pt-2">
-                  <a
-                    href="mailto:andhikarievaldy@gmail.com"
-                    className="text-white font-bold text-[12px] md:text-[13px] px-6 sm:px-7 py-3 sm:py-3.5 rounded-full shadow-md bg-slate-900/90 hover:bg-slate-900 transition-all backdrop-blur-sm"
-                  >
-                    Send Email Direct
-                  </a>
-                  <a
-                    href="https://www.linkedin.com/in/rievaldyandhika/"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-slate-900 font-bold text-[12px] md:text-[13px] px-6 sm:px-7 py-3 sm:py-3.5 rounded-full bg-white/80 backdrop-blur-md border border-white hover:bg-white transition-all shadow-sm"
-                  >
-                    LinkedIn Profile
-                  </a>
+                  ))}
                 </div>
               </div>
-            </footer>
-          </div>
-        )}
 
-        {/* VIEW 2: SOCIAL MEDIA MANAGEMENT */}
-        {currentView === 'social-media' && (
-          <div className="space-y-6 md:space-y-8 w-full mx-auto max-w-[1500px]">
-            <div className="p-5 sm:p-7 md:p-10 text-slate-900 mx-auto space-y-5 liquid-glass-3d rounded-3xl overflow-hidden w-full">
-              <div className="relative z-10 space-y-4">
+              {/* CARD KANAN BAWAH: SOFTWARE SKILLS (Col Span 1) */}
+              <div id="card-skills" className="lg:col-span-1 bg-white/60 backdrop-blur-xl rounded-3xl sm:rounded-[2rem] p-6 sm:p-8 border border-white/50 shadow-lg flex flex-col justify-between space-y-6">
                 <div>
-                  <button
-                    type="button"
-                    onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
-                  >
-                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="19" y1="12" x2="5" y2="12" />
-                      <polyline points="12 19 5 12 12 5" />
-                    </svg>
-                    <span>Kembali ke Beranda</span>
-                  </button>
+                  <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">PROFICIENCY</span>
+                  <h2 className="text-2xl font-black text-stone-900 mb-4">Software Skills</h2>
+                  <div className="grid grid-cols-2 gap-2">
+                    {[
+                      { name: 'Photoshop', cat: 'Editing' },
+                      { name: 'Illustrator', cat: 'Vector' },
+                      { name: 'Premiere Pro', cat: 'Video' },
+                      { name: 'Canva Pro', cat: 'Design' },
+                      { name: 'CapCut Pro', cat: 'Shorts' },
+                      { name: 'Meta Suite', cat: 'Social' }
+                    ].map((tool, idx) => (
+                      <div key={idx} className="p-2.5 rounded-xl bg-white/50 border border-white/60 flex flex-col hover:bg-white/80 transition-colors shadow-sm">
+                        <span className="font-bold text-xs text-stone-900">{tool.name}</span>
+                        <span className="text-[10px] text-stone-500 font-semibold">{tool.cat}</span>
+                      </div>
+                    ))}
+                  </div>
                 </div>
 
-                <div className="space-y-1.5 pt-1">
-                  <h1 className="text-[20px] sm:text-[26px] md:text-[30px] font-black text-slate-900 leading-tight">
-                    Social Media Management
-                  </h1>
-                  <p className="text-[12px] sm:text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
-                    Kumpulan dokumentasi eksekusi strategi media sosial, penyusunan jadwal konten, penulisan narasi copywriting, serta pengelolaan interaksi merek.
-                  </p>
+                {/* FOOTER CONNECT */}
+                <div className="p-4 rounded-2xl bg-[#2b2624] text-white space-y-3 shadow-md">
+                  <span className="text-[10px] font-extrabold text-stone-400 tracking-wider uppercase block">LET'S CONNECT</span>
+                  <h3 className="text-sm font-bold leading-snug">Interested in collaborating on a creative project?</h3>
+                  <a
+                    href="mailto:andhikarievaldy07@gmail.com"
+                    className="inline-block w-full py-2 bg-white text-stone-900 text-xs font-bold text-center rounded-xl hover:bg-stone-100 transition-colors shadow-sm"
+                  >
+                    Email Me Directly
+                  </a>
                 </div>
               </div>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-5 w-full">
-              {[
-                {
-                  name: 'Diatera Technology',
-                  desc: 'Mengelola kanal Instagram Diatera Technology melalui penyusunan content planner terstruktur, penulisan copywriting edukatif seputar solusi IT & teknologi, serta perancangan visual feed dan story yang profesional untuk membangun kredibilitas dan interaksi audiens.',
-                  action: () =>
-                    openPreview({
+            </div>
+          )}
+
+          {/* VIEW 2: SOCIAL MEDIA MANAGEMENT */}
+          {currentView === 'social-media' && (
+            <div className="space-y-6">
+              <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/50 shadow-lg space-y-4">
+                <button
+                  type="button"
+                  onClick={goToMain}
+                  className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm"
+                >
+                  ← Back to Home
+                </button>
+                <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Social Media Management</h1>
+                <p className="text-sm text-stone-700 leading-relaxed">
+                  A documentation collection of social media strategy execution, content calendar planning, copywriting narrative creation, and brand audience engagement.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {[
+                  {
+                    name: 'Diatera Technology',
+                    desc: "Managed Diatera Technology's Instagram channel through structured content planning, educational copywriting on IT & tech solutions, and designing professional feed and story visuals.",
+                    action: () => openPreview({
                       title: 'Diatera Technology',
                       instagramUrl: 'https://www.instagram.com/diatera.tech/',
                       username: 'diatera.tech',
                       displayName: 'Diatera Cipta Teknologi',
                       avatarImg: '/portofolio/diatera-avatar.jpg',
-                      postsCount: '32',
-                      followersCount: '510',
-                      followingCount: '11',
-                      bio: [
-                        'Smart Solutions, Seamless Integration, Embrace the IoT Advantage 🌐💡',
-                        '📩 : support@diatera.com',
-                        'Learn More',
-                        '👇👇👇👇👇'
-                      ],
+                      postsCount: '32', followersCount: '510', followingCount: '11',
+                      bio: ['Smart Solutions, Seamless Integration, Embrace the IoT Advantage 🌐💡', '📩 : support@diatera.com', 'Learn More', '👇👇👇👇👇'],
                       website: 'www.diatera.com',
                       posts: [
-                        { url: 'https://www.instagram.com/p/C7qLDlSpypd/?img_index=1', embedUrl: 'https://www.instagram.com/p/C7qLDlSpypd/embed' },
-                        { url: 'https://www.instagram.com/p/C7SvsGjPA6i/', embedUrl: 'https://www.instagram.com/p/C7SvsGjPA6i/embed' },
-                        { url: 'https://www.instagram.com/p/C7RqeQcJvmb/?img_index=1', embedUrl: 'https://www.instagram.com/p/C7RqeQcJvmb/embed' },
-                        { url: 'https://www.instagram.com/p/C7RTunxJW2X/?img_index=1', embedUrl: 'https://www.instagram.com/p/C7RTunxJW2X/embed' },
-                        { url: 'https://www.instagram.com/p/C7OsO0mpYIZ/?img_index=2', embedUrl: 'https://www.instagram.com/p/C7OsO0mpYIZ/embed' },
-                        { url: 'https://www.instagram.com/p/C5e8-6pJ0hc/', embedUrl: 'https://www.instagram.com/p/C5e8-6pJ0hc/embed' }
+                        { url: 'https://www.instagram.com/p/C7qLDlSpypd/', embedUrl: 'https://www.instagram.com/p/C7qLDlSpypd/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/C7SvsGjPA6i/', embedUrl: 'https://www.instagram.com/p/C7SvsGjPA6i/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/C7RqeQcJvmb/', embedUrl: 'https://www.instagram.com/p/C7RqeQcJvmb/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/C7RTunxJW2X/', embedUrl: 'https://www.instagram.com/p/C7RTunxJW2X/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/C7OsO0mpYIZ/', embedUrl: 'https://www.instagram.com/p/C7OsO0mpYIZ/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/C5e8-6pJ0hc/', embedUrl: 'https://www.instagram.com/p/C5e8-6pJ0hc/embed/captioned/' }
                       ]
                     })
-                },
-                {
-                  name: 'Glovecare',
-                  desc: 'Mengelola aktivitas Instagram Glovecare dengan fokus pada edukasi perawatan produk, promosi penawaran layanan khusus, penyusunan kalender konten harian, serta penciptaan visual yang bersih dan konsisten untuk memperkuat identitas merek.',
-                  action: () =>
-                    openPreview({
+                  },
+                  {
+                    name: 'Glovecare',
+                    desc: "Managed Glovecare's Instagram activity focusing on product care education, special service promotional offers, daily content calendar planning, and creating clean visual aesthetics.",
+                    action: () => openPreview({
                       title: 'Glovecare',
                       instagramUrl: 'https://www.instagram.com/glovecare.official/',
                       username: 'glovecare.official',
                       displayName: 'GLOVECARE OFFICIAL',
                       category: 'Shopping & retail',
                       avatarImg: '/portofolio/glovecare-avatar.jpg',
-                      postsCount: '25',
-                      followersCount: '394',
-                      followingCount: '0',
-                      bio: [
-                        'Smart Detailing Made Easy',
-                        '#CareYouCanSee',
-                        'Bikin mobil glowing tanpa ribet.',
-                        '👇 Pilih produk favoritmu! 👇'
-                      ],
+                      postsCount: '25', followersCount: '394', followingCount: '0',
+                      bio: ['Smart Detailing Made Easy', '#CareYouCanSee', 'Bikin mobil glowing tanpa ribet.', '👇 Pilih produk favoritmu! 👇'],
                       website: 'linktr.ee/GlovecareOfficial',
                       posts: [
-                        { url: 'https://www.instagram.com/p/DJnWHO7tVf6/', embedUrl: 'https://www.instagram.com/p/DJnWHO7tVf6/embed' },
-                        { url: 'https://www.instagram.com/p/DJx3JZGKcM-/?img_index=1', embedUrl: 'https://www.instagram.com/p/DJx3JZGKcM-/embed' },
-                        { url: 'https://www.instagram.com/p/DJlvOFltV4y/', embedUrl: 'https://www.instagram.com/p/DJlvOFltV4y/embed' },
-                        { url: 'https://www.instagram.com/p/DJlTyGfKe8J/?img_index=1', embedUrl: 'https://www.instagram.com/p/DJlTyGfKe8J/embed' },
-                        { url: 'https://www.instagram.com/p/DJk--3fSfbp/', embedUrl: 'https://www.instagram.com/p/DJk--3fSfbp/embed' },
-                        { url: 'https://www.instagram.com/p/DJbcCVkNMJR/', embedUrl: 'https://www.instagram.com/p/DJbcCVkNMJR/embed' },
-                        { url: 'https://www.instagram.com/p/DKs7pifuCl0/', embedUrl: 'https://www.instagram.com/p/DKs7pifuCl0/embed' },
-                        { url: 'https://www.instagram.com/p/DKx-yHLOtZB/', embedUrl: 'https://www.instagram.com/p/DKx-yHLOtZB/embed' },
-                        { url: 'https://www.instagram.com/p/DK6d85chp0T/', embedUrl: 'https://www.instagram.com/p/DK6d85chp0T/embed' }
+                        { url: 'https://www.instagram.com/reel/DLPA--khhxM/', embedUrl: 'https://www.instagram.com/reel/DLPA--khhxM/embed/captioned/' },
+                        { url: 'https://www.instagram.com/reel/DLGsFF8hi1Q/', embedUrl: 'https://www.instagram.com/reel/DLGsFF8hi1Q/embed/captioned/' },
+                        { url: 'https://www.instagram.com/reel/DK6d85chp0T/', embedUrl: 'https://www.instagram.com/reel/DK6d85chp0T/embed/captioned/' },
+                        { url: 'https://www.instagram.com/reel/DKx-yHLOtZB/', embedUrl: 'https://www.instagram.com/reel/DKx-yHLOtZB/embed/captioned/' },
+                        { url: 'https://www.instagram.com/reel/DKs7pifuCl0/', embedUrl: 'https://www.instagram.com/reel/DKs7pifuCl0/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DKoQT5hq95Y/', embedUrl: 'https://www.instagram.com/p/DKoQT5hq95Y/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DKga_IGJiVb/', embedUrl: 'https://www.instagram.com/p/DKga_IGJiVb/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DKeYmjgssWM/', embedUrl: 'https://www.instagram.com/p/DKeYmjgssWM/embed/captioned/' },
+                        { url: 'https://www.instagram.com/reel/DKdWT8juNEj/', embedUrl: 'https://www.instagram.com/reel/DKdWT8juNEj/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJ0VJivtvPE/', embedUrl: 'https://www.instagram.com/p/DJ0VJivtvPE/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJynBKhyKZg/', embedUrl: 'https://www.instagram.com/p/DJynBKhyKZg/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJyLjfcqlwQ/', embedUrl: 'https://www.instagram.com/p/DJyLjfcqlwQ/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJx3JZGKcM-/', embedUrl: 'https://www.instagram.com/p/DJx3JZGKcM-/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJnWHO7tVf6/', embedUrl: 'https://www.instagram.com/p/DJnWHO7tVf6/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJlvOFltV4y/', embedUrl: 'https://www.instagram.com/p/DJlvOFltV4y/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJlTyGfKe8J/', embedUrl: 'https://www.instagram.com/p/DJlTyGfKe8J/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJk--3fSfbp/', embedUrl: 'https://www.instagram.com/p/DJk--3fSfbp/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJjKTPztGvR/', embedUrl: 'https://www.instagram.com/p/DJjKTPztGvR/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJin-SHK7ZD/', embedUrl: 'https://www.instagram.com/p/DJin-SHK7ZD/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJiMealtL_U/', embedUrl: 'https://www.instagram.com/p/DJiMealtL_U/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJgljxvS25F/', embedUrl: 'https://www.instagram.com/p/DJgljxvS25F/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJew0DvNL95/', embedUrl: 'https://www.instagram.com/p/DJew0DvNL95/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJbcCVkNMJR/', embedUrl: 'https://www.instagram.com/p/DJbcCVkNMJR/embed/captioned/' },
+                        { url: 'https://www.instagram.com/p/DJaeEc8SnHW/', embedUrl: 'https://www.instagram.com/p/DJaeEc8SnHW/embed/captioned/' }
                       ]
                     })
-                }
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
-                >
-                  <div className="space-y-1 relative z-10">
-                    <h2 className="text-[8.5px] sm:text-[9.5px] font-extrabold text-slate-900 leading-tight tracking-tight">{item.name}</h2>
-                    <p className="text-[8px] sm:text-[8.5px] font-normal text-slate-600 leading-relaxed text-left">
-                      {item.desc}
-                    </p>
-                  </div>
-
-                  <div className="pt-2 relative z-10">
+                  }
+                ].map((item, idx) => (
+                  <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <h2 className="text-xl font-bold text-stone-900">{item.name}</h2>
+                      <p className="text-xs text-stone-700 leading-relaxed">{item.desc}</p>
+                    </div>
                     <button
                       type="button"
                       onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-3.5 py-1.5 rounded-2xl text-[10.5px] sm:text-[11px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
+                      className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm"
                     >
-                      <span>See Portfolio</span>
+                      View Portfolio
                     </button>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* VIEW 3: COMMERCIAL PHOTOGRAPHY */}
-        {currentView === 'photography' && (
-          <div className="space-y-6 md:space-y-8 w-full mx-auto max-w-[1500px]">
-            <div className="p-5 sm:p-7 md:p-10 text-slate-900 mx-auto space-y-5 liquid-glass-3d rounded-3xl overflow-hidden w-full">
-              <div className="relative z-10 space-y-4">
-                <div>
-                  <button
-                    type="button"
-                    onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
-                  >
-                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="19" y1="12" x2="5" y2="12" />
-                      <polyline points="12 19 5 12 12 5" />
-                    </svg>
-                    <span>Kembali ke Beranda</span>
-                  </button>
-                </div>
-
-                <div className="space-y-1.5 pt-1">
-                  <h1 className="text-[20px] sm:text-[26px] md:text-[30px] font-black text-slate-900 leading-tight">
-                    Commercial Photography
-                  </h1>
-                  <p className="text-[12px] sm:text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
-                    Pengarahan visual, konsep tata cahaya, dan pengambilan foto komersial produk yang disempurnakan dengan teknik retouching profesional serta color grading Adobe Lightroom.
-                  </p>
-                </div>
+                ))}
               </div>
             </div>
+          )}
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
-              {[
-                {
-                  name: 'Product Photography – Glovecare',
-                  desc: 'Pengambilan foto komersial produk perawatan kendaraan Glovecare dengan pengarahan estetika visual, penataan lighting studio, serta retouching dan color grading mendetail menggunakan Adobe Lightroom.',
-                  action: () =>
-                    openPreview({
+          {/* VIEW 3: COMMERCIAL PHOTOGRAPHY */}
+          {currentView === 'photography' && (
+            <div className="space-y-6">
+              <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/50 shadow-lg space-y-4">
+                <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
+                  ← Back to Home
+                </button>
+                <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Commercial Photography</h1>
+                <p className="text-sm text-stone-700 leading-relaxed">
+                  Visual direction, studio lighting setup, and commercial product photography enhanced with professional retouching techniques.
+                </p>
+              </div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: 'Product Photography – Glovecare',
+                    desc: 'Commercial photo shoot for Glovecare vehicle care products featuring visual aesthetic direction, studio lighting setups, as well as detailed retouching and color grading.',
+                    action: () => openPreview({
                       title: 'Product Photography – Glovecare',
                       mediaList: [
-                        '/portofolio/produk-1.jpg',
-                        '/portofolio/produk-3.jpg',
-                        '/portofolio/produk-4.jpg',
-                        '/portofolio/produk-5.jpg',
-                        '/portofolio/produk-6.jpg',
-                        '/portofolio/produk-7.jpg',
-                        '/portofolio/produk-8.jpg',
-                        '/portofolio/produk-9.jpg',
-                        '/portofolio/produk-10.jpg'
+                        '/portofolio/produk-1.jpg', '/portofolio/produk-3.jpg', '/portofolio/produk-4.jpg',
+                        '/portofolio/produk-5.jpg', '/portofolio/produk-6.jpg', '/portofolio/produk-7.jpg',
+                        '/portofolio/produk-8.jpg', '/portofolio/produk-9.jpg', '/portofolio/produk-10.jpg'
                       ]
                     })
-                }
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
-                >
-                  <div className="space-y-1 relative z-10">
-                    <h2 className="text-[8.5px] sm:text-[9.5px] font-extrabold text-slate-900 leading-tight tracking-tight">{item.name}</h2>
-                    <p className="text-[8px] sm:text-[8.5px] font-normal text-slate-600 leading-relaxed text-left">
-                      {item.desc}
-                    </p>
-                  </div>
-
-                  <div className="pt-2 relative z-10">
-                    <button
-                      type="button"
-                      onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-3.5 py-1.5 rounded-2xl text-[10.5px] sm:text-[11px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
-                    >
-                      <span>See Portfolio</span>
+                  }
+                ].map((item, idx) => (
+                  <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <h2 className="text-xl font-bold text-stone-900">{item.name}</h2>
+                      <p className="text-xs text-stone-700 leading-relaxed">{item.desc}</p>
+                    </div>
+                    <button type="button" onClick={item.action} className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm">
+                      View Portfolio
                     </button>
                   </div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-        {/* VIEW 4: VIDEOGRAPHY & VIDEO EDITING */}
-        {currentView === 'videography' && (
-          <div className="space-y-6 md:space-y-8 w-full mx-auto max-w-[1500px]">
-            <div className="p-5 sm:p-7 md:p-10 text-slate-900 mx-auto space-y-5 liquid-glass-3d rounded-3xl overflow-hidden w-full">
-              <div className="relative z-10 space-y-4">
-                <div>
-                  <button
-                    type="button"
-                    onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
+          {/* VIEW 4: VIDEO PRODUCTION */}
+          {currentView === 'videography' && (
+            <div className="space-y-6">
+              <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/50 shadow-lg space-y-4">
+                <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
+                  ← Back to Home
+                </button>
+                <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Video Production</h1>
+                <p className="text-sm text-stone-700 leading-relaxed">
+                  Production and editing of commercial videos, creative projects, and vlogging content driven by dynamic visual storytelling.
+                </p>
+              </div>
+
+              {/* Menyatukan Koleksi Video Menjadi 1 Card Utama yang Membuka Modal */}
+              <div className="grid grid-cols-1 gap-6">
+                <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/50 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+                  <div className="space-y-3 flex-1">
+                    <h2 className="text-2xl font-bold text-stone-900">Video Production Portfolio</h2>
+                    <p className="text-sm text-stone-700 leading-relaxed max-w-3xl">
+                      An interactive curated collection of commercial brand videos, social media ad campaigns, and crisp product showcases. Showcasing dynamic cuts, professional color grading, and custom motion graphics.
+                    </p>
+                  </div>
+                  <button 
+                    type="button" 
+                    onClick={() => openPreview({ title: 'Video Production Collection', videoProjects: videoEditingProjects })} 
+                    className="w-full md:w-auto px-8 py-3.5 rounded-xl text-sm font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm whitespace-nowrap text-center"
                   >
-                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="19" y1="12" x2="5" y2="12" />
-                      <polyline points="12 19 5 12 12 5" />
-                    </svg>
-                    <span>Kembali ke Beranda</span>
+                    Open Video Player
                   </button>
-                </div>
-
-                <div className="space-y-1.5 pt-1">
-                  <h1 className="text-[20px] sm:text-[26px] md:text-[30px] font-black text-slate-900 leading-tight">
-                    Videography & Video Editing
-                  </h1>
-                  <p className="text-[12px] sm:text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
-                    Produksi dan penyuntingan video komersial, proyek kreatif, serta konten vlogging berbasis penceritaan visual yang dinamis.
-                  </p>
                 </div>
               </div>
             </div>
+          )}
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
-              {[
-                {
-                  name: 'Commercial & Brand Project',
-                  desc: 'Produksi video berbasis konsep naratif berformat landscape dengan fokus pada penyampaian pesan merek dan estetika visual yang terstruktur.',
-                  action: () =>
-                    openPreview({
-                      title: 'Commercial & Brand Project',
-                      mediaList: ['/portofolio/video-project-landscape.mp4']
-                    })
-                },
-                {
-                  name: 'Short-Form Campaign Video',
-                  desc: 'Penyuntingan video kreatif berformat vertikal yang dirancang khusus untuk kebutuhan kampanye media sosial dan engagement audiens.',
-                  action: () =>
-                    openPreview({
-                      title: 'Short-Form Campaign Video',
-                      mediaList: ['/portofolio/video-project-vertical.mp4']
-                    })
-                },
-                {
-                  name: 'Creative Vlog & Lifestyle',
-                  desc: 'Dokumentasi penceritaan personal dan perjalanan harian berformat vertikal dengan alur penyuntingan yang kasual dan estetik.',
-                  action: () =>
-                    openPreview({
-                      title: 'Creative Vlog & Lifestyle',
-                      mediaList: ['/portofolio/video-vlog-vertical.mp4']
-                    })
-                }
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
-                >
-                  <div className="space-y-1 relative z-10">
-                    <h2 className="text-[8.5px] sm:text-[9.5px] font-extrabold text-slate-900 leading-tight tracking-tight">{item.name}</h2>
-                    <p className="text-[8px] sm:text-[8.5px] font-normal text-slate-600 leading-relaxed text-left">
-                      {item.desc}
-                    </p>
-                  </div>
-
-                  <div className="pt-2 relative z-10">
-                    <button
-                      type="button"
-                      onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-3.5 py-1.5 rounded-2xl text-[10.5px] sm:text-[11px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
-                    >
-                      <span>See Portfolio</span>
-                    </button>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-
-        {/* VIEW 5: GRAPHIC DESIGN & VISUAL CONTENT */}
-        {currentView === 'graphic-design' && (
-          <div className="space-y-6 md:space-y-8 w-full mx-auto max-w-[1500px]">
-            <div className="p-5 sm:p-7 md:p-10 text-slate-900 mx-auto space-y-5 liquid-glass-3d rounded-3xl overflow-hidden w-full">
-              <div className="relative z-10 space-y-4">
-                <div>
-                  <button
-                    type="button"
-                    onClick={goToMain}
-                    className="inline-flex items-center gap-2 px-3.5 sm:px-4 py-1.5 sm:py-2 rounded-full text-[11px] sm:text-[12px] font-bold text-slate-800 bg-white/80 border border-white hover:bg-white transition-all cursor-pointer shadow-sm"
-                  >
-                    <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                      <line x1="19" y1="12" x2="5" y2="12" />
-                      <polyline points="12 19 5 12 12 5" />
-                    </svg>
-                    <span>Kembali ke Beranda</span>
-                  </button>
-                </div>
-
-                <div className="space-y-1.5 pt-1">
-                  <h1 className="text-[20px] sm:text-[26px] md:text-[30px] font-black text-slate-900 leading-tight">
-                    Graphic Design & Visual Content
-                  </h1>
-                  <p className="text-[12px] sm:text-[13px] font-normal text-slate-700 leading-relaxed text-justify">
-                    Perancangan identitas visual, media promosi seminar, materi e-commerce, filter AR interaktif, serta desain merchandise operasional merek.
-                  </p>
-                </div>
+          {/* VIEW 5: GRAPHIC DESIGN & VISUAL CONTENT */}
+          {currentView === 'graphic-design' && (
+            <div className="space-y-6">
+              <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/50 shadow-lg space-y-4">
+                <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
+                  ← Back to Home
+                </button>
+                <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Graphic Design & Visual Content</h1>
+                <p className="text-sm text-stone-700 leading-relaxed">
+                  Designing visual identities, seminar promotional media, e-commerce assets, interactive AR filters, and operational brand merchandise.
+                </p>
               </div>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-5 w-full">
-              {[
-                {
-                  name: 'Banner Seminar – Esa Unggul University',
-                  desc: 'Perancangan banner promosi seminar terpadu untuk kebutuhan publikasi visual dan media informasi acara.',
-                  action: () =>
-                    openPreview({
-                      title: 'Banner Seminar – Esa Unggul University',
-                      mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/flyer-esa-unggul-${i + 1}.jpg`)
-                    })
-                },
-                {
-                  name: 'Display Marketplace – Glovecare',
-                  desc: 'Penataan visual etalase toko digital Glovecare guna menciptakan tampilan produk yang profesional dan menarik minat pembeli.',
-                  action: () =>
-                    openPreview({
-                      title: 'Display Marketplace – Glovecare',
-                      mediaList: Array.from({ length: 31 }, (_, i) => `/portofolio/display-glovecare-${i + 1}.jpg`)
-                    })
-                },
-                {
-                  name: 'E-Invitation Display - Digisite Tech',
-                  desc: 'Perancangan aset display marketplace serta undangan digital (e-invitation) interaktif untuk kebutuhan pemasaran Digisite Tech.',
-                  action: () =>
-                    openPreview({
+              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                {[
+                  {
+                    name: 'Banner Seminar – Esa Unggul University',
+                    desc: 'Designing integrated seminar promotional banners for visual publication and event information media.',
+                    action: () => openPreview({ title: 'Banner Seminar – Esa Unggul University', mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/flyer-esa-unggul-${i + 1}.jpg`) })
+                  },
+                  {
+                    name: 'Display Marketplace – Glovecare',
+                    desc: "Visual arrangement of Glovecare's digital storefront to create professional product displays and attract buyers.",
+                    action: () => openPreview({ title: 'Display Marketplace – Glovecare', mediaList: Array.from({ length: 31 }, (_, i) => `/portofolio/display-glovecare-${i + 1}.jpg`) })
+                  },
+                  {
+                    name: 'E-Invitation Display - Digisite Tech',
+                    desc: "Designing marketplace display assets and interactive digital invitations (e-invitation) for Digisite Tech's marketing needs.",
+                    action: () => openPreview({
                       title: 'E-Invitation Display - Digisite Tech',
                       mediaList: [
-                        '/portofolio/e-invitation-birthday-digisite-1.jpg',
-                        '/portofolio/e-invitation-birthday-digisite-2.jpg',
-                        '/portofolio/e-invitation-birthday-digisite-3.jpg',
-                        '/portofolio/e-invitation-seminar-digisite-1.jpg',
-                        '/portofolio/e-invitation-seminar-digisite-2.jpg',
-                        '/portofolio/e-invitation-seminar-digisite-3.jpg',
-                        '/portofolio/e-invitation-seminar-digisite-4.jpg',
-                        '/portofolio/e-invitation-wedding-digisite-1.jpg',
-                        '/portofolio/e-invitation-wedding-digisite-2.jpg',
-                        '/portofolio/e-invitation-wedding-digisite-3.jpg',
-                        '/portofolio/e-invitation-wedding-digisite-4.jpg'
+                        '/portofolio/e-invitation-birthday-digisite-1.jpg', '/portofolio/e-invitation-birthday-digisite-2.jpg', '/portofolio/e-invitation-birthday-digisite-3.jpg',
+                        '/portofolio/e-invitation-seminar-digisite-1.jpg', '/portofolio/e-invitation-seminar-digisite-2.jpg', '/portofolio/e-invitation-seminar-digisite-3.jpg',
+                        '/portofolio/e-invitation-seminar-digisite-4.jpg', '/portofolio/e-invitation-wedding-digisite-1.jpg', '/portofolio/e-invitation-wedding-digisite-2.jpg',
+                        '/portofolio/e-invitation-wedding-digisite-3.jpg', '/portofolio/e-invitation-wedding-digisite-4.jpg'
                       ]
                     })
-                },
-                {
-                  name: 'Filter Live Report – Meta Spark Studio',
-                  desc: 'Pembuatan filter AR interaktif untuk liputan acara secara langsung (live report) guna meningkatkan keterlibatan audiens di Instagram.',
-                  action: () =>
-                    openPreview({
+                  },
+                  {
+                    name: 'Filter Live Report – Meta Spark Studio',
+                    desc: 'Developing interactive AR filters for live event coverage to increase audience engagement on Instagram.',
+                    action: () => openPreview({
                       title: 'Filter Live Report – Meta Spark Studio',
                       mediaList: [
-                        '/portofolio/filter-meta-spark-1.mp4',
-                        '/portofolio/filter-meta-spark-2.mp4',
-                        '/portofolio/filter-meta-spark-3.mp4',
-                        '/portofolio/filter-meta-spark-4.mp4',
-                        '/portofolio/filter-meta-spark-5.mp4',
-                        '/portofolio/filter-meta-spark-6.mp4'
+                        '/portofolio/filter-meta-spark-1.mp4', '/portofolio/filter-meta-spark-2.mp4', '/portofolio/filter-meta-spark-3.mp4',
+                        '/portofolio/filter-meta-spark-4.mp4', '/portofolio/filter-meta-spark-5.mp4', '/portofolio/filter-meta-spark-6.mp4'
                       ]
                     })
-                },
-                {
-                  name: 'Flyer Seminar – Esa Unggul University',
-                  desc: 'Perancangan flyer promosi seminar terpadu untuk kebutuhan publikasi cetak maupun media digital.',
-                  action: () =>
-                    openPreview({
-                      title: 'Flyer Seminar – Esa Unggul University',
-                      mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/flyer-esa-unggul-${i + 1}.jpg`)
-                    })
-                },
-                {
-                  name: 'Lanyard & ID Card',
-                  desc: 'Penerapan identitas visual merek pada media operasional profesional seperti lanyard dan ID Card.',
-                  action: () =>
-                    openPreview({
+                  },
+                  {
+                    name: 'Flyer Seminar – Esa Unggul University',
+                    desc: 'Designing integrated seminar promotional flyers for print publication and digital media.',
+                    action: () => openPreview({ title: 'Flyer Seminar – Esa Unggul University', mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/flyer-esa-unggul-${i + 1}.jpg`) })
+                  },
+                  {
+                    name: 'Lanyard & ID Card',
+                    desc: 'Applying brand visual identity to professional operational media such as lanyards and ID cards.',
+                    action: () => openPreview({
                       title: 'Lanyard & ID Card',
-                      mediaList: [
-                        '/portofolio/lanyard-1.jpg',
-                        '/portofolio/lanyard-2.jpg',
-                        '/portofolio/lanyard-idcard-1.jpg',
-                        '/portofolio/lanyard-idcard-2.jpg'
-                      ]
+                      mediaList: ['/portofolio/lanyard-1.jpg', '/portofolio/lanyard-2.jpg', '/portofolio/lanyard-idcard-1.jpg', '/portofolio/lanyard-idcard-2.jpg']
                     })
-                },
-                {
-                  name: 'Logo Design',
-                  desc: 'Pengembangan desain logo utama sebagai fondasi identitas visual merek yang kuat dan konsisten.',
-                  action: () =>
-                    openPreview({
-                      title: 'Logo Design',
-                      mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/logo-design-${i + 1}.jpg`)
-                    })
-                },
-                {
-                  name: 'Story Content – OnTheGoods',
-                  desc: 'Perancangan desain story harian dan penawaran promosi yang dinamis untuk menguatkan branding serta engagement OnTheGoods.',
-                  action: () =>
-                    openPreview({
+                  },
+                  {
+                    name: 'Logo Design',
+                    desc: 'Developing main logo designs as the foundation for a strong and consistent brand visual identity.',
+                    action: () => openPreview({ title: 'Logo Design', mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/logo-design-${i + 1}.jpg`) })
+                  },
+                  {
+                    name: 'Story Content – OnTheGoods',
+                    desc: "Designing dynamic daily stories and promotional offers to strengthen OnTheGoods' branding and engagement.",
+                    action: () => openPreview({
                       title: 'Story Content – OnTheGoods',
                       mediaList: [
-                        '/portofolio/story-onthegoods-1.mp4',
-                        '/portofolio/story-onthegoods-1.jpg',
-                        '/portofolio/story-onthegoods-2.jpg',
-                        '/portofolio/story-onthegoods-3.jpg',
-                        '/portofolio/story-onthegoods-4.jpg',
-                        '/portofolio/story-onthegoods-5.jpg',
-                        '/portofolio/story-onthegoods-6.jpg'
+                        '/portofolio/story-onthegoods-1.mp4', '/portofolio/story-onthegoods-1.jpg', '/portofolio/story-onthegoods-2.jpg',
+                        '/portofolio/story-onthegoods-3.jpg', '/portofolio/story-onthegoods-4.jpg', '/portofolio/story-onthegoods-5.jpg', '/portofolio/story-onthegoods-6.jpg'
                       ]
                     })
-                }
-              ].map((item, idx) => (
-                <div
-                  key={idx}
-                  className="p-4 sm:p-5 transition-all duration-300 space-y-2 flex flex-col justify-between liquid-glass-3d rounded-3xl hover:scale-[1.015] overflow-hidden w-full"
-                >
-                  <div className="space-y-1 relative z-10">
-                    <h2 className="text-[8.5px] sm:text-[9.5px] font-extrabold text-slate-900 leading-tight tracking-tight">{item.name}</h2>
-                    <p className="text-[8px] sm:text-[8.5px] font-normal text-slate-600 leading-relaxed text-left">
-                      {item.desc}
-                    </p>
-                  </div>
-
-                  <div className="pt-2 relative z-10">
-                    <button
-                      type="button"
-                      onClick={item.action}
-                      className="w-full inline-flex items-center justify-center px-3.5 py-1.5 rounded-2xl text-[10.5px] sm:text-[11px] font-bold text-white bg-slate-900/90 hover:bg-slate-900 transition-all cursor-pointer shadow-sm backdrop-blur-sm"
-                    >
-                      <span>See Portfolio</span>
+                  }
+                ].map((item, idx) => (
+                  <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
+                    <div className="space-y-2">
+                      <h2 className="text-xl font-bold text-stone-900">{item.name}</h2>
+                      <p className="text-xs text-stone-700 leading-relaxed">{item.desc}</p>
+                    </div>
+                    <button type="button" onClick={item.action} className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm">
+                      View Portfolio
                     </button>
                   </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        )}
-      </div>
-
-      {/* MODAL SERTIFIKAT */}
-      {activeCert && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 transition-all"
-          style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.65)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-          }}
-          onClick={closeCert}
-        >
-          <div
-            className="relative w-full max-w-[1500px] rounded-3xl p-4 sm:p-6 flex flex-col overflow-hidden text-slate-900 liquid-glass-3d max-h-[92vh]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="relative z-10 flex items-center justify-between pb-3 border-b border-slate-900/10 shrink-0 mb-3 gap-2">
-              <div className="flex items-center gap-2 overflow-hidden">
-                <span className="text-slate-800 font-extrabold text-[10px] sm:text-[11px] md:text-[12px] uppercase tracking-wider shrink-0">
-                  Credential Viewer
-                </span>
-                <span className="text-slate-400 shrink-0">•</span>
-                <h3 className="text-[14px] sm:text-[16px] md:text-[20px] font-black text-slate-900 truncate">{activeCert.title}</h3>
+                ))}
               </div>
-              <button
-                type="button"
-                onClick={closeCert}
-                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-colors bg-white/80 hover:bg-white border border-white cursor-pointer shadow-sm font-bold shrink-0"
+            </div>
+          )}
+
+          {/* MODAL SERTIFIKAT (CREDENTIAL VIEWER) */}
+          {activeCert && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/60 backdrop-blur-sm" onClick={closeCert}>
+              <div 
+                className={`relative bg-[#ede6e3] rounded-2xl p-3 sm:p-4 shadow-2xl transition-all w-full max-h-[88vh] flex flex-col ${
+                  activeCert?.title?.includes('BNSP') ? 'max-w-lg' : 'max-w-4xl'
+                }`}
+                onClick={(e) => e.stopPropagation()}
               >
-                ✕
-              </button>
-            </div>
+                
+                {/* Header Modal */}
+                <div className="flex items-center justify-between pb-2 mb-2 border-b border-stone-300/60">
+                  <h3 className="text-sm sm:text-base font-bold text-stone-900">{activeCert?.title}</h3>
+                  <button 
+                    type="button"
+                    onClick={closeCert}
+                    className="p-1 rounded-full hover:bg-stone-300/50 text-stone-700 transition-colors text-sm font-bold"
+                  >
+                    ✕
+                  </button>
+                </div>
 
-            <div className="relative z-10 w-full aspect-[1.414/1] max-h-[75vh] overflow-hidden rounded-2xl bg-white/50 border border-white flex items-center justify-center shadow-inner">
-              {activeCert.type === 'pdf' ? (
-                <iframe
-                  src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=0&view=FitH`}
-                  className="w-full h-full border-0 rounded-2xl bg-white"
-                  title={activeCert.title}
-                />
-              ) : (
-                <img
-                  src={activeCert.src}
-                  alt={activeCert.title}
-                  className="w-full h-full object-contain rounded-2xl bg-white"
-                />
-              )}
-            </div>
-          </div>
-        </div>
-      )}
-
-      {/* MODAL HASIL PORTOFOLIO */}
-      {activePreview && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 transition-all"
-          style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.65)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-          }}
-          onClick={closePreview}
-        >
-          <div
-            className="relative w-full max-w-[1500px] rounded-3xl p-4 sm:p-8 space-y-4 sm:space-y-6 overflow-hidden text-slate-900 flex flex-col justify-between liquid-glass-3d max-h-[92vh]"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* HEADER MODAL */}
-            <div className="relative z-10 flex items-center justify-between pb-3 sm:pb-4 border-b border-slate-900/10 gap-2">
-              <h3 className="text-[16px] sm:text-[18px] md:text-[22px] font-black text-slate-900 tracking-tight truncate">
-                Portofolio - {activePreview.title}
-              </h3>
-              <button
-                type="button"
-                onClick={closePreview}
-                className="w-7 h-7 sm:w-8 sm:h-8 rounded-full flex items-center justify-center text-slate-800 hover:text-slate-950 transition-all bg-white/80 hover:bg-white border border-white shadow-sm backdrop-blur-md font-bold cursor-pointer shrink-0"
-              >
-                ✕
-              </button>
-            </div>
-
-            <div className="relative z-10 overflow-y-auto space-y-6 pr-1 max-h-[76vh]">
-              {activePreview.username ? (
-                <div className="space-y-6 sm:space-y-8">
-                  <div className="p-4 sm:p-8 rounded-3xl space-y-6 liquid-glass-3d">
-                    <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4 sm:gap-6 md:gap-10">
-                      <div className="w-16 h-16 sm:w-24 sm:h-24 rounded-full bg-slate-900 p-[2px] shrink-0 flex items-center justify-center shadow-lg overflow-hidden">
-                        <div className="w-full h-full rounded-full overflow-hidden flex items-center justify-center">
-                          <InstagramAvatar
-                            username={activePreview.username}
-                            displayName={activePreview.displayName}
-                            avatarImg={activePreview.avatarImg}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="space-y-3 sm:space-y-4 flex-1 w-full">
-                        <div className="flex flex-wrap items-center justify-between sm:justify-start gap-3">
-                          <h2 className="text-[18px] sm:text-[22px] md:text-[25px] font-black text-slate-900 tracking-tight">
-                            {activePreview.username}
-                          </h2>
-                          <a
-                            href={activePreview.instagramUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="px-4 sm:px-5 py-2 rounded-2xl text-[11px] md:text-[13px] font-bold text-white shadow-sm transition-all bg-slate-900 hover:bg-slate-800 backdrop-blur-sm"
-                          >
-                            Kunjungi Profile Instagram
-                          </a>
-                        </div>
-
-                        <div className="flex items-center gap-4 sm:gap-8 text-[12px] sm:text-[13px] md:text-[14px] border-y border-slate-900/10 py-2 sm:py-2.5 font-normal">
-                          <div>
-                            <span className="font-extrabold text-slate-900">{activePreview.postsCount}</span>{' '}
-                            <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">posts</span>
-                          </div>
-                          <div>
-                            <span className="font-extrabold text-slate-900">{activePreview.followersCount}</span>{' '}
-                            <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">followers</span>
-                          </div>
-                          <div>
-                            <span className="font-extrabold text-slate-900">{activePreview.followingCount}</span>{' '}
-                            <span className="text-slate-700 text-[11px] sm:text-[12px] font-medium">following</span>
-                          </div>
-                        </div>
-
-                        <div className="space-y-1 text-[12px] sm:text-[13px] md:text-[14px] font-normal text-slate-800">
-                          <div className="font-bold text-slate-900 text-[15px] sm:text-[17px] md:text-[18px]">
-                            {activePreview.displayName}
-                          </div>
-                          {activePreview.category && (
-                            <div className="text-slate-600 font-semibold text-[10px] sm:text-[11px] md:text-[12px] pb-1">
-                              {activePreview.category}
-                            </div>
-                          )}
-                          {activePreview.bio?.map((line, idx) => (
-                            <p key={idx} className="leading-relaxed text-justify">
-                              {line}
-                            </p>
-                          ))}
-                          {activePreview.website && (
-                            <a
-                              href={`https://${activePreview.website}`}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="inline-flex items-center gap-1.5 font-bold text-blue-700 hover:text-blue-800 pt-1.5 text-[12px] sm:text-[13px] md:text-[14px]"
-                            >
-                              <svg width="13" height="13" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                                <path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71" />
-                                <path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71" />
-                              </svg>
-                              <span>{activePreview.website}</span>
-                            </a>
-                          )}
-                        </div>
-                      </div>
+                {/* Area Gambar dengan Scrollbar Otomatis Jika Layar Pendek */}
+                <div className="flex-1 overflow-y-auto w-full flex justify-center items-start rounded-lg bg-white/40 p-1">
+                  {/* LOGIKA PERCABANGAN KHUSUS SERTIFIKAT BNSP */}
+                  {activeCert?.title?.includes('BNSP') ? (
+                    <div className="relative w-full max-w-md aspect-[1/1.414] max-h-[80vh] overflow-hidden rounded-lg border border-stone-200 bg-white mx-auto shadow-sm">
+                      {activeCert?.type === 'pdf' ? (
+                        <iframe
+                          src={`${activeCert.src}#page=1&toolbar=0&navpanes=0&scrollbar=0`}
+                          className="w-full h-full border-0"
+                          title={activeCert.title}
+                        />
+                      ) : (
+                        <img 
+                          src={activeCert?.src} 
+                          alt={activeCert?.title} 
+                          className="w-full h-auto object-cover object-top block"
+                        />
+                      )}
                     </div>
+                  ) : (
+                    /* LOGIKA UNTUK SERTIFIKAT LAINNYA (LANDSCAPE) */
+                    activeCert?.type === 'pdf' ? (
+                      <iframe
+                        src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
+                        className="w-full h-[75vh] min-h-[550px] border-0 rounded-md bg-white"
+                        title={activeCert.title}
+                      />
+                    ) : (
+                      <img 
+                        src={activeCert?.src} 
+                        alt={activeCert?.title} 
+                        className="w-full h-auto object-contain block rounded-md"
+                      />
+                    )
+                  )}
+                </div>
 
-                    <div className="space-y-4">
-                      <div className="flex items-center justify-between border-b border-slate-900/10 pb-3">
-                        <span className="text-[10px] sm:text-[11px] md:text-[12px] font-extrabold text-slate-800 tracking-wider uppercase flex items-center gap-2">
-                          <svg width="15" height="15" fill="none" stroke="currentColor" viewBox="0 0 24 24" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-                            <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z" />
-                            <circle cx="12" cy="13" r="4" />
-                          </svg>
-                          <span>LIVE DISPLAY DESIGN & FEATURED POSTS</span>
-                        </span>
+              </div>
+            </div>
+          )}
+
+          {/* MODAL HASIL PORTOFOLIO */}
+          {activePreview && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-stone-900/60 backdrop-blur-md" onClick={closePreview}>
+              <div className={`relative w-full ${activePreview.videoProjects ? 'max-w-3xl p-4 sm:p-6' : 'max-w-5xl p-6 sm:p-8'} bg-white/90 backdrop-blur-2xl rounded-3xl space-y-4 overflow-hidden max-h-[92vh] flex flex-col shadow-2xl border border-white/60`} onClick={(e) => e.stopPropagation()}>
+                <div className="flex items-center justify-between pb-3 border-b border-stone-200">
+                  <h3 className="text-xl font-black text-stone-900">{activePreview.title}</h3>
+                  <button type="button" onClick={closePreview} className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center font-bold">✕</button>
+                </div>
+
+                <div className="w-full flex-1 overflow-hidden flex flex-col">
+                  {activePreview.username ? (
+                    <div className="flex flex-col space-y-6 h-full">
+                      {/* HEADER PROFIL UTAMA */}
+                      <div className="p-6 rounded-2xl bg-white/60 border border-white/80 flex flex-col sm:flex-row items-start sm:items-center gap-6 shadow-sm shrink-0">
+                        <div className="w-20 h-20 rounded-full bg-[#2b2624] p-0.5 shrink-0 overflow-hidden">
+                          <InstagramAvatar username={activePreview.username} displayName={activePreview.displayName} avatarImg={activePreview.avatarImg} />
+                        </div>
+                        <div className="space-y-2 flex-1">
+                          <div className="flex flex-wrap items-center gap-3">
+                            <h2 className="text-xl font-bold text-stone-900">{activePreview.username}</h2>
+                            <a href={activePreview.instagramUrl} target="_blank" rel="noopener noreferrer" className="px-4 py-1.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] shadow-sm">
+                              Visit Instagram
+                            </a>
+                          </div>
+                          <div className="flex gap-4 text-xs font-medium text-stone-600">
+                            <span><b>{activePreview.postsCount}</b> posts</span>
+                            <span><b>{activePreview.followersCount}</b> followers</span>
+                            <span><b>{activePreview.followingCount}</b> following</span>
+                          </div>
+                          <p className="text-xs text-stone-700 whitespace-pre-line">{activePreview.bio?.join('\n')}</p>
+                        </div>
                       </div>
 
-                      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6">
+                      {/* GRID POSTINGAN IFRAME DENGAN CROPPING & KONTROL SCROLL */}
+                      <div className="max-h-[70vh] overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-2">
                         {activePreview.posts?.map((post, index) => (
-                          <div
-                            key={index}
-                            className="rounded-3xl overflow-hidden flex flex-col justify-between liquid-glass-3d min-h-[440px]"
-                          >
-                            <iframe
-                              src={post.embedUrl}
-                              className="w-full h-full min-h-[440px] border-0 rounded-3xl"
-                              scrolling="no"
-                              allow="autoplay"
-                              title={`Instagram Post ${index + 1}`}
-                            />
+                          <div key={index} className="w-full bg-white rounded-2xl overflow-hidden border border-stone-200/80 shadow-sm relative">
+                            {/* Pembungkus Cropping: Menarik iframe ke atas untuk menyembunyikan header */}
+                            <div className="w-full overflow-hidden -mt-[54px]">
+                              <iframe
+                                src={post.embedUrl}
+                                className="w-full h-[580px] border-0"
+                                frameBorder="0"
+                                scrolling="no"
+                                allowTransparency={true}
+                                title={`IG Post ${index + 1}`}
+                              />
+                            </div>
                           </div>
                         ))}
                       </div>
                     </div>
-                  </div>
-                </div>
-              ) : (
-                <div className="w-full space-y-5">
-                  {activePreview.mediaList && activePreview.mediaList.length > 0 ? (
-                    <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-3 sm:gap-4 max-h-[65vh] overflow-y-auto p-2 sm:p-4 rounded-3xl">
-                      {activePreview.mediaList.map((file, i) => (
-                        <div
-                          key={i}
-                          onClick={() => setZoomedMedia(file)}
-                          className="aspect-square rounded-3xl p-2 sm:p-3 liquid-glass-3d flex items-center justify-center cursor-pointer transition-all duration-300 hover:scale-[1.03] hover:bg-white/60 group"
-                        >
-                          <SmartMediaDisplay src={file} title={`${activePreview.title} #${i + 1}`} />
+                  ) : activePreview.videoProjects ? (
+                    /* PORTOFOLIO VIDEO PRODUCTION: LAYOUT BERTINGKAT (1 LANSKAP ATAS, 2 VERTIKAL BAWAH) */
+                    (() => {
+                      const landscapeVideo = activePreview.videoProjects.find(v => v.aspectRatio === 'landscape' || videoOrientations[v.id] === 'landscape');
+                      const portraitVideos = activePreview.videoProjects.filter(v => v.aspectRatio === 'portrait' || videoOrientations[v.id] === 'portrait');
+
+                      return (
+                        <div className="flex flex-col items-center gap-5 p-2 sm:p-4 max-h-[82vh] overflow-y-auto w-full">
+                          
+                          {/* 1. VIDEO LANSKAP (Lebih Besar & Pas di Tengah) */}
+                          {landscapeVideo && (
+                            <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl p-3 sm:p-4 border border-stone-200/80 shadow-sm flex flex-col">
+                              <div className="w-full aspect-video bg-stone-900 rounded-xl overflow-hidden mb-2.5">
+                                <video 
+                                  controls 
+                                  playsInline 
+                                  preload="metadata"
+                                  onLoadedMetadata={(e) => handleLoadedMetadata(e, landscapeVideo.id)}
+                                  className="w-full h-full object-contain"
+                                >
+                                  <source src={landscapeVideo.videoUrl} type="video/mp4" />
+                                </video>
+                              </div>
+                              <div>
+                                <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+                                  {landscapeVideo.category}
+                                </span>
+                                <h4 className="text-base font-bold text-stone-900 mt-0.5">
+                                  {landscapeVideo.title}
+                                </h4>
+                                <p className="text-xs text-stone-600 mt-1 leading-relaxed">
+                                  {landscapeVideo.description}
+                                </p>
+                              </div>
+                            </div>
+                          )}
+
+                          {/* 2. DUA VIDEO VERTIKAL (Lebih Besar & Pas Berdampingan) */}
+                          <div className="flex flex-col sm:flex-row justify-center items-stretch gap-4 sm:gap-5 w-full max-w-2xl mx-auto">
+                            {portraitVideos.map((video) => (
+                              <div 
+                                key={video.id} 
+                                className="w-full sm:w-1/2 max-w-[310px] mx-auto bg-white rounded-2xl p-3 sm:p-4 border border-stone-200/80 shadow-sm flex flex-col justify-between"
+                              >
+                                <div className="w-full aspect-[9/16] bg-stone-900 rounded-xl overflow-hidden mb-2.5">
+                                  <video 
+                                    controls 
+                                    playsInline 
+                                    preload="metadata"
+                                    onLoadedMetadata={(e) => handleLoadedMetadata(e, video.id)}
+                                    className="w-full h-full object-cover"
+                                  >
+                                    <source src={video.videoUrl} type="video/mp4" />
+                                  </video>
+                                </div>
+                                <div className="flex-1 flex flex-col justify-between">
+                                  <div>
+                                    <span className="text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider text-stone-500">
+                                      {video.category}
+                                    </span>
+                                    <h4 className="text-sm sm:text-base font-bold text-stone-900 mt-0.5 leading-snug">
+                                      {video.title}
+                                    </h4>
+                                    <p className="text-xs text-stone-600 mt-1 leading-relaxed">
+                                      {video.description}
+                                    </p>
+                                  </div>
+                                </div>
+                              </div>
+                            ))}
+                          </div>
+
                         </div>
-                      ))}
+                      );
+                    })()
+                  ) : (
+                    /* VIEW PORTOFOLIO LAINNYA */
+                    <div className="max-h-[80vh] overflow-y-auto pr-2 pb-4 space-y-4">
+                      {activePreview.mediaList && activePreview.mediaList.length > 0 ? (
+                        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4 bg-white/50 rounded-2xl border border-white/60">
+                          {activePreview.mediaList.map((file, i) => (
+                            <div key={i} onClick={() => setZoomedMedia(file)} className="aspect-square rounded-xl overflow-hidden bg-white/80 border border-white/70 p-1 cursor-pointer hover:scale-[1.02] transition-transform">
+                              <SmartMediaDisplay src={file} title={`${activePreview.title} #${i + 1}`} />
+                            </div>
+                          ))}
+                        </div>
+                      ) : activePreview.img ? (
+                        <div className="flex items-center justify-center p-4 bg-white/50 rounded-2xl border border-white/60">
+                          <div onClick={() => setZoomedMedia(activePreview.img!)} className="max-w-md w-full aspect-square cursor-pointer hover:scale-[1.02] transition-transform">
+                            <SmartMediaDisplay src={activePreview.img} title={activePreview.title} />
+                          </div>
+                        </div>
+                      ) : null}
                     </div>
-                  ) : activePreview.img ? (
-                    <div className="w-full flex items-center justify-center rounded-3xl p-4 text-center">
-                      <div
-                        onClick={() => setZoomedMedia(activePreview.img!)}
-                        className="max-w-md w-full aspect-square cursor-pointer transition-all hover:scale-[1.03] rounded-3xl p-4 liquid-glass-3d flex items-center justify-center"
-                      >
-                        <SmartMediaDisplay src={activePreview.img} title={activePreview.title} />
-                      </div>
-                    </div>
-                  ) : null}
-
-                  <div className="text-center pt-1 space-y-1">
-                    <p className="font-extrabold text-slate-900 text-[14px] sm:text-[16px] md:text-[18px] tracking-tight">
-                      Dokumentasi Karya {activePreview.title}
-                    </p>
-                    <p className="text-[11px] sm:text-[12px] text-slate-700 font-semibold">
-                      Klik gambar atau video untuk melihat pratinjau diperbesar
-                    </p>
-                  </div>
+                  )}
                 </div>
-              )}
+              </div>
             </div>
-          </div>
-        )}
+          )}
 
-      {/* MODAL LIGHTBOX OVERLAY */}
-      {zoomedMedia && (
-        <div
-          className="fixed inset-0 z-[60] flex items-center justify-center p-3 sm:p-8 transition-all"
-          style={{
-            backgroundColor: 'rgba(15, 23, 42, 0.88)',
-            backdropFilter: 'blur(20px)',
-            WebkitBackdropFilter: 'blur(20px)',
-          }}
-          onClick={() => setZoomedMedia(null)}
-        >
-          <div
-            className="relative max-w-[1500px] max-h-[90vh] w-full flex items-center justify-center p-2"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <button
-              type="button"
-              onClick={() => setZoomedMedia(null)}
-              className="absolute -top-12 right-0 sm:right-2 w-9 h-9 sm:w-10 sm:h-10 rounded-full bg-white/20 hover:bg-white/40 text-white flex items-center justify-center text-lg transition-all cursor-pointer border border-white/30 shadow-xl font-bold"
-            >
-              ✕
-            </button>
+          {/* Modal Preview Media / Zoom */}
+          {zoomedMedia && (
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4" onClick={() => setZoomedMedia(null)}>
+              <div className="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-xl">
+                {zoomedMedia.endsWith('.mp4') ? (
+                  <video src={zoomedMedia} controls autoPlay playsInline className="max-h-[85vh] w-auto rounded-lg" />
+                ) : (
+                  <img src={zoomedMedia} alt="Preview" className="max-h-[85vh] max-w-full object-contain rounded-lg" />
+                )}
+              </div>
+            </div>
+          )}
 
-            {zoomedMedia.endsWith('.mp4') ? (
-              <video
-                src={zoomedMedia}
-                controls
-                autoPlay
-                playsInline
-                className="max-h-[80vh] sm:max-h-[85vh] max-w-full rounded-3xl shadow-2xl border border-slate-700 bg-black"
-              />
-            ) : (
-              <img
-                src={zoomedMedia}
-                alt="Preview diperbesar"
-                className="max-h-[80vh] sm:max-h-[85vh] max-w-full object-contain rounded-3xl shadow-2xl border border-slate-200 bg-white"
-              />
-            )}
-          </div>
         </div>
-      )}
+      </main>
     </div>
   );
 }

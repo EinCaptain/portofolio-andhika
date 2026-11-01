@@ -1,6 +1,7 @@
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef, useMemo, Suspense } from 'react';
+import { useRouter, useSearchParams, usePathname } from 'next/navigation';
 import { Phone, MapPin } from 'lucide-react';
 
 // --- KOMPONEN IKON MAIL KUSTOM (PADDED VIEWBOX - ANTI CROP 100%) --- //
@@ -47,7 +48,7 @@ function LinkedinIcon({ size = 18, className = '', strokeWidth = 2 }: { size?: n
 
 type PostItem = {
   url: string;
-  embedUrl: string; // Menggunakan URL embed berformat /embed/captioned/
+  embedUrl: string;
 };
 
 type VideoProject = {
@@ -57,8 +58,8 @@ type VideoProject = {
   videoUrl: string;
   thumbnail?: string;
   description: string;
-  orientation?: 'horizontal' | 'vertical'; // Opsional agar kompatibel dengan data lama
-  aspectRatio?: 'portrait' | 'landscape'; // Opsional
+  orientation?: 'horizontal' | 'vertical';
+  aspectRatio?: 'portrait' | 'landscape';
 };
 
 type PreviewData = {
@@ -107,7 +108,7 @@ const contactInfoList = [
   }
 ];
 
-// --- DATA VIDEO EDITING (PROFESSIONAL ENGLISH) --- //
+// --- DATA VIDEO EDITING --- //
 const videoEditingProjects: VideoProject[] = [
   {
     id: 1,
@@ -134,6 +135,127 @@ const videoEditingProjects: VideoProject[] = [
     description: "Engaging short-form video editing featuring custom motion graphics and crisp audio-visual synchronization."
   }
 ];
+
+// --- MAP SERTIFIKAT UNTUK QUERY BROWSER --- //
+const CERTIFICATES_MAP: Record<string, { title: string; src: string; type: 'pdf' | 'image' }> = {
+  bnsp: { title: 'Sertifikat LSP BNSP', src: '/certificates/sertifikat-bnsp.pdf', type: 'pdf' },
+  revou: { title: 'Sertifikat Digital Marketing Revou', src: '/certificates/sertifikat-digital-marketing-revou.pdf', type: 'pdf' },
+  afaq: { title: 'Sertifikat Digital Marketing Afaq Academy', src: '/certificates/sertifikat-digital-marketing-afaq-academy.pdf', type: 'pdf' }
+};
+
+// --- MAP PREVIEW PORTOFOLIO UNTUK QUERY BROWSER --- //
+const PREVIEW_DATA_MAP: Record<string, PreviewData> = {
+  'diatera-tech': {
+    title: 'Diatera Technology',
+    instagramUrl: 'https://www.instagram.com/diatera.tech/',
+    username: 'diatera.tech',
+    displayName: 'Diatera Cipta Teknologi',
+    avatarImg: '/portofolio/diatera-avatar.jpg',
+    postsCount: '32', followersCount: '510', followingCount: '11',
+    bio: ['Smart Solutions, Seamless Integration, Embrace the IoT Advantage 🌐💡', '📩 : support@diatera.com', 'Learn More', '👇👇👇👇👇'],
+    website: 'www.diatera.com',
+    posts: [
+      { url: 'https://www.instagram.com/p/C7qLDlSpypd/', embedUrl: 'https://www.instagram.com/p/C7qLDlSpypd/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/C7SvsGjPA6i/', embedUrl: 'https://www.instagram.com/p/C7SvsGjPA6i/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/C7RqeQcJvmb/', embedUrl: 'https://www.instagram.com/p/C7RqeQcJvmb/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/C7RTunxJW2X/', embedUrl: 'https://www.instagram.com/p/C7RTunxJW2X/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/C7OsO0mpYIZ/', embedUrl: 'https://www.instagram.com/p/C7OsO0mpYIZ/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/C5e8-6pJ0hc/', embedUrl: 'https://www.instagram.com/p/C5e8-6pJ0hc/embed/captioned/' }
+    ]
+  },
+  'glovecare-ig': {
+    title: 'Glovecare',
+    instagramUrl: 'https://www.instagram.com/glovecare.official/',
+    username: 'glovecare.official',
+    displayName: 'GLOVECARE OFFICIAL',
+    category: 'Shopping & retail',
+    avatarImg: '/portofolio/glovecare-avatar.jpg',
+    postsCount: '25', followersCount: '394', followingCount: '0',
+    bio: ['Smart Detailing Made Easy', '#CareYouCanSee', 'Bikin mobil glowing tanpa ribet.', '👇 Pilih produk favoritmu! 👇'],
+    website: 'linktr.ee/GlovecareOfficial',
+    posts: [
+      { url: 'https://www.instagram.com/reel/DLPA--khhxM/', embedUrl: 'https://www.instagram.com/reel/DLPA--khhxM/embed/captioned/' },
+      { url: 'https://www.instagram.com/reel/DLGsFF8hi1Q/', embedUrl: 'https://www.instagram.com/reel/DLGsFF8hi1Q/embed/captioned/' },
+      { url: 'https://www.instagram.com/reel/DK6d85chp0T/', embedUrl: 'https://www.instagram.com/reel/DK6d85chp0T/embed/captioned/' },
+      { url: 'https://www.instagram.com/reel/DKx-yHLOtZB/', embedUrl: 'https://www.instagram.com/reel/DKx-yHLOtZB/embed/captioned/' },
+      { url: 'https://www.instagram.com/reel/DKs7pifuCl0/', embedUrl: 'https://www.instagram.com/reel/DKs7pifuCl0/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DKoQT5hq95Y/', embedUrl: 'https://www.instagram.com/p/DKoQT5hq95Y/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DKga_IGJiVb/', embedUrl: 'https://www.instagram.com/p/DKga_IGJiVb/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DKeYmjgssWM/', embedUrl: 'https://www.instagram.com/p/DKeYmjgssWM/embed/captioned/' },
+      { url: 'https://www.instagram.com/reel/DKdWT8juNEj/', embedUrl: 'https://www.instagram.com/reel/DKdWT8juNEj/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJ0VJivtvPE/', embedUrl: 'https://www.instagram.com/p/DJ0VJivtvPE/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJynBKhyKZg/', embedUrl: 'https://www.instagram.com/p/DJynBKhyKZg/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJyLjfcqlwQ/', embedUrl: 'https://www.instagram.com/p/DJyLjfcqlwQ/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJx3JZGKcM-/', embedUrl: 'https://www.instagram.com/p/DJx3JZGKcM-/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJnWHO7tVf6/', embedUrl: 'https://www.instagram.com/p/DJnWHO7tVf6/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJlvOFltV4y/', embedUrl: 'https://www.instagram.com/p/DJlvOFltV4y/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJlTyGfKe8J/', embedUrl: 'https://www.instagram.com/p/DJlTyGfKe8J/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJk--3fSfbp/', embedUrl: 'https://www.instagram.com/p/DJk--3fSfbp/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJjKTPztGvR/', embedUrl: 'https://www.instagram.com/p/DJjKTPztGvR/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJin-SHK7ZD/', embedUrl: 'https://www.instagram.com/p/DJin-SHK7ZD/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJiMealtL_U/', embedUrl: 'https://www.instagram.com/p/DJiMealtL_U/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJgljxvS25F/', embedUrl: 'https://www.instagram.com/p/DJgljxvS25F/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJew0DvNL95/', embedUrl: 'https://www.instagram.com/p/DJew0DvNL95/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJbcCVkNMJR/', embedUrl: 'https://www.instagram.com/p/DJbcCVkNMJR/embed/captioned/' },
+      { url: 'https://www.instagram.com/p/DJaeEc8SnHW/', embedUrl: 'https://www.instagram.com/p/DJaeEc8SnHW/embed/captioned/' }
+    ]
+  },
+  'glovecare-photo': {
+    title: 'Product Photography – Glovecare',
+    mediaList: [
+      '/portofolio/produk-1.jpg', '/portofolio/produk-3.jpg', '/portofolio/produk-4.jpg',
+      '/portofolio/produk-5.jpg', '/portofolio/produk-6.jpg', '/portofolio/produk-7.jpg',
+      '/portofolio/produk-8.jpg', '/portofolio/produk-9.jpg', '/portofolio/produk-10.jpg'
+    ]
+  },
+  'video-production': {
+    title: 'Video Production Collection',
+    videoProjects: videoEditingProjects
+  },
+  'banner-esa-unggul': {
+    title: 'Banner Seminar – Esa Unggul University',
+    mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/flyer-esa-unggul-${i + 1}.jpg`)
+  },
+  'display-glovecare': {
+    title: 'Display Marketplace – Glovecare',
+    mediaList: Array.from({ length: 31 }, (_, i) => `/portofolio/display-glovecare-${i + 1}.jpg`)
+  },
+  'e-invitation-digisite': {
+    title: 'E-Invitation Display - Digisite Tech',
+    mediaList: [
+      '/portofolio/e-invitation-birthday-digisite-1.jpg', '/portofolio/e-invitation-birthday-digisite-2.jpg', '/portofolio/e-invitation-birthday-digisite-3.jpg',
+      '/portofolio/e-invitation-seminar-digisite-1.jpg', '/portofolio/e-invitation-seminar-digisite-2.jpg', '/portofolio/e-invitation-seminar-digisite-3.jpg',
+      '/portofolio/e-invitation-seminar-digisite-4.jpg', '/portofolio/e-invitation-wedding-digisite-1.jpg', '/portofolio/e-invitation-wedding-digisite-2.jpg',
+      '/portofolio/e-invitation-wedding-digisite-3.jpg', '/portofolio/e-invitation-wedding-digisite-4.jpg'
+    ]
+  },
+  'filter-meta-spark': {
+    title: 'Filter Live Report – Meta Spark Studio',
+    mediaList: [
+      '/portofolio/filter-meta-spark-1.mp4', '/portofolio/filter-meta-spark-2.mp4', '/portofolio/filter-meta-spark-3.mp4',
+      '/portofolio/filter-meta-spark-4.mp4', '/portofolio/filter-meta-spark-5.mp4', '/portofolio/filter-meta-spark-6.mp4'
+    ]
+  },
+  'flyer-esa-unggul': {
+    title: 'Flyer Seminar – Esa Unggul University',
+    mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/flyer-esa-unggul-${i + 1}.jpg`)
+  },
+  'lanyard-idcard': {
+    title: 'Lanyard & ID Card',
+    mediaList: ['/portofolio/lanyard-1.jpg', '/portofolio/lanyard-2.jpg', '/portofolio/lanyard-idcard-1.jpg', '/portofolio/lanyard-idcard-2.jpg']
+  },
+  'logo-design': {
+    title: 'Logo Design',
+    mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/logo-design-${i + 1}.jpg`)
+  },
+  'story-onthegoods': {
+    title: 'Story Content – OnTheGoods',
+    mediaList: [
+      '/portofolio/story-onthegoods-1.mp4', '/portofolio/story-onthegoods-1.jpg', '/portofolio/story-onthegoods-2.jpg',
+      '/portofolio/story-onthegoods-3.jpg', '/portofolio/story-onthegoods-4.jpg', '/portofolio/story-onthegoods-5.jpg', '/portofolio/story-onthegoods-6.jpg'
+    ]
+  }
+};
 
 // --- KOMPONEN PENDUKUNG --- //
 function SmartMediaDisplay({ src, title, alt }: { src: string; title: string; alt?: string }) {
@@ -192,16 +314,61 @@ function InstagramAvatar({ username, displayName, avatarImg }: { username?: stri
   );
 }
 
-// --- KOMPONEN UTAMA --- //
-export default function Home() {
-  const [currentView, setCurrentView] = useState<'main' | 'social-media' | 'photography' | 'videography' | 'graphic-design'>('main');
-  const [activeCert, setActiveCert] = useState<{ title: string; src: string; type: 'pdf' | 'image' } | null>(null);
-  const [activePreview, setActivePreview] = useState<PreviewData | null>(null);
-  const [zoomedMedia, setZoomedMedia] = useState<string | null>(null);
-  const [profileImgError, setProfileImgError] = useState(false);
+// --- KOMPONEN KONTEN UTAMA --- //
+function PortfolioContent() {
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
 
-  // --- STATE DETEKSI ORIENTASI VIDEO OTOMATIS --- //
+  // --- DERIVASI STATE DARI QUERY PARAMS URL --- //
+  const viewParam = searchParams.get('view') || 'main';
+  const previewParam = searchParams.get('preview');
+  const certParam = searchParams.get('cert');
+  const zoomParam = searchParams.get('zoom');
+
+  const currentView = (['main', 'social-media', 'photography', 'videography', 'graphic-design'].includes(viewParam)
+    ? viewParam
+    : 'main') as 'main' | 'social-media' | 'photography' | 'videography' | 'graphic-design';
+
+  const activeCert = certParam && CERTIFICATES_MAP[certParam] ? CERTIFICATES_MAP[certParam] : null;
+  const activePreview = previewParam && PREVIEW_DATA_MAP[previewParam] ? PREVIEW_DATA_MAP[previewParam] : null;
+  const zoomedMedia = zoomParam ? decodeURIComponent(zoomParam) : null;
+
+  const [profileImgError, setProfileImgError] = useState(false);
   const [videoOrientations, setVideoOrientations] = useState<Record<number, 'portrait' | 'landscape'>>({});
+
+  // Helper untuk update URL query secara bersih di browser history
+  const updateQueryParams = (newParams: Record<string, string | null>, options?: { replace?: boolean }) => {
+    const params = new URLSearchParams(searchParams.toString());
+    Object.entries(newParams).forEach(([key, val]) => {
+      if (val === null || val === undefined) {
+        params.delete(key);
+      } else {
+        params.set(key, val);
+      }
+    });
+
+    const queryString = params.toString();
+    const url = queryString ? `${pathname}?${queryString}` : pathname;
+
+    if (options?.replace) {
+      router.replace(url, { scroll: false });
+    } else {
+      router.push(url, { scroll: false });
+    }
+  };
+
+  // Navigasi modal menggunakan browser history
+  const openCertKey = (key: string) => updateQueryParams({ cert: key });
+  const openPreviewKey = (key: string) => updateQueryParams({ preview: key });
+  const openZoomMedia = (src: string) => updateQueryParams({ zoom: encodeURIComponent(src) });
+
+  const closeModal = () => router.back();
+
+  const changeView = (view: string) => {
+    updateQueryParams({ view, preview: null, cert: null, zoom: null });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   const handleLoadedMetadata = (e: React.SyntheticEvent<HTMLVideoElement, Event>, id: number) => {
     const { videoWidth, videoHeight } = e.currentTarget;
@@ -212,12 +379,12 @@ export default function Home() {
     }));
   };
 
-  // --- STATE & LOGIC NAVIGASI SLIDING PILL --- //
+  // --- LOGIC NAVIGASI SLIDING PILL --- //
   const [activeMenu, setActiveMenu] = useState('home');
   const [pillStyle, setPillStyle] = useState({ left: 0, width: 0 });
-  const navRefs = React.useRef<(HTMLAnchorElement | null)[]>([]);
+  const navRefs = useRef<(HTMLAnchorElement | null)[]>([]);
 
-  const navMenus = React.useMemo(() => [
+  const navMenus = useMemo(() => [
     { id: 'home', label: 'Home', target: 'bento-grid' },
     { id: 'about', label: 'About', target: 'card-profile' },
     { id: 'services', label: 'Services', target: 'card-services' },
@@ -225,7 +392,7 @@ export default function Home() {
     { id: 'tools', label: 'Software', target: 'card-skills' },
   ], []);
 
-  React.useEffect(() => {
+  useEffect(() => {
     const updatePill = () => {
       const activeIndex = navMenus.findIndex(m => m.id === activeMenu);
       const activeEl = navRefs.current[activeIndex];
@@ -245,7 +412,7 @@ export default function Home() {
   const handleScroll = (e: React.MouseEvent<HTMLAnchorElement>, targetId: string) => {
     e.preventDefault();
     if (currentView !== 'main') {
-      setCurrentView('main');
+      changeView('main');
       setTimeout(() => {
         const target = document.getElementById(targetId);
         if (target) {
@@ -259,17 +426,6 @@ export default function Home() {
       }
     }
   };
-
-  const openCert = (title: string, src: string, type: 'pdf' | 'image') => setActiveCert({ title, src, type });
-  const closeCert = () => setActiveCert(null);
-  const openPreview = (data: PreviewData) => setActivePreview(data);
-  const closePreview = () => setActivePreview(null);
-
-  const goToSocialMedia = () => { setCurrentView('social-media'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
-  const goToPhotography = () => { setCurrentView('photography'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
-  const goToVideography = () => { setCurrentView('videography'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
-  const goToGraphicDesign = () => { setCurrentView('graphic-design'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
-  const goToMain = () => { setCurrentView('main'); window.scrollTo({ top: 0, behavior: 'smooth' }); };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-[#d0c2bb] to-[#ede6e3] text-stone-900 font-sans antialiased selection:bg-[#2b2624] selection:text-white py-6 sm:py-10 px-4 sm:px-6 lg:px-8">
@@ -348,7 +504,7 @@ export default function Home() {
                 {/* Header Profile Avatar */}
                 <div className="flex items-center gap-3 border-b border-white/40 pb-4">
                   <div 
-                    onClick={() => setZoomedMedia('/avatar.jpg')}
+                    onClick={() => openZoomMedia('/avatar.jpg')}
                     className="w-16 h-16 sm:w-20 sm:h-20 rounded-full shrink-0 overflow-hidden shadow-md cursor-pointer hover:scale-105 hover:opacity-90 transition-all duration-300 bg-stone-200"
                   >
                     {!profileImgError ? (
@@ -375,7 +531,7 @@ export default function Home() {
                   </p>
                 </div>
 
-                {/* Contact Info Chips (Bebas Overflow-Hidden & Anti-Crop) */}
+                {/* Contact Info Chips */}
                 <div className="space-y-1.5">
                   <span className="text-[11px] font-extrabold text-stone-500 tracking-widest uppercase">CONTACT INFO</span>
                   <div className="flex flex-col gap-2">
@@ -383,7 +539,6 @@ export default function Home() {
                       const Icon = item.icon;
                       const cardContent = (
                         <div className="flex items-center gap-3.5 p-2 rounded-xl bg-white/50 hover:bg-white/70 border border-white/60 text-xs font-bold text-stone-800 transition-colors shadow-sm group">
-                          {/* Wrapper Ikon Tanpa Batasan Tinggi Ketat & Tanpa Overflow Hidden */}
                           <div className="min-w-8 min-h-8 p-1.5 flex items-center justify-center shrink-0 rounded-xl bg-stone-200/40 group-hover:bg-stone-200/70 transition-colors overflow-visible">
                             <Icon 
                               size={18} 
@@ -418,21 +573,21 @@ export default function Home() {
                   <div className="flex flex-col gap-2">
                     <button
                       type="button"
-                      onClick={() => openCert('Sertifikat LSP BNSP', '/certificates/sertifikat-bnsp.pdf', 'pdf')}
+                      onClick={() => openCertKey('bnsp')}
                       className="w-full flex items-center justify-center p-2.5 rounded-xl bg-[#2b2624] text-white hover:bg-[#3a3330] text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
                     >
                       <span>Sertifikat LSP BNSP</span>
                     </button>
                     <button
                       type="button"
-                      onClick={() => openCert('Sertifikat Digital Marketing Revou', '/certificates/sertifikat-digital-marketing-revou.pdf', 'pdf')}
+                      onClick={() => openCertKey('revou')}
                       className="w-full flex items-center justify-center p-2.5 rounded-xl bg-white/60 text-stone-900 hover:bg-white/80 border border-white/70 text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
                     >
                       <span>Sertifikat Digital Marketing Revou</span>
                     </button>
                     <button
                       type="button"
-                      onClick={() => openCert('Sertifikat Digital Marketing Afaq Academy', '/certificates/sertifikat-digital-marketing-afaq-academy.pdf', 'pdf')}
+                      onClick={() => openCertKey('afaq')}
                       className="w-full flex items-center justify-center p-2.5 rounded-xl bg-white/60 text-stone-900 hover:bg-white/80 border border-white/70 text-xs font-bold transition-all cursor-pointer text-center shadow-sm"
                     >
                       <span>Sertifikat Digital Marketing Afaq Academy</span>
@@ -521,25 +676,25 @@ export default function Home() {
                       tag: 'STRATEGY & CONTENT',
                       name: 'Social Media Management',
                       desc: 'Managing social media channels to build audience interaction and engagement.',
-                      action: goToSocialMedia
+                      action: () => changeView('social-media')
                     },
                     {
                       tag: 'GRAPHIC & BRANDING',
                       name: 'Graphic Design',
                       desc: 'Designing consistent visual promotional materials for brand identity strengthening.',
-                      action: goToGraphicDesign
+                      action: () => changeView('graphic-design')
                     },
                     {
                       tag: 'VISUAL & RETOUCHING',
                       name: 'Commercial Photography',
                       desc: 'Commercial product photography with detailed retouching and color grading.',
-                      action: goToPhotography
+                      action: () => changeView('photography')
                     },
                     {
                       tag: 'VIDEO PRODUCTION',
                       name: 'Video Production',
                       desc: 'Creative video production and editing tailored for social media marketing campaigns.',
-                      action: goToVideography
+                      action: () => changeView('videography')
                     }
                   ].map((proj, idx) => (
                     <div
@@ -613,7 +768,7 @@ export default function Home() {
               <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/50 shadow-lg space-y-4">
                 <button
                   type="button"
-                  onClick={goToMain}
+                  onClick={() => changeView('main')}
                   className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm"
                 >
                   ← Back to Home
@@ -629,65 +784,12 @@ export default function Home() {
                   {
                     name: 'Diatera Technology',
                     desc: "Managed Diatera Technology's Instagram channel through structured content planning, educational copywriting on IT & tech solutions, and designing professional feed and story visuals.",
-                    action: () => openPreview({
-                      title: 'Diatera Technology',
-                      instagramUrl: 'https://www.instagram.com/diatera.tech/',
-                      username: 'diatera.tech',
-                      displayName: 'Diatera Cipta Teknologi',
-                      avatarImg: '/portofolio/diatera-avatar.jpg',
-                      postsCount: '32', followersCount: '510', followingCount: '11',
-                      bio: ['Smart Solutions, Seamless Integration, Embrace the IoT Advantage 🌐💡', '📩 : support@diatera.com', 'Learn More', '👇👇👇👇👇'],
-                      website: 'www.diatera.com',
-                      posts: [
-                        { url: 'https://www.instagram.com/p/C7qLDlSpypd/', embedUrl: 'https://www.instagram.com/p/C7qLDlSpypd/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/C7SvsGjPA6i/', embedUrl: 'https://www.instagram.com/p/C7SvsGjPA6i/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/C7RqeQcJvmb/', embedUrl: 'https://www.instagram.com/p/C7RqeQcJvmb/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/C7RTunxJW2X/', embedUrl: 'https://www.instagram.com/p/C7RTunxJW2X/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/C7OsO0mpYIZ/', embedUrl: 'https://www.instagram.com/p/C7OsO0mpYIZ/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/C5e8-6pJ0hc/', embedUrl: 'https://www.instagram.com/p/C5e8-6pJ0hc/embed/captioned/' }
-                      ]
-                    })
+                    action: () => openPreviewKey('diatera-tech')
                   },
                   {
                     name: 'Glovecare',
                     desc: "Managed Glovecare's Instagram activity focusing on product care education, special service promotional offers, daily content calendar planning, and creating clean visual aesthetics.",
-                    action: () => openPreview({
-                      title: 'Glovecare',
-                      instagramUrl: 'https://www.instagram.com/glovecare.official/',
-                      username: 'glovecare.official',
-                      displayName: 'GLOVECARE OFFICIAL',
-                      category: 'Shopping & retail',
-                      avatarImg: '/portofolio/glovecare-avatar.jpg',
-                      postsCount: '25', followersCount: '394', followingCount: '0',
-                      bio: ['Smart Detailing Made Easy', '#CareYouCanSee', 'Bikin mobil glowing tanpa ribet.', '👇 Pilih produk favoritmu! 👇'],
-                      website: 'linktr.ee/GlovecareOfficial',
-                      posts: [
-                        { url: 'https://www.instagram.com/reel/DLPA--khhxM/', embedUrl: 'https://www.instagram.com/reel/DLPA--khhxM/embed/captioned/' },
-                        { url: 'https://www.instagram.com/reel/DLGsFF8hi1Q/', embedUrl: 'https://www.instagram.com/reel/DLGsFF8hi1Q/embed/captioned/' },
-                        { url: 'https://www.instagram.com/reel/DK6d85chp0T/', embedUrl: 'https://www.instagram.com/reel/DK6d85chp0T/embed/captioned/' },
-                        { url: 'https://www.instagram.com/reel/DKx-yHLOtZB/', embedUrl: 'https://www.instagram.com/reel/DKx-yHLOtZB/embed/captioned/' },
-                        { url: 'https://www.instagram.com/reel/DKs7pifuCl0/', embedUrl: 'https://www.instagram.com/reel/DKs7pifuCl0/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DKoQT5hq95Y/', embedUrl: 'https://www.instagram.com/p/DKoQT5hq95Y/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DKga_IGJiVb/', embedUrl: 'https://www.instagram.com/p/DKga_IGJiVb/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DKeYmjgssWM/', embedUrl: 'https://www.instagram.com/p/DKeYmjgssWM/embed/captioned/' },
-                        { url: 'https://www.instagram.com/reel/DKdWT8juNEj/', embedUrl: 'https://www.instagram.com/reel/DKdWT8juNEj/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJ0VJivtvPE/', embedUrl: 'https://www.instagram.com/p/DJ0VJivtvPE/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJynBKhyKZg/', embedUrl: 'https://www.instagram.com/p/DJynBKhyKZg/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJyLjfcqlwQ/', embedUrl: 'https://www.instagram.com/p/DJyLjfcqlwQ/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJx3JZGKcM-/', embedUrl: 'https://www.instagram.com/p/DJx3JZGKcM-/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJnWHO7tVf6/', embedUrl: 'https://www.instagram.com/p/DJnWHO7tVf6/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJlvOFltV4y/', embedUrl: 'https://www.instagram.com/p/DJlvOFltV4y/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJlTyGfKe8J/', embedUrl: 'https://www.instagram.com/p/DJlTyGfKe8J/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJk--3fSfbp/', embedUrl: 'https://www.instagram.com/p/DJk--3fSfbp/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJjKTPztGvR/', embedUrl: 'https://www.instagram.com/p/DJjKTPztGvR/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJin-SHK7ZD/', embedUrl: 'https://www.instagram.com/p/DJin-SHK7ZD/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJiMealtL_U/', embedUrl: 'https://www.instagram.com/p/DJiMealtL_U/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJgljxvS25F/', embedUrl: 'https://www.instagram.com/p/DJgljxvS25F/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJew0DvNL95/', embedUrl: 'https://www.instagram.com/p/DJew0DvNL95/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJbcCVkNMJR/', embedUrl: 'https://www.instagram.com/p/DJbcCVkNMJR/embed/captioned/' },
-                        { url: 'https://www.instagram.com/p/DJaeEc8SnHW/', embedUrl: 'https://www.instagram.com/p/DJaeEc8SnHW/embed/captioned/' }
-                      ]
-                    })
+                    action: () => openPreviewKey('glovecare-ig')
                   }
                 ].map((item, idx) => (
                   <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
@@ -712,7 +814,7 @@ export default function Home() {
           {currentView === 'photography' && (
             <div className="space-y-6">
               <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/50 shadow-lg space-y-4">
-                <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
+                <button type="button" onClick={() => changeView('main')} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
                   ← Back to Home
                 </button>
                 <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Commercial Photography</h1>
@@ -726,14 +828,7 @@ export default function Home() {
                   {
                     name: 'Product Photography – Glovecare',
                     desc: 'Commercial photo shoot for Glovecare vehicle care products featuring visual aesthetic direction, studio lighting setups, as well as detailed retouching and color grading.',
-                    action: () => openPreview({
-                      title: 'Product Photography – Glovecare',
-                      mediaList: [
-                        '/portofolio/produk-1.jpg', '/portofolio/produk-3.jpg', '/portofolio/produk-4.jpg',
-                        '/portofolio/produk-5.jpg', '/portofolio/produk-6.jpg', '/portofolio/produk-7.jpg',
-                        '/portofolio/produk-8.jpg', '/portofolio/produk-9.jpg', '/portofolio/produk-10.jpg'
-                      ]
-                    })
+                    action: () => openPreviewKey('glovecare-photo')
                   }
                 ].map((item, idx) => (
                   <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
@@ -754,7 +849,7 @@ export default function Home() {
           {currentView === 'videography' && (
             <div className="space-y-6">
               <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/50 shadow-lg space-y-4">
-                <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
+                <button type="button" onClick={() => changeView('main')} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
                   ← Back to Home
                 </button>
                 <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Video Production</h1>
@@ -763,7 +858,6 @@ export default function Home() {
                 </p>
               </div>
 
-              {/* Menyatukan Koleksi Video Menjadi 1 Card Utama yang Membuka Modal */}
               <div className="grid grid-cols-1 gap-6">
                 <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 md:p-8 border border-white/50 shadow-lg flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
                   <div className="space-y-3 flex-1">
@@ -774,7 +868,7 @@ export default function Home() {
                   </div>
                   <button 
                     type="button" 
-                    onClick={() => openPreview({ title: 'Video Production Collection', videoProjects: videoEditingProjects })} 
+                    onClick={() => openPreviewKey('video-production')} 
                     className="w-full md:w-auto px-8 py-3.5 rounded-xl text-sm font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm whitespace-nowrap text-center"
                   >
                     Open Video Player
@@ -788,7 +882,7 @@ export default function Home() {
           {currentView === 'graphic-design' && (
             <div className="space-y-6">
               <div className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 sm:p-8 border border-white/50 shadow-lg space-y-4">
-                <button type="button" onClick={goToMain} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
+                <button type="button" onClick={() => changeView('main')} className="inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs font-bold text-stone-800 bg-white/60 hover:bg-white/80 border border-white/70 transition-all cursor-pointer shadow-sm">
                   ← Back to Home
                 </button>
                 <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Graphic Design & Visual Content</h1>
@@ -802,65 +896,42 @@ export default function Home() {
                   {
                     name: 'Banner Seminar – Esa Unggul University',
                     desc: 'Designing integrated seminar promotional banners for visual publication and event information media.',
-                    action: () => openPreview({ title: 'Banner Seminar – Esa Unggul University', mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/flyer-esa-unggul-${i + 1}.jpg`) })
+                    action: () => openPreviewKey('banner-esa-unggul')
                   },
                   {
                     name: 'Display Marketplace – Glovecare',
                     desc: "Visual arrangement of Glovecare's digital storefront to create professional product displays and attract buyers.",
-                    action: () => openPreview({ title: 'Display Marketplace – Glovecare', mediaList: Array.from({ length: 31 }, (_, i) => `/portofolio/display-glovecare-${i + 1}.jpg`) })
+                    action: () => openPreviewKey('display-glovecare')
                   },
                   {
                     name: 'E-Invitation Display - Digisite Tech',
                     desc: "Designing marketplace display assets and interactive digital invitations (e-invitation) for Digisite Tech's marketing needs.",
-                    action: () => openPreview({
-                      title: 'E-Invitation Display - Digisite Tech',
-                      mediaList: [
-                        '/portofolio/e-invitation-birthday-digisite-1.jpg', '/portofolio/e-invitation-birthday-digisite-2.jpg', '/portofolio/e-invitation-birthday-digisite-3.jpg',
-                        '/portofolio/e-invitation-seminar-digisite-1.jpg', '/portofolio/e-invitation-seminar-digisite-2.jpg', '/portofolio/e-invitation-seminar-digisite-3.jpg',
-                        '/portofolio/e-invitation-seminar-digisite-4.jpg', '/portofolio/e-invitation-wedding-digisite-1.jpg', '/portofolio/e-invitation-wedding-digisite-2.jpg',
-                        '/portofolio/e-invitation-wedding-digisite-3.jpg', '/portofolio/e-invitation-wedding-digisite-4.jpg'
-                      ]
-                    })
+                    action: () => openPreviewKey('e-invitation-digisite')
                   },
                   {
                     name: 'Filter Live Report – Meta Spark Studio',
                     desc: 'Developing interactive AR filters for live event coverage to increase audience engagement on Instagram.',
-                    action: () => openPreview({
-                      title: 'Filter Live Report – Meta Spark Studio',
-                      mediaList: [
-                        '/portofolio/filter-meta-spark-1.mp4', '/portofolio/filter-meta-spark-2.mp4', '/portofolio/filter-meta-spark-3.mp4',
-                        '/portofolio/filter-meta-spark-4.mp4', '/portofolio/filter-meta-spark-5.mp4', '/portofolio/filter-meta-spark-6.mp4'
-                      ]
-                    })
+                    action: () => openPreviewKey('filter-meta-spark')
                   },
                   {
                     name: 'Flyer Seminar – Esa Unggul University',
                     desc: 'Designing integrated seminar promotional flyers for print publication and digital media.',
-                    action: () => openPreview({ title: 'Flyer Seminar – Esa Unggul University', mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/flyer-esa-unggul-${i + 1}.jpg`) })
+                    action: () => openPreviewKey('flyer-esa-unggul')
                   },
                   {
                     name: 'Lanyard & ID Card',
                     desc: 'Applying brand visual identity to professional operational media such as lanyards and ID cards.',
-                    action: () => openPreview({
-                      title: 'Lanyard & ID Card',
-                      mediaList: ['/portofolio/lanyard-1.jpg', '/portofolio/lanyard-2.jpg', '/portofolio/lanyard-idcard-1.jpg', '/portofolio/lanyard-idcard-2.jpg']
-                    })
+                    action: () => openPreviewKey('lanyard-idcard')
                   },
                   {
                     name: 'Logo Design',
                     desc: 'Developing main logo designs as the foundation for a strong and consistent brand visual identity.',
-                    action: () => openPreview({ title: 'Logo Design', mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/logo-design-${i + 1}.jpg`) })
+                    action: () => openPreviewKey('logo-design')
                   },
                   {
                     name: 'Story Content – OnTheGoods',
                     desc: "Designing dynamic daily stories and promotional offers to strengthen OnTheGoods' branding and engagement.",
-                    action: () => openPreview({
-                      title: 'Story Content – OnTheGoods',
-                      mediaList: [
-                        '/portofolio/story-onthegoods-1.mp4', '/portofolio/story-onthegoods-1.jpg', '/portofolio/story-onthegoods-2.jpg',
-                        '/portofolio/story-onthegoods-3.jpg', '/portofolio/story-onthegoods-4.jpg', '/portofolio/story-onthegoods-5.jpg', '/portofolio/story-onthegoods-6.jpg'
-                      ]
-                    })
+                    action: () => openPreviewKey('story-onthegoods')
                   }
                 ].map((item, idx) => (
                   <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
@@ -879,7 +950,7 @@ export default function Home() {
 
           {/* MODAL SERTIFIKAT (CREDENTIAL VIEWER) */}
           {activeCert && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/60 backdrop-blur-sm" onClick={closeCert}>
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 bg-black/60 backdrop-blur-sm" onClick={closeModal}>
               <div 
                 className={`relative bg-[#ede6e3] rounded-2xl p-3 sm:p-4 shadow-2xl transition-all w-full max-h-[88vh] flex flex-col ${
                   activeCert?.title?.includes('BNSP') ? 'max-w-lg' : 'max-w-4xl'
@@ -892,16 +963,15 @@ export default function Home() {
                   <h3 className="text-sm sm:text-base font-bold text-stone-900">{activeCert?.title}</h3>
                   <button 
                     type="button"
-                    onClick={closeCert}
+                    onClick={closeModal}
                     className="p-1 rounded-full hover:bg-stone-300/50 text-stone-700 transition-colors text-sm font-bold"
                   >
                     ✕
                   </button>
                 </div>
 
-                {/* Area Gambar dengan Scrollbar Otomatis Jika Layar Pendek */}
+                {/* Area Gambar */}
                 <div className="flex-1 overflow-y-auto w-full flex justify-center items-start rounded-lg bg-white/40 p-1">
-                  {/* LOGIKA PERCABANGAN KHUSUS SERTIFIKAT BNSP */}
                   {activeCert?.title?.includes('BNSP') ? (
                     <div className="relative w-full max-w-md aspect-[1/1.414] max-h-[80vh] overflow-hidden rounded-lg border border-stone-200 bg-white mx-auto shadow-sm">
                       {activeCert?.type === 'pdf' ? (
@@ -919,7 +989,6 @@ export default function Home() {
                       )}
                     </div>
                   ) : (
-                    /* LOGIKA UNTUK SERTIFIKAT LAINNYA (LANDSCAPE) */
                     activeCert?.type === 'pdf' ? (
                       <iframe
                         src={`${activeCert.src}#toolbar=0&navpanes=0&scrollbar=1&view=FitH`}
@@ -942,11 +1011,11 @@ export default function Home() {
 
           {/* MODAL HASIL PORTOFOLIO */}
           {activePreview && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-stone-900/60 backdrop-blur-md" onClick={closePreview}>
+            <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-5 bg-stone-900/60 backdrop-blur-md" onClick={closeModal}>
               <div className={`relative w-full ${activePreview.videoProjects ? 'max-w-3xl p-4 sm:p-6' : 'max-w-5xl p-6 sm:p-8'} bg-white/90 backdrop-blur-2xl rounded-3xl space-y-4 overflow-hidden max-h-[92vh] flex flex-col shadow-2xl border border-white/60`} onClick={(e) => e.stopPropagation()}>
                 <div className="flex items-center justify-between pb-3 border-b border-stone-200">
                   <h3 className="text-xl font-black text-stone-900">{activePreview.title}</h3>
-                  <button type="button" onClick={closePreview} className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center font-bold">✕</button>
+                  <button type="button" onClick={closeModal} className="w-8 h-8 rounded-full bg-stone-100 hover:bg-stone-200 flex items-center justify-center font-bold">✕</button>
                 </div>
 
                 <div className="w-full flex-1 overflow-hidden flex flex-col">
@@ -973,11 +1042,10 @@ export default function Home() {
                         </div>
                       </div>
 
-                      {/* GRID POSTINGAN IFRAME DENGAN CROPPING & KONTROL SCROLL */}
+                      {/* GRID POSTINGAN IFRAME */}
                       <div className="max-h-[70vh] overflow-y-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-2">
                         {activePreview.posts?.map((post, index) => (
                           <div key={index} className="w-full bg-white rounded-2xl overflow-hidden border border-stone-200/80 shadow-sm relative">
-                            {/* Pembungkus Cropping: Menarik iframe ke atas untuk menyembunyikan header */}
                             <div className="w-full overflow-hidden -mt-[54px]">
                               <iframe
                                 src={post.embedUrl}
@@ -993,15 +1061,12 @@ export default function Home() {
                       </div>
                     </div>
                   ) : activePreview.videoProjects ? (
-                    /* PORTOFOLIO VIDEO PRODUCTION: LAYOUT BERTINGKAT (1 LANSKAP ATAS, 2 VERTIKAL BAWAH) */
                     (() => {
                       const landscapeVideo = activePreview.videoProjects.find(v => v.aspectRatio === 'landscape' || videoOrientations[v.id] === 'landscape');
                       const portraitVideos = activePreview.videoProjects.filter(v => v.aspectRatio === 'portrait' || videoOrientations[v.id] === 'portrait');
 
                       return (
                         <div className="flex flex-col items-center gap-5 p-2 sm:p-4 max-h-[82vh] overflow-y-auto w-full">
-                          
-                          {/* 1. VIDEO LANSKAP (Lebih Besar & Pas di Tengah) */}
                           {landscapeVideo && (
                             <div className="w-full max-w-2xl mx-auto bg-white rounded-2xl p-3 sm:p-4 border border-stone-200/80 shadow-sm flex flex-col">
                               <div className="w-full aspect-video bg-stone-900 rounded-xl overflow-hidden mb-2.5">
@@ -1029,7 +1094,6 @@ export default function Home() {
                             </div>
                           )}
 
-                          {/* 2. DUA VIDEO VERTIKAL (Lebih Besar & Pas Berdampingan) */}
                           <div className="flex flex-col sm:flex-row justify-center items-stretch gap-4 sm:gap-5 w-full max-w-2xl mx-auto">
                             {portraitVideos.map((video) => (
                               <div 
@@ -1063,24 +1127,22 @@ export default function Home() {
                               </div>
                             ))}
                           </div>
-
                         </div>
                       );
                     })()
                   ) : (
-                    /* VIEW PORTOFOLIO LAINNYA */
                     <div className="max-h-[80vh] overflow-y-auto pr-2 pb-4 space-y-4">
                       {activePreview.mediaList && activePreview.mediaList.length > 0 ? (
                         <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4 p-4 bg-white/50 rounded-2xl border border-white/60">
                           {activePreview.mediaList.map((file, i) => (
-                            <div key={i} onClick={() => setZoomedMedia(file)} className="aspect-square rounded-xl overflow-hidden bg-white/80 border border-white/70 p-1 cursor-pointer hover:scale-[1.02] transition-transform">
+                            <div key={i} onClick={() => openZoomMedia(file)} className="aspect-square rounded-xl overflow-hidden bg-white/80 border border-white/70 p-1 cursor-pointer hover:scale-[1.02] transition-transform">
                               <SmartMediaDisplay src={file} title={`${activePreview.title} #${i + 1}`} />
                             </div>
                           ))}
                         </div>
                       ) : activePreview.img ? (
                         <div className="flex items-center justify-center p-4 bg-white/50 rounded-2xl border border-white/60">
-                          <div onClick={() => setZoomedMedia(activePreview.img!)} className="max-w-md w-full aspect-square cursor-pointer hover:scale-[1.02] transition-transform">
+                          <div onClick={() => openZoomMedia(activePreview.img!)} className="max-w-md w-full aspect-square cursor-pointer hover:scale-[1.02] transition-transform">
                             <SmartMediaDisplay src={activePreview.img} title={activePreview.title} />
                           </div>
                         </div>
@@ -1092,10 +1154,10 @@ export default function Home() {
             </div>
           )}
 
-          {/* Modal Preview Media / Zoom */}
+          {/* MODAL PREVIEW MEDIA / ZOOM */}
           {zoomedMedia && (
-            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4" onClick={() => setZoomedMedia(null)}>
-              <div className="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-xl">
+            <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4" onClick={closeModal}>
+              <div className="relative max-w-4xl max-h-[90vh] overflow-hidden rounded-xl" onClick={(e) => e.stopPropagation()}>
                 {zoomedMedia.endsWith('.mp4') ? (
                   <video src={zoomedMedia} controls autoPlay playsInline className="max-h-[85vh] w-auto rounded-lg" />
                 ) : (
@@ -1108,5 +1170,14 @@ export default function Home() {
         </div>
       </main>
     </div>
+  );
+}
+
+// --- EXPORT DEFAULT DENGAN SUSPENSE WRAPPER --- //
+export default function Home() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-[#ede6e3] flex items-center justify-center text-stone-700 font-bold">Loading Portfolio...</div>}>
+      <PortfolioContent />
+    </Suspense>
   );
 }

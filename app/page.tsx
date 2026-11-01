@@ -62,6 +62,14 @@ type VideoProject = {
   aspectRatio?: 'portrait' | 'landscape';
 };
 
+type GraphicDesignProject = {
+  id: string;
+  title: string;
+  category: string;
+  description: string;
+  image?: string;
+};
+
 type PreviewData = {
   title: string;
   instagramUrl?: string;
@@ -79,6 +87,66 @@ type PreviewData = {
   mediaList?: string[];
   videoProjects?: VideoProject[];
 };
+
+// --- DATA GRAPHIC DESIGN PROJECTS --- //
+const graphicDesignProjects: GraphicDesignProject[] = [
+  {
+    id: "banner-esa-unggul",
+    title: "Seminar Promotional Banners",
+    category: "Universitas Esa Unggul",
+    description: "Designing integrated large-format promotional banners for official campus seminars and visual event publication.",
+    image: "/portofolio/banner-seminar.jpg"
+  },
+  {
+    id: "marketplace-glovecare",
+    title: "Marketplace Storefront Display",
+    category: "Glovecare",
+    description: "Visual curation of digital storefront assets to present a clean, professional product lineup and drive conversions.",
+    image: "/portofolio/glovecare-display.jpg"
+  },
+  {
+    id: "e-invitation-digisite",
+    title: "Digital E-Invitation Assets",
+    category: "Digisite Tech",
+    description: "Crafting interactive digital invitations and custom graphic assets tailored for corporate technology events.",
+    image: "/portofolio/digisite-invitation.jpg"
+  },
+  {
+    id: "ar-filter-spark",
+    title: "Interactive AR Event Filter",
+    category: "Meta Spark Studio",
+    description: "Developing custom Augmented Reality filters for live event coverage to boost audience interaction on Instagram.",
+    image: "/portofolio/ar-filter.jpg"
+  },
+  {
+    id: "flyer-esa-unggul",
+    title: "Event Promotional Flyers",
+    category: "Universitas Esa Unggul",
+    description: "Designing dynamic promotional flyers optimized for both digital publication and physical print distribution.",
+    image: "/portofolio/flyer-seminar.jpg"
+  },
+  {
+    id: "brand-merchandise",
+    title: "Lanyard & ID Card System",
+    category: "Brand Merchandise",
+    description: "Applying brand visual identity to corporate operational touchpoints including official lanyards and ID cards.",
+    image: "/portofolio/lanyard-idcard.jpg"
+  },
+  {
+    id: "logo-design",
+    title: "Brand Logo & Visual Identity",
+    category: "Identity Design",
+    description: "Conceptualizing versatile core logo marks to build a solid, memorable, and consistent visual brand system.",
+    image: "/portofolio/logo-design.jpg"
+  },
+  {
+    id: "story-onthegoods",
+    title: "Social Media Story Campaigns",
+    category: "OnTheGoods",
+    description: "Designing engaging daily story layouts and promotional campaign materials to elevate brand presence.",
+    image: "/portofolio/story-onthegoods.jpg"
+  }
+];
 
 // --- DATA CONTACT INFO --- //
 const contactInfoList = [
@@ -220,6 +288,10 @@ const PREVIEW_DATA_MAP: Record<string, PreviewData> = {
     title: 'Display Marketplace – Glovecare',
     mediaList: Array.from({ length: 31 }, (_, i) => `/portofolio/display-glovecare-${i + 1}.jpg`)
   },
+  'marketplace-glovecare': {
+    title: 'Marketplace Storefront Display – Glovecare',
+    mediaList: Array.from({ length: 31 }, (_, i) => `/portofolio/display-glovecare-${i + 1}.jpg`)
+  },
   'e-invitation-digisite': {
     title: 'E-Invitation Display - Digisite Tech',
     mediaList: [
@@ -236,12 +308,23 @@ const PREVIEW_DATA_MAP: Record<string, PreviewData> = {
       '/portofolio/filter-meta-spark-4.mp4', '/portofolio/filter-meta-spark-5.mp4', '/portofolio/filter-meta-spark-6.mp4'
     ]
   },
+  'ar-filter-spark': {
+    title: 'Interactive AR Event Filter – Meta Spark Studio',
+    mediaList: [
+      '/portofolio/filter-meta-spark-1.mp4', '/portofolio/filter-meta-spark-2.mp4', '/portofolio/filter-meta-spark-3.mp4',
+      '/portofolio/filter-meta-spark-4.mp4', '/portofolio/filter-meta-spark-5.mp4', '/portofolio/filter-meta-spark-6.mp4'
+    ]
+  },
   'flyer-esa-unggul': {
     title: 'Flyer Seminar – Esa Unggul University',
     mediaList: Array.from({ length: 7 }, (_, i) => `/portofolio/flyer-esa-unggul-${i + 1}.jpg`)
   },
   'lanyard-idcard': {
     title: 'Lanyard & ID Card',
+    mediaList: ['/portofolio/lanyard-1.jpg', '/portofolio/lanyard-2.jpg', '/portofolio/lanyard-idcard-1.jpg', '/portofolio/lanyard-idcard-2.jpg']
+  },
+  'brand-merchandise': {
+    title: 'Lanyard & ID Card System',
     mediaList: ['/portofolio/lanyard-1.jpg', '/portofolio/lanyard-2.jpg', '/portofolio/lanyard-idcard-1.jpg', '/portofolio/lanyard-idcard-2.jpg']
   },
   'logo-design': {
@@ -887,59 +970,25 @@ function PortfolioContent() {
                 </button>
                 <h1 className="text-3xl sm:text-4xl font-black text-stone-900">Graphic Design & Visual Content</h1>
                 <p className="text-sm text-stone-700 leading-relaxed">
-                  Designing visual identities, seminar promotional media, e-commerce assets, interactive AR filters, and operational brand merchandise.
+                  Crafting compelling visual identities, event marketing collateral, digital storefront assets, interactive AR filters, and operational brand merchandise.
                 </p>
               </div>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {[
-                  {
-                    name: 'Banner Seminar – Esa Unggul University',
-                    desc: 'Designing integrated seminar promotional banners for visual publication and event information media.',
-                    action: () => openPreviewKey('banner-esa-unggul')
-                  },
-                  {
-                    name: 'Display Marketplace – Glovecare',
-                    desc: "Visual arrangement of Glovecare's digital storefront to create professional product displays and attract buyers.",
-                    action: () => openPreviewKey('display-glovecare')
-                  },
-                  {
-                    name: 'E-Invitation Display - Digisite Tech',
-                    desc: "Designing marketplace display assets and interactive digital invitations (e-invitation) for Digisite Tech's marketing needs.",
-                    action: () => openPreviewKey('e-invitation-digisite')
-                  },
-                  {
-                    name: 'Filter Live Report – Meta Spark Studio',
-                    desc: 'Developing interactive AR filters for live event coverage to increase audience engagement on Instagram.',
-                    action: () => openPreviewKey('filter-meta-spark')
-                  },
-                  {
-                    name: 'Flyer Seminar – Esa Unggul University',
-                    desc: 'Designing integrated seminar promotional flyers for print publication and digital media.',
-                    action: () => openPreviewKey('flyer-esa-unggul')
-                  },
-                  {
-                    name: 'Lanyard & ID Card',
-                    desc: 'Applying brand visual identity to professional operational media such as lanyards and ID cards.',
-                    action: () => openPreviewKey('lanyard-idcard')
-                  },
-                  {
-                    name: 'Logo Design',
-                    desc: 'Developing main logo designs as the foundation for a strong and consistent brand visual identity.',
-                    action: () => openPreviewKey('logo-design')
-                  },
-                  {
-                    name: 'Story Content – OnTheGoods',
-                    desc: "Designing dynamic daily stories and promotional offers to strengthen OnTheGoods' branding and engagement.",
-                    action: () => openPreviewKey('story-onthegoods')
-                  }
-                ].map((item, idx) => (
-                  <div key={idx} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between space-y-4">
+                {graphicDesignProjects.map((item) => (
+                  <div key={item.id} className="bg-white/60 backdrop-blur-xl rounded-3xl p-6 border border-white/50 shadow-lg flex flex-col justify-between h-full space-y-4">
                     <div className="space-y-2">
-                      <h2 className="text-xl font-bold text-stone-900">{item.name}</h2>
-                      <p className="text-xs text-stone-700 leading-relaxed">{item.desc}</p>
+                      <span className="text-[11px] font-semibold uppercase tracking-wider text-stone-500 block">
+                        {item.category}
+                      </span>
+                      <h2 className="text-xl font-bold text-stone-900 leading-snug">{item.title}</h2>
+                      <p className="text-xs text-stone-700 leading-relaxed text-justify">{item.description}</p>
                     </div>
-                    <button type="button" onClick={item.action} className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm">
+                    <button 
+                      type="button" 
+                      onClick={() => openPreviewKey(item.id)} 
+                      className="w-full py-2.5 rounded-xl text-xs font-bold text-white bg-[#2b2624] hover:bg-[#3a3330] transition-all cursor-pointer shadow-sm text-center"
+                    >
                       View Portfolio
                     </button>
                   </div>
